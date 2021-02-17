@@ -23,5 +23,5 @@ these refreshed establishments.
 (Click image to open the preview of the colors)
 
 # We used Trello to keep track of the organization of the proyect
-<a href="https://trello.com/b/qZXdt2L6/proyecto-hambre-%F0%9F%8D%94" target="_blank"><img align="center" src="https://i.imgur.com/RbU9LYg.jpg" alt="Trello" border="0" /></a>
+<a href="https://trello.com/invite/b/qZXdt2L6/0a04ac85f62d8b8c495bfb3a255fd93b/proyecto-hambre-%F0%9F%8D%94" target="_blank"><img align="center" src="https://i.imgur.com/RbU9LYg.jpg" alt="Trello" border="0" /></a>
 (Click image to see the Trello of the project)
