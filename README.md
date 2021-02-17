@@ -1,63 +1,25 @@
-# WebApp boilerplate with React JS
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io#https://github.com/4GeeksAcademy/react-flask-hello.git)
+# 🍔 Project Hungry - Final Project 4GeeksAcademy 🍴
+### Final Project with @charles8ff
 
-<p align="center">
-<a href="https://www.loom.com/share/f37c6838b3f1496c95111e515e83dd9b"><img src="https://github.com/4GeeksAcademy/flask-rest-hello/blob/main/docs/assets/how-to.png?raw=true?raw=true" /></a>
-</p>
+In this project our goal is to give to local hostelry an easier and simple access to the digital world. Furthermore, we will bring visibility 
+to those little establishments through our searchbar.
 
-### Styles
-You can update the `styles/index.scss` or create new `.scss` files inside `styles/` and import them into your current scss or js files depending on your needs.
+To achieve our goal, we reshape the traditional paper menus into a digital approach, including QR technology. Moreover, we will bring forward 
+those businesses to new clients born into the digital world, by developing a search engine using our database that filters the different products
+these refreshed establishments.
 
-### Components
-Add more files into your `./src/js/components` or styles folder as you need them and import them into your current files as needed.
+# Thinking about the UX
+<a href="https://docs.google.com/spreadsheets/d/1GkgkEOZP4fDDO_FT29dnPJT-r2ZatEt_L4DRrKOZQ4c/edit?usp=sharing"><img align="center" src="https://i.imgur.com/yBCpAT6.png" alt="Final-colors" alt="database" border="0" /></a>
+(Click image to see the Google spreadsheets)
 
-💡Note: There is an example using the Context API inside `views/demo.js`;
+# Designing database
+<a href="https://app.quickdatabasediagrams.com/#/d/CYSjvQ"><img align="center" src="https://i.imgur.com/evpMqPK.jpg" alt="Final-DATABASE-model" alt="database" border="0" /></a>
+(Click image to open the preview of the database)
 
-### Views (Components)
-Add more files into your `./src/js/views` and import them in `./src/js/layout.jsx`.
+# Colors palette used across the project
+<a href="https://coolors.co/191919-cdcdcd-ffffff-f44708-ed750b-f6b983-58c7e0"><img align="center" src="https://i.imgur.com/jgF5msE.png" alt="Final-colors" alt="database" border="0" /></a>
+(Click image to open the preview of the colors)
 
-### Context
-This boilerplate comes with a centralized general Context API. The file `./src/js/store/flux.js` has a base structure for the store, we encourage you to change it and adapt it to your needs.
-
-React Context [docs](https://reactjs.org/docs/context.html)
-BreathCode Lesson [view](https://content.breatheco.de/lesson/react-hooks-explained)
-
-The `Provider` is already set. You can consume from any component using the useContext hook to get the `store` and `actions` from the Context. Check `/views/demo.js` to see a demo.
-
-```jsx
-import { Context } from "../store/appContext";
-const MyComponentSuper = () => {
-  //here you use useContext to get store and actions
-  const { store, actions } = useContext(Context);
-  return <div>{/* you can use your actions or store inside the html */}</div>
-}
-```
-
-### Back-End Manual Installation:
-
-It is recomended to install the backend first, make sure you have Python 3.8, Pipenv and a database engine (Posgress recomended)
-
-1. Install the python packages: `$ pipenv install`
-2. Create a .env file based on the .env.example: `$ cp .env.example .env`
-3. Install your database engine and create your database, depending on your database you have to create a DATABASE_URL variable with one of the possible values, make sure yo replace the valudes with your database information:
-
-| Engine	| DATABASE_URL 						|
-| ------------- | ----------------------------------------------------- |
-| SQLite	| sqlite:////test.db	 				|
-| MySQL		| mysql://username:password@localhost:port/example	|
-| Postgress	| postgres://username:password@localhost:5432/example 	|
-
-3. Run the migrations: `$ pipenv run upgrade`
-4. Run the application: `$ pipenv run start
-
-
-### Front-End Manual Installation:
-
-- Make sure you are using node version 14+ and that you have already successfully installed and runned the backend.
-
-1. Install the packages: `$ npm install`
-2. Start coding! start the webpack dev server `$ npm run start`
-
-## Publish your website!
-
-This boilerplate it's 100% integrate with Herkou, just by pushing your changes to the heroku repository it will deploy: `$ git push heroku main`
+# We used Trello to keep track of the organization of the proyect
+<a href="https://trello.com/b/qZXdt2L6/proyecto-hambre-%F0%9F%8D%94"><img align="center" src="https://i.imgur.com/RbU9LYg.jpg" alt="Final-colors" alt="database" border="0" /></a>
+(Click image to see the Trello of the project)
