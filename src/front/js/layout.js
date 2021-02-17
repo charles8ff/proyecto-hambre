@@ -35,7 +35,10 @@ const Layout = () => {
 							<h1>Not found!</h1>
 						</Route>
 					</Switch>
-					<Footer />
+					<Footer
+						footer_text="¿Tienes Hambre?"
+						footer_url="https://coolors.co/191919-cdcdcd-ffffff-f44708-ed750b-f6b983-58c7e0"
+					/>
 				</ScrollToTop>
 			</BrowserRouter>
 		</div>
