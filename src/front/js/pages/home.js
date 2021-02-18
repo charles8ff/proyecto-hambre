@@ -2,23 +2,20 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.scss";
+import { Profile } from "../component/profile.jsx";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!</h1>
-			<p>
-				<img src={rigoImageUrl} />
-			</p>
-			<div className="alert alert-info">{store.message || "Loading message from the backend..."}</div>
-			<p>
-				This boilerplate comes with lots of documentation:{" "}
-				<a href="https://github.com/4GeeksAcademy/react-flask-hello/tree/95e0540bd1422249c3004f149825285118594325/docs">
-					Read documentation
-				</a>
-			</p>
-		</div>
+		<Profile
+			profile_img="https://www.pizzeriagastrobarlafundacion.es/wp-content/uploads/2019/04/slider-new1.jpg"
+			place_name="Bar/Restaurante Manolo e Hijos"
+			place_address="C/ Paseo de la Castellana, 3, 28923, MADRID"
+			place_telephone="937426813"
+			open_time="10:00 AM"
+			close_time="21:00 PM"
+			place_description="Tasca agradable de tu barrio de siempre, desde 1966. aquí se ha visto de to'. Buenas bravas, 2 televisiones y canal plus. To lo weno. Llevamos atendiendo desde los años 50s"
+		/>
 	);
 };
