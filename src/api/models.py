@@ -5,19 +5,19 @@ db = SQLAlchemy()
 class Bussiness(db.Model):
     __tablename__ = 'bussiness'
     id = db.Column(db.Integer, primary_key=True)
-    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+    is_active = db.Column(db.Boolean, nullable=False, default=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(80), unique=False, nullable=False)
-    place_name = db.Column(db.String(80), nullable=False)
+    _password = db.Column(db.String, nullable=False)
+    place_name = db.Column(db.String, nullable=False)
     address = db.Column(db.String(250), nullable=False)
     description = db.Column(db.Text, nullable=False) #Import this (¿?)
     phone_number = db.Column(db.String(15), nullable=False)
-    open_hour = db.Column(db.Time)
-    close_hour = db.Column(db.Time) 
+    open_hour = db.Column(db.Time, nullable=False)
+    close_hour = db.Column(db.Time, nullable=False) 
     menu = db.relationship('Menu', backref='bussiness',lazy=True)
 
     def __repr__(self):
-        return f'Bussiness: {self.id}'
+        return f'Bussiness: {self.place_name}'
 
     def serialize(self):
         return {
@@ -25,11 +25,11 @@ class Bussiness(db.Model):
             "email": self.email,
         }
 
-class Menu(Db.Model):
+class Menu(db.Model):
     __tablename__ = 'menu'
     id = db.Column(db.Integer, primary_key=True)
     bussiness_id = db.Column(db.Integer, db.ForeignKey("bussiness.id"), nullable=False)
-    template_id = db.Column(db.Integer, db.ForeignKey("template.id"), unique=True, nullable=False)
+    template_id = db.Column(db.Integer, db.ForeignKey("template.id"), nullable=False)
     meal = db.relationship('Meal', backref='menu',lazy=True)
 
     def __repr__(self):
@@ -40,7 +40,7 @@ class Menu(Db.Model):
             "id": self.id,
         }
 
-class Template(Db.Model):
+class Template(db.Model):
     __tablename__ = 'template'
     id = db.Column(db.Integer, primary_key=True) 
     title = db.Column(db.String(80), nullable=False)
@@ -50,7 +50,7 @@ class Template(Db.Model):
 
 
     def __repr__(self):
-        return f'The template is: {self.id}'
+        return f'The template is: {self.title}'
 
     def serialize(self):
         return {
@@ -58,20 +58,19 @@ class Template(Db.Model):
             # do not serialize the password, its a security breach
         }
 
-association_table = Table('meal_contains_meal_info', Base.metadata,
-    Column('meal', Integer, ForeignKey('meal.id')),
-    Column('meal_info', Integer, ForeignKey('meal_info.id'))
+association_table = db.Table('meal_contains_meal_info', db.Model.metadata,
+    db.Column('meal', db.Integer, db.ForeignKey('meal.id')),
+    db.Column('meal_info', db.Integer, db.ForeignKey('meal_info.id'))
 )
-
-class Meal(Db.Model):
+class Meal(db.Model):
     __tablename__ = 'meal'
     id = db.Column(db.Integer, primary_key=True) 
     meal_name = db.Column(db.String(250), nullable=False)
     price = db.Column(db.Float, nullable=False)
     menu_id = db.Column(db.Integer, db.ForeignKey("menu.id"), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey("category.id"), nullable=False)
-    meal_info = relationship(
-        "Meal_info",
+    meal_info = db.relationship(
+        "Meal_Info",
         secondary=association_table,
         back_populates="meal")
 
@@ -84,17 +83,17 @@ class Meal(Db.Model):
             # do not serialize the password, its a security breach
         }
 
-class Meal_info(Db.Model):
+class Meal_Info(db.Model):
     __tablename__ = 'meal_info'
     id = db.Column(db.Integer, primary_key=True) 
-    info = db.Column(db.Text, nullable=False)
-    meal = relationship(
+    info = db.Column(db.String, nullable=False)
+    meal = db.relationship(
         "Meal",
         secondary=association_table,
         back_populates="meal_info")
 
     def __repr__(self):
-        return f'The meal info: {self.id}'
+        return f'The meal info: {self.info}'
 
     def serialize(self):
         return {
@@ -102,11 +101,10 @@ class Meal_info(Db.Model):
             # do not serialize the password, its a security breach
         }
 
-
-class Category(Db.Model):
+class Category(db.Model):
     __tablename__ = 'category'
     id = db.Column(db.Integer, primary_key=True) 
-    category = db.Column(db.String(250), nullable=False)
+    category = db.Column(db.String, nullable=False)
     meal = db.relationship('Meal', backref='category',lazy=True)
 
     def __repr__(self):
