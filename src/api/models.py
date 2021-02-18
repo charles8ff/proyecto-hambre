@@ -24,18 +24,29 @@ class Business(db.Model):
         return {
             "id": self.id,
             "email": self.email,
+            "place_name": self.place_name,
+            "address": self.address,
+            "phone_number": self.phone_number,
+            ##"open_hour": self.open_hour,
+            #"close_hour": self.close_hour,
+            "description": self.description,
         }
+
+    @classmethod
+    def get_by_id(cls, profile_id):
+        profile = cls.query.filter_by(id = profile_id).first()
+        return profile.to_dict()
         
     def add():
-        business = business(
+        business = Business(
             email="chispis@gmail.com", 
             _password="123456789", 
             place_name="Bar Manolo", 
             address="Calle sevilla", 
             description="Este es mi restaurante chulo",
             phone_number="68792348",
-            open_hour="10:00 AM",
-            close_hour="21:00 PM"
+            open_hour="10:00",
+            close_hour="21:00"
             )
         db.session.add(business)
         db.session.commit()

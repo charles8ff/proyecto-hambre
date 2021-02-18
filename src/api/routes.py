@@ -16,3 +16,10 @@ api = Blueprint('api', __name__)
 #         business.add()
 #         return "Created user", 201
 #     return 'Fallaste', 400
+
+@api.route('/profile/<profile_id>', methods=['GET'])
+def profile_id(profile_id):
+   # Business.add()
+    business_profile = Business.get_by_id(profile_id)
+    ##print
+    return jsonify(business_profile), 200
