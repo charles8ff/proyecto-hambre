@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 export const Footer = props => (
-	<footer className="footer mt-auto py-3 footer--background-color container-fluid">
+	<footer className="footer mt-auto py-3 container-fluid">
 		<div className="row d-flex justify-content-center">
 			<div className="col-2 text-white">Project Hunger</div>
 			<div className="offset-7 col-2 text-white">
