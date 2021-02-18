@@ -12,7 +12,7 @@ $textfont: 'Roboto', sans-serif;
 footer{
     background-color: $black;
     
-    .link-color{
+    a{
         color: $secondary-color;
     } 
     & a:hover{
