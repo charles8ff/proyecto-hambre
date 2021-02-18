@@ -11,7 +11,7 @@ $textfont: 'Roboto', sans-serif;
 
 footer{
     background-color: $black;
-    
+    color: $white;
     a{
         color: $secondary-color;
     } 
@@ -19,9 +19,6 @@ footer{
         color: $primary-color-light;
         text-decoration: none;
     }
-
-
-
 }
 body{
     font-family: $textfont;
