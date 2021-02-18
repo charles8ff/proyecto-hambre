@@ -1,41 +1,56 @@
+import enum
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class Bussiness(db.Model):
-    __tablename__ = 'bussiness'
+class Business(db.Model):
+    __tablename__ = 'business'
     id = db.Column(db.Integer, primary_key=True)
     is_active = db.Column(db.Boolean, nullable=False, default=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     _password = db.Column(db.String, nullable=False)
     place_name = db.Column(db.String, nullable=False)
     address = db.Column(db.String(250), nullable=False)
-    description = db.Column(db.Text, nullable=False) #Import this (¿?)
+    description = db.Column(db.Text, nullable=False)
     phone_number = db.Column(db.String(15), nullable=False)
     open_hour = db.Column(db.Time, nullable=False)
     close_hour = db.Column(db.Time, nullable=False) 
-    menu = db.relationship('Menu', backref='bussiness',lazy=True)
+    menu = db.relationship('Menu', backref='business',lazy=True)
 
     def __repr__(self):
-        return f'Bussiness: {self.place_name}'
+        return f'business: {self.place_name}'
 
-    def serialize(self):
+    def to_dict(self):
         return {
             "id": self.id,
             "email": self.email,
         }
+        
+    def add():
+        business = business(
+            email="chispis@gmail.com", 
+            _password="123456789", 
+            place_name="Bar Manolo", 
+            address="Calle sevilla", 
+            description="Este es mi restaurante chulo",
+            phone_number="68792348",
+            open_hour="10:00 AM",
+            close_hour="21:00 PM"
+            )
+        db.session.add(business)
+        db.session.commit()
 
 class Menu(db.Model):
     __tablename__ = 'menu'
     id = db.Column(db.Integer, primary_key=True)
-    bussiness_id = db.Column(db.Integer, db.ForeignKey("bussiness.id"), nullable=False)
+    business_id = db.Column(db.Integer, db.ForeignKey("business.id"), nullable=False)
     template_id = db.Column(db.Integer, db.ForeignKey("template.id"), nullable=False)
     meal = db.relationship('Meal', backref='menu',lazy=True)
 
     def __repr__(self):
-        return f'The menu of bussiness: {self.bussiness_id}'
+        return f'The menu of business: {self.business_id}'
 
-    def serialize(self):
+    def to_dict(self):
         return {
             "id": self.id,
         }
@@ -52,10 +67,10 @@ class Template(db.Model):
     def __repr__(self):
         return f'The template is: {self.title}'
 
-    def serialize(self):
+    def to_dict(self):
         return {
             "id": self.id,
-            # do not serialize the password, its a security breach
+            # do not to_dict the password, its a security breach
         }
 
 association_table = db.Table('meal_contains_meal_info', db.Model.metadata,
@@ -77,16 +92,34 @@ class Meal(db.Model):
     def __repr__(self):
         return f'The meal is: {self.meal_name}'
 
-    def serialize(self):
+    def to_dict(self):
         return {
             "id": self.id,
-            # do not serialize the password, its a security breach
+            # do not to_dict the password, its a security breach
         }
+
+class Enum_Info(enum.Enum):
+    gluten = "gluten"
+    peanuts = "peanuts"
+    tree_nuts = "tree_nuts"
+    celery = "celery"
+    mustard = "mustard"
+    eggs = "eggs"
+    milk = "milk"
+    sesame = "sesame"
+    fish = "fish"
+    custaceans = "custaceans"
+    molluscs = "molluscs"
+    soya = "soya"
+    sulphites = "sulphites"
+    lupin  = "lupin"
+    vegetarian_friendly = "vegetarian_friendly"
+    vegan_friendly = "vegan_friendly"
 
 class Meal_Info(db.Model):
     __tablename__ = 'meal_info'
     id = db.Column(db.Integer, primary_key=True) 
-    info = db.Column(db.String, nullable=False)
+    info = db.Column(db.Enum(Enum_Info), nullable=False)
     meal = db.relationship(
         "Meal",
         secondary=association_table,
@@ -95,11 +128,19 @@ class Meal_Info(db.Model):
     def __repr__(self):
         return f'The meal info: {self.info}'
 
-    def serialize(self):
+    def to_dict(self):
         return {
             "id": self.id,
-            # do not serialize the password, its a security breach
+            # do not to_dict the password, its a security breach
         }
+
+
+class Enum_Category(enum.Enum):
+    daily_menu = "daily_menu"
+    cart_menu = "cart_menu"
+    drinks_menu = "drinks_menu"
+    dessert_menu = "dessert_menu"
+    cocktail_menu = "cocktail_menu"
 
 class Category(db.Model):
     __tablename__ = 'category'
@@ -110,8 +151,8 @@ class Category(db.Model):
     def __repr__(self):
         return f'The meal is: {self.meal_name}'
 
-    def serialize(self):
+    def to_dict(self):
         return {
             "id": self.id,
-            # do not serialize the password, its a security breach
+            # do not to_dict the password, its a security breach
         }
