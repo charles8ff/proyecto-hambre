@@ -17,6 +17,11 @@ body{
     background: #ED750B;
 }
 
+.fill:hover,
+.fill:focus {
+  box-shadow: inset 0 0 0 2em var(--hover);
+}
+
 .jumbotron {
   background-color: #ed750b57;
 }
@@ -63,7 +68,6 @@ body{
     margin-top: 30px;
   }
 }
-$text-font: 'Roboto', sans-serif;
 
 footer{
     background-color: $black;
