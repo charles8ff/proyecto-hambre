@@ -34,7 +34,6 @@ class Business(db.Model):
             "description": self.description,
         }
 
-        
     @classmethod
     def get_by_id(cls, profile_id):
         profile = cls.query.filter_by(id = profile_id).first()
