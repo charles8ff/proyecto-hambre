@@ -3,63 +3,63 @@ import { Context } from "../store/appContext";
 import Card from "react-bootstrap/Card";
 import CardDeck from "react-bootstrap/CardDeck";
 import PropTypes from "prop-types";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 export const MenusView = props => {
 	const { store, actions } = useContext(Context);
 
-	// templatesInHTML = store.business.templates o algo del palo
+	// templatesInHTML = store.business.menus o algo del palo
 
 	return (
-		<div className="container">
-			<CardDeck className="d-flex justify-content-center">
-				<Card className="mb-2 col-3 p-0">
-					<Card.Img
-						variant="top"
-						src="https://dkstudio.mx/wp-content/plugins/tutor/assets/images/placeholder.jpg"
-					/>
-					<Card.Body>
-						<Card.Title>Carta</Card.Title>
-						<Card.Text>
-							This is a wider card with supporting text below as a natural lead-in to additional content.
-							This content is a little bit longer.
-						</Card.Text>
-					</Card.Body>
-					<Card.Footer>
-						<small className="text-muted">Ver toda la carta</small>
-					</Card.Footer>
-				</Card>
-				<Card className="mb-2 col-3 p-0">
-					<Card.Img
-						variant="top"
-						src="https://dkstudio.mx/wp-content/plugins/tutor/assets/images/placeholder.jpg"
-					/>
-					<Card.Body>
-						<Card.Title>Carta</Card.Title>
-						<Card.Text>
-							This card has supporting text below as a natural lead-in to additional content.{" "}
-						</Card.Text>
-					</Card.Body>
-					<Card.Footer>
-						<small className="text-muted">Ver toda la carta</small>
-					</Card.Footer>
-				</Card>
-				<Card className="mb-2 col-3 p-0">
-					<Card.Img
-						variant="top"
-						src="https://dkstudio.mx/wp-content/plugins/tutor/assets/images/placeholder.jpg"
-					/>
-					<Card.Body>
-						<Card.Title>Carta</Card.Title>
-						<Card.Text>
-							This is a wider card with supporting text below as a natural lead-in to additional content.
-							This card has even longer content than the first to show that equal height action.
-						</Card.Text>
-					</Card.Body>
-					<Card.Footer>
-						<small className="text-muted">Ver toda la carta</small>
-					</Card.Footer>
-				</Card>
+		<Container>
+			<CardDeck className="justify-content-center">
+				<Row xs={1} md={1} lg={3} className="justify-content-center">
+					<Col>
+						<Card className="text-center">
+							<Card.Img
+								variant="top"
+								src="https://dkstudio.mx/wp-content/plugins/tutor/assets/images/placeholder.jpg"
+							/>
+							<Card.Body>
+								<Card.Title>Menú del día</Card.Title>
+							</Card.Body>
+							<Card.Footer>
+								<small className="text-muted">Ver toda la carta</small>
+							</Card.Footer>
+						</Card>
+					</Col>
+					<Col>
+						<Card className="text-center">
+							<Card.Img
+								variant="top"
+								src="https://dkstudio.mx/wp-content/plugins/tutor/assets/images/placeholder.jpg"
+							/>
+							<Card.Body>
+								<Card.Title>Carta</Card.Title>
+							</Card.Body>
+							<Card.Footer>
+								<small className="text-muted">Ver toda la carta</small>
+							</Card.Footer>
+						</Card>
+					</Col>
+					<Col>
+						<Card className="text-center">
+							<Card.Img
+								variant="top"
+								src="https://dkstudio.mx/wp-content/plugins/tutor/assets/images/placeholder.jpg"
+							/>
+							<Card.Body>
+								<Card.Title>Carta de vinos</Card.Title>
+							</Card.Body>
+							<Card.Footer>
+								<small className="text-muted">Ver toda la carta</small>
+							</Card.Footer>
+						</Card>
+					</Col>
+				</Row>
 			</CardDeck>
-		</div>
+		</Container>
 	);
 };
