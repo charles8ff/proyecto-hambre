@@ -7,17 +7,17 @@ $black:  #191919;
 $grey: #CDCDCD;
 $text-font: 'Roboto', sans-serif;
 
-.navbar--background{
+.navbar{
     background: #ED750B;
 }
 
-.jumbotron--background {
-  background-color: #ED750B;
+.jumbotron {
+  background-color: #ed750b57;
 }
 
 .box {
   background: #f9f9f9;
-  box-shadow: 0 0 1px rgba(0,0,0,.2), 0 2px 4px rgba(0,0,0,.1);
+  box-shadow: 0 0 0.1rem #ed750b, 0 0.3rem 0.8rem #ed750b;
   height: 25rem;
   border-radius: 5px;
   h2 {
@@ -50,8 +50,8 @@ $text-font: 'Roboto', sans-serif;
   text-align: center;
   img {
       border-radius: 50%;
-      width: 13rem;
-      height: 13rem;
+      width: 10rem;
+      height: 10rem;
     }
   .details {
     margin-top: 30px;

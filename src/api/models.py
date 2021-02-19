@@ -1,5 +1,7 @@
 import enum
 from flask_sqlalchemy import SQLAlchemy
+import json  
+from dataclasses import asdict, dataclass
 
 db = SQLAlchemy()
 
@@ -27,11 +29,12 @@ class Business(db.Model):
             "place_name": self.place_name,
             "address": self.address,
             "phone_number": self.phone_number,
-            ##"open_hour": self.open_hour,
-            #"close_hour": self.close_hour,
+            "open_hour": self.open_hour.isoformat(),
+            "close_hour": self.close_hour.isoformat(),
             "description": self.description,
         }
 
+        
     @classmethod
     def get_by_id(cls, profile_id):
         profile = cls.query.filter_by(id = profile_id).first()
