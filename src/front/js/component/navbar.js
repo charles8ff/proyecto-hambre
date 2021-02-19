@@ -4,7 +4,7 @@ import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container, Jumbotr
 export const Header = () => {
 	return (
 		<>
-			<header className="navbar--background">
+			<header className="navbar">
 				<Container>
 					<Navbar expand="lg">
 						<Navbar.Brand href="#home">Proyecto Hambre</Navbar.Brand>
