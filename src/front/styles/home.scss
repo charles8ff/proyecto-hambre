@@ -1,3 +1,5 @@
+//https://coolors.co/191919-cdcdcd-ffffff-f44708-ed750b-f6b983-58c7e0
+
 $primary-color: #ED750B;
 $primary-color-light: #F6B983;
 $secondary-color: #58C7E0;
@@ -6,6 +8,10 @@ $white: #FFFFFF;
 $black:  #191919;
 $grey: #CDCDCD;
 $text-font: 'Roboto', sans-serif;
+
+body{
+    font-family: $text-font;
+}
 
 .navbar{
     background: #ED750B;
@@ -56,4 +62,17 @@ $text-font: 'Roboto', sans-serif;
   .details {
     margin-top: 30px;
   }
+}
+$text-font: 'Roboto', sans-serif;
+
+footer{
+    background-color: $black;
+    color: $white;
+    a{
+        color: $secondary-color;
+    } 
+    & a:hover{
+        color: $primary-color-light;
+        text-decoration: none;
+    }
 }
