@@ -15,7 +15,7 @@ these refreshed establishments.
 (Click images to see the Google spreadsheets)
 
 # Designing database
-<a href="https://app.quickdatabasediagrams.com/#/d/CYSjvQ" target="_blank"><img align="center" src="https://i.imgur.com/evpMqPK.jpg" alt="DATABASE-model" border="0" /></a>
+<a href="https://app.quickdatabasediagrams.com/#/d/CYSjvQ" target="_blank"><img align="center" src="https://i.imgur.com/EKaaJqJ.png" alt="DATABASE-model" border="0" /></a>
 (Click image to open the preview of the database)
 
 # Colors palette used across the project
