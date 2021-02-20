@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 654e18404a83
+Revision ID: 6ebeb2f42de4
 Revises: 
-Create Date: 2021-02-19 08:28:00.686479
+Create Date: 2021-02-20 08:47:04.980074
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '654e18404a83'
+revision = '6ebeb2f42de4'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,10 +21,10 @@ def upgrade():
     op.create_table('business',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('is_active', sa.Boolean(), nullable=False),
-    sa.Column('email', sa.String(length=120), nullable=False),
-    sa.Column('_password', sa.String(), nullable=False),
+    sa.Column('email', sa.VARCHAR(), nullable=False),
+    sa.Column('password', sa.VARCHAR(), nullable=False),
     sa.Column('place_name', sa.String(), nullable=False),
-    sa.Column('address', sa.String(length=250), nullable=False),
+    sa.Column('address', sa.VARCHAR(), nullable=False),
     sa.Column('description', sa.Text(), nullable=False),
     sa.Column('phone_number', sa.String(length=15), nullable=False),
     sa.Column('open_hour', sa.Time(), nullable=False),
@@ -32,21 +32,23 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
     )
-    op.create_table('category',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('category', sa.String(), nullable=False),
-    sa.PrimaryKeyConstraint('id')
-    )
     op.create_table('meal_info',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('info', sa.Enum('gluten', 'peanuts', 'tree_nuts', 'celery', 'mustard', 'eggs', 'milk', 'sesame', 'fish', 'custaceans', 'molluscs', 'soya', 'sulphites', 'lupin', 'vegetarian_friendly', 'vegan_friendly', name='enum_info'), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('menu_type',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('menu_type', sa.Enum('daily_menu', 'cart_menu', 'drinks_menu', 'dessert_menu', 'cocktail_menu', name='enum_category'), nullable=False),
+    sa.PrimaryKeyConstraint('id')
+    )
     op.create_table('template',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('title', sa.String(length=80), nullable=False),
+    sa.Column('title', sa.VARCHAR(), nullable=False),
     sa.Column('description', sa.Text(), nullable=False),
     sa.Column('price', sa.Float(), nullable=False),
+    sa.Column('menu_type_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['menu_type_id'], ['menu_type.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('menu',
@@ -59,11 +61,9 @@ def upgrade():
     )
     op.create_table('meal',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('meal_name', sa.String(length=250), nullable=False),
+    sa.Column('meal_name', sa.VARCHAR(), nullable=False),
     sa.Column('price', sa.Float(), nullable=False),
     sa.Column('menu_id', sa.Integer(), nullable=False),
-    sa.Column('category_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['category_id'], ['category.id'], ),
     sa.ForeignKeyConstraint(['menu_id'], ['menu.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -82,7 +82,7 @@ def downgrade():
     op.drop_table('meal')
     op.drop_table('menu')
     op.drop_table('template')
+    op.drop_table('menu_type')
     op.drop_table('meal_info')
-    op.drop_table('category')
     op.drop_table('business')
     # ### end Alembic commands ###

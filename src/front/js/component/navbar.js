@@ -11,8 +11,8 @@ export const Header = () => {
 					<Navbar expand="lg">
 						<Navbar.Brand href="#home">Proyecto Hambre</Navbar.Brand>
 						<Navbar.Toggle aria-controls="basic-navbar-nav" />
-						<BUTTON />
 					</Navbar>
+					<BUTTON title="Logout" />
 				</Container>
 			</header>
 		</>

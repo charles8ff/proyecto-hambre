@@ -1,15 +1,15 @@
-"""
-This module takes care of starting the API Server, Loading the DB and Adding the endpoints
-"""
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, Business, Menu, Template, Meal, Meal_Info, Category
+from api.models import db, Business, Menu, Template, Meal, Meal_Info, Menu_Type
 from api.utils import generate_sitemap, APIException
 
 
 api = Blueprint('api', __name__)
 
-@api.route('/profile/<profile_id>', methods=['GET'])
-def profile_id(profile_id):
-    #Business.add()
-    business_profile = Business.get_by_id(profile_id)
-    return jsonify(business_profile), 200
+@api.route('/place/<place_id>', methods=['GET'])
+def profile_id(place_id):
+    business_profile = Business.get_by_id(place_id)
+    if business_profile['is_active']:
+        return jsonify(business_profile)
+    else:
+        return 'User does not exsist', 400
+

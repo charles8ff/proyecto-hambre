@@ -5,12 +5,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			profile: []
 		},
 		actions: {
-			getProfile: () => {
-				fetch("https://3001-coral-silkworm-mp9fnk8u.ws-eu03.gitpod.io/api/profile/1")
+			getProfile: place_id => {
+				fetch(`https://3001-coral-silkworm-mp9fnk8u.ws-eu03.gitpod.io/api/place/${place_id}`)
 					.then(async res => {
 						const response = await res.json();
 						setStore({ profile: response });
-						console.log(getStore().profile);
+						//console.log(getStore().profile);
 					})
 					.catch(err => {
 						throw err;

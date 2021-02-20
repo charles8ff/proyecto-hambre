@@ -2,6 +2,7 @@ import enum
 from flask_sqlalchemy import SQLAlchemy
 import json  
 from dataclasses import asdict, dataclass
+from sqlalchemy.ext.hybrid import hybrid_property, hybrid_method 
 
 db = SQLAlchemy()
 
@@ -9,10 +10,10 @@ class Business(db.Model):
     __tablename__ = 'business'
     id = db.Column(db.Integer, primary_key=True)
     is_active = db.Column(db.Boolean, nullable=False, default=True)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    _password = db.Column(db.String, nullable=False)
+    email = db.Column(db.VARCHAR, unique=True, nullable=False)
+    _password = db.Column("password", db.VARCHAR, nullable=False)
     place_name = db.Column(db.String, nullable=False)
-    address = db.Column(db.String(250), nullable=False)
+    address = db.Column(db.VARCHAR, nullable=False)
     description = db.Column(db.Text, nullable=False)
     phone_number = db.Column(db.String(15), nullable=False)
     open_hour = db.Column(db.Time, nullable=False)
@@ -22,9 +23,14 @@ class Business(db.Model):
     def __repr__(self):
         return f'business: {self.place_name}'
 
+    @hybrid_property
+    def password(self):
+        return self._password
+
     def to_dict(self):
         return {
             "id": self.id,
+            "is_active": self.is_active,
             "email": self.email,
             "place_name": self.place_name,
             "address": self.address,
@@ -35,14 +41,19 @@ class Business(db.Model):
         }
 
     @classmethod
-    def get_by_id(cls, profile_id):
-        profile = cls.query.filter_by(id = profile_id).first()
+    def get_by_id(cls, place_id):
+        profile = cls.query.filter_by(id = place_id).first()
         return profile.to_dict()
-        
+
+    @classmethod
+    def get_all_profile(cls):
+        return cls.query.all()
+
+
     def add():
         business = Business(
-            email="chispis@gmail.com", 
-            _password="123456789", 
+            email="holi_7@gmail.com", 
+            _password="123456789",
             place_name="Bar Manolo", 
             address="Calle sevilla", 
             description="Este es mi restaurante chulo",
@@ -71,14 +82,36 @@ class Menu(db.Model):
 class Template(db.Model):
     __tablename__ = 'template'
     id = db.Column(db.Integer, primary_key=True) 
-    title = db.Column(db.String(80), nullable=False)
+    title = db.Column(db.VARCHAR, nullable=False)
     description = db.Column(db.Text, nullable=False)
     price = db.Column(db.Float, nullable=False)
     menu = db.relationship('Menu', backref='template',lazy=True)
-
+    menu_type_id = db.Column(db.Integer, db.ForeignKey("menu_type.id"), nullable=False)
 
     def __repr__(self):
         return f'The template is: {self.title}'
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            # do not to_dict the password, its a security breach
+        }
+
+class Enum_Category(enum.Enum):
+    daily_menu = "daily_menu"
+    cart_menu = "cart_menu"
+    drinks_menu = "drinks_menu"
+    dessert_menu = "dessert_menu"
+    cocktail_menu = "cocktail_menu"
+
+class Menu_Type(db.Model):
+    __tablename__ = 'menu_type'
+    id = db.Column(db.Integer, primary_key=True) 
+    menu_type = db.Column(db.Enum(Enum_Category), nullable=False)
+    #meal = db.relationship('Meal', backref='menu_type',lazy=True)
+
+    def __repr__(self):
+        return f'The meal is: {self.meal_name}'
 
     def to_dict(self):
         return {
@@ -93,10 +126,9 @@ association_table = db.Table('meal_contains_meal_info', db.Model.metadata,
 class Meal(db.Model):
     __tablename__ = 'meal'
     id = db.Column(db.Integer, primary_key=True) 
-    meal_name = db.Column(db.String(250), nullable=False)
+    meal_name = db.Column(db.VARCHAR, nullable=False)
     price = db.Column(db.Float, nullable=False)
     menu_id = db.Column(db.Integer, db.ForeignKey("menu.id"), nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey("category.id"), nullable=False)
     meal_info = db.relationship(
         "Meal_Info",
         secondary=association_table,
@@ -140,29 +172,6 @@ class Meal_Info(db.Model):
 
     def __repr__(self):
         return f'The meal info: {self.info}'
-
-    def to_dict(self):
-        return {
-            "id": self.id,
-            # do not to_dict the password, its a security breach
-        }
-
-
-class Enum_Category(enum.Enum):
-    daily_menu = "daily_menu"
-    cart_menu = "cart_menu"
-    drinks_menu = "drinks_menu"
-    dessert_menu = "dessert_menu"
-    cocktail_menu = "cocktail_menu"
-
-class Category(db.Model):
-    __tablename__ = 'category'
-    id = db.Column(db.Integer, primary_key=True) 
-    category = db.Column(db.String, nullable=False)
-    meal = db.relationship('Meal', backref='category',lazy=True)
-
-    def __repr__(self):
-        return f'The meal is: {self.meal_name}'
 
     def to_dict(self):
         return {

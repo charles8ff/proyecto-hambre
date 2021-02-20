@@ -1,4 +1,5 @@
-import React, { useContext, Fragment } from "react";
+import React, { useContext, Fragment, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route, useParams, useLocation, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { Profile } from "../component/profile.jsx";
@@ -6,12 +7,22 @@ import { MenusView } from "../component/menusview.jsx";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+	let id = useParams();
+
+	let history = useHistory();
+
+	useEffect(
+		() => {
+			actions.getProfile(id.id);
+		},
+		[!id]
+	);
 
 	return (
 		<>
 			<Profile
 				profile_img="https://www.pizzeriagastrobarlafundacion.es/wp-content/uploads/2019/04/slider-new1.jpg"
-				place_name={store.profile.place_name}
+				place_name={store.profile.email}
 				place_address={store.profile.address}
 				place_telephone={store.profile.phone_number}
 				open_time={store.profile.open_hour}

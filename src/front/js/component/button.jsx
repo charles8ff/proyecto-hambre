@@ -1,13 +1,21 @@
 import React, { useContext, Fragment } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
+import PropTypes from "prop-types";
 
-export const BUTTON = () => {
+export const BUTTON = props => {
 	const { store, actions } = useContext(Context);
 
 	return (
 		<>
-			<button className="fill">Fill In</button>
+			<button onClick={props.click} className="fill ml-auto">
+				{props.title}
+			</button>
 		</>
 	);
+};
+
+BUTTON.propTypes = {
+	title: PropTypes.string,
+	click: PropTypes.func
 };
