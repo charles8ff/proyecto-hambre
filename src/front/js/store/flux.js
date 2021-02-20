@@ -2,7 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			message: "holi",
-			profile: []
+			profile: [],
+			profile_id: 0
 		},
 		actions: {
 			getProfile: place_id => {
@@ -16,12 +17,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 						throw err;
 					});
 			},
-			getMessage: () => {
-				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "/api/hello")
-					.then(resp => resp.json())
-					.then(data => setStore({ message: data.message }))
-					.catch(error => console.log("Error loading message from backend", error));
+			deleteProfile: async place_id => {
+				//setStore({ contact: getStore().contact.filter(index => index !== item) });
+				let response = await fetch(
+					`https://3001-coral-silkworm-mp9fnk8u.ws-eu03.gitpod.io/api/place/${place_id}`,
+					{
+						method: "DELETE",
+						headers: new Headers({
+							"Content-Type": "application/json"
+						})
+					}
+				);
+				response = await response.json();
+				console.log(response);
 			}
 		}
 	};

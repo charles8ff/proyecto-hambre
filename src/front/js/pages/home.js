@@ -13,9 +13,10 @@ export const Home = () => {
 
 	useEffect(
 		() => {
-			actions.getProfile(id.id);
+			store.profile_id = id.id;
+			actions.getProfile(store.profile_id);
 		},
-		[!id]
+		[!store.profile_id]
 	);
 
 	return (
