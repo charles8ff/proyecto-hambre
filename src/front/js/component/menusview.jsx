@@ -10,13 +10,32 @@ import Col from "react-bootstrap/Col";
 export const MenusView = props => {
 	const { store, actions } = useContext(Context);
 
-	// templatesInHTML = store.business.menus o algo del palo
+	let templatesInHTML = store.templates.map((item, index) => {
+		return (
+			<Col key={index}>
+				<Card className="text-center">
+					<Card.Img
+						variant="top"
+						src="https://dkstudio.mx/wp-content/plugins/tutor/assets/images/placeholder.jpg"
+					/>
+					<Card.Body>
+						<Card.Title>{item.title}</Card.Title>
+					</Card.Body>
+					<Card.Footer>
+						{/* import the button */}
+						<small className="text-muted">Ver toda la carta</small>
+					</Card.Footer>
+				</Card>
+			</Col>
+		);
+	});
 
 	return (
 		<Container>
 			<CardDeck className="justify-content-center">
 				<Row xs={1} md={1} lg={3} className="justify-content-center">
-					<Col>
+					{templatesInHTML}
+					{/* <Col>
 						<Card className="text-center">
 							<Card.Img
 								variant="top"
@@ -57,7 +76,7 @@ export const MenusView = props => {
 								<small className="text-muted">Ver toda la carta</small>
 							</Card.Footer>
 						</Card>
-					</Col>
+					</Col> */}
 				</Row>
 			</CardDeck>
 		</Container>
