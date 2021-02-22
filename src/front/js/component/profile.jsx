@@ -1,9 +1,10 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 import { Container, Jumbotron, Row, Col, Card, Button } from "react-bootstrap";
-import PropTypes from "prop-types";
 
-export const Profile = props => {
+export const Profile = () => {
+    	const { store, actions } = useContext(Context);
 	return (
 		<>
 			<Jumbotron className="jumbotron">
@@ -12,11 +13,11 @@ export const Profile = props => {
 						<Col md={5} lg={5} className="pb-5">
 							<Card className="box box--contains">
 								<div className="avatar">
-									<img src={props.profile_img} />
+									<img src="https://www.pizzeriagastrobarlafundacion.es/wp-content/uploads/2019/04/slider-new1.jpg"/>
 								</div>
 								<Card.Body>
 									<Card.Title>
-										<h2 className="details">{props.place_name}</h2>
+										<h2 className="details">{store.profile.place_name}</h2>
 									</Card.Title>
 								</Card.Body>
 							</Card>
@@ -27,20 +28,20 @@ export const Profile = props => {
 									<div className="details">
 										<div className="d-flex flex-row">
 											<i className="fas fa-color fa-lg fa-map-marker-alt" />
-											<h3>{props.place_address}</h3>
+											<h3>{store.profile.place_address}</h3>
 										</div>
 										<div className="d-flex flex-row">
 											<i className="fas fa-color fa-lg fa-phone" />
-											<h3>{props.place_telephone}</h3>
+											<h3>{store.profile.place_telephone}</h3>
 										</div>
 										<div className="d-flex flex-row">
 											<i className="far fa-color fa-clock" />
 											<h3>
-												{props.open_time}
-												{props.close_time}
+												{store.profile.open_time}
+												{store.profile.close_time}
 											</h3>
 										</div>
-										<p className="p-5">{props.place_description}</p>
+										<p className="p-5">{store.profile.place_description}</p>
 									</div>
 								</Card.Body>
 							</Card>
@@ -50,14 +51,4 @@ export const Profile = props => {
 			</Jumbotron>
 		</>
 	);
-};
-
-Profile.propTypes = {
-	profile_img: PropTypes.string,
-	place_name: PropTypes.string,
-	place_address: PropTypes.string,
-	place_description: PropTypes.string,
-	open_time: PropTypes.string,
-	close_time: PropTypes.string,
-	place_telephone: PropTypes.string
 };
