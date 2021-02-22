@@ -7,7 +7,81 @@ $error-color: #F44708;
 $white: #FFFFFF;
 $black:  #191919;
 $grey: #CDCDCD;
-$textfont: 'Roboto', sans-serif;
+$text-font: 'Roboto', sans-serif;
+
+body{
+    font-family: $text-font;
+}
+
+.navbar{
+    background: #ED750B;
+}
+
+button {  
+  color: $white;
+  border-color: red;
+    background: none;
+  border: 2px solid;
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+  transition: 0.25s;
+  
+  &:hover,
+  &:focus { 
+    border-color: $secondary-color;
+    color: #fff;
+  }
+}
+
+
+.jumbotron {
+  background-color: #ed750b57;
+}
+
+.box {
+  background: #f9f9f9;
+  box-shadow: 0 0 0.1rem #ed750b, 0 0.3rem 0.8rem #ed750b;
+  height: 23rem;
+  border-radius: 5px;
+  h2 {
+    font-family: $text-font;
+    color: $primary-color;
+    font-size: 1.5em;
+          padding-top: 1rem;
+  }
+    h3 {
+    font-family: $text-font;
+    color: $primary-color;
+    font-size: 1.2em;
+          padding-top: 1rem;
+  }
+  .fa-color{
+      color: black;
+      font-size: 1.8em;
+      padding: 1rem;
+      padding-left: 3rem;
+  }
+  p {
+    font-family: $text-font;
+    font-size: 1rem;
+    color: $black;
+  }
+}
+
+.box--contains {
+  padding: 30px;  
+  text-align: center;
+  img {
+      border-radius: 50%;
+      width: 10rem;
+      height: 10rem;
+    }
+  .details {
+    margin-top: 30px;
+  }
+}
 
 footer{
     background-color: $black;
@@ -20,7 +94,4 @@ footer{
         }   
     } 
     
-}
-body{
-    font-family: $textfont;
 }

@@ -1,17 +1,20 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container, Jumbotron, Row, Col } from "react-bootstrap";
+import { BUTTON } from "../component/button.jsx";
 
-export const Navbar = () => {
+export const Header = () => {
 	return (
-		<nav className="navbar navbar-light bg-light mb-3">
-			<Link to="/">
-				<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-			</Link>
-			<div className="ml-auto">
-				<Link to="/demo">
-					<button className="btn btn-primary">Check the Context in action</button>
-				</Link>
-			</div>
-		</nav>
+		<>
+			<header className="navbar">
+				<Container>
+					<Navbar expand="lg">
+						<Navbar.Brand href="#home">Proyecto Hambre</Navbar.Brand>
+						<Navbar.Toggle aria-controls="basic-navbar-nav" />
+					</Navbar>
+					<BUTTON title="Logout" />
+				</Container>
+			</header>
+		</>
 	);
 };
