@@ -7,6 +7,7 @@ api = Blueprint('api', __name__)
 
 @api.route('/place/<place_id>', methods=['GET'])
 def profile_id(place_id):
+    #Business.add()
     business_profile = Business.get_by_id(place_id)
     if business_profile['is_active']:
         return jsonify(business_profile)

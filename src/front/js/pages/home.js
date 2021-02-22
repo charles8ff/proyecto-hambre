@@ -19,7 +19,7 @@ export const Home = () => {
 		[!store.profile_id]
 	);
 
-	return (
-		<Profile/>
-	);
+	console.log(store.profile);
+
+	return <Profile />;
 };

@@ -10,8 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch(`https://3001-coral-silkworm-mp9fnk8u.ws-eu03.gitpod.io/api/place/${place_id}`)
 					.then(async res => {
 						const response = await res.json();
-                        setStore({ profile: response });
-                        
+						setStore({ profile: response });
 					})
 					.catch(err => {
 						throw err;

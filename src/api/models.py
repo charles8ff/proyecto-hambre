@@ -30,6 +30,7 @@ class Business(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
+            "is_active": self.is_active,
             "email": self.email,
             "place_name": self.place_name,
             "address": self.address,
@@ -56,7 +57,7 @@ class Business(db.Model):
 
     def add():
         business = Business(
-            email="holi_1@gmail.com", 
+            email="holi_3@gmail.com", 
             _password="123456789",
             place_name="Bar Manolo", 
             address="Calle sevilla", 
