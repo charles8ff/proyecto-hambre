@@ -30,7 +30,6 @@ class Business(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "is_active": self.is_active,
             "email": self.email,
             "place_name": self.place_name,
             "address": self.address,
@@ -49,10 +48,15 @@ class Business(db.Model):
     def get_all_profile(cls):
         return cls.query.all()
 
+    @classmethod
+    def delete_profile(cls, place_id):
+        profile = cls.query.filter_by(id = place_id).first()
+        profile.is_active = False
+        db.session.commit()
 
     def add():
         business = Business(
-            email="holi_7@gmail.com", 
+            email="holi_1@gmail.com", 
             _password="123456789",
             place_name="Bar Manolo", 
             address="Calle sevilla", 
@@ -172,7 +176,7 @@ class Meal_Info(db.Model):
 
     def __repr__(self):
         return f'The meal info: {self.info}'
-
+    
     def to_dict(self):
         return {
             "id": self.id,
