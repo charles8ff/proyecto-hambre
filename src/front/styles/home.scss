@@ -1,0 +1,26 @@
+//https://coolors.co/191919-cdcdcd-ffffff-f44708-ed750b-f6b983-58c7e0
+
+$primary-color: #ED750B;
+$primary-color-light: #F6B983;
+$secondary-color: #58C7E0;
+$error-color: #F44708;
+$white: #FFFFFF;
+$black:  #191919;
+$grey: #CDCDCD;
+$textfont: 'Roboto', sans-serif;
+
+footer{
+    background-color: $black;
+    color: $white;
+    a{
+        color: $secondary-color;
+        &:hover{
+            color: $primary-color-light;
+            text-decoration: none;
+        }   
+    } 
+    
+}
+body{
+    font-family: $textfont;
+}
