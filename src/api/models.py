@@ -57,7 +57,7 @@ class Business(db.Model):
 
     def add():
         business = Business(
-            email="holi_3@gmail.com", 
+            email="holi_1@gmail.com", 
             _password="123456789",
             place_name="Bar Manolo", 
             address="Calle sevilla", 
@@ -68,6 +68,7 @@ class Business(db.Model):
             )
         db.session.add(business)
         db.session.commit()
+    
 
 class Menu(db.Model):
     __tablename__ = 'menu'
@@ -83,6 +84,18 @@ class Menu(db.Model):
         return {
             "id": self.id,
         }
+    def add():
+        menu = Menu(
+            business_id ="1", 
+            template_id ="2", 
+            )
+        db.session.add(menu)
+        db.session.commit()
+    @classmethod
+    def get_by_business_id(cls, place_id):
+        menus = cls.query.filter_by(business_id = place_id).all()
+        return [menu.to_dict() for menu in menus]
+
 
 class Template(db.Model):
     __tablename__ = 'template'
@@ -91,7 +104,7 @@ class Template(db.Model):
     description = db.Column(db.Text, nullable=False)
     price = db.Column(db.Float, nullable=False)
     menu = db.relationship('Menu', backref='template',lazy=True)
-    menu_type_id = db.Column(db.Integer, db.ForeignKey("menu_type.id"), nullable=False)
+    menu_type_id = db.Column(db.Integer, db.ForeignKey("menu_type.id"))#add nullable=False
 
     def __repr__(self):
         return f'The template is: {self.title}'
@@ -101,6 +114,15 @@ class Template(db.Model):
             "id": self.id,
             # do not to_dict the password, its a security breach
         }
+
+    def add():
+        template = Template(
+            title= "Verde",
+            description= "esverde",  
+            price= 7.00,
+            )
+        db.session.add(template)
+        db.session.commit()
 
 class Enum_Category(enum.Enum):
     daily_menu = "daily_menu"
