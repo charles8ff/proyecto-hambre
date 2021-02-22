@@ -88,9 +88,10 @@ footer{
     color: $white;
     a{
         color: $secondary-color;
+        &:hover{
+            color: $primary-color-light;
+            text-decoration: none;
+        }   
     } 
-    & a:hover{
-        color: $primary-color-light;
-        text-decoration: none;
-    }
+    
 }
