@@ -172,7 +172,7 @@ class Meal_Info(db.Model):
 
     def __repr__(self):
         return f'The meal info: {self.info}'
-
+    
     def to_dict(self):
         return {
             "id": self.id,
