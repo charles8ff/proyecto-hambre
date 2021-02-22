@@ -16,6 +16,5 @@ def profile_id(place_id):
 
 @api.route('/place/<place_id>', methods=['DELETE'])
 def delete_profile(place_id):
-    #print('funciona chucha')
     delete_profile = Business.delete_profile(place_id)
     return 'The user has been successfully deleted', 200
