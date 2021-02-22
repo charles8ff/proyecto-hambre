@@ -7,12 +7,16 @@ api = Blueprint('api', __name__)
 
 @api.route('/place/<place_id>', methods=['GET'])
 def profile_id(place_id):
-    #Business.add()
+    # Business.add()
+    # Template.add()
+    # Menu.add()
     business_profile = Business.get_by_id(place_id)
+    business_menus = Menu.get_by_business_id(place_id)
     if business_profile['is_active']:
-        return jsonify(business_profile)
+        business_info = {**business_profile, "menus": business_menus}
+        return jsonify(business_info)
     else:
-        return 'User does not exsist', 400
+        return 'User does not exist', 400
 
 @api.route('/place/<place_id>', methods=['DELETE'])
 def delete_profile(place_id):
