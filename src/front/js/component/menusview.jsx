@@ -1,8 +1,8 @@
-import React, { Component, useContext } from "react";
+import React, { Component, useContext, Fragment } from "react";
 import { Context } from "../store/appContext";
 import Card from "react-bootstrap/Card";
 import CardDeck from "react-bootstrap/CardDeck";
-import PropTypes from "prop-types";
+import BUTTON from "./button.jsx";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -22,8 +22,7 @@ export const MenusView = props => {
 						<Card.Title>{item.title}</Card.Title>
 					</Card.Body>
 					<Card.Footer>
-						{/* import the button */}
-						<small className="text-muted">Ver toda la carta</small>
+						<BUTTON title="Ver toda la carta" />
 					</Card.Footer>
 				</Card>
 			</Col>
@@ -35,48 +34,6 @@ export const MenusView = props => {
 			<CardDeck className="justify-content-center">
 				<Row xs={1} md={1} lg={3} className="justify-content-center">
 					{templatesInHTML}
-					{/* <Col>
-						<Card className="text-center">
-							<Card.Img
-								variant="top"
-								src="https://dkstudio.mx/wp-content/plugins/tutor/assets/images/placeholder.jpg"
-							/>
-							<Card.Body>
-								<Card.Title>Menú del día</Card.Title>
-							</Card.Body>
-							<Card.Footer>
-								<small className="text-muted">Ver toda la carta</small>
-							</Card.Footer>
-						</Card>
-					</Col>
-					<Col>
-						<Card className="text-center">
-							<Card.Img
-								variant="top"
-								src="https://dkstudio.mx/wp-content/plugins/tutor/assets/images/placeholder.jpg"
-							/>
-							<Card.Body>
-								<Card.Title>Carta</Card.Title>
-							</Card.Body>
-							<Card.Footer>
-								<small className="text-muted">Ver toda la carta</small>
-							</Card.Footer>
-						</Card>
-					</Col>
-					<Col>
-						<Card className="text-center">
-							<Card.Img
-								variant="top"
-								src="https://dkstudio.mx/wp-content/plugins/tutor/assets/images/placeholder.jpg"
-							/>
-							<Card.Body>
-								<Card.Title>Carta de vinos</Card.Title>
-							</Card.Body>
-							<Card.Footer>
-								<small className="text-muted">Ver toda la carta</small>
-							</Card.Footer>
-						</Card>
-					</Col> */}
 				</Row>
 			</CardDeck>
 		</Container>
