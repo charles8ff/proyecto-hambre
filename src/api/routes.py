@@ -7,9 +7,6 @@ api = Blueprint('api', __name__)
 
 @api.route('/place/<place_id>', methods=['GET'])
 def profile_id(place_id):
-    # Business.add()
-    # Template.add()
-    # Menu.add()
     business_profile = Business.get_by_id(place_id)
     business_menus = Menu.get_by_business_id(place_id)
     if business_profile['is_active']:
@@ -22,3 +19,19 @@ def profile_id(place_id):
 def delete_profile(place_id):
     delete_profile = Business.delete_profile(place_id)
     return jsonify(delete_profile), 202
+
+@api.route('/user', methods=['POST'])
+def create_user():
+    user_profile = request.json
+    new_user = Business(
+        email=user_profile['email'], 
+        _password=user_profile['password'],
+        place_name=user_profile['place_name'], 
+        address=user_profile['address'],
+        description=user_profile['description'], 
+        phone_number=user_profile['phone_number'],
+        close_hour=user_profile['close_hour'],
+        open_hour=user_profile['open_hour'],
+    )
+    new_user.add()
+    return "Missing new user name", 200

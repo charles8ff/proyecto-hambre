@@ -55,18 +55,8 @@ class Business(db.Model):
         profile.is_active = False
         db.session.commit()
 
-    def add():
-        business = Business(
-            email="holi_1@gmail.com", 
-            _password="123456789",
-            place_name="Bar Manolo", 
-            address="Calle sevilla", 
-            description="Este es mi restaurante chulo",
-            phone_number="68792348",
-            open_hour="10:00",
-            close_hour="21:00"
-            )
-        db.session.add(business)
+    def add(self):
+        db.session.add(self)
         db.session.commit()
 
 class Menu(db.Model):
@@ -119,8 +109,7 @@ class Menu_Type(db.Model):
     __tablename__ = 'menu_type'
     id = db.Column(db.Integer, primary_key=True) 
     menu_type = db.Column(db.Enum(Enum_Category), nullable=False)
-    meal = db.relationship('Meal', backref='menu_type',lazy=True)
-
+    
     def __repr__(self):
         return f'The meal is: {self.meal_name}'
 
