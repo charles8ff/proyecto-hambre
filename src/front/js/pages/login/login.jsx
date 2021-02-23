@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 
-import { AccountCircle as AccountCircleIcon } from "@material-ui/icons";
+import { AccountCircle as AccountCircleIcon, SettingsOverscanRounded, DonutLargeOutlined } from "@material-ui/icons";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Context } from "../../store/appContext";
 import {
@@ -33,6 +33,9 @@ export const Login = () => {
 
 	const onSubmit = data => {
 		console.log(data);
+		actions.setLoginEmail(data.email);
+		actions.setLoginPassword(data.password);
+		actions.doLogin(data.email, data.password);
 		//history.push("/Login/place");
 	};
 
@@ -45,7 +48,7 @@ export const Login = () => {
 						<LockOutlinedIcon />
 					</Avatar>
 					<Typography component="h1" variant="h4">
-						Sign up
+						Log in
 					</Typography>
 				</div>
 				<form className={classes.form} noValidate onSubmit={handleSubmit(onSubmit)}>
@@ -92,7 +95,7 @@ export const Login = () => {
 						variant="contained"
 						disabled={!!errors.email || !!errors.password}
 						className={classes.submit}>
-						Sign up
+						Log in
 					</Button>
 				</form>
 			</div>

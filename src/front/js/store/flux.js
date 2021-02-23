@@ -3,7 +3,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			message: "holi",
 			profile: [],
-			profile_id: 0
+			profile_id: 0,
+			loginEmail: "",
+			loginPassword: "",
+			loginToken: ""
 		},
 		actions: {
 			getProfile: place_id => {
@@ -28,6 +31,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				);
 				response = await response.json();
+			},
+			setLoginEmail: email => {
+				setStore({ loginEmail: email });
+			},
+			setLoginPassword: password => {
+				setStore({ loginPassword: password });
+			},
+			doLogin: async (emailgiven, passwordgiven) => {
+				let response = await fetch("https://3001-blush-wallaby-9vwtj6or.ws-eu03.gitpod.io/api/login", {
+					method: ["POST"],
+					headers: new Headers({
+						"Content-Type": "application/json"
+					}),
+					body: JSON.stringify({
+						email: emailgiven,
+						password: passwordgiven
+					})
+				});
+				response = await response.json();
+				setStore({ contact: response });
 			}
 		}
 	};
