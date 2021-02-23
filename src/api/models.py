@@ -55,6 +55,11 @@ class Business (db.Model):
         profile.is_active = False
         db.session.commit()
 
+    @classmethod
+    def get_by_email(cls, email):
+        user = cls.query.filter_by(email = email).first_or_404( description="aaaaaaa" )
+        return user.to_dict()
+
     def add():
         business = Business(
             email="holi_1@gmail.com", 
@@ -97,7 +102,7 @@ class Template(db.Model):
     description = db.Column(db.Text) # add nullable=False
     price = db.Column(db.Float) # add nullable=False
     menu = db.relationship('Menu', backref='template',lazy=True)
-    menu_type_id = db.Column(db.Integer, db.ForeignKey("menu_type.id")) # add nullable=False
+    menu_type_id = db.Column(db.Integer, db.ForeignKey("menu_type.id"), nullable=False) # add nullable=False
 
     def __repr__(self):
         return f'The template is: {self.title}'
@@ -119,7 +124,8 @@ class Menu_Type(db.Model):
     __tablename__ = 'menu_type'
     id = db.Column(db.Integer, primary_key=True) 
     menu_type = db.Column(db.Enum(Enum_Category), nullable=False)
-    meal = db.relationship('Meal', backref='menu_type',lazy=True)
+    template = db.relationship('Template', backref='menu_type',lazy=True)
+    
 
     def __repr__(self):
         return f'The meal is: {self.meal_name}'
@@ -139,7 +145,7 @@ class Meal(db.Model):
     id = db.Column(db.Integer, primary_key=True) 
     meal_name = db.Column(db.VARCHAR, nullable=False)
     price = db.Column(db.Float, nullable=False)
-    menu_id = db.Column(db.Integer, db.ForeignKey("menu.id")) #Add  nullable=False
+    menu_id = db.Column(db.Integer, db.ForeignKey("menu.id"), nullable=False) #Add  nullable=False
     meal_info = db.relationship(
         "Meal_Info",
         secondary=association_table,
