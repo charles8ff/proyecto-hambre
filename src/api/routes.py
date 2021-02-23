@@ -5,6 +5,8 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
+import datetime
+from datetime import timedelta
 
 api = Blueprint('api', __name__)
 
@@ -30,9 +32,11 @@ def delete_profile(place_id):
 def login():
     email = request.json.get("email", None)
     _password = request.json.get("password", None)
-    if email and _password:
-        user = Business.get_by_email(email)
-        if user:
-            access_token = create_access_token(identity=email)
-            return jsonify(access_token=access_token), 201
-    return jsonify({"msg": "No email or password"}), 401
+    if not email or not _password:
+        return jsonify({"msg": "No email or password"}), 401
+    user = Business.get_by_email(email)
+    if user:
+        print(user)
+        access_token = create_access_token(identity=user, expires_delta=timedelta(minutes=90))
+        return jsonify(access_token=access_token), 201
+    

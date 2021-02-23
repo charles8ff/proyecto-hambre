@@ -57,7 +57,7 @@ class Business (db.Model):
 
     @classmethod
     def get_by_email(cls, email):
-        user = cls.query.filter_by(email = email).first_or_404( description="aaaaaaa" )
+        user = cls.query.filter_by(email = email).first_or_404( description="Invalid username or Password" )
         return user.to_dict()
 
     def add():

@@ -9,6 +9,7 @@ import injectContext from "./store/appContext";
 
 import { Header } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { Login } from "./pages/login/login.jsx";
 
 const Layout = () => {
 	const basename = process.env.BASENAME || "";
@@ -18,14 +19,11 @@ const Layout = () => {
 			<ScrollToTop>
 				<Header />
 				<Switch>
-					<Route exact path="/:id">
+					<Route exact path="/">
 						<Home />
 					</Route>
-					<Route exact path="/demo">
-						<Demo />
-					</Route>
-					<Route exact path="/single/:theid">
-						<Single />
+					<Route exact path="/login">
+						<Login />
 					</Route>
 					<Route>
 						<h1>Not found!</h1>
