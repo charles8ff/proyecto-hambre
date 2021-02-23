@@ -83,6 +83,8 @@ class Menu(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
+            "business_id": self.business_id,
+            "template_id": self.template_id
         }
     def add():
         menu = Menu(
@@ -101,10 +103,10 @@ class Template(db.Model):
     __tablename__ = 'template'
     id = db.Column(db.Integer, primary_key=True) 
     title = db.Column(db.VARCHAR, nullable=False)
-    description = db.Column(db.Text, nullable=False)
-    price = db.Column(db.Float, nullable=False)
+    description = db.Column(db.Text) # add nullable=False
+    price = db.Column(db.Float) # add nullable=False
     menu = db.relationship('Menu', backref='template',lazy=True)
-    menu_type_id = db.Column(db.Integer, db.ForeignKey("menu_type.id"))#add nullable=False
+    menu_type_id = db.Column(db.Integer, db.ForeignKey("menu_type.id")) # add nullable=False
 
     def __repr__(self):
         return f'The template is: {self.title}'
@@ -112,7 +114,7 @@ class Template(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            # do not to_dict the password, its a security breach
+            "title": self.title
         }
 
     def add():
@@ -135,7 +137,7 @@ class Menu_Type(db.Model):
     __tablename__ = 'menu_type'
     id = db.Column(db.Integer, primary_key=True) 
     menu_type = db.Column(db.Enum(Enum_Category), nullable=False)
-    #meal = db.relationship('Meal', backref='menu_type',lazy=True)
+    meal = db.relationship('Meal', backref='menu_type',lazy=True)
 
     def __repr__(self):
         return f'The meal is: {self.meal_name}'
@@ -143,7 +145,7 @@ class Menu_Type(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            # do not to_dict the password, its a security breach
+            "menu_type": self.menu_type
         }
 
 association_table = db.Table('meal_contains_meal_info', db.Model.metadata,
@@ -155,7 +157,7 @@ class Meal(db.Model):
     id = db.Column(db.Integer, primary_key=True) 
     meal_name = db.Column(db.VARCHAR, nullable=False)
     price = db.Column(db.Float, nullable=False)
-    menu_id = db.Column(db.Integer, db.ForeignKey("menu.id"), nullable=False)
+    menu_id = db.Column(db.Integer, db.ForeignKey("menu.id")) #Add  nullable=False
     meal_info = db.relationship(
         "Meal_Info",
         secondary=association_table,
@@ -167,7 +169,8 @@ class Meal(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            # do not to_dict the password, its a security breach
+            "meal_name": self.meal_name,
+            "price": self.price
         }
 
 class Enum_Info(enum.Enum):
