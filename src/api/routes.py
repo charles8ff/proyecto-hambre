@@ -22,3 +22,10 @@ def profile_id(place_id):
 def delete_profile(place_id):
     delete_profile = Business.delete_profile(place_id)
     return jsonify(delete_profile), 202
+
+@api.route('/login', methods=['GET', 'POST'])
+def login():
+    email = request.json.get("email", None)
+    _password = request.json.get("password", None)
+    access_token = create_access_token(identity=email)
+    return jsonify(access_token=access_token), 201

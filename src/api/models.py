@@ -3,10 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 import json  
 from dataclasses import asdict, dataclass
 from sqlalchemy.ext.hybrid import hybrid_property, hybrid_method 
-
+# from flask_login import UserMixin
 db = SQLAlchemy()
 
-class Business(db.Model):
+class Business (db.Model):
     __tablename__ = 'business'
     id = db.Column(db.Integer, primary_key=True)
     is_active = db.Column(db.Boolean, nullable=False, default=True)
