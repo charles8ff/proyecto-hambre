@@ -77,20 +77,6 @@ class Business (db.Model):
         db.session.add(user)
         db.session.commit()
         return user
-    
-    # def add():
-    #     business = Business(
-    #         email="holi_1@gmail.com", 
-    #         _password="123456789",
-    #         place_name="Bar Manolo", 
-    #         address="Calle sevilla", 
-    #         description="Este es mi restaurante chulo",
-    #         phone_number="68792348",
-    #         open_hour="10:00",
-    #         close_hour="21:00"
-    #         )
-    #     db.session.add(business)  
-    #     db.session.commit()
 
 class Menu(db.Model):
     __tablename__ = 'menu'
