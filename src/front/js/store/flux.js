@@ -66,6 +66,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(user_profile)
 				});
 				response = await response.json();
+				console.log(response);
 			},
 
 			deleteProfile: async place_id => {

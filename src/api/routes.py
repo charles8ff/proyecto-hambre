@@ -1,6 +1,9 @@
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, Business, Menu, Template, Meal, Meal_Info, Menu_Type
 from api.utils import generate_sitemap, APIException
+from werkzeug.security import generate_password_hash
+from werkzeug.security import check_password_hash
+from werkzeug import security
 
 
 api = Blueprint('api', __name__)
@@ -23,19 +26,21 @@ def delete_profile(place_id):
 @api.route('/user', methods=['POST'])
 def create_user():
     user_profile = request.json
-    #print(user_profile)
+    password = generate_password_hash(user_profile.get('password'), method='pbkdf2:sha256')
     new_user = Business(
-        email=user_profile['email'], 
-        _password=user_profile['password'],
-        place_name=user_profile['place_name'], 
-        address=user_profile['address'],
-        description=user_profile['description'], 
-        phone_number=user_profile['phone_number'],
-        close_hour=user_profile['close_hour'],
-        open_hour=user_profile['open_hour'],
+        email=user_profile.get('email', None), 
+        _password=password,
+        place_name=user_profile.get('place_name', None), 
+        address=user_profile.get('address', None),
+        description=user_profile.get('description', None), 
+        phone_number=user_profile.get('phone_number', None),
+        close_hour=user_profile.get('close_hour', None),
+        open_hour=user_profile.get('open_hour', None),
     )
+    if user_profile.get('email') and password is None:
+        return jsonify('Missing info'), 400
     new_user.add()
-    return jsonify('User registered successfully'), 200
+    return jsonify(user_profile), 200
 
 
 @api.route('/user/<user_email>', methods=['GET'])
