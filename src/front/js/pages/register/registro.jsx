@@ -1,31 +1,16 @@
 import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
-
 import { AddPlace } from "./add-place.jsx";
 import { AccountCircle as AccountCircleIcon } from "@material-ui/icons";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { DevTool } from "@hookform/devtools";
 import { Context } from "../../store/appContext";
-import {
-	Avatar,
-	Grid,
-	Container,
-	CssBaseline,
-	FormControlLabel,
-	Button,
-	Link,
-	Checkbox,
-	Typography
-} from "@material-ui/core";
+import { Avatar, Container, CssBaseline, Button, Typography } from "@material-ui/core";
 import { CssTextField, useStyles } from "./styles.js";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, controller } from "react-hook-form";
 
 export const Registro = () => {
 	const { store, actions } = useContext(Context);
-	const [firstStep, setFirstStep] = useState(true);
 	const classes = useStyles();
-	const history = useHistory();
-	const { register, handleSubmit, control, errors } = useForm({
+	const { register, handleSubmit, errors } = useForm({
 		mode: "onChange",
 		reValidateMode: "onChange",
 		defaultValues: {
@@ -35,15 +20,13 @@ export const Registro = () => {
 	});
 
 	const onSubmit = data => {
-		//history.push("/registro/place");
 		actions.registerProfile(data);
-		setFirstStep(false);
+		actions.getUserbyEmail(data.email);
 	};
 
-	if (firstStep) {
+	if (store.userSingUp.is_first_step) {
 		return (
 			<Container component="main" maxWidth="xs">
-				<DevTool control={control} />
 				<CssBaseline />
 				<div className={classes.paper}>
 					<div className={classes.paper}>
@@ -67,13 +50,15 @@ export const Registro = () => {
 									message: "You must provide a valid email address!"
 								}
 							})}
-							autoComplete="email"
 							error={!!errors.email}
 							className={classes.margin}
 							fullWidth
-							autoFocus
 						/>
-						{errors.email && <span className={classes.error}>{errors.email.message}</span>}
+						{store.userSingUp.is_user_exist ? (
+							<span className={classes.error}>{"Invalid email"}</span>
+						) : null}
+						{errors.email &&
+							store.user_exist && <span className={classes.error}>{errors.email.message}</span>}
 						<CssTextField
 							name="password"
 							label="Password"
@@ -89,7 +74,6 @@ export const Registro = () => {
 							})}
 							error={!!errors.password}
 							fullWidth
-							autoComplete="current-password"
 						/>
 						{errors.password && <span className={classes.error}>{errors.password.message}</span>}
 						<Button
@@ -106,7 +90,7 @@ export const Registro = () => {
 		);
 	}
 
-	if (!firstStep) {
+	if (!store.userSingUp.is_first_step) {
 		return <AddPlace />;
 	}
 };

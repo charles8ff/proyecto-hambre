@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { AccountCircle as AccountCircleIcon } from "@material-ui/icons";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { DevTool } from "@hookform/devtools";
 import {
 	Avatar,
 	Grid,
@@ -37,12 +36,10 @@ export const AddPlace = () => {
 
 	const onSubmit = data => {
 		actions.registerPlace(data);
-		console.log(store.userSingUp);
 	};
 
 	return (
 		<Container component="main" maxWidth="xs">
-			<DevTool control={control} />
 			<CssBaseline />
 			<div className={classes.paper}>
 				<div className={classes.paper}>
@@ -60,11 +57,9 @@ export const AddPlace = () => {
 						inputRef={register({
 							required: "Añade el nombre de tu restaurante"
 						})}
-						autoComplete="place_name"
 						error={!!errors.place_name}
 						className={classes.margin}
 						fullWidth
-						autoFocus
 					/>
 					{errors.place_name && <span className={classes.error}>{errors.place_name.message}</span>}
 					<CssTextField
@@ -76,13 +71,24 @@ export const AddPlace = () => {
 						inputRef={register({
 							required: "Añade la dirección de tu restaurante"
 						})}
-						autoComplete="address"
 						error={!!errors.address}
 						className={classes.margin}
 						fullWidth
-						autoFocus
 					/>
-					{errors.address && <span className={classes.error}>{errors.address.message}</span>}
+					<CssTextField
+						name="description"
+						label="Descripción del restaurante"
+						type="text"
+						variant="outlined"
+						margin="normal"
+						inputRef={register({
+							required: "Añade la descripción de tu restaurante"
+						})}
+						error={!!errors.description}
+						className={classes.margin}
+						fullWidth
+					/>
+					{errors.description && <span className={classes.error}>{errors.description.message}</span>}
 					<CssTextField
 						name="phone_number"
 						label="Telefono"
@@ -92,11 +98,9 @@ export const AddPlace = () => {
 						inputRef={register({
 							required: "Añade el numero de telefono de tu restaurante"
 						})}
-						autoComplete="phone_number"
 						error={!!errors.phone_number}
 						className={classes.margin}
 						fullWidth
-						autoFocus
 					/>
 					{errors.phone_number && <span className={classes.error}>{errors.phone_number.message}</span>}
 					<Grid container spacing={3}>
@@ -109,11 +113,9 @@ export const AddPlace = () => {
 								inputRef={register({
 									required: "Añade el horario de apertura de tu restaurante"
 								})}
-								autoComplete="open_hour"
 								error={!!errors.open_hour}
 								className={classes.margin}
 								fullWidth
-								autoFocus
 							/>
 							{errors.open_hour && <span className={classes.error}>{errors.open_hour.message}</span>}
 						</Grid>
@@ -126,31 +128,13 @@ export const AddPlace = () => {
 								inputRef={register({
 									required: "Añade el horario de cierre de tu restaurante"
 								})}
-								autoComplete="close_hour"
 								error={!!errors.close_hour}
 								className={classes.margin}
 								fullWidth
-								autoFocus
 							/>
 							{errors.close_hour && <span className={classes.error}>{errors.close_hour.message}</span>}
 						</Grid>
 					</Grid>
-					<CssTextField
-						name="description"
-						label="Descripción del restaurante"
-						type="text"
-						variant="outlined"
-						margin="normal"
-						inputRef={register({
-							required: "Añade la descripción del restaurante"
-						})}
-						autoComplete="description"
-						error={!!errors.description}
-						className={classes.margin}
-						fullWidth
-						autoFocus
-					/>
-					{errors.description && <span className={classes.error}>{errors.description.message}</span>}
 					<Button
 						type="submit"
 						fullWidth

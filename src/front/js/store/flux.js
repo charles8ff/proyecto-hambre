@@ -1,8 +1,12 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			userSingUp: [],
+			userSingUp: {
+				is_user_exist: false,
+				is_first_step: true
+			},
 			profile: [],
+			singUp_profile: [],
 			profile_id: 0
 		},
 		actions: {
@@ -17,14 +21,40 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
+			getUserbyEmail: user_email => {
+				fetch(`https://3001-moccasin-snipe-gf2wcqia.ws-eu03.gitpod.io/api/user/${user_email}`)
+					.then(async res => {
+						if (res.status == 409) {
+							setStore({
+								userSingUp: {
+									is_user_exist: true,
+									is_first_step: true
+								}
+							});
+						} else {
+							setStore({
+								userSingUp: {
+									is_user_exist: false,
+									is_first_step: false
+								}
+							});
+						}
+						const response = await res.json();
+					})
+					.catch(err => {
+						throw err;
+					});
+			},
+
 			registerProfile: data => {
-				setStore({ userSingUp: data });
+				setStore({ singUp_profile: data });
 			},
 
 			registerPlace: data => {
-				const the_profile = { ...getStore().userSingUp, ...data };
-				setStore({ userSingUp: the_profile });
-				getActions().addNewProfile(getStore().userSingUp);
+				const the_profile = { ...getStore().singUp_profile, ...data };
+				setStore({ singUp_profile: the_profile });
+				//console.log(getStore().);
+				getActions().addNewProfile(getStore().singUp_profile);
 			},
 
 			addNewProfile: async user_profile => {

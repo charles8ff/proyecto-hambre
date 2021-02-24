@@ -19,7 +19,5 @@ export const Home = () => {
 		[!store.profile_id]
 	);
 
-	console.log(store.profile);
-
 	return <Profile />;
 };

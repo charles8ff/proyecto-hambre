@@ -23,6 +23,7 @@ def delete_profile(place_id):
 @api.route('/user', methods=['POST'])
 def create_user():
     user_profile = request.json
+    #print(user_profile)
     new_user = Business(
         email=user_profile['email'], 
         _password=user_profile['password'],
@@ -34,4 +35,15 @@ def create_user():
         open_hour=user_profile['open_hour'],
     )
     new_user.add()
-    return "Missing new user name", 200
+    return jsonify('User registered successfully'), 200
+
+
+@api.route('/user/<user_email>', methods=['GET'])
+def get_by_email(user_email):
+    profile = Business.get_by_email(user_email)
+    if profile is not None:
+        if profile.to_dict().get('is_active') is True:
+            return jsonify('Invalid email'), 409
+        else:
+            Business.active_profile(profile.to_dict().get('id'))
+    return jsonify('User created successfully'), 201

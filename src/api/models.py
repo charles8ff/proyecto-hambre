@@ -44,6 +44,11 @@ class Business(db.Model):
     def get_by_id(cls, place_id):
         profile = cls.query.filter_by(id = place_id).first()
         return profile.to_dict()
+    
+    @classmethod
+    def get_by_email(cls, user_email):
+        profile = cls.query.filter_by(email = user_email).first()
+        return profile
 
     @classmethod
     def get_all_profile(cls):
@@ -53,6 +58,12 @@ class Business(db.Model):
     def delete_profile(cls, place_id):
         profile = cls.query.filter_by(id = place_id).first()
         profile.is_active = False
+        db.session.commit()
+
+    @classmethod
+    def active_profile(cls, place_id):
+        profile = cls.query.filter_by(id = place_id).first()
+        profile.is_active = True
         db.session.commit()
 
     def add(self):
