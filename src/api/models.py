@@ -26,7 +26,7 @@ class Business(db.Model):
     @hybrid_property
     def password(self):
         return self._password
-
+    
     def to_dict(self):
         return {
             "id": self.id,
@@ -44,11 +44,6 @@ class Business(db.Model):
     def get_by_id(cls, place_id):
         profile = cls.query.filter_by(id = place_id).first()
         return profile.to_dict()
-    
-    @classmethod
-    def get_by_email(cls, user_email):
-        profile = cls.query.filter_by(email = user_email).first()
-        return profile
 
     @classmethod
     def get_all_profile(cls):
@@ -66,10 +61,18 @@ class Business(db.Model):
         profile.is_active = True
         db.session.commit()
 
+    @classmethod  
+    def get_by_email(cls, email):
+        user = cls.query.filter_by(email = email).first_or_404( description="Invalid username or Password" )
+        return user
+
     def add(self):
         db.session.add(self)
         db.session.commit()
 
+    def get_password(self):
+        return self._password
+    
 class Menu(db.Model):
     __tablename__ = 'menu'
     id = db.Column(db.Integer, primary_key=True)
@@ -98,7 +101,7 @@ class Template(db.Model):
     description = db.Column(db.Text) # add nullable=False
     price = db.Column(db.Float) # add nullable=False
     menu = db.relationship('Menu', backref='template',lazy=True)
-    menu_type_id = db.Column(db.Integer, db.ForeignKey("menu_type.id")) # add nullable=False
+    menu_type_id = db.Column(db.Integer, db.ForeignKey("menu_type.id"), nullable=False) # add nullable=False
 
     def __repr__(self):
         return f'The template is: {self.title}'
@@ -120,7 +123,9 @@ class Menu_Type(db.Model):
     __tablename__ = 'menu_type'
     id = db.Column(db.Integer, primary_key=True) 
     menu_type = db.Column(db.Enum(Enum_Category), nullable=False)
+    template = db.relationship('Template', backref='menu_type',lazy=True)
     
+
     def __repr__(self):
         return f'The meal is: {self.meal_name}'
 
@@ -139,7 +144,7 @@ class Meal(db.Model):
     id = db.Column(db.Integer, primary_key=True) 
     meal_name = db.Column(db.VARCHAR, nullable=False)
     price = db.Column(db.Float, nullable=False)
-    menu_id = db.Column(db.Integer, db.ForeignKey("menu.id")) #Add  nullable=False
+    menu_id = db.Column(db.Integer, db.ForeignKey("menu.id"), nullable=False) #Add  nullable=False
     meal_info = db.relationship(
         "Meal_Info",
         secondary=association_table,

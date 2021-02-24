@@ -1,10 +1,15 @@
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, Business, Menu, Template, Meal, Meal_Info, Menu_Type
 from api.utils import generate_sitemap, APIException
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
+import datetime
+from datetime import timedelta
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 from werkzeug import security
-
 
 api = Blueprint('api', __name__)
 
@@ -52,3 +57,21 @@ def get_by_email(user_email):
         else:
             Business.active_profile(profile.to_dict().get('id'))
     return jsonify('User created successfully'), 201
+
+@api.route('/login', methods=['GET', 'POST'])
+def login():
+    email, password = request.json.get(
+        "email", None
+    ), request.json.get(
+        "password", None
+    )
+    if not email or not password:
+        return "Missing info", 400
+    user = Business.get_by_email(email)
+    if check_password_hash(user.get_password(), password):
+        access_token = create_access_token(
+            identity=user.to_dict(), 
+            expires_delta=timedelta(minutes=90)
+        )
+        return jsonify({'access_token': access_token}), 200
+    return 'Invalid info', 400

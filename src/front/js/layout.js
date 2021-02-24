@@ -8,6 +8,8 @@ import { Registro } from "./pages/register/registro.jsx";
 
 import { Header } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { Login } from "./pages/login/login.jsx";
+import { Profile } from "./component/profile.jsx";
 
 const Layout = () => {
 	const basename = process.env.BASENAME || "";
@@ -22,6 +24,9 @@ const Layout = () => {
 					</Route>
 					<Route exact path="/registro">
 						<Registro />
+					</Route>
+					<Route exact path="/login">
+						<Login />
 					</Route>
 					<Route>
 						<h1>Not found!</h1>

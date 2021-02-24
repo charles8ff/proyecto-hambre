@@ -23,6 +23,7 @@ these refreshed establishments.
 (Click image to open the preview of the colors)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ### Context
 This boilerplate comes with a centralized general Context API. The file `./src/js/store/flux.js` has a base structure for the store, we encourage you to change it and adapt it to your needs.
 
@@ -74,3 +75,8 @@ This boilerplate it's 100% integrate with Herkou, just by pushing your changes t
 <a href="https://trello.com/invite/b/qZXdt2L6/0a04ac85f62d8b8c495bfb3a255fd93b/proyecto-hambre-%F0%9F%8D%94" target="_blank"><img align="center" src="https://i.imgur.com/RbU9LYg.jpg" alt="Trello" border="0" /></a>
 (Click image to see the Trello of the project)
 >>>>>>> e175d1128e9e68cf862c333fb26cb7ea1d23f075
+=======
+# We used Trello to keep track of the organization of the proyect
+<a href="https://trello.com/invite/b/qZXdt2L6/0a04ac85f62d8b8c495bfb3a255fd93b/proyecto-hambre-%F0%9F%8D%94" target="_blank"><img align="center" src="https://i.imgur.com/RbU9LYg.jpg" alt="Trello" border="0" /></a>
+(Click image to see the Trello of the project)
+>>>>>>> feature/carlos/login
