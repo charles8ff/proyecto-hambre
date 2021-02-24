@@ -30,7 +30,6 @@ class Business (db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "is_active": self.is_active,
             "email": self.email,
             "place_name": self.place_name,
             "address": self.address,
@@ -58,21 +57,40 @@ class Business (db.Model):
     @classmethod
     def get_by_email(cls, email):
         user = cls.query.filter_by(email = email).first_or_404( description="Invalid username or Password" )
-        return user.to_dict()
+        return user
 
-    def add():
-        business = Business(
-            email="holi_1@gmail.com", 
-            _password="123456789",
-            place_name="Bar Manolo", 
-            address="Calle sevilla", 
-            description="Este es mi restaurante chulo",
-            phone_number="68792348",
-            open_hour="10:00",
-            close_hour="21:00"
+    def get_password(self):
+        return self._password
+
+    @classmethod
+    def add(cls, email, password, place_name, address, description, phone_number, open_hour, close_hour):
+        user = cls(
+            email=email,
+            _password=password,
+            place_name=place_name,
+            address=address,
+            description=description,
+            phone_number=phone_number,
+            open_hour=open_hour,
+            close_hour=close_hour
             )
-        db.session.add(business)
+        db.session.add(user)
         db.session.commit()
+        return user
+    
+    # def add():
+    #     business = Business(
+    #         email="holi_1@gmail.com", 
+    #         _password="123456789",
+    #         place_name="Bar Manolo", 
+    #         address="Calle sevilla", 
+    #         description="Este es mi restaurante chulo",
+    #         phone_number="68792348",
+    #         open_hour="10:00",
+    #         close_hour="21:00"
+    #         )
+    #     db.session.add(business)  
+    #     db.session.commit()
 
 class Menu(db.Model):
     __tablename__ = 'menu'

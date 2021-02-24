@@ -21,9 +21,9 @@ const injectContext = PassedComponent => {
 			})
 		);
 
-		useEffect(() => {
-			//state.actions.getProfile();
-		}, []);
+		// useEffect(() => {
+		// 	//state.actions.getProfile();
+		// }, []);
 
 		return (
 			<Context.Provider value={state}>

@@ -10,6 +10,7 @@ import injectContext from "./store/appContext";
 import { Header } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Login } from "./pages/login/login.jsx";
+import { Profile } from "./component/profile.jsx";
 
 const Layout = () => {
 	const basename = process.env.BASENAME || "";
@@ -21,6 +22,9 @@ const Layout = () => {
 				<Switch>
 					<Route exact path="/">
 						<Home />
+					</Route>
+					<Route exact path="/place/:id">
+						<Profile />
 					</Route>
 					<Route exact path="/login">
 						<Login />

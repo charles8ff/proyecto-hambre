@@ -1,10 +1,21 @@
-import React, { Fragment, useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { Fragment, useContext, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Container, Jumbotron, Row, Col, Card, Button } from "react-bootstrap";
 
 export const Profile = () => {
 	const { store, actions } = useContext(Context);
+	let id = useParams();
+
+	useEffect(
+		() => {
+			store.profile_id = id.id;
+			actions.getProfile(store.profile_id);
+		},
+		[!store.profile_id]
+	);
+
+	console.log(store.profile);
 	return (
 		<>
 			<Jumbotron className="jumbotron">

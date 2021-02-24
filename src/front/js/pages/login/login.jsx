@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import { AccountCircle as AccountCircleIcon, SettingsOverscanRounded, DonutLargeOutlined } from "@material-ui/icons";
@@ -21,6 +21,7 @@ import { useForm, Controller } from "react-hook-form";
 export const Login = () => {
 	const { store, actions } = useContext(Context);
 	const classes = useStyles();
+	const { token, setToken } = useState("");
 	// const history = useHistory();
 	const { register, handleSubmit, errors } = useForm({
 		mode: "onChange",
@@ -32,11 +33,7 @@ export const Login = () => {
 	});
 
 	const onSubmit = data => {
-		console.log(data);
-		actions.setLoginEmail(data.email);
-		actions.setLoginPassword(data.password);
 		actions.doLogin(data.email, data.password);
-		//history.push("/Login/place");
 	};
 
 	return (
