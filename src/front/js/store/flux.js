@@ -1,46 +1,33 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			message: "holi",
+			profile: [],
+			profile_id: 0
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			getProfile: place_id => {
+				fetch(`https://3001-coral-silkworm-mp9fnk8u.ws-eu03.gitpod.io/api/place/${place_id}`)
+					.then(async res => {
+						const response = await res.json();
+						setStore({ profile: response });
+					})
+					.catch(err => {
+						throw err;
+					});
 			},
-
-			getMessage: () => {
-				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "/api/hello")
-					.then(resp => resp.json())
-					.then(data => setStore({ message: data.message }))
-					.catch(error => console.log("Error loading message from backend", error));
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
+			deleteProfile: async place_id => {
+				//setStore({ contact: getStore().contact.filter(index => index !== item) });
+				let response = await fetch(
+					`https://3001-coral-silkworm-mp9fnk8u.ws-eu03.gitpod.io/api/place/${place_id}`,
+					{
+						method: "DELETE",
+						headers: new Headers({
+							"Content-Type": "application/json"
+						})
+					}
+				);
+				response = await response.json();
 			}
 		}
 	};
