@@ -1,5 +1,6 @@
 import jwt_decode from "jwt-decode";
-const URLBACKEND = "https://3001-moccasin-snipe-gf2wcqia.ws-eu03.gitpod.io";
+const URLBACKEND = "https://3001-blush-wallaby-9vwtj6or.ws-eu03.gitpod.io"; //no slash at end
+//no slash at end//no slash at end//no slash at end//no slash at end//no slash at end//no slash at end
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -98,7 +99,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						password: passwordgiven
 					})
 				});
+				console.log(response.status);
 				response = await response.json();
+
 				localStorage.setItem("loginToken", response.access_token);
 				let data = getActions().decodeToken(response.access_token);
 				setStore({ loggedBusiness: data.sub });
@@ -106,6 +109,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			decodeToken: token => {
 				return (token = jwt_decode(token));
+			},
+			doLogOut: () => {
+				setStore({ loggedBusiness: [] });
+				localStorage.setItem("loginToken", "");
+				localStorage.setItem("loggedBusiness", "");
 			}
 		}
 	};

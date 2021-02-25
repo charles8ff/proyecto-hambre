@@ -86,4 +86,4 @@ def login():
             expires_delta=timedelta(minutes=90)
         )
         return jsonify({'access_token': access_token}), 200
-    return jsonify('Invalid info'), 418
+    return jsonify('Invalid info'), 409

@@ -7,7 +7,7 @@ import { Avatar, Container, CssBaseline, Button, Typography } from "@material-ui
 import { CssTextField, useStyles } from "./styles.js";
 import { useForm, controller } from "react-hook-form";
 
-export const Registro = () => {
+export const Register = () => {
 	const { store, actions } = useContext(Context);
 	const classes = useStyles();
 	const { register, handleSubmit, errors } = useForm({
