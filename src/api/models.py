@@ -139,6 +139,21 @@ class Meal(db.Model):
     meal_name = db.Column(db.VARCHAR, nullable=False)
     price = db.Column(db.Float, nullable=False)
     menu_id = db.Column(db.Integer, db.ForeignKey("menu.id")) #Add  nullable=False
+    meal_info = db.relationship("Meal_Info", secondary=association_table, back_populates="meal")
+    
+    def __repr__(self):
+        return f'The meal is: {self.meal_name}'
+        
+    def to_dict(self):
+        return{
+            "id": self.id,
+            "meal_name": self.meal_name,
+            "price": self.price
+            }
+
+class Enum_Info(enum.Enum):
+    gluten = "gluten"
+    peanuts = "peanuts"
     tree_nuts = "tree_nuts"
     celery = "celery"
     mustard = "mustard"
