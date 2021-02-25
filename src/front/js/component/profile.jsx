@@ -2,6 +2,7 @@ import React, { Fragment, useContext, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Container, Jumbotron, Row, Col, Card, Button } from "react-bootstrap";
+import { MenusView } from "./menusview.jsx";
 
 export const Profile = () => {
 	const { store, actions } = useContext(Context);
@@ -60,6 +61,7 @@ export const Profile = () => {
 					</Row>
 				</Container>
 			</Jumbotron>
+			<MenusView />
 		</>
 	);
 };
