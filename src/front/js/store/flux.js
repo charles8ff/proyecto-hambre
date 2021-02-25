@@ -1,4 +1,5 @@
 import jwt_decode from "jwt-decode";
+const URLBACKEND = "https://3001-moccasin-snipe-gf2wcqia.ws-eu03.gitpod.io";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -10,11 +11,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			profile: [],
 			singUp_profile: [],
 			profile_id: 0,
-			loggedBusiness: ""
+			loggedBusiness: localStorage.getItem("loggedBusiness")
+				? JSON.parse(localStorage.getItem("loggedBusiness"))
+				: ""
 		},
 		actions: {
 			getProfile: place_id => {
-				fetch(`https://3001-coral-silkworm-mp9fnk8u.ws-eu03.gitpod.io/api/place/${place_id}`)
+				fetch(URLBACKEND + `/api/place/${place_id}`)
 					.then(async res => {
 						const response = await res.json();
 						setStore({ profile: response });
@@ -25,7 +28,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getUserbyEmail: user_email => {
-				fetch(`https://3001-moccasin-snipe-gf2wcqia.ws-eu03.gitpod.io/api/user/${user_email}`)
+				fetch(URLBACKEND + `/api/user/${user_email}`)
 					.then(async res => {
 						if (res.status == 409) {
 							setStore({
@@ -56,12 +59,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			registerPlace: data => {
 				const the_profile = { ...getStore().singUp_profile, ...data };
 				setStore({ singUp_profile: the_profile });
-				//console.log(getStore().);
 				getActions().addNewProfile(getStore().singUp_profile);
 			},
 
 			addNewProfile: async user_profile => {
-				let response = await fetch("https://3001-moccasin-snipe-gf2wcqia.ws-eu03.gitpod.io/api/user", {
+				let response = await fetch(URLBACKEND + "/api/user", {
 					method: "POST",
 					headers: new Headers({
 						"Content-Type": "application/json"
@@ -69,24 +71,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(user_profile)
 				});
 				response = await response.json();
-				console.log(response);
+				localStorage.setItem("loginToken", response.access_token);
+				let data = getActions().decodeToken(response.access_token);
+				setStore({ loggedBusiness: data.sub });
+				localStorage.setItem("loggedBusiness", JSON.stringify(getStore().loggedBusiness));
 			},
 
 			deleteProfile: async place_id => {
-				let response = await fetch(
-					`https://3001-coral-silkworm-mp9fnk8u.ws-eu03.gitpod.io/api/place/${place_id}`,
-					{
-						method: "DELETE",
-						headers: new Headers({
-							"Content-Type": "application/json"
-						})
-					}
-				);
+				let response = await fetch(URLBACKEND + `api/place/${place_id}`, {
+					method: "DELETE",
+					headers: new Headers({
+						"Content-Type": "application/json"
+					})
+				});
 				response = await response.json();
 			},
 
 			doLogin: async (emailgiven, passwordgiven) => {
-				let response = await fetch("https://3001-blush-wallaby-9vwtj6or.ws-eu03.gitpod.io/api/login", {
+				let response = await fetch(URLBACKEND + "/api/login", {
 					method: "POST",
 					headers: new Headers({
 						"Content-Type": "application/json"
@@ -100,6 +102,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				localStorage.setItem("loginToken", response.access_token);
 				let data = getActions().decodeToken(response.access_token);
 				setStore({ loggedBusiness: data.sub });
+				localStorage.setItem("loggedBusiness", JSON.stringify(getStore().loggedBusiness));
 			},
 			decodeToken: token => {
 				return (token = jwt_decode(token));

@@ -29,30 +29,42 @@ def delete_profile(place_id):
     return jsonify(delete_profile), 202
 
 @api.route('/user', methods=['POST'])
-def create_user():
-    user_profile = request.json
-    password = generate_password_hash(user_profile.get('password'), method='pbkdf2:sha256')
-    new_user = Business(
-        email=user_profile.get('email', None), 
-        _password=password,
-        place_name=user_profile.get('place_name', None), 
-        address=user_profile.get('address', None),
-        description=user_profile.get('description', None), 
-        phone_number=user_profile.get('phone_number', None),
-        close_hour=user_profile.get('close_hour', None),
-        open_hour=user_profile.get('open_hour', None),
+def handle_new_user():
+    email, password, place_name, address, description, phone_number, open_hour, close_hour = request.json.get(
+        "email", None
+    ), request.json.get(
+        "password", None
+    ), request.json.get(
+        "place_name", None
+    ), request.json.get(
+        "address", None
+    ), request.json.get(
+        "description", None
+    ), request.json.get(
+        "phone_number", None
+    ), request.json.get(
+        "open_hour", None
+    ), request.json.get(
+        "close_hour", None
     )
-    if user_profile.get('email') and password is None:
-        return jsonify('Missing info'), 400
-    new_user.add()
-    return jsonify(user_profile), 200
-
+    if not email or not password:
+        return "Missing info", 400
+    password_hash = generate_password_hash(password, method='pbkdf2:sha256')
+    user = Business.add(email, password_hash, place_name, address, description, phone_number, open_hour, close_hour)
+    user = Business.get_by_email(email)
+    if check_password_hash(password_hash, password):
+        access_token = create_access_token(
+            identity=user.to_dict(), 
+            expires_delta=timedelta(minutes=90)
+        )
+        return jsonify({'access_token': access_token}), 201
+    return jsonify('Invalid info'), 400
 
 @api.route('/user/<user_email>', methods=['GET'])
 def get_by_email(user_email):
     profile = Business.get_by_email(user_email)
     if profile is not None:
-        if profile.to_dict().get('is_active') is True:
+        if profile.get_is_active() is True:
             return jsonify('Invalid email'), 409
         else:
             Business.active_profile(profile.to_dict().get('id'))
@@ -66,7 +78,7 @@ def login():
         "password", None
     )
     if not email or not password:
-        return "Missing info", 400
+        return jsonify("Missing info"), 400
     user = Business.get_by_email(email)
     if check_password_hash(user.get_password(), password):
         access_token = create_access_token(
@@ -74,4 +86,4 @@ def login():
             expires_delta=timedelta(minutes=90)
         )
         return jsonify({'access_token': access_token}), 200
-    return 'Invalid info', 400
+    return jsonify('Invalid info'), 418

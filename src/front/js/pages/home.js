@@ -8,6 +8,6 @@ import { MenusView } from "../component/menusview.jsx";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	let id = useParams();
-
-	return <div>hola</div>;
+	console.log(store.loggedBusiness);
+	return <h1>Proximamente....</h1>;
 };

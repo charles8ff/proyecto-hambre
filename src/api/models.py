@@ -30,7 +30,6 @@ class Business(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "is_active": self.is_active,
             "email": self.email,
             "place_name": self.place_name,
             "address": self.address,
@@ -66,12 +65,27 @@ class Business(db.Model):
         user = cls.query.filter_by(email = email).first_or_404( description="Invalid username or Password" )
         return user
 
-    def add(self):
-        db.session.add(self)
+    @classmethod
+    def add(cls, email, password, place_name, address, description, phone_number, open_hour, close_hour):
+        user = cls(
+            email=email,
+            _password=password,
+            place_name=place_name,
+            address=address,
+            description=description,
+            phone_number=phone_number,
+            open_hour=open_hour,
+            close_hour=close_hour
+            )
+        db.session.add(user)
         db.session.commit()
+        return user
 
     def get_password(self):
         return self._password
+    
+    def get_is_active(self):
+        return self.is_active
     
 class Menu(db.Model):
     __tablename__ = 'menu'
