@@ -49,18 +49,23 @@ class Business(db.Model):
     def get_all_profile(cls):
         return cls.query.all()
 
+    @classmethod
+    def delete_profile(cls, place_id):
+        profile = cls.query.filter_by(id = place_id).first()
+        profile.is_active = False
+        db.session.commit()
 
     def add():
-        # business = Business(
-        #     email="holi_3@gmail.com", 
-        #     _password="123456789",
-        #     place_name="Bar Manolo", 
-        #     address="Calle sevilla", 
-        #     description="Este es mi restaurante chulo",
-        #     phone_number="68792348",
-        #     open_hour="10:00",
-        #     close_hour="21:00"
-        #     )
+        business = Business(
+            email="holi_1@gmail.com", 
+            _password="123456789",
+            place_name="Bar Manolo", 
+            address="Calle sevilla", 
+            description="Este es mi restaurante chulo",
+            phone_number="68792348",
+            open_hour="10:00",
+            close_hour="21:00"
+            )
         db.session.add(business)
         db.session.commit()
 
@@ -78,15 +83,8 @@ class Menu(db.Model):
         return {
             "id": self.id,
             "business_id": self.business_id,
-            "template_id": self.business_id
+            "template_id": self.template_id
         }
-    def add():
-        # menu = Menu(
-        #     business_id = 3,
-        #     template_id = 4,
-        #     )
-        db.session.add(menu)
-        db.session.commit()
     @classmethod
     def get_by_business_id(cls, place_id):
         menus = cls.query.filter_by(business_id = place_id).all()
@@ -97,10 +95,10 @@ class Template(db.Model):
     __tablename__ = 'template'
     id = db.Column(db.Integer, primary_key=True) 
     title = db.Column(db.VARCHAR, nullable=False)
-    description = db.Column(db.Text, nullable=False)
-    price = db.Column(db.Float, nullable=False)
+    description = db.Column(db.Text) # add nullable=False
+    price = db.Column(db.Float) # add nullable=False
     menu = db.relationship('Menu', backref='template',lazy=True)
-    menu_type_id = db.Column(db.Integer, db.ForeignKey("menu_type.id") )#add nullable false
+    menu_type_id = db.Column(db.Integer, db.ForeignKey("menu_type.id")) # add nullable=False
 
     def __repr__(self):
         return f'The template is: {self.title}'
@@ -108,18 +106,8 @@ class Template(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "title": self.title,
-            # do not to_dict the password, its a security breach
+            "title": self.title
         }
-    def add():
-        # template = Template(
-        #     title = "Azul",
-        #     description = "es azul lol",
-        #     price= 5.00,
-
-        #     )
-        db.session.add(template)
-        db.session.commit()
 
 class Enum_Category(enum.Enum):
     daily_menu = "daily_menu"
@@ -140,7 +128,7 @@ class Menu_Type(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            # do not to_dict the password, its a security breach
+            "menu_type": self.menu_type
         }
 
 association_table = db.Table('meal_contains_meal_info', db.Model.metadata,
@@ -152,7 +140,7 @@ class Meal(db.Model):
     id = db.Column(db.Integer, primary_key=True) 
     meal_name = db.Column(db.VARCHAR, nullable=False)
     price = db.Column(db.Float, nullable=False)
-    menu_id = db.Column(db.Integer, db.ForeignKey("menu.id"), nullable=False)
+    menu_id = db.Column(db.Integer, db.ForeignKey("menu.id")) #Add  nullable=False
     meal_info = db.relationship(
         "Meal_Info",
         secondary=association_table,
@@ -164,7 +152,8 @@ class Meal(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            # do not to_dict the password, its a security breach
+            "meal_name": self.meal_name,
+            "price": self.price
         }
 
 class Enum_Info(enum.Enum):
@@ -197,6 +186,7 @@ class Meal_Info(db.Model):
     def __repr__(self):
         return f'The meal info: {self.info}'
 
+    
     def to_dict(self):
         return {
             "id": self.id,

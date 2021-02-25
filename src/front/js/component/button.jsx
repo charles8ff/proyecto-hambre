@@ -15,6 +15,7 @@ const BUTTON = props => {
 	);
 };
 export default BUTTON;
+
 BUTTON.propTypes = {
 	title: PropTypes.string,
 	click: PropTypes.func

@@ -1,17 +1,25 @@
-import React from "react";
+import React, { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container, Jumbotron, Row, Col } from "react-bootstrap";
+import { BUTTON } from "../component/button.jsx";
+import { Context } from "../store/appContext";
 
-export const Navbar = () => {
+export const Header = () => {
+	const { store, actions } = useContext(Context);
 	return (
-		<nav className="navbar navbar-light bg-light mb-3">
-			<Link to="/">
-				<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-			</Link>
-			<div className="ml-auto">
-				<Link to="/demo">
-					<button className="btn btn-primary">Check the Context in action</button>
-				</Link>
-			</div>
-		</nav>
+		<>
+			<header className="navbar">
+				<Container>
+					<Navbar expand="lg">
+						<Link to="/">
+							<Navbar.Brand>Proyecto Hambre</Navbar.Brand>
+						</Link>
+						<Navbar.Toggle aria-controls="basic-navbar-nav" />
+					</Navbar>
+					<BUTTON title="Eliminar cuenta" click={() => actions.deleteProfile(store.profile_id)} />
+					<BUTTON title="Cerrar Sesion" />
+				</Container>
+			</header>
+		</>
 	);
 };
