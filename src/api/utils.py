@@ -2,7 +2,8 @@ from flask import jsonify, url_for
 from sqlalchemy import Table
 from sqlalchemy.exc import IntegrityError
 from api import models
-from seed_data import data 
+from seed_data import data
+import flask_migrate
 
 class APIException(Exception):
     status_code = 400
@@ -44,12 +45,11 @@ def generate_sitemap(app):
         <p>Remember to specify a real endpoint path like: </p>
         <ul style="text-align: left;">"""+links_html+"</ul></div>"
 
-def load_seed_data():
+
+def load_seed_data(data):
     for table, rows in data.items():
-        print ("hola seed data")
         ModelClass = getattr(models, table)
         for row in rows:
-            print ("hola seed data 2nd ")
             if isinstance(ModelClass, Table):
                 insert = ModelClass.insert().values(**row)
                 try:

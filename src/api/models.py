@@ -115,7 +115,7 @@ class Template(db.Model):
     description = db.Column(db.Text) # add nullable=False
     price = db.Column(db.Float) # add nullable=False
     menu = db.relationship('Menu', backref='template',lazy=True)
-    menu_type_id = db.Column(db.Integer, db.ForeignKey("menu_type.id"), nullable=False) # add nullable=False
+    menu_type_id = db.Column(db.Integer, db.ForeignKey("menu_type.id")) # add nullable=False
 
     def __repr__(self):
         return f'The template is: {self.title}'
@@ -204,8 +204,8 @@ class Meal_Info(db.Model):
     def __repr__(self):
         return f'The meal info: {self.info}'
     
-    def to_dict(self):
-        return {
-            "id": self.id,
-            # do not to_dict the password, its a security breach
-        }
+    # def to_dict(self):
+    #     return {
+    #         "id": self.id,
+    #         "info": self.info
+    #         }

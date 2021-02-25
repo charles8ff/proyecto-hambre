@@ -15,6 +15,8 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
+# from seed_data import data
+from api.init_database import init_db
 
 ENV = os.getenv("FLASK_ENV")
 static_file_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../public/')
@@ -32,7 +34,8 @@ else:
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 MIGRATE = Migrate(app, db)
 db.init_app(app)
-load_seed_data()
+# load_seed_data(data)
+app.cli.add_command(init_db)
 # Allow CORS requests to this API
 CORS(app)
 

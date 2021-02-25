@@ -2,8 +2,9 @@ from werkzeug.security import generate_password_hash
 from werkzeug import security
 
 data={
-    'Business':[{
+    "Business":[{
         "id":1,
+        "is_active":True,
         "email":"rigoberto_el_guapo@gmail.com", 
         "_password": generate_password_hash("1234567890"),
         "place_name":"Bar Rigoberto", 
@@ -15,6 +16,7 @@ data={
     },
     {
         "id":2,
+        "is_active":True,
         "email":"tasca_trini@gmail.com", 
         "_password":generate_password_hash("9876543210"),
         "place_name":"Tasca Trini", 
@@ -26,6 +28,7 @@ data={
     },
     {
         "id":3,
+        "is_active":True,
         "email":"bollitos_veganitos@gmail.com", 
         "_password":generate_password_hash("333333333"),
         "place_name":"EatGreenAndHealthy", 
@@ -34,41 +37,41 @@ data={
         "phone_number":"915645576",
         "open_hour":"09:30",
         "close_hour":"17:00"
-    }],
-    'Menu':[{
-        "id":1,
-        "business_id":1,
-        "template_id":1,
-    },
-    {
-        "id":2,
-        "business_id":1,
-        "template_id":2,
-    },
-    {
-        "id":3,
-        "business_id":2,
-        "template_id":3,
-    }],
-    'Template':[{
-        "id":1,
-        "title":"Template Red Arrows",
-        "description":"Has Red Arrows",
-        "price":5.00,
-        "menu_type_id":1
-    },
-    {
-        "id":2,
-        "title":"Template White",
-        "description":"Is White",
-        "price":0.00,
-        "menu_type_id":1
-    },
-    {
-        "id":3,
-        "title":"Template Green",
-        "description":"Is Green",
-        "price":0.00,
-        "menu_type_id":1
     }]
+    # "Menu":[{
+    #     "id":1,
+    #     "business_id":1,
+    #     "template_id":1,
+    # },
+    # {
+    #     "id":2,
+    #     "business_id":1,
+    #     "template_id":2,
+    # },
+    # {
+    #     "id":3,
+    #     "business_id":2,
+    #     "template_id":3,
+    # }],
+    # "Template":[{
+    #     "id":1,
+    #     "title":"Template Red Arrows",
+    #     "description":"Has Red Arrows",
+    #     "price":5.00,
+        
+    # },
+    # {
+    #     "id":2,
+    #     "title":"Template White",
+    #     "description":"Is White",
+    #     "price":0.00,
+        
+    # },
+    # {
+    #     "id":3,
+    #     "title":"Template Green",
+    #     "description":"Is Green",
+    #     "price":0.00,
+        
+    # }]
 }
