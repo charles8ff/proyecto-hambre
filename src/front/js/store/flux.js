@@ -6,10 +6,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			getProfile: place_id => {
-				fetch(`https://3001-blush-wallaby-9vwtj6or.ws-eu03.gitpod.io/api/place/1`)
+				fetch(`https://3001-blush-wallaby-9vwtj6or.ws-eu03.gitpod.io/api/place/${place_id}`)
 					.then(async res => {
 						const response = await res.json();
-						console.log(response);
 						setStore({
 							profile: response,
 							menus: response.menus

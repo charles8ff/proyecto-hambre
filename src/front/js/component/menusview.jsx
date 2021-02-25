@@ -2,7 +2,7 @@ import React, { Component, useContext, Fragment, useEffect, useState } from "rea
 import { Context } from "../store/appContext";
 import Card from "react-bootstrap/Card";
 import CardDeck from "react-bootstrap/CardDeck";
-import BUTTON from "./button.jsx";
+import ourButton from "./button.jsx";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -30,7 +30,7 @@ export const MenusView = props => {
 							<Card.Title>{item.id}</Card.Title>
 						</Card.Body>
 						<Card.Footer>
-							<BUTTON title="Ver toda la carta" />
+							<ourButton title="Ver toda la carta" />
 						</Card.Footer>
 					</Card>
 				</Col>
@@ -40,7 +40,7 @@ export const MenusView = props => {
 
 	return (
 		<Container>
-			<BUTTON click={() => actions.getProfile()} title="a" />
+			<ourButton click={() => actions.getProfile()} title="a" />
 			<CardDeck className="justify-content-center">
 				<Row xs={1} md={1} lg={3} className="justify-content-center">
 					{templatesInHTML()}

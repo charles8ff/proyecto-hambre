@@ -6,7 +6,6 @@ import { Container, Jumbotron, Row, Col, Card, Button } from "react-bootstrap";
 export const Profile = () => {
 	const { store, actions } = useContext(Context);
 	return (
-		<>
 			<Jumbotron className="jumbotron">
 				<Container>
 					<Row>
@@ -37,7 +36,9 @@ export const Profile = () => {
 										<div className="d-flex flex-row">
 											<i className="far fa-color fa-clock" />
 											<h3>
-												{store.profile.open_time}
+                                                {"Horario"}
+                                                {store.profile.open_time}
+                                                {" - "}
 												{store.profile.close_time}
 											</h3>
 										</div>
@@ -49,6 +50,5 @@ export const Profile = () => {
 					</Row>
 				</Container>
 			</Jumbotron>
-		</>
 	);
 };

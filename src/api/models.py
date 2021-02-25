@@ -23,7 +23,6 @@ class Business(db.Model):
     def __repr__(self):
         return f'business: {self.place_name}'
 
-    @hybrid_property
     def password(self):
         return self._password
 
@@ -90,7 +89,6 @@ class Menu(db.Model):
         menus = cls.query.filter_by(business_id = place_id).all()
         return [menu.to_dict() for menu in menus]
 
-
 class Template(db.Model):
     __tablename__ = 'template'
     id = db.Column(db.Integer, primary_key=True) 
@@ -120,10 +118,10 @@ class Menu_Type(db.Model):
     __tablename__ = 'menu_type'
     id = db.Column(db.Integer, primary_key=True) 
     menu_type = db.Column(db.Enum(Enum_Category), nullable=False)
-    #meal = db.relationship('Meal', backref='menu_type',lazy=True)
+    meal = db.relationship('Meal', backref='menu_type',lazy=True)
 
     def __repr__(self):
-        return f'The meal type is: {self.menu_type}'
+        return f'The meal is: {self.meal_name}'
 
     def to_dict(self):
         return {
@@ -141,24 +139,6 @@ class Meal(db.Model):
     meal_name = db.Column(db.VARCHAR, nullable=False)
     price = db.Column(db.Float, nullable=False)
     menu_id = db.Column(db.Integer, db.ForeignKey("menu.id")) #Add  nullable=False
-    meal_info = db.relationship(
-        "Meal_Info",
-        secondary=association_table,
-        back_populates="meal")
-
-    def __repr__(self):
-        return f'The meal is: {self.meal_name}'
-
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "meal_name": self.meal_name,
-            "price": self.price
-        }
-
-class Enum_Info(enum.Enum):
-    gluten = "gluten"
-    peanuts = "peanuts"
     tree_nuts = "tree_nuts"
     celery = "celery"
     mustard = "mustard"
