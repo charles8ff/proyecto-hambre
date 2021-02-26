@@ -14,7 +14,6 @@ export const OurButton = props => {
 		</>
 	);
 };
-export default ourButton;
 
 OurButton.propTypes = {
 	title: PropTypes.string,

@@ -15,8 +15,6 @@ export const Profile = () => {
 		},
 		[!store.profile_id]
 	);
-
-	console.log(store.profile);
 	return (
         <>
 			<Jumbotron className="jumbotron">

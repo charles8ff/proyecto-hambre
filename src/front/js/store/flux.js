@@ -108,7 +108,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().doLogOut();
 			},
 
-			doLogin: async (emailgiven, passwordgiven) => {
+			login: async (emailgiven, passwordgiven) => {
 				let response = await fetch(URLBACKEND + "/api/login", {
 					method: "POST",
 					headers: new Headers({

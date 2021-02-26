@@ -21,7 +21,6 @@ import { useForm, Controller } from "react-hook-form";
 export const Login = () => {
 	const { store, actions } = useContext(Context);
 	const classes = useStyles();
-	const { token, setToken } = useState("");
 	const history = useHistory();
 	const { register, handleSubmit, errors } = useForm({
 		mode: "onChange",
@@ -35,7 +34,7 @@ export const Login = () => {
 	const onSubmit = data => {
 		store.userSingUp.is_user_active = false;
 		store.userSingUp.is_correct_password = false;
-		actions.doLogin(data.email, data.password);
+		actions.login(data.email, data.password);
 	};
 	useEffect(
 		() => {

@@ -52,7 +52,6 @@ def handle_new_user():
         return "Missing info", 400
     password_hash = generate_password_hash(password, method='pbkdf2:sha256')
     user = Business.add(email, password_hash, place_name, address, description, phone_number, open_hour, close_hour)
-    user = Business.get_by_email(email)
     if check_password_hash(password_hash, password):
         access_token = create_access_token(
             identity=user.to_dict(), 
@@ -64,11 +63,10 @@ def handle_new_user():
 @api.route('/user/<user_email>', methods=['GET'])
 def get_by_email(user_email):
     profile = Business.get_by_email(user_email)
-    if profile is not None:
-        if profile.get_is_active() is True:
-            return jsonify('Invalid email'), 409
-        else:
-            Business.active_profile(profile.to_dict().get('id'))
+    if profile is not None and profile.get_is_active() is True :
+        return jsonify('Invalid email'), 409
+    else:
+        Business.active_profile(profile.to_dict().get('id'))
     return jsonify('User created successfully'), 201
 
 @api.route('/login', methods=['GET', 'POST'])

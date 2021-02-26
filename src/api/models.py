@@ -40,7 +40,7 @@ class Business(db.Model):
 
     @classmethod
     def get_by_id(cls, place_id):
-        profile = cls.query.filter_by(id = place_id).first()
+        profile = cls.query.filter_by(id = place_id).first_or_404(description=None)
         return profile
 
     @classmethod
@@ -61,7 +61,7 @@ class Business(db.Model):
 
     @classmethod  
     def get_by_email(cls, email):
-        user = cls.query.filter_by(email = email).first_or_404( description="Invalid username or Password" )
+        user = cls.query.filter_by(email = email).first_or_404(description=None)
         return user
 
     @classmethod
