@@ -6,17 +6,6 @@ import { MenusView } from "./menusview.jsx";
 
 export const Profile = () => {
 	const { store, actions } = useContext(Context);
-	let id = useParams();
-
-	useEffect(
-		() => {
-			store.profile_id = id.id;
-			actions.getProfile(store.profile_id);
-		},
-		[!store.profile_id]
-	);
-
-	console.log(store.profile);
 	return (
 		<>
 			<Jumbotron className="jumbotron">

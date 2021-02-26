@@ -12,12 +12,21 @@ export const Header = () => {
 				<Container>
 					<Navbar expand="lg">
 						<Link to="/">
-							<Navbar.Brand>Proyecto Hambre</Navbar.Brand>
+							<Navbar.Brand>
+								{" "}
+								<img
+									alt=""
+									src="https://zimwebtech.com/assets/images/media/012.png"
+									width="70"
+									height="50"
+									className="d-inline-block align-top"
+								/>{" "}
+							</Navbar.Brand>
 						</Link>
 						<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					</Navbar>
-					<BUTTON title="Eliminar cuenta" click={() => actions.deleteProfile(store.profile_id)} />
-					<BUTTON title="Cerrar Sesion" />
+					{/* <BUTTON title="Eliminar cuenta" click={() => actions.deleteProfile(store.profile_id)} />
+					<BUTTON title="Cerrar Sesion" /> */}
 				</Container>
 			</header>
 		</>
