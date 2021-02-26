@@ -2,7 +2,7 @@ import React, { useContext, Fragment } from "react";
 import "../../styles/home.scss";
 import PropTypes from "prop-types";
 
-export const BUTTON = props => {
+export const ourButton = props => {
 	return (
 		<>
 			<button onClick={props.click} className="fill ml-auto">
@@ -12,7 +12,7 @@ export const BUTTON = props => {
 	);
 };
 
-BUTTON.propTypes = {
+ourButton.propTypes = {
 	title: PropTypes.string,
 	click: PropTypes.func
 };
