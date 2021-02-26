@@ -37,7 +37,7 @@ export const Header = () => {
 						<Link to="/">
 							<Navbar.Brand>Proyecto Hambre</Navbar.Brand>
 						</Link>
-						<Navbar.Toggle aria-controls="basic-navbar-nav" />
+						{/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
 					</Navbar>
 					<OurButton
 						title="Eliminar cuenta"

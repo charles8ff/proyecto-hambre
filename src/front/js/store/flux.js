@@ -23,7 +23,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch(URLBACKEND + `/api/place/${place_id}`)
 					.then(async res => {
 						const response = await res.json();
-						setStore({ profile: response });
+						setStore({
+							profile: response,
+							menus: response.menus
+						});
 					})
 					.catch(err => {
 						throw err;

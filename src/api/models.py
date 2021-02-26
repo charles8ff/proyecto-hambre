@@ -23,7 +23,6 @@ class Business(db.Model):
     def __repr__(self):
         return f'business: {self.place_name}'
 
-    @hybrid_property
     def password(self):
         return self._password
     
@@ -168,11 +167,11 @@ class Meal(db.Model):
         return f'The meal is: {self.meal_name}'
 
     def to_dict(self):
-        return {
+        return{
             "id": self.id,
             "meal_name": self.meal_name,
             "price": self.price
-        }
+            }
 
 class Enum_Info(enum.Enum):
     gluten = "gluten"
@@ -203,6 +202,7 @@ class Meal_Info(db.Model):
 
     def __repr__(self):
         return f'The meal info: {self.info}'
+
     
     def to_dict(self):
         return {

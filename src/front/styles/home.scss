@@ -9,6 +9,10 @@ $black:  #191919;
 $grey: #CDCDCD;
 $text-font: 'Roboto', sans-serif;
 
+button {  
+  color: $white;
+  border-color: red;
+background: none;
 body{
     font-family: $text-font;
     height:100vh; 
@@ -35,6 +39,11 @@ button {
   &:hover,
   &:focus { 
     border-color: $secondary-color;
+    color: $secondary-color;
+  }
+}
+.card{
+    background: $primary-color;
     color: #fff;
   }
 }
