@@ -81,6 +81,8 @@ def login():
     if not email or not password:
         return jsonify("Missing info"), 400
     user = Business.get_by_email(email)
+    if user.get_is_active() is False:
+        return jsonify('User does not exist'), 404
     if check_password_hash(user.get_password(), password):
         access_token = create_access_token(
             identity=user.to_dict(), 

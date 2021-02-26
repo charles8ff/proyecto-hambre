@@ -33,6 +33,8 @@ export const Login = () => {
 	});
 
 	const onSubmit = data => {
+		store.userSingUp.is_user_active = false;
+		store.userSingUp.is_correct_password = false;
 		actions.doLogin(data.email, data.password);
 	};
 	useEffect(
@@ -75,6 +77,7 @@ export const Login = () => {
 						fullWidth
 						autoFocus
 					/>
+					{store.userSingUp.is_user_active ? <span className={classes.error}>{"Invalid email"}</span> : null}
 					{errors.email && <span className={classes.error}>{errors.email.message}</span>}
 					<CssTextField
 						name="password"
@@ -93,6 +96,9 @@ export const Login = () => {
 						fullWidth
 						autoComplete="current-password"
 					/>
+					{store.userSingUp.is_correct_password ? (
+						<span className={classes.error}>{"Invalid password \n"}</span>
+					) : null}
 					{errors.password && <span className={classes.error}>{errors.password.message}</span>}
 					<Button
 						type="submit"

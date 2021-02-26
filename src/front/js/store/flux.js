@@ -9,11 +9,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				is_user_exist: false,
 				is_first_step: true,
 				is_register_ok: false,
-				is_login_ok: false
+				is_login_ok: false,
+				is_user_active: false,
+				is_correct_password: false
 			},
-			profile: [],
 			singUp_profile: [],
-			profile_id: 0,
 			loggedBusiness: localStorage.getItem("loggedBusiness")
 				? JSON.parse(localStorage.getItem("loggedBusiness"))
 				: ""
@@ -59,7 +59,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ singUp_profile: data });
 				setStore({
 					userSingUp: {
-						is_register_ok: false
+						is_register_ok: false,
+						is_login_ok: false
 					}
 				});
 			},
@@ -86,20 +87,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 					localStorage.setItem("loggedBusiness", JSON.stringify(getStore().loggedBusiness));
 					setStore({
 						userSingUp: {
-							is_register_ok: true
+							is_register_ok: true,
+							is_login_ok: true
 						}
 					});
 				}
 			},
 
 			deleteProfile: async place_id => {
-				let response = await fetch(URLBACKEND + `api/place/${place_id}`, {
+				let response = await fetch(URLBACKEND + `/api/place/${place_id}`, {
 					method: "DELETE",
 					headers: new Headers({
 						"Content-Type": "application/json"
 					})
 				});
 				response = await response.json();
+				getActions().doLogOut();
 			},
 
 			doLogin: async (emailgiven, passwordgiven) => {
@@ -113,19 +116,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 						password: passwordgiven
 					})
 				});
-				if (response.ok) {
-					response = await response.json();
-					localStorage.setItem("loginToken", response.access_token);
-					let data = getActions().decodeToken(response.access_token);
-					setStore({ loggedBusiness: data.sub });
-					localStorage.setItem("loggedBusiness", JSON.stringify(getStore().loggedBusiness));
+				if (response.status == 404) {
 					setStore({
 						userSingUp: {
-							is_login_ok: true
+							is_user_active: true
+						}
+					});
+				} else if (response.status == 409) {
+					setStore({
+						userSingUp: {
+							is_correct_password: true
 						}
 					});
 				} else {
-					console.log(response);
+					if (response.ok) {
+						response = await response.json();
+						localStorage.setItem("loginToken", response.access_token);
+						let data = getActions().decodeToken(response.access_token);
+						setStore({
+							loggedBusiness: data.sub,
+							userSingUp: {
+								is_login_ok: true
+							}
+						});
+						localStorage.setItem("loggedBusiness", JSON.stringify(getStore().loggedBusiness));
+					}
 				}
 			},
 			decodeToken: token => {
@@ -135,7 +150,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({
 					loggedBusiness: [],
 					userSingUp: {
-						is_login_ok: false
+						is_login_ok: false,
+						is_register_ok: false
 					}
 				});
 				localStorage.setItem("loginToken", "");

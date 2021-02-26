@@ -2,17 +2,19 @@ import React, { useContext, Fragment } from "react";
 import "../../styles/home.scss";
 import PropTypes from "prop-types";
 
-export const ourButton = props => {
+export const OurButton = props => {
+	const className = "fill ml-auto " + props.hide;
 	return (
 		<>
-			<button onClick={props.click} className="fill ml-auto">
+			<button onClick={props.click} className={className}>
 				{props.title}
 			</button>
 		</>
 	);
 };
 
-ourButton.propTypes = {
+OurButton.propTypes = {
 	title: PropTypes.string,
-	click: PropTypes.func
+	click: PropTypes.func,
+	hide: PropTypes.string
 };
