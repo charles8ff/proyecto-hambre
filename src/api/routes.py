@@ -17,8 +17,8 @@ api = Blueprint('api', __name__)
 def profile_id(place_id):
     business_profile = Business.get_by_id(place_id)
     business_menus = Menu.get_by_business_id(place_id)
-    if business_profile['is_active']:
-        business_info = {**business_profile, "menus": business_menus}
+    if business_profile.get_is_active() is True:
+        business_info = {**business_profile.to_dict(), "menus": business_menus}
         return jsonify(business_info)
     else:
         return 'User does not exist', 400
@@ -86,4 +86,4 @@ def login():
             expires_delta=timedelta(minutes=90)
         )
         return jsonify({'access_token': access_token}), 200
-    return jsonify('Invalid info'), 418
+    return jsonify('Invalid info'), 409

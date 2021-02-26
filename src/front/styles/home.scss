@@ -11,6 +11,10 @@ $text-font: 'Roboto', sans-serif;
 
 body{
     font-family: $text-font;
+    height:100vh; 
+    margin:0;
+    display:flex; 
+    flex-direction:column; 
 }
 
 .navbar{

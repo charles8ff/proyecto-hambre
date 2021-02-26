@@ -42,7 +42,7 @@ class Business(db.Model):
     @classmethod
     def get_by_id(cls, place_id):
         profile = cls.query.filter_by(id = place_id).first()
-        return profile.to_dict()
+        return profile
 
     @classmethod
     def get_all_profile(cls):
@@ -62,7 +62,7 @@ class Business(db.Model):
 
     @classmethod  
     def get_by_email(cls, email):
-        user = cls.query.filter_by(email = email).first_or_404( description="Invalid username or Password" )
+        user = cls.query.filter_by(email = email).first()
         return user
 
     @classmethod
