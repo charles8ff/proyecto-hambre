@@ -8,6 +8,7 @@ verify_ssl = true
 [packages]
 flask = "*"
 sqlalchemy = "*"
+sqlalchemy-utils = "*"
 flask-sqlalchemy = "*"
 flask-migrate = "*"
 flask-swagger = "*"
@@ -21,6 +22,8 @@ flask-login = "*"
 flask-wtf = "*"
 flask-jwt-extended = "*"
 werkzeug = "*"
+sqlalchemy-seeder = "*"
+flask-db = "*"
 
 [requires]
 python_version = "3.8"
@@ -28,7 +31,6 @@ python_version = "3.8"
 [scripts]
 start="flask run -p 3001 -h 0.0.0.0"
 init="flask db init"
-init-db="flask db init-db"
 migrate="flask db migrate"
 local="heroku local"
 upgrade="flask db upgrade"

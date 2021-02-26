@@ -2,7 +2,8 @@ from flask import jsonify, url_for
 from sqlalchemy import Table
 from sqlalchemy.exc import IntegrityError
 from api import models
-from seed_data import data
+from seeder import ResolvingSeeder
+# from seed_data import data
 import flask_migrate
 
 class APIException(Exception):
@@ -44,20 +45,3 @@ def generate_sitemap(app):
         <p>Start working on your proyect by following the <a href="https://github.com/4GeeksAcademy/flask-rest-hello/blob/master/docs/_QUICK_START.md" target="_blank">Quick Start</a></p>
         <p>Remember to specify a real endpoint path like: </p>
         <ul style="text-align: left;">"""+links_html+"</ul></div>"
-
-
-def load_seed_data(data):
-    for table, rows in data.items():
-        ModelClass = getattr(models, table)
-        for row in rows:
-            if isinstance(ModelClass, Table):
-                insert = ModelClass.insert().values(**row)
-                try:
-                    models.db.session.execute(insert) 
-                    models.db.session.commit()
-                except IntegrityError as e:
-                    print(f'ERROR: inserting row {row} in "{table}". IGNORING')
-            else:
-                new_row = ModelClass(**row)
-                models.db.session.merge(new_row)
-                models.db.session.commit()
