@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { AccountCircle as AccountCircleIcon } from "@material-ui/icons";
+import { AccountCircle as AccountCircleIcon, HistoryRounded } from "@material-ui/icons";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import {
 	Avatar,
@@ -37,6 +37,15 @@ export const AddPlace = () => {
 	const onSubmit = data => {
 		actions.registerPlace(data);
 	};
+
+	useEffect(
+		() => {
+			if (store.userSingUp.is_register_ok) {
+				history.push(`/place/${store.loggedBusiness.id}`);
+			}
+		},
+		[store.userSingUp.is_register_ok]
+	);
 
 	return (
 		<Container component="main" maxWidth="xs">

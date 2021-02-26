@@ -22,7 +22,7 @@ export const Login = () => {
 	const { store, actions } = useContext(Context);
 	const classes = useStyles();
 	const { token, setToken } = useState("");
-	// const history = useHistory();
+	const history = useHistory();
 	const { register, handleSubmit, errors } = useForm({
 		mode: "onChange",
 		reValidateMode: "onChange",
@@ -35,6 +35,14 @@ export const Login = () => {
 	const onSubmit = data => {
 		actions.doLogin(data.email, data.password);
 	};
+	useEffect(
+		() => {
+			if (store.userSingUp.is_login_ok) {
+				history.push(`/place/${store.loggedBusiness.id}`);
+			}
+		},
+		[store.userSingUp.is_login_ok]
+	);
 
 	return (
 		<Container component="main" maxWidth="xs">

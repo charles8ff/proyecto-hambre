@@ -7,7 +7,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			userSingUp: {
 				is_user_exist: false,
-				is_first_step: true
+				is_first_step: true,
+				is_register_ok: false,
+				is_login_ok: false
 			},
 			profile: [],
 			singUp_profile: [],
@@ -55,6 +57,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			registerProfile: data => {
 				setStore({ singUp_profile: data });
+				setStore({
+					userSingUp: {
+						is_register_ok: false
+					}
+				});
 			},
 
 			registerPlace: data => {
@@ -71,11 +78,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}),
 					body: JSON.stringify(user_profile)
 				});
-				response = await response.json();
-				localStorage.setItem("loginToken", response.access_token);
-				let data = getActions().decodeToken(response.access_token);
-				setStore({ loggedBusiness: data.sub });
-				localStorage.setItem("loggedBusiness", JSON.stringify(getStore().loggedBusiness));
+				if (response.ok) {
+					response = await response.json();
+					localStorage.setItem("loginToken", response.access_token);
+					let data = getActions().decodeToken(response.access_token);
+					setStore({ loggedBusiness: data.sub });
+					localStorage.setItem("loggedBusiness", JSON.stringify(getStore().loggedBusiness));
+					setStore({
+						userSingUp: {
+							is_register_ok: true
+						}
+					});
+				}
 			},
 
 			deleteProfile: async place_id => {
@@ -99,19 +113,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 						password: passwordgiven
 					})
 				});
-				console.log(response.status);
-				response = await response.json();
-
-				localStorage.setItem("loginToken", response.access_token);
-				let data = getActions().decodeToken(response.access_token);
-				setStore({ loggedBusiness: data.sub });
-				localStorage.setItem("loggedBusiness", JSON.stringify(getStore().loggedBusiness));
+				if (response.ok) {
+					response = await response.json();
+					localStorage.setItem("loginToken", response.access_token);
+					let data = getActions().decodeToken(response.access_token);
+					setStore({ loggedBusiness: data.sub });
+					localStorage.setItem("loggedBusiness", JSON.stringify(getStore().loggedBusiness));
+					setStore({
+						userSingUp: {
+							is_login_ok: true
+						}
+					});
+				} else {
+					console.log(response);
+				}
 			},
 			decodeToken: token => {
 				return (token = jwt_decode(token));
 			},
 			doLogOut: () => {
-				setStore({ loggedBusiness: [] });
+				setStore({
+					loggedBusiness: [],
+					userSingUp: {
+						is_login_ok: false
+					}
+				});
 				localStorage.setItem("loginToken", "");
 				localStorage.setItem("loggedBusiness", "");
 			}

@@ -40,20 +40,20 @@ export const Profile = () => {
 									<div className="details">
 										<div className="d-flex flex-row">
 											<i className="fas fa-color fa-lg fa-map-marker-alt" />
-											<h3>{store.profile.address}</h3>
+											<h3>{store.loggedBusiness.address}</h3>
 										</div>
 										<div className="d-flex flex-row">
 											<i className="fas fa-color fa-lg fa-phone" />
-											<h3>{store.profile.place_telephone}</h3>
+											<h3>{store.loggedBusiness.phone_number}</h3>
 										</div>
 										<div className="d-flex flex-row">
 											<i className="far fa-color fa-clock" />
 											<h3>
-												{store.profile.open_time}
-												{store.profile.close_time}
+												{store.loggedBusiness.open_hour}
+												{store.loggedBusiness.close_hour}
 											</h3>
 										</div>
-										<p className="p-5">{store.profile.description}</p>
+										<p className="p-5">{store.loggedBusiness.description}</p>
 									</div>
 								</Card.Body>
 							</Card>
