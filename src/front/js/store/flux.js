@@ -1,5 +1,5 @@
 import jwt_decode from "jwt-decode";
-const URLBACKEND = "https://3001-blush-wallaby-9vwtj6or.ws-eu03.gitpod.io"; //no slash at end
+const URLBACKEND = "https://3001-silver-narwhal-dcgq8rgc.ws-eu03.gitpod.io"; //no slash at end
 //no slash at end//no slash at end//no slash at end//no slash at end//no slash at end//no slash at end
 
 const getState = ({ getStore, getActions, setStore }) => {
@@ -8,15 +8,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userSingUp: {
 				is_user_exist: false,
 				is_first_step: true,
-				is_register_ok: false,
-				is_login_ok: false,
 				is_user_active: false,
 				is_correct_password: false
 			},
 			singUp_profile: [],
 			loggedBusiness: localStorage.getItem("loggedBusiness")
 				? JSON.parse(localStorage.getItem("loggedBusiness"))
-				: ""
+				: false
 		},
 		actions: {
 			getProfile: place_id => {
@@ -60,12 +58,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			registerProfile: data => {
 				setStore({ singUp_profile: data });
-				setStore({
-					userSingUp: {
-						is_register_ok: false,
-						is_login_ok: false
-					}
-				});
 			},
 
 			registerPlace: data => {
@@ -86,14 +78,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					response = await response.json();
 					localStorage.setItem("loginToken", response.access_token);
 					let data = getActions().decodeToken(response.access_token);
-					setStore({ loggedBusiness: data.sub });
-					localStorage.setItem("loggedBusiness", JSON.stringify(getStore().loggedBusiness));
 					setStore({
-						userSingUp: {
-							is_register_ok: true,
-							is_login_ok: true
-						}
+						loggedBusiness: data.sub
 					});
+					localStorage.setItem("loggedBusiness", JSON.stringify(getStore().loggedBusiness));
 				}
 			},
 
@@ -137,10 +125,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						localStorage.setItem("loginToken", response.access_token);
 						let data = getActions().decodeToken(response.access_token);
 						setStore({
-							loggedBusiness: data.sub,
-							userSingUp: {
-								is_login_ok: true
-							}
+							loggedBusiness: data.sub
 						});
 						localStorage.setItem("loggedBusiness", JSON.stringify(getStore().loggedBusiness));
 					}
@@ -150,15 +135,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return (token = jwt_decode(token));
 			},
 			doLogOut: () => {
+				localStorage.removeItem("loginToken");
+				localStorage.removeItem("loggedBusiness");
 				setStore({
-					loggedBusiness: [],
-					userSingUp: {
-						is_login_ok: false,
-						is_register_ok: false
-					}
+					loggedBusiness: false
 				});
-				localStorage.setItem("loginToken", "");
-				localStorage.setItem("loggedBusiness", "");
 			}
 		}
 	};

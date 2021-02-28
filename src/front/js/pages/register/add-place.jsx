@@ -40,11 +40,11 @@ export const AddPlace = () => {
 
 	useEffect(
 		() => {
-			if (store.userSingUp.is_register_ok) {
+			if (store.loggedBusiness != false) {
 				history.push(`/place/${store.loggedBusiness.id}`);
 			}
 		},
-		[store.userSingUp.is_register_ok]
+		[store.loggedBusiness]
 	);
 
 	return (

@@ -32,17 +32,16 @@ export const Login = () => {
 	});
 
 	const onSubmit = data => {
-		store.userSingUp.is_user_active = false;
 		store.userSingUp.is_correct_password = false;
 		actions.login(data.email, data.password);
 	};
 	useEffect(
 		() => {
-			if (store.userSingUp.is_login_ok) {
+			if (store.loggedBusiness != false) {
 				history.push(`/place/${store.loggedBusiness.id}`);
 			}
 		},
-		[store.userSingUp.is_login_ok]
+		[store.loggedBusiness]
 	);
 
 	return (

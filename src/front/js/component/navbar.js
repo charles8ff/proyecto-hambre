@@ -7,28 +7,7 @@ import { Context } from "../store/appContext";
 export const Header = () => {
 	const { store, actions } = useContext(Context);
 	const history = useHistory();
-	const [isLogged, setIsLogged] = useState({
-		loggedButtons: "",
-		notLoggedButtons: ""
-	});
-
-	useEffect(
-		() => {
-			if (store.userSingUp.is_login_ok) {
-				setIsLogged({
-					loggedButtons: "",
-					notLoggedButtons: "d-none"
-				});
-			} else {
-				setIsLogged({
-					loggedButtons: "d-none",
-					notLoggedButtons: ""
-				});
-			}
-		},
-		[store.userSingUp.is_login_ok]
-	);
-
+	console.log(store.loggedBusiness);
 	return (
 		<>
 			<header className="navbar">
@@ -45,17 +24,7 @@ export const Header = () => {
 							actions.deleteProfile(store.loggedBusiness.id);
 							history.push("/");
 						}}
-						hide={isLogged.loggedButtons}
-					/>
-					<OurButton
-						title="Regístrate"
-						click={() => history.push("/register")}
-						hide={isLogged.notLoggedButtons}
-					/>
-					<OurButton
-						title="Iniciar sesión"
-						click={() => history.push("/login")}
-						hide={isLogged.notLoggedButtons}
+						hide={store.loggedBusiness ? "" : "d-none"}
 					/>
 					<OurButton
 						title="Cerrar Sesión"
@@ -63,7 +32,17 @@ export const Header = () => {
 							actions.doLogOut();
 							history.push("/");
 						}}
-						hide={isLogged.loggedButtons}
+						hide={store.loggedBusiness ? "" : "d-none"}
+					/>
+					<OurButton
+						title="Regístrate"
+						click={() => history.push("/register")}
+						hide={store.loggedBusiness ? "d-none" : ""}
+					/>
+					<OurButton
+						title="Iniciar sesión"
+						click={() => history.push("/login")}
+						hide={store.loggedBusiness ? "d-none" : ""}
 					/>
 				</Container>
 			</header>

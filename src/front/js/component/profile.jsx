@@ -6,17 +6,8 @@ import { MenusView } from "./menusview.jsx";
 
 export const Profile = () => {
 	const { store, actions } = useContext(Context);
-	let id = useParams();
-
-	useEffect(
-		() => {
-			store.profile_id = id.id;
-			actions.getProfile(store.profile_id);
-		},
-		[!store.profile_id]
-	);
 	return (
-        <>
+		<>
 			<Jumbotron className="jumbotron">
 				<Container>
 					<Row>
@@ -47,9 +38,9 @@ export const Profile = () => {
 										<div className="d-flex flex-row">
 											<i className="far fa-color fa-clock" />
 											<h3>
-                                                {"Horario"}
-                                                {store.loggedBusiness.open_hour}
-                                                {" - "}
+												{"Horario"}
+												{store.loggedBusiness.open_hour}
+												{" - "}
 												{store.loggedBusiness.close_hour}
 											</h3>
 										</div>
@@ -62,6 +53,6 @@ export const Profile = () => {
 				</Container>
 			</Jumbotron>
 			<MenusView />
-        </>
+		</>
 	);
 };
