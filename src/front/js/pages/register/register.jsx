@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { AddPlace } from "./add-place.jsx";
 import { AccountCircle as AccountCircleIcon } from "@material-ui/icons";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -6,10 +6,12 @@ import { Context } from "../../store/appContext";
 import { Avatar, Container, CssBaseline, Button, Typography } from "@material-ui/core";
 import { CssTextField, useStyles } from "./styles.js";
 import { useForm, controller } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 
 export const Register = () => {
 	const { store, actions } = useContext(Context);
 	const classes = useStyles();
+	const history = useHistory();
 	const { register, handleSubmit, errors } = useForm({
 		mode: "onChange",
 		reValidateMode: "onChange",
@@ -23,6 +25,15 @@ export const Register = () => {
 		actions.registerProfile(data);
 		actions.getUserbyEmail(data.email);
 	};
+
+	useEffect(
+		() => {
+			if (store.loginToken != false) {
+				history.push(`/place/${actions.decodeToken(store.loginToken).sub.id}`);
+			}
+		},
+		[store.loginToken]
+	);
 
 	if (store.userSingUp.is_first_step) {
 		return (

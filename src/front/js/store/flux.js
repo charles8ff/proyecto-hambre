@@ -75,6 +75,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (response.ok) {
 					response = await response.json();
 					localStorage.setItem("loginToken", response.access_token);
+					setStore({
+						loginToken: response.access_token
+					});
 					let data = getActions().decodeToken(response.access_token);
 					const dataURL = "/place/" + data.sub.id;
 					getActions().getProfile(dataURL);
@@ -118,8 +121,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} else {
 					if (response.ok) {
 						response = await response.json();
+						localStorage.setItem("loginToken", response.access_token);
 						setStore({
-							loginToken: localStorage.setItem("loginToken", response.access_token)
+							loginToken: response.access_token
 						});
 						let data = getActions().decodeToken(response.access_token);
 						const dataURL = "/place/" + data.sub.id;

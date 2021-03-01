@@ -39,12 +39,11 @@ export const Login = () => {
 	useEffect(
 		() => {
 			if (store.loginToken != false) {
-				history.push(`/place/${store.loggedBusiness.id}`);
+				history.push(`/place/${actions.decodeToken(store.loginToken).sub.id}`);
 			}
 		},
 		[store.loginToken]
 	);
-
 	return (
 		<Container component="main" maxWidth="xs">
 			<CssBaseline />

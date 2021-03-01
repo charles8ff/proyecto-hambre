@@ -40,11 +40,11 @@ export const AddPlace = () => {
 
 	useEffect(
 		() => {
-			if (localStorage.getItem("loginToken") != null) {
-				history.push(`/place/${store.loggedBusiness.id}`);
+			if (store.loginToken != false) {
+				history.push(`/place/${actions.decodeToken(store.loginToken).sub.id}`);
 			}
 		},
-		[store.loggedBusiness]
+		[store.loginToken]
 	);
 
 	return (
