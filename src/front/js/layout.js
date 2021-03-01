@@ -10,6 +10,7 @@ import { Header } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Login } from "./pages/login/login.jsx";
 import { Profile } from "./component/profile.jsx";
+import { Template1 } from "./pages/templates/template1.js";
 
 const Layout = () => {
 	const basename = process.env.BASENAME || "";
@@ -30,6 +31,9 @@ const Layout = () => {
 					</Route>
 					<Route exact path="/login">
 						<Login />
+					</Route>
+					<Route exact path="/template1">
+						<Template1 />
 					</Route>
 					<Route>
 						<h1>Not found!</h1>
