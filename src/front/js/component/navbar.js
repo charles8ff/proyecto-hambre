@@ -7,7 +7,7 @@ import { Context } from "../store/appContext";
 export const Header = () => {
 	const { store, actions } = useContext(Context);
 	const history = useHistory();
-	console.log(store.loggedBusiness);
+
 	return (
 		<>
 			<header className="navbar">
@@ -16,7 +16,6 @@ export const Header = () => {
 						<Link to="/">
 							<Navbar.Brand>Proyecto Hambre</Navbar.Brand>
 						</Link>
-						{/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
 					</Navbar>
 					<OurButton
 						title="Eliminar cuenta"
@@ -24,7 +23,7 @@ export const Header = () => {
 							actions.deleteProfile(store.loggedBusiness.id);
 							history.push("/");
 						}}
-						hide={store.loggedBusiness ? "" : "d-none"}
+						hide={store.loginToken != false ? "" : "d-none"}
 					/>
 					<OurButton
 						title="Cerrar Sesión"
@@ -32,17 +31,17 @@ export const Header = () => {
 							actions.doLogOut();
 							history.push("/");
 						}}
-						hide={store.loggedBusiness ? "" : "d-none"}
+						hide={store.loginToken != false ? "" : "d-none"}
 					/>
 					<OurButton
 						title="Regístrate"
 						click={() => history.push("/register")}
-						hide={store.loggedBusiness ? "d-none" : ""}
+						hide={store.loginToken != false ? "d-none" : ""}
 					/>
 					<OurButton
 						title="Iniciar sesión"
 						click={() => history.push("/login")}
-						hide={store.loggedBusiness ? "d-none" : ""}
+						hide={store.loginToken != false ? "d-none" : ""}
 					/>
 				</Container>
 			</header>

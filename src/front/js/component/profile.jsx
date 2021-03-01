@@ -3,9 +3,18 @@ import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Container, Jumbotron, Row, Col, Card, Button } from "react-bootstrap";
 import { MenusView } from "./menusview.jsx";
+import { useHistory } from "react-router-dom";
 
 export const Profile = () => {
 	const { store, actions } = useContext(Context);
+	const history = useHistory();
+
+	useEffect(
+		() => {
+			actions.getProfile(history.location.pathname);
+		},
+		[history.location.pathname]
+	);
 	return (
 		<>
 			<Jumbotron className="jumbotron">

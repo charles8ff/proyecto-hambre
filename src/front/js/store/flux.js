@@ -6,24 +6,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			userSingUp: {
-				is_user_exist: false,
+				material_ui_is_user_exist: false,
 				is_first_step: true,
-				is_user_active: false,
-				is_correct_password: false
+				material_ui_is_user_active: false,
+				material_ui_is_correct_password: false
 			},
 			singUp_profile: [],
-			loggedBusiness: localStorage.getItem("loggedBusiness")
-				? JSON.parse(localStorage.getItem("loggedBusiness"))
-				: false
+			loggedBusiness: {},
+			loginToken: localStorage.getItem("loginToken") ? localStorage.getItem("loginToken") : false
 		},
 		actions: {
 			getProfile: place_id => {
-				fetch(URLBACKEND + `/api/place/${place_id}`)
+				fetch(URLBACKEND + `/api${place_id}`)
 					.then(async res => {
 						const response = await res.json();
 						setStore({
-							profile: response,
-							menus: response.menus
+							loggedBusiness: response
 						});
 					})
 					.catch(err => {
@@ -37,14 +35,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if (res.status == 409) {
 							setStore({
 								userSingUp: {
-									is_user_exist: true,
+									material_ui_is_user_exist: true,
 									is_first_step: true
 								}
 							});
 						} else {
 							setStore({
 								userSingUp: {
-									is_user_exist: false,
+									material_ui_is_user_exist: false,
 									is_first_step: false
 								}
 							});
@@ -78,10 +76,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					response = await response.json();
 					localStorage.setItem("loginToken", response.access_token);
 					let data = getActions().decodeToken(response.access_token);
-					setStore({
-						loggedBusiness: data.sub
-					});
-					localStorage.setItem("loggedBusiness", JSON.stringify(getStore().loggedBusiness));
+					const dataURL = "/place/" + data.sub.id;
+					getActions().getProfile(dataURL);
 				}
 			},
 
@@ -110,24 +106,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (response.status == 404) {
 					setStore({
 						userSingUp: {
-							is_user_active: true
+							material_ui_is_user_active: true
 						}
 					});
 				} else if (response.status == 409) {
 					setStore({
 						userSingUp: {
-							is_correct_password: true
+							material_ui_is_correct_password: true
 						}
 					});
 				} else {
 					if (response.ok) {
 						response = await response.json();
-						localStorage.setItem("loginToken", response.access_token);
-						let data = getActions().decodeToken(response.access_token);
 						setStore({
-							loggedBusiness: data.sub
+							loginToken: localStorage.setItem("loginToken", response.access_token)
 						});
-						localStorage.setItem("loggedBusiness", JSON.stringify(getStore().loggedBusiness));
+						let data = getActions().decodeToken(response.access_token);
+						const dataURL = "/place/" + data.sub.id;
+						getActions().getProfile(dataURL);
 					}
 				}
 			},
@@ -136,9 +132,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			doLogOut: () => {
 				localStorage.removeItem("loginToken");
-				localStorage.removeItem("loggedBusiness");
 				setStore({
-					loggedBusiness: false
+					loginToken: false
 				});
 			}
 		}

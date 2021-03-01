@@ -40,7 +40,7 @@ export const AddPlace = () => {
 
 	useEffect(
 		() => {
-			if (store.loggedBusiness != false) {
+			if (localStorage.getItem("loginToken") != null) {
 				history.push(`/place/${store.loggedBusiness.id}`);
 			}
 		},

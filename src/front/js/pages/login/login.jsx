@@ -32,16 +32,17 @@ export const Login = () => {
 	});
 
 	const onSubmit = data => {
-		store.userSingUp.is_correct_password = false;
+		store.userSingUp.material_ui_is_correct_password = false;
 		actions.login(data.email, data.password);
 	};
+
 	useEffect(
 		() => {
-			if (store.loggedBusiness != false) {
+			if (store.loginToken != false) {
 				history.push(`/place/${store.loggedBusiness.id}`);
 			}
 		},
-		[store.loggedBusiness]
+		[store.loginToken]
 	);
 
 	return (
@@ -75,7 +76,9 @@ export const Login = () => {
 						fullWidth
 						autoFocus
 					/>
-					{store.userSingUp.is_user_active ? <span className={classes.error}>{"Invalid email"}</span> : null}
+					{store.userSingUp.material_ui_is_user_active ? (
+						<span className={classes.error}>{"Invalid email"}</span>
+					) : null}
 					{errors.email && <span className={classes.error}>{errors.email.message}</span>}
 					<CssTextField
 						name="password"
@@ -94,7 +97,7 @@ export const Login = () => {
 						fullWidth
 						autoComplete="current-password"
 					/>
-					{store.userSingUp.is_correct_password ? (
+					{store.userSingUp.material_ui_is_correct_password ? (
 						<span className={classes.error}>{"Invalid password \n"}</span>
 					) : null}
 					{errors.password && <span className={classes.error}>{errors.password.message}</span>}

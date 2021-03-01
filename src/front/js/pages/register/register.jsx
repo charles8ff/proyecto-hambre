@@ -54,7 +54,7 @@ export const Register = () => {
 							className={classes.margin}
 							fullWidth
 						/>
-						{store.userSingUp.is_user_exist ? (
+						{store.userSingUp.material_ui_is_user_exist ? (
 							<span className={classes.error}>{"Invalid email"}</span>
 						) : null}
 						{errors.email &&
