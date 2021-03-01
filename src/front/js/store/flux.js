@@ -11,6 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				material_ui_is_user_active: false,
 				material_ui_is_correct_password: false
 			},
+			showNavigation: true,
 			singUp_profile: [],
 			loggedBusiness: {},
 			loginToken: localStorage.getItem("loginToken") ? localStorage.getItem("loginToken") : false
@@ -27,6 +28,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(err => {
 						throw err;
 					});
+			},
+
+			hideNavigation: () => {
+				setStore({
+					showNavigation: false
+				});
 			},
 
 			getUserbyEmail: user_email => {

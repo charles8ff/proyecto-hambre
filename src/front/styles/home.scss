@@ -44,7 +44,7 @@ button {
     color: $secondary-color;
   }
 }
-.card{
+.card--menuview{
     background: $primary-color;
     color: #fff;
   }
@@ -109,3 +109,69 @@ footer{
     } 
     
 }
+
+
+.templete--two{
+  max-width: 28.125rem;
+  padding: 1.875rem;
+  margin: 1rem 0;
+  background-color: $white;
+
+  h2{
+    font-weight: bold;
+    text-align: center;
+    color: #c28512;
+}
+  h3{
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: $black;
+}
+
+/* List */
+ul {
+  counter-reset: index;  
+  padding: 0;
+  max-width: 300px;
+}
+
+/* List element */
+li {
+  counter-increment: index; 
+  display: flex;
+  align-items: center;
+  padding: 0.8rem;
+  box-sizing: border-box;
+}
+/* Element separation */
+li + li {
+  border-top: 1px solid $grey;
+}
+}
+
+  .templete--two::before,
+.templete--two::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+.templete--two::before {
+    border-width: 2.5em;
+    border-right-color: #c28512;
+    border-top-color: #c28512;
+}
+
+.templete--two::after {
+    border-radius: 0.4em;
+    border-width: 1.35em;
+    border-right-color: #c28512;
+    border-top-color: #c28512;
+}
+
+
+
