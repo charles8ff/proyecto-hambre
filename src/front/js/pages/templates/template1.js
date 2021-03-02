@@ -17,7 +17,7 @@ export const Template1 = () => {
 
 	return (
 		<>
-			<div className="container-fluid template1-container justify-content-center">
+			<div className="container-fluid template1--container justify-content-center">
 				<h2>MENÚ</h2>
 				<span>BAR MANOLO</span>
 				{/* ^future props */}
