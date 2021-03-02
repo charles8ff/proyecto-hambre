@@ -157,7 +157,7 @@ class Meal(db.Model):
     id = db.Column(db.Integer, primary_key=True) 
     meal_name = db.Column(db.VARCHAR, nullable=False)
     price = db.Column(db.Float, nullable=False)
-    menu_id = db.Column(db.Integer, db.ForeignKey("menu.id"), nullable=False) #Add  nullable=False
+    menu_id = db.Column(db.Integer, db.ForeignKey("menu.id"), nullable=False) #Add nullable=False
     meal_info = db.relationship(
         "Meal_Info",
         secondary=association_table,
