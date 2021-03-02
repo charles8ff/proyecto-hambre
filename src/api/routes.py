@@ -88,3 +88,7 @@ def login():
         )
         return jsonify({'access_token': access_token}), 200
     return jsonify('Invalid info'), 409
+
+@api.route('/place/<place_id>/template/<template_id>', methods=['POST'])
+def new_meals_in_template(place_id, template_id):
+    pass
