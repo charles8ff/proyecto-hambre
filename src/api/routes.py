@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, Business, Menu, Template, Meal, Meal_Info, Menu_Type
+from api.models import db, Business, Menu, Template, Meal, Meal_Info, Menu_Type, Section
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -88,3 +88,54 @@ def login():
         )
         return jsonify({'access_token': access_token}), 200
     return jsonify('Invalid info'), 409
+
+@api.route('/place/<place_id>/meal', methods=['POST'])
+def new_meal(place_id):
+    name, description, price = request.json.get(
+        "name", None
+    ), request.json.get(
+        "description", None
+    ), request.json.get(
+        "price", None
+    )
+    print(place_id)
+    meal = Meal.add(name, description, price, place_id)
+
+    return {}, 201
+
+
+@api.route('/menutype', methods=['POST'])
+def new_menu_type():
+    menu_type= request.json.get(
+        "menu_type", None
+    )
+    menu_type = Menu_Type.add(menu_type)
+
+    return {}, 201
+
+
+@api.route('/menutype/<menu_type_id>/template', methods=['POST'])
+def new_template(menu_type_id):
+    title, description, price = request.json.get(
+        "title", None
+    ), request.json.get(
+        "description", None
+    ), request.json.get(
+        "price", None
+    )
+    template = Template.add(title, description, price, menu_type_id)
+
+    return {}, 201
+
+@api.route('/section', methods=['POST'])
+def new_section():
+    name, meal_id, template_id = request.json.get(
+        "name", None
+    ), request.json.get(
+        "meal_id", None
+    ), request.json.get(
+        "template_id", None
+    )
+    section = Section.add(name, meal_id, template_id )
+
+    return {}, 201
