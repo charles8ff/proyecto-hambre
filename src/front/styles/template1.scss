@@ -1,7 +1,7 @@
 $primary-color: #ED750B;
-$primary-color-light: #F6B983;
+$primary-color-light: #eee7d5;
 $secondary-color: #58C7E0;
-$error-color: #F44708;
+$error-color:#ea1814;
 $white: #FFFFFF;
 $black:  #191919;
 $grey: #CDCDCD;
@@ -9,7 +9,7 @@ $text-font: 'Akaya Kanadaka', cursive;
 
 .template1-container{
     font-family: $text-font;
-    height:100vh; 
+    
     margin:0;
     display:flex; 
     flex-direction:column;
@@ -23,15 +23,20 @@ $text-font: 'Akaya Kanadaka', cursive;
         transform: scaleX(-1);
     }
     h2{
+        margin-top: 4rem;
+        font-size: 3rem;
         text-align: center;
-        margin-bottom: 0.7rem;
         color: $error-color
     }
     span{
         text-align: center;
+        font-size: 1.4rem;
+        margin-bottom: 0.8rem;
+        color: $error-color
     }
     h3{
         align-items: center;
+        font-size: 2rem;
         color: $error-color
     }
     ul{
@@ -43,17 +48,4 @@ $text-font: 'Akaya Kanadaka', cursive;
     li{
         text-align: end;
     }
-}
-
-
-
-
-ul{
-    list-style-type: none;
-    padding: 0rem;
-    margin-bottom: 2rem;
-    text-align: end;
-}
-li{
-    text-align: end;
 }
