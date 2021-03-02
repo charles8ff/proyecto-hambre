@@ -1,5 +1,5 @@
 import jwt_decode from "jwt-decode";
-const URLBACKEND = "https://3001-cyan-badger-6vf6r847.ws-eu03.gitpod.io"; //no slash at end
+const URLBACKEND = "https://3001-peach-hamster-hxks95vb.ws-eu03.gitpod.io"; //no slash at end
 //no slash at end//no slash at end//no slash at end//no slash at end//no slash at end//no slash at end
 
 const getState = ({ getStore, getActions, setStore }) => {
