@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container, Jumbotron, Row, Col } from "react-bootstrap";
-import { OurButton } from "../component/button.jsx";
+import { OurButton } from "./button.jsx";
 import { Context } from "../store/appContext";
 
 export const Header = () => {
