@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import PropTypes from "prop-types";
 
-const ourButton = props => {
+export const OurButton = props => {
 	const { store, actions } = useContext(Context);
 
 	return (
@@ -14,9 +14,8 @@ const ourButton = props => {
 		</>
 	);
 };
-export default ourButton;
 
-ourButton.propTypes = {
+OurButton.propTypes = {
 	title: PropTypes.string,
 	click: PropTypes.func
 };

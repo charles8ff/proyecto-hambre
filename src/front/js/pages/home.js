@@ -20,10 +20,10 @@ export const Home = () => {
 
 	console.log(store.profile);
 
-    return (
-        <>
-            <Profile />
-            <MenusView />
-        </>
-        );
+	return (
+		<>
+			<Profile />
+			<MenusView />
+		</>
+	);
 };

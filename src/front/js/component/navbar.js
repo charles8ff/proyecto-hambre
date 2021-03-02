@@ -1,7 +1,7 @@
 import React, { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container, Jumbotron, Row, Col } from "react-bootstrap";
-import { ourButton } from "../component/button.jsx";
+import { OurButton } from "./button.jsx";
 import { Context } from "../store/appContext";
 
 export const Header = () => {
@@ -14,10 +14,10 @@ export const Header = () => {
 						<Link to="/">
 							<Navbar.Brand>Proyecto Hambre</Navbar.Brand>
 						</Link>
-						{/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
+						<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					</Navbar>
-					<ourButton title="Eliminar cuenta" click={() => actions.deleteProfile(store.profile_id)} />
-					<ourButton title="Cerrar Sesion" />
+					<OurButton title="Eliminar cuenta" click={() => actions.deleteProfile(store.profile_id)} />
+					<OurButton title="Cerrar Sesión" />
 				</Container>
 			</header>
 		</>
