@@ -164,15 +164,19 @@ class Section(db.Model):
 
     
     def add(self):
-        
         db.session.add(self)
         db.session.commit()
-        return self
     
-    @classmethod  
-    def get_by_name(cls, name):
-        section = cls.query.filter_by(name = name).first()
-        return section
+    @classmethod
+    def get_by_meal(cls, meal_id):
+        meal_in_section = cls.query.filter_by(meal_id = meal_id).first_or_404(description=None)
+        return meal_in_section
+    
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+        return self
+
 
 
 class Enum_Category(enum.Enum):
@@ -221,7 +225,8 @@ class Meal(db.Model):
     meal_info = db.relationship(
         "Meal_Info",
         secondary=association_table,
-        back_populates="meal")
+        back_populates="meal",
+        )
 
     def __repr__(self):
         return f'The meal is: {self.meal_name}'
@@ -229,16 +234,26 @@ class Meal(db.Model):
     def to_dict(self):
         return{
             "id": self.id,
-            "meal_name": self.meal_name,
+            "name": self.name,
             "description": self.description,
             "price": self.price,
             "business_id": self.business_id
             }
-
     
-    def add(self):
+    def add(self , meal_info):
+        for info in meal_info:
+            self.meal_info.append(Meal_Info.get_by_id(info))
         db.session.add(self)
         db.session.commit()
+
+    @classmethod
+    def get_by_id(cls, id):
+        meal = cls.query.filter_by(id = id).first_or_404(description=None)
+        return meal
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit() 
         return self
 
 class Enum_Info(enum.Enum):
@@ -278,9 +293,15 @@ class Meal_Info(db.Model):
             "info": self.info
         }
     @classmethod
-    def add(cls, info):
+    def get_by_id(cls, id):
+        info = cls.query.filter_by(id = id).first()
+        return info
+
+    
+    @classmethod
+    def add(cls, meal_info):
         meal_info = cls(
-            info=info,
+            info=meal_info
             )
         db.session.add(meal_info)
         db.session.commit()

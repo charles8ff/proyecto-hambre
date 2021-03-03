@@ -154,14 +154,32 @@ def new_meals_in_template(place_id, template_id):
     body = request.get_json()
     for section, meals in body.items():
         for meal in meals:
-            new_meal= Meal (name = meal.get("name"), 
-                            description = meal.get("description"),
-                            price = meal.get("price"),
-                            business_id = place_id)
-            new_meal.add()
-            print ("Meal created")
-            new_section = Section ( name = section, 
-                                    meal_id = new_meal.id,
-                                    template_id = template_id)
+            new_meal= Meal(
+                name = meal.get("name"), 
+                description = meal.get("description"),
+                price = meal.get("price"),
+                business_id = place_id,
+            )
+            
+            new_meal.add(meal.get("meal_info"))
+            
+            new_section = Section(
+                name = section, 
+                meal_id = new_meal.id,
+                template_id = template_id
+            )
             new_section.add()
-    return {}, 418
+    return {}, 201
+
+@api.route('/place/<int:place_id>/template/<int:template_id>', methods=['DELETE'])
+def delete_meal(place_id, template_id):
+    meal_id= request.json.get(
+        "id", None
+    )
+    meal = Meal.get_by_id(meal_id)
+    section_row = Section.get_by_meal(meal.id)
+    section_row.delete()
+    meal.delete()
+    return meal.to_dict(), 200
+
+
