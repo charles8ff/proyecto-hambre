@@ -89,9 +89,6 @@ def login():
         return jsonify({'access_token': access_token}), 200
     return jsonify('Invalid info'), 409
 
-@api.route('/place/<place_id>/template/<template_id>', methods=['POST'])
-def new_meals_in_template(place_id, template_id):
-    pass
 @api.route('/place/<place_id>/meal', methods=['POST'])
 def new_meal(place_id):
     name, description, price = request.json.get(
@@ -142,3 +139,29 @@ def new_section():
     section = Section.add(name, meal_id, template_id )
 
     return {}, 201
+
+@api.route('/meal_info', methods=['POST'])
+def new_meal_info():
+    info= request.json.get(
+        "info", None
+    )
+    meal_info = Meal_Info.add(info)
+
+    return {}, 201
+
+@api.route('/place/<int:place_id>/template/<int:template_id>', methods=['POST'])
+def new_meals_in_template(place_id, template_id):
+    body = request.get_json()
+    for section, meals in body.items():
+        for meal in meals:
+            new_meal= Meal (name = meal.get("name"), 
+                            description = meal.get("description"),
+                            price = meal.get("price"),
+                            business_id = place_id)
+            new_meal.add()
+            print ("Meal created")
+            new_section = Section ( name = section, 
+                                    meal_id = new_meal.id,
+                                    template_id = template_id)
+            new_section.add()
+    return {}, 418
