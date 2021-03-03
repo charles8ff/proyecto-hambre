@@ -89,11 +89,9 @@ def login():
         return jsonify({'access_token': access_token}), 200
     return jsonify('Invalid info'), 409
 
-<<<<<<< HEAD
 @api.route('/place/<place_id>/template/<template_id>', methods=['POST'])
 def new_meals_in_template(place_id, template_id):
     pass
-=======
 @api.route('/place/<place_id>/meal', methods=['POST'])
 def new_meal(place_id):
     name, description, price = request.json.get(
@@ -144,4 +142,3 @@ def new_section():
     section = Section.add(name, meal_id, template_id )
 
     return {}, 201
->>>>>>> feature/oscar-carlos/newmodels
