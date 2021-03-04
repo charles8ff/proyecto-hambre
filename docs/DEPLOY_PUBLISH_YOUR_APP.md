@@ -21,8 +21,8 @@ $ heroku create <your_application_name>
 
 4. Add Python and also node.js capabilities to heroku to be able to use npm on production
 ```
-$ heroku buildpacks:add --index 1 heroku/python
-$ heroku buildpacks:add --index 2 heroku/nodejs
+$ heroku buildpacks:set --index 1 heroku/python
+$ heroku buildpacks:set --index 2 heroku/nodejs
 ```
 
 5. Add a new postgress database to your project
