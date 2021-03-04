@@ -9,8 +9,18 @@ $black:  #191919;
 $grey: #CDCDCD;
 $text-font: 'Roboto', sans-serif;
 
+button {  
+    color: $white;
+    border-color: red;
+    background: none;
+}
+
 body{
     font-family: $text-font;
+    height:100vh; 
+    margin:0;
+    display:flex; 
+    flex-direction:column; 
 }
 
 .navbar{
@@ -31,9 +41,13 @@ button {
   &:hover,
   &:focus { 
     border-color: $secondary-color;
-    color: #fff;
+    color: $secondary-color;
   }
 }
+.card{
+    background: $primary-color;
+    color: #fff;
+  }
 
 
 .jumbotron {
