@@ -3,20 +3,20 @@ import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import PropTypes from "prop-types";
 
-const ourButton = props => {
-	const { store, actions } = useContext(Context);
+export const OurButton = props => {
+	const className = "fill ml-auto " + props.hide;
 
 	return (
 		<>
-			<button onClick={props.click} className="fill ml-auto">
+			<button onClick={props.click} className={className}>
 				{props.title}
 			</button>
 		</>
 	);
 };
-export default ourButton;
 
-ourButton.propTypes = {
+OurButton.propTypes = {
 	title: PropTypes.string,
-	click: PropTypes.func
+	click: PropTypes.func,
+	hide: PropTypes.string
 };

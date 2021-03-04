@@ -1,11 +1,22 @@
-import React, { Fragment, useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { Fragment, useContext, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Container, Jumbotron, Row, Col, Card, Button } from "react-bootstrap";
+import { MenusView } from "./menusview.jsx";
+import { useHistory } from "react-router-dom";
 
 export const Profile = () => {
 	const { store, actions } = useContext(Context);
+	const history = useHistory();
+
+	useEffect(
+		() => {
+			actions.getProfile(history.location.pathname);
+		},
+		[history.location.pathname]
+	);
 	return (
+		<>
 			<Jumbotron className="jumbotron">
 				<Container>
 					<Row>
@@ -16,7 +27,7 @@ export const Profile = () => {
 								</div>
 								<Card.Body>
 									<Card.Title>
-										<h2 className="details">{store.profile.email}</h2>
+										<h2 className="details">{store.loggedBusiness.email}</h2>
 									</Card.Title>
 								</Card.Body>
 							</Card>
@@ -27,22 +38,22 @@ export const Profile = () => {
 									<div className="details">
 										<div className="d-flex flex-row">
 											<i className="fas fa-color fa-lg fa-map-marker-alt" />
-											<h3>{store.profile.address}</h3>
+											<h3>{store.loggedBusiness.address}</h3>
 										</div>
 										<div className="d-flex flex-row">
 											<i className="fas fa-color fa-lg fa-phone" />
-											<h3>{store.profile.place_telephone}</h3>
+											<h3>{store.loggedBusiness.phone_number}</h3>
 										</div>
 										<div className="d-flex flex-row">
 											<i className="far fa-color fa-clock" />
 											<h3>
-                                                {"Horario"}
-                                                {store.profile.open_time}
-                                                {" - "}
-												{store.profile.close_time}
+												{"Horario"}
+												{store.loggedBusiness.open_hour}
+												{" - "}
+												{store.loggedBusiness.close_hour}
 											</h3>
 										</div>
-										<p className="p-5">{store.profile.description}</p>
+										<p className="p-5">{store.loggedBusiness.description}</p>
 									</div>
 								</Card.Body>
 							</Card>
@@ -50,5 +61,7 @@ export const Profile = () => {
 					</Row>
 				</Container>
 			</Jumbotron>
+			<MenusView />
+		</>
 	);
 };

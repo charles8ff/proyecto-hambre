@@ -10,11 +10,17 @@ $grey: #CDCDCD;
 $text-font: 'Roboto', sans-serif;
 
 button {  
-  color: $white;
-  border-color: red;
-background: none;
+    color: $white;
+    border-color: red;
+    background: none;
+}
+
 body{
     font-family: $text-font;
+    height:100vh; 
+    margin:0;
+    display:flex; 
+    flex-direction:column; 
 }
 
 .navbar{
@@ -42,7 +48,6 @@ button {
     background: $primary-color;
     color: #fff;
   }
-}
 
 
 .jumbotron {
