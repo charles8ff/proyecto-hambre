@@ -239,10 +239,11 @@ class Meal(db.Model):
             "price": self.price,
             "business_id": self.business_id
             }
-    
+
     def add(self , meal_info):
-        for info in meal_info:
-            self.meal_info.append(Meal_Info.get_by_id(info))
+        if meal_info is not None:
+            for info in meal_info:
+                self.meal_info.append(Meal_Info.get_by_id(info))
         db.session.add(self)
         db.session.commit()
 
