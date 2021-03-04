@@ -39,28 +39,26 @@ export const EditProfile = () => {
 									<div className="details">
 										<div className="d-flex flex-row">
 											<i className="fas fa-color fa-lg fa-map-marker-alt" />
-											<h3>
-												<input />
-											</h3>
+
+											<input />
 										</div>
 										<div className="d-flex flex-row">
 											<i className="fas fa-color fa-lg fa-phone" />
-											<h3>
-												<input />
-											</h3>
+
+											<input />
 										</div>
 										<div className="d-flex flex-row">
 											<i className="far fa-color fa-clock" />
-											<h3>
-												{"Horario"}
-												<input />
-												{" - "}
-												<input />
-											</h3>
-										</div>
-										<p className="p-3">
 											<input />
-										</p>
+											<h3> - </h3>
+											<input />
+										</div>
+										<div className="d-flex flex-row p-2">
+											<h3>Descripción</h3>
+
+											<textarea />
+										</div>
+										<OurButton title="Guardar cambios" />
 									</div>
 								</Card.Body>
 							</Card>
