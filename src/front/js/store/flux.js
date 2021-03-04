@@ -13,6 +13,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			showNavigation: true,
 			singUp_profile: [],
+			templates: [],
+			section: [],
+			meal: [],
 			loggedBusiness: {},
 			loginToken: localStorage.getItem("loginToken") ? localStorage.getItem("loginToken") : false
 		},
@@ -24,6 +27,41 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({
 							loggedBusiness: response
 						});
+					})
+					.catch(err => {
+						throw err;
+					});
+			},
+			addMealArray: list => {
+				setStore({
+					meal: [...list]
+				});
+			},
+
+			getTemplates: menu_type => {
+				fetch(URLBACKEND + `/api/${menu_type}/templates`)
+					.then(async res => {
+						const response = await res.json();
+						for (let template of response) {
+							setStore({
+								templates: [...getStore().templates, template]
+							});
+						}
+					})
+					.catch(err => {
+						throw err;
+					});
+			},
+
+			getSections: () => {
+				fetch(URLBACKEND + `/api/1/section`)
+					.then(async res => {
+						const response = await res.json();
+						for (let section of response) {
+							setStore({
+								section: [...getStore().section, section.title]
+							});
+						}
 					})
 					.catch(err => {
 						throw err;

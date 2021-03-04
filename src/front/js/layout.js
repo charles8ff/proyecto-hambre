@@ -4,6 +4,7 @@ import ScrollToTop from "./component/scrollToTop";
 import { Context } from "./store/appContext.js";
 
 import { Home } from "./pages/home";
+
 import injectContext from "./store/appContext";
 import { Register } from "./pages/register/register.jsx";
 
@@ -12,11 +13,10 @@ import { Footer } from "./component/footer";
 import { Login } from "./pages/login/login.jsx";
 import { Profile } from "./component/profile.jsx";
 import { TemplateTwo } from "./pages/templates/template-two.jsx";
-import { AddMenu } from "./pages/admin/addmenu.jsx";
+import { AddMenu } from "./pages/admin/addMenu.jsx";
 const Layout = () => {
 	const basename = process.env.BASENAME || "";
 	const { store, actions } = useContext(Context);
-	console.log(store.showNavigation);
 	return (
 		<BrowserRouter basename={basename}>
 			<ScrollToTop>

@@ -21,6 +21,10 @@ const injectContext = PassedComponent => {
 			})
 		);
 
+		useEffect(() => {
+			state.actions.getSections();
+		}, []);
+
 		return (
 			<Context.Provider value={state}>
 				<PassedComponent {...props} />

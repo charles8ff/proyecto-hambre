@@ -1,12 +1,10 @@
-import React, { useContext, Fragment, useEffect } from "react";
+import React, { useContext, Fragment, useEffect, useState } from "react";
 import { Context } from "../../store/appContext.js";
 import "../../../styles/home.scss";
 import { Container, Card, ListGroup, ListGroupItem, Col, Row } from "react-bootstrap";
 
 export const TemplateTwo = () => {
 	const { store, actions } = useContext(Context);
-	const price = "5 Euros";
-
 	const renderFood = () => {
 		var indents = [];
 		for (var i = 0; i < 3; i++) {
