@@ -6,7 +6,7 @@ import { MenusView } from "./menusview.jsx";
 import { useHistory } from "react-router-dom";
 import { OurButton } from "./button.jsx";
 
-export const Profile = () => {
+export const EditProfile = () => {
 	const { store, actions } = useContext(Context);
 	const history = useHistory();
 
@@ -39,27 +39,28 @@ export const Profile = () => {
 									<div className="details">
 										<div className="d-flex flex-row">
 											<i className="fas fa-color fa-lg fa-map-marker-alt" />
-											<h3>{store.loggedBusiness.address}</h3>
+											<h3>
+												<input />
+											</h3>
 										</div>
 										<div className="d-flex flex-row">
 											<i className="fas fa-color fa-lg fa-phone" />
-											<h3>{store.loggedBusiness.phone_number}</h3>
+											<h3>
+												<input />
+											</h3>
 										</div>
 										<div className="d-flex flex-row">
 											<i className="far fa-color fa-clock" />
 											<h3>
 												{"Horario"}
-												{store.loggedBusiness.open_hour}
+												<input />
 												{" - "}
-												{store.loggedBusiness.close_hour}
+												<input />
 											</h3>
 										</div>
-										<p className="p-3">{store.loggedBusiness.description}</p>
-										<OurButton
-											title="Editar"
-											click={() => history.push("/editProfile")}
-											hide={store.loginToken != false ? "" : "d-none"}
-										/>
+										<p className="p-3">
+											<input />
+										</p>
 									</div>
 								</Card.Body>
 							</Card>
