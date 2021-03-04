@@ -163,7 +163,7 @@ def new_meals_in_template(place_id, template_id):
             
             new_meal.add(meal.get("meal_info"))
             
-            new_section = Section(
+            section = Section(
                 name = section, 
                 meal_id = new_meal.id,
                 template_id = template_id

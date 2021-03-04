@@ -142,13 +142,18 @@ class Template(db.Model):
         db.session.add(template)
         db.session.commit()
         return template
+    
+    @classmethod
+    def get_by_menu_type(cls, menu_type):
+        template_list = cls.query.filter_by(menu_type = menu_type).all()
+        return template_list
 
 class Section(db.Model):
     __tablename__ = 'section'
     __table_args__ = ( db.UniqueConstraint('name', 'meal_id', 'template_id'), )
     id = db.Column(db.Integer, primary_key=True) 
     name = db.Column(db.VARCHAR, nullable=False)
-    meal_id = db.Column(db.Integer, db.ForeignKey("meal.id"), nullable=False)
+    meal_id = db.Column(db.Integer, db.ForeignKey("meal.id"))
     template_id = db.Column(db.Integer, db.ForeignKey("template.id"), nullable=False)
 
     def __repr__(self):
@@ -171,6 +176,16 @@ class Section(db.Model):
     def get_by_meal(cls, meal_id):
         meal_in_section = cls.query.filter_by(meal_id = meal_id).first_or_404(description=None)
         return meal_in_section
+
+    @classmethod
+    def get_by_name(cls, name):
+        section_name = cls.query.filter_by(name = name).all()
+        return section_name
+
+    @classmethod
+    def get_by_template(cls, template_id):
+        sections_in_template = cls.query.filter_by(template_id = template_id).all()
+        return sections_in_template
     
     def delete(self):
         db.session.delete(self)
