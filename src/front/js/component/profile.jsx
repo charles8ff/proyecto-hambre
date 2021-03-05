@@ -57,8 +57,13 @@ export const Profile = () => {
 										<p className="p-3">{store.loggedBusiness.description}</p>
 										<OurButton
 											title="Editar"
-											click={() => history.push("/editProfile")}
-											hide={store.loginToken != false ? "" : "d-none"}
+											click={() => history.push(`${store.loggedBusiness.id}/edit`)}
+											hide={
+												store.loginToken != false &&
+												actions.decodeToken(store.loginToken).sub.id == store.loggedBusiness.id
+													? ""
+													: "d-none"
+											}
 										/>
 									</div>
 								</Card.Body>

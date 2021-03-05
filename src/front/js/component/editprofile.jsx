@@ -5,6 +5,7 @@ import { Container, Jumbotron, Row, Col, Card, Button } from "react-bootstrap";
 import { MenusView } from "./menusview.jsx";
 import { useHistory } from "react-router-dom";
 import { OurButton } from "./button.jsx";
+import { useForm } from "react-hook-form";
 
 export const EditProfile = () => {
 	const { store, actions } = useContext(Context);
@@ -16,6 +17,13 @@ export const EditProfile = () => {
 		},
 		[history.location.pathname]
 	);
+	const { register, handleSubmit, watch, errors } = useForm();
+	const onSubmit = data => {
+		let place_id = actions.decodeToken(store.loginToken).sub.id;
+		console.log(data);
+		actions.changeProfile(place_id, data);
+		history.push(`/place/${place_id}/`);
+	};
 	return (
 		<>
 			<Jumbotron className="jumbotron">
@@ -36,30 +44,29 @@ export const EditProfile = () => {
 						<Col md={6} lg={6} className="pb-5">
 							<Card className="box box--contains">
 								<Card.Body>
-									<div className="details">
-										<div className="d-flex flex-row">
-											<i className="fas fa-color fa-lg fa-map-marker-alt" />
-
-											<input />
+									<form onSubmit={handleSubmit(onSubmit)}>
+										<div className="details">
+											<div className="d-flex flex-row">
+												<i className="fas fa-color fa-lg fa-map-marker-alt" />
+												<input name="address" ref={register} />
+											</div>
+											<div className="d-flex flex-row">
+												<i className="fas fa-color fa-lg fa-phone" />
+												<input name="phone_number" ref={register} />
+											</div>
+											<div className="d-flex flex-row">
+												<i className="far fa-color fa-clock" />
+												<input name="open_hour" />
+												<h3> - </h3>
+												<input name="close_hour" ref={register} />
+											</div>
+											<div className="d-flex flex-row p-2">
+												<h3>Descripción</h3>
+												<textarea name="description" ref={register} />
+											</div>
+											<input type="submit" />
 										</div>
-										<div className="d-flex flex-row">
-											<i className="fas fa-color fa-lg fa-phone" />
-
-											<input />
-										</div>
-										<div className="d-flex flex-row">
-											<i className="far fa-color fa-clock" />
-											<input />
-											<h3> - </h3>
-											<input />
-										</div>
-										<div className="d-flex flex-row p-2">
-											<h3>Descripción</h3>
-
-											<textarea />
-										</div>
-										<OurButton title="Guardar cambios" />
-									</div>
+									</form>
 								</Card.Body>
 							</Card>
 						</Col>

@@ -24,10 +24,19 @@ def profile_id(place_id):
     else:
         return 'User does not exist', 400
 
+@api.route('/place/<place_id>/edit', methods=['PATCH'])
+def edit_profile(place_id):
+    print(request)
+    data = request.json
+    print (data)
+    business = Business.edit_profile(place_id, data)
+    edited_profile = Business.get_by_id(place_id)
+    return {}, 200
+
 @api.route('/place/<place_id>', methods=['DELETE'])
 def delete_profile(place_id):
     delete_profile = Business.delete_profile(place_id)
-    return jsonify(delete_profile), 202
+    return {}, 202
 
 @api.route('/user', methods=['POST'])
 def handle_new_user():

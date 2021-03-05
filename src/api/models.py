@@ -54,6 +54,18 @@ class Business(db.Model):
         db.session.commit()
 
     @classmethod
+    def edit_profile(cls, place_id, data):
+        profile = cls.query.filter_by(id = place_id).first_or_404(description=None)
+        profile = profile.to_dict()
+        for item in data:
+            print(profile[item])
+            print(data[f'{item}'])
+            profile[item] = data[f'{item}']
+        db.session.commit()
+        return profile
+    
+
+    @classmethod
     def active_profile(cls, place_id):
         profile = cls.query.filter_by(id = place_id).first()
         profile.is_active = True
