@@ -14,8 +14,8 @@ export const AddMeal = props => {
 				{
 					name: "Ensalada César",
 					description: "Es una ensalada de pollo tomate y salsa césar",
-					price: "5"
-					//meal_info: [1, 2, 3]
+					price: "5",
+					meal_info: [1]
 				}
 			]
 		}
@@ -25,18 +25,16 @@ export const AddMeal = props => {
 		name: "meal"
 	});
 	const getDataAllFields = watch();
-
-	let sections = ["Primeros", "Segundos", "Postres", "Tapas"];
 	let allMeals = {};
 
 	useEffect(() => {
-		for (let name of sections) {
+		for (let name of store.sections) {
 			localStorage.removeItem(name.toString());
 		}
 	}, []);
 
 	const onSubmit = () => {
-		for (let name of sections) {
+		for (let name of store.sections) {
 			let obj = JSON.parse(localStorage.getItem(name));
 			allMeals = { ...allMeals, ...obj };
 		}

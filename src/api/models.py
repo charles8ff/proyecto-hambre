@@ -1,4 +1,4 @@
-import enum
+import enum 
 from flask_sqlalchemy import SQLAlchemy
 import json  
 from dataclasses import asdict, dataclass
@@ -177,12 +177,20 @@ class Section(db.Model):
         return [section.to_dict() for section in sections]
         #return [template.to_dict() for template in templates]
 
-class Enum_Category(enum.Enum):
-    daily_menu = "daily_menu"
-    cart_menu = "cart_menu"
-    drinks_menu = "drinks_menu"
-    dessert_menu = "dessert_menu"
-    cocktail_menu = "cocktail_menu"
+# class Enum_Category(enum.Enum):
+#     daily_menu = "daily_menu"
+#     cart_menu = "cart_menu"
+#     drinks_menu = "drinks_menu"
+#     dessert_menu = "dessert_menu"
+#     cocktail_menu = "cocktail_menu"
+
+class Enum_Category(str, enum.Enum):
+    daily_menu = "Menu del día"
+    cart_menu = "Carta"
+    drinks_menu = "Carta de bebidas"
+    dessert_menu = "Carta de postres"
+    cocktail_menu = "Carta de cocteles"
+
 
 class Menu_Type(db.Model):
     __tablename__ = 'menu_type'
@@ -191,7 +199,7 @@ class Menu_Type(db.Model):
     template = db.relationship('Template', backref='menu_type',lazy=True)
     
     def __repr__(self):
-        return f'The meal is: {self.meal_name}'
+        return f'The menu types are: {self.menu_type}'
 
     def to_dict(self):
         return {
@@ -207,6 +215,11 @@ class Menu_Type(db.Model):
         db.session.add(menu_type)
         db.session.commit()
         return menu_type
+    
+    @classmethod
+    def get_all_menu_type(cls):
+        menu_type = cls.query.all()
+        return [menu_types.to_dict() for menu_types in menu_type]
 
 association_table = db.Table('meal_contains_meal_info', db.Model.metadata,
     db.Column('meal', db.Integer, db.ForeignKey('meal.id')),

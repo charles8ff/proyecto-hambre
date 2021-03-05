@@ -114,6 +114,11 @@ def new_menu_type():
 
     return {}, 201
 
+@api.route('/menutype', methods=['GET'])
+def get_menu_type():
+    get_menu_type = Menu_Type.get_all_menu_type()
+    return jsonify(get_menu_type), 200
+
 
 @api.route('/menutype/<menu_type_id>/template', methods=['POST'])
 def new_template(menu_type_id):

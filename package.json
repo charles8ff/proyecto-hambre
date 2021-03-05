@@ -94,6 +94,7 @@
 		"react-hook-form": "^6.15.4",
 		"react-polyfills": "0.0.1",
 		"react-router-dom": "^5.2.0",
+		"react-select": "^4.2.0",
 		"semantic-ui-css": "^2.4.1",
 		"semantic-ui-react": "^2.0.3"
 	}

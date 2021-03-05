@@ -11,15 +11,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				material_ui_is_user_active: false,
 				material_ui_is_correct_password: false
 			},
+			menus_type: [],
+			templates: [],
+			sections: [],
 			showNavigation: true,
 			singUp_profile: [],
-			templates: [],
-			section: [],
-			meal: [],
 			loggedBusiness: {},
 			loginToken: localStorage.getItem("loginToken") ? localStorage.getItem("loginToken") : false
 		},
 		actions: {
+			renameKey: (object, key, newKey) => {
+				const clonedObj = Object.assign({}, object);
+				const targetKey = clonedObj[key];
+				delete clonedObj[key];
+				clonedObj[newKey] = targetKey;
+				return clonedObj;
+			},
 			getProfile: place_id => {
 				fetch(URLBACKEND + `/api${place_id}`)
 					.then(async res => {
@@ -32,17 +39,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 						throw err;
 					});
 			},
-			addMealArray: list => {
+			getMenuType: () => {
 				setStore({
-					meal: [...list]
+					menus_type: []
 				});
+				fetch(URLBACKEND + `/api/menutype`)
+					.then(async res => {
+						const response = await res.json();
+						for (let menu_type of response) {
+							menu_type = getActions().renameKey(menu_type, "id", "value");
+							menu_type = getActions().renameKey(menu_type, "menu_type", "label");
+							setStore({
+								menus_type: [...getStore().menus_type, menu_type]
+							});
+						}
+					})
+					.catch(err => {
+						throw err;
+					});
 			},
-
 			getTemplates: menu_type => {
+				setStore({
+					templates: []
+				});
 				fetch(URLBACKEND + `/api/${menu_type}/templates`)
 					.then(async res => {
 						const response = await res.json();
 						for (let template of response) {
+							template = getActions().renameKey(template, "id", "value");
+							template = getActions().renameKey(template, "title", "label");
 							setStore({
 								templates: [...getStore().templates, template]
 							});
@@ -53,13 +78,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
-			getSections: () => {
-				fetch(URLBACKEND + `/api/1/section`)
+			getSections: template_id => {
+				setStore({
+					sections: []
+				});
+				fetch(URLBACKEND + `/api/${template_id}/section`)
 					.then(async res => {
 						const response = await res.json();
 						for (let section of response) {
 							setStore({
-								section: [...getStore().section, section.title]
+								sections: [...getStore().sections, section.title]
 							});
 						}
 					})
