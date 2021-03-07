@@ -60,7 +60,7 @@ class Business(db.Model):
     def edit_profile(cls, place_id, data):
         profile = cls.query.filter_by(id = place_id).first_or_404(description=None)
         for item, value in data.items():
-            if value!='':
+            if value ! ='':
                 setattr(profile, item, value)
         db.session.commit()
         return profile

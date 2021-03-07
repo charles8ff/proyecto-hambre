@@ -22,7 +22,7 @@ export const EditProfile = () => {
 		let place_id = actions.decodeToken(store.loginToken).sub.id;
 		console.log(data);
 		actions.changeProfile(place_id, data);
-		history.push(`/place/${place_id}/`);
+		history.push(`/place/${place_id}`);
 	};
 	return (
 		<>
@@ -56,7 +56,7 @@ export const EditProfile = () => {
 											</div>
 											<div className="d-flex flex-row">
 												<i className="far fa-color fa-clock" />
-												<input name="open_hour" />
+												<input name="open_hour" ref={register} />
 												<h3> - </h3>
 												<input name="close_hour" ref={register} />
 											</div>
