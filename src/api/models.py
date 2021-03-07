@@ -61,6 +61,8 @@ class Business(db.Model):
             print(profile[item])
             print(data[f'{item}'])
             profile[item] = data[f'{item}']
+            print(profile[item])
+        db.session.add(profile)
         db.session.commit()
         return profile
     
