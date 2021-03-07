@@ -31,7 +31,7 @@ def edit_profile(place_id):
     print (data)
     business = Business.edit_profile(place_id, data)
     edited_profile = Business.get_by_id(place_id)
-    return {}, 200
+    return business.to_dict(), 200
 
 @api.route('/place/<place_id>', methods=['DELETE'])
 def delete_profile(place_id):

@@ -59,13 +59,9 @@ class Business(db.Model):
     @classmethod
     def edit_profile(cls, place_id, data):
         profile = cls.query.filter_by(id = place_id).first_or_404(description=None)
-        profile = profile.to_dict()
-        for item in data:
-            print(profile[item])
-            print(data[f'{item}'])
-            profile[item] = data[f'{item}']
-            print(profile[item])
-        db.session.add(profile)
+        for item, value in data.items():
+            if value!='':
+                setattr(profile, item, value)
         db.session.commit()
         return profile
     
