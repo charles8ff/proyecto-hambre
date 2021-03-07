@@ -153,16 +153,6 @@ class Template(db.Model):
             "menu_type_id": self.menu_type_id
         }
 
-<<<<<<< HEAD
-    def add():
-        template = Template(
-            title= "Verde",
-            description= "esverde",  
-            price= 7.00,
-            )
-        db.session.add(template)
-        db.session.commit()
-=======
     @classmethod
     def add(cls, title, description, price, menu_type_id):
         template = cls(
@@ -225,7 +215,6 @@ class Section(db.Model):
         return self
 
 
->>>>>>> feature/carlos/backend-form
 
 class Enum_Category(enum.Enum):
     daily_menu = "daily_menu"
