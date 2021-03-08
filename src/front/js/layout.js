@@ -5,11 +5,11 @@ import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./pages/home";
 
 import injectContext from "./store/appContext";
-import { Register } from "./pages/register/register.jsx";
+import { Registro } from "./pages/register/registro.jsx";
 
 import { Header } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { NewLogin } from "./pages/login/newlogin.jsx";
+import { Login } from "./pages/login/login.jsx";
 import { Profile } from "./component/profile.jsx";
 
 const Layout = () => {
@@ -27,10 +27,10 @@ const Layout = () => {
 						<Profile />
 					</Route>
 					<Route exact path="/register">
-						<Register />
+						<Login />
 					</Route>
 					<Route exact path="/login">
-						<NewLogin />
+						<Login />
 					</Route>
 					<Route>
 						<h1>Not found!</h1>
