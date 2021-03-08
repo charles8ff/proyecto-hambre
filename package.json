@@ -33,8 +33,10 @@
 		"@babel/preset-env": "^7.4.3",
 		"@babel/preset-react": "^7.0.0",
 		"@hookform/devtools": "^2.2.1",
+		"@svgr/webpack": "^5.5.0",
 		"babel-eslint": "^10.0.1",
 		"babel-loader": "^8.0.5",
+		"babel-plugin-react-html-attrs": "^3.0.5",
 		"babel-plugin-transform-class-properties": "^6.24.1",
 		"bc-console": "0.0.2",
 		"css-loader": "^2.1.1",
@@ -44,7 +46,7 @@
 		"eslint": "^4.19.1",
 		"eslint-loader": "^2.0.0",
 		"eslint-plugin-react": "^7.7.0",
-		"file-loader": "^1.1.5",
+		"file-loader": "^1.1.11",
 		"friendly-errors-webpack-plugin": "^1.7.0",
 		"gh-pages": "^1.2.0",
 		"html-loader": "^0.5.5",
@@ -89,6 +91,7 @@
 		"react-encrypt": "^1.0.1",
 		"react-form-input-validation": "^2.0.5",
 		"react-hook-form": "^6.15.4",
+		"react-inlinesvg": "^2.2.2",
 		"react-polyfills": "0.0.1",
 		"react-router-dom": "^5.2.0"
 	}

@@ -7,7 +7,7 @@ import { Home } from "./pages/home";
 import injectContext from "./store/appContext";
 import { Register } from "./pages/register/register.jsx";
 
-import { Header } from "./component/navbar";
+import { Header } from "./component/partials/header.jsx";
 import { Footer } from "./component/footer";
 import { Login } from "./pages/login/login.jsx";
 import { Profile } from "./component/profile.jsx";
