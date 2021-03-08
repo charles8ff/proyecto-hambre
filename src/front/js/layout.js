@@ -9,7 +9,7 @@ import { Register } from "./pages/register/register.jsx";
 
 import { Header } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { Login } from "./pages/login/login.jsx";
+import { NewLogin } from "./pages/login/newlogin.jsx";
 import { Profile } from "./component/profile.jsx";
 
 const Layout = () => {
@@ -30,7 +30,7 @@ const Layout = () => {
 						<Register />
 					</Route>
 					<Route exact path="/login">
-						<Login />
+						<NewLogin />
 					</Route>
 					<Route>
 						<h1>Not found!</h1>
