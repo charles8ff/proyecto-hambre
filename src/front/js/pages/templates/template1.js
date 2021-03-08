@@ -14,9 +14,10 @@ export const Template1 = () => {
 	const [templateSections, setTemplateSections] = useState([]);
 
 	const [wholeMeals, setWholeMeals] = useState([]);
+
 	const [wholeSections, setWholeSections] = useState([]);
 
-	let auxiliarmeals = [];
+	let meals = [];
 
 	const loadSectionNames = async () => {
 		const response = await fetch(URLBACKEND + `/api/template/1`);
@@ -35,7 +36,7 @@ export const Template1 = () => {
 
 	const mealsInHTML = mealArray => {
 		for (let i = 0; i < mealArray.length; i++) {
-			meals = mealArray[i].map((elem, index) => {
+			meals = mealArray.map((elem, index) => {
 				return (
 					<ul key={index}>
 						{elem.name}
@@ -45,6 +46,7 @@ export const Template1 = () => {
 					</ul>
 				);
 			});
+			return meals;
 		}
 	};
 	useEffect(() => {
@@ -69,7 +71,7 @@ export const Template1 = () => {
 								</h3>
 							</div>
 							<div className="row justify-content-center align-content-center">
-								<ul>{mealsInHTML[index]}</ul>
+								<ul>{mealsInHTML(wholeMeals)}</ul>
 							</div>
 						</div>
 					);
