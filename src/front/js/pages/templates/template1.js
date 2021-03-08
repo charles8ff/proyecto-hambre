@@ -1,68 +1,41 @@
-import React, { useContext, Fragment, useEffect } from "react";
+import React, { useState, useEffect, useContext, Fragment } from "react";
+import { useHistory } from "react-router-dom";
 import { Context } from "../../store/appContext";
 import "../../../styles/template1.scss";
 // import arrow from "../../../styles/img/yellowarrow.png";
 
+const URLBACKEND = "https://3001-peach-hamster-hxks95vb.ws-eu03.gitpod.io";
+const arrow = require("../../../styles/img/yellowarrow.png");
+
 export const Template1 = () => {
 	const { store, actions } = useContext(Context);
-	let arrow = require("../../../styles/img/yellowarrow.png");
-	// let placeName = store.loggedBusiness.place_name;
-	// wholeMenu = actions.loadMenu()
-	// templateSections = actions.loadSections()
-	let placeName = "BAR MANOLO";
-	let templateSections = ["Ensaladas", "Sándwiches", "Tapas", "Pizzas", "Buenardo"];
-	let wholeMenu = [
-		[
-			{
-				name: "Ensalada César",
-				description: "Tiene pollo y cosas de romanos",
-				price: 11.5,
-				meal_info: [1, 2, 3, 4, 5]
-			},
-			{
-				name: "Ensalada De Atún",
-				description: "Tiene atún y cosas del norte",
-				price: 14.5,
-				meal_info: [1, 2, 5, 8]
-			},
-			{
-				name: "Ensalada de Pasta",
-				description: "No lechuga",
-				price: 9.5,
-				meal_info: [1, 2, 3, 4, 5, 6, 7]
-			}
-		],
-		[
-			{
-				name: "Sandwich Mixto",
-				description: "Con X de miXta",
-				price: 4.5,
-				meal_info: []
-			},
-			{
-				name: "Sandwich De Atún",
-				description: "Tiene atún y pan",
-				price: 6.5,
-				meal_info: [6]
-			},
-			{
-				name: "Sandwich de la Casa",
-				description: "No lechuga",
-				price: 9.5,
-				meal_info: [2]
-			},
-			{
-				name: "Sandwich Vegetal",
-				description: "Jimena approves",
-				price: 3.5,
-				meal_info: [6]
-			}
-		]
-	];
-	let mealsInHTML = [];
-	for (let i = 0; i < wholeMenu.length; i++) {
-		mealsInHTML.push(
-			wholeMenu[i].map((elem, index) => {
+	// const history = useHistory();
+
+	const [templateSections, setTemplateSections] = useState([]);
+
+	const [wholeMeals, setWholeMeals] = useState([]);
+	const [wholeSections, setWholeSections] = useState([]);
+
+	let auxiliarmeals = [];
+
+	const loadSectionNames = async () => {
+		const response = await fetch(URLBACKEND + `/api/template/1`);
+		const data = await response.json();
+		let sections = data.map(elem => {
+			return elem.name;
+		});
+		setTemplateSections(sections);
+	};
+
+	const loadMeals = async () => {
+		const response = await fetch(URLBACKEND + `/api/place/1/template/1`);
+		const data = await response.json();
+		setWholeMeals(data);
+	};
+
+	const mealsInHTML = mealArray => {
+		for (let i = 0; i < mealArray.length; i++) {
+			meals = mealArray[i].map((elem, index) => {
 				return (
 					<ul key={index}>
 						{elem.name}
@@ -71,30 +44,36 @@ export const Template1 = () => {
 						{"€"}
 					</ul>
 				);
-			})
-		);
-	}
-	let sectionsInHTML = templateSections.map((elem, index) => {
-		return (
-			<>
-				<div className="row  justify-content-center align-content-center">
-					<h3>
-						<img src={arrow} /> {elem} <img className="flip-horizontally" src={arrow} />
-					</h3>
-				</div>
-				<div className="row justify-content-center align-content-center">
-					<ul>{mealsInHTML[index]}</ul>
-				</div>
-			</>
-		);
-	});
+			});
+		}
+	};
+	useEffect(() => {
+		loadSectionNames();
+		loadMeals();
+		// var xd = actions.loadMenu(1, 1);
+		// console.log(xd);
+		// setWholeMeals(xd);
+	}, []);
 
 	return (
 		<>
 			<div className="container-fluid template1--container justify-content-center">
 				<h2>MENÚ</h2>
-				<span className="place_name">{placeName}</span>
-				{sectionsInHTML}
+				<span className="place_name">{store.loggedBusiness.place_name}</span>
+				{templateSections.map((elem, index) => {
+					return (
+						<div key={index}>
+							<div className="row  justify-content-center align-content-center">
+								<h3>
+									<img src={arrow} /> {elem} <img className="flip-horizontally" src={arrow} />
+								</h3>
+							</div>
+							<div className="row justify-content-center align-content-center">
+								<ul>{mealsInHTML[index]}</ul>
+							</div>
+						</div>
+					);
+				})}
 			</div>
 		</>
 	);

@@ -179,13 +179,24 @@ class Section(db.Model):
 
     @classmethod
     def get_by_name(cls, name):
-        section_name = cls.query.filter_by(name = name).all()
-        return section_name
+        sections = cls.query.filter_by(name = name).all()
+        return sections
+
+    @classmethod
+    def get_by_template_ONLY_NAMES(cls, template_id):
+        sections_in_template = cls.query.filter_by(template_id = template_id).distinct(Section.name)
+        return [section.to_dict() for section in sections_in_template]
+    
 
     @classmethod
     def get_by_template(cls, template_id):
         sections_in_template = cls.query.filter_by(template_id = template_id).all()
-        return sections_in_template
+        return [section.to_dict() for section in sections_in_template]
+
+    @classmethod
+    def get_by_template_and_business(cls, place_id, template_id):
+        sections_in_template = cls.query.filter_by(template_id = template_id).join(Meal, Section.meal_id==Meal.id)
+        return [section.to_dict() for section in sections_in_template]
     
     def delete(self):
         db.session.delete(self)
@@ -225,10 +236,13 @@ class Menu_Type(db.Model):
         db.session.commit()
         return menu_type
 
+
 association_table = db.Table('meal_contains_meal_info', db.Model.metadata,
     db.Column('meal', db.Integer, db.ForeignKey('meal.id')),
     db.Column('meal_info', db.Integer, db.ForeignKey('meal_info.id'))
 )
+
+
 class Meal(db.Model):
     __tablename__ = 'meal'
     id = db.Column(db.Integer, primary_key=True) 
@@ -253,7 +267,7 @@ class Meal(db.Model):
             "description": self.description,
             "price": self.price,
             "business_id": self.business_id
-            }
+        }
 
     def add(self , meal_info):
         if meal_info is not None:

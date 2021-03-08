@@ -13,7 +13,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			singUp_profile: [],
 			loggedBusiness: {},
-			loginToken: localStorage.getItem("loginToken") ? localStorage.getItem("loginToken") : false
+			loginToken: localStorage.getItem("loginToken") ? localStorage.getItem("loginToken") : false,
+			templateSections: []
 		},
 		actions: {
 			getProfile: place_id => {
@@ -139,6 +140,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({
 					loginToken: false
 				});
+			},
+
+			loadMenu: (place_id, template_id) => {
+				fetch(URLBACKEND + `/api/place/${place_id}/template/${template_id}`)
+					.then(async res => {
+						const response = await res.json();
+						console.log(response);
+						return response;
+					})
+					.catch(err => {
+						throw err;
+					});
 			}
 		}
 	};
