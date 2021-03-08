@@ -1,5 +1,5 @@
 import jwt_decode from "jwt-decode";
-const URLBACKEND = "https://3001-peach-hamster-hxks95vb.ws-eu03.gitpod.io"; //no slash at end
+const URLBACKEND = "https://3001-copper-mite-z2nrl6y2.ws-eu03.gitpod.io"; //no slash at end
 //no slash at end//no slash at end//no slash at end//no slash at end//no slash at end//no slash at end
 
 const getState = ({ getStore, getActions, setStore }) => {
@@ -11,6 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				material_ui_is_user_active: false,
 				material_ui_is_correct_password: false
 			},
+			singUp_User: false,
 			singUp_profile: [],
 			loggedBusiness: {},
 			loginToken: localStorage.getItem("loginToken") ? localStorage.getItem("loginToken") : false
@@ -27,6 +28,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(err => {
 						throw err;
 					});
+			},
+
+			userWantToSingUp: data => {
+				if (data == true) {
+					setStore({
+						singUp_User: true
+					});
+				} else {
+					setStore({
+						singUp_User: false
+					});
+				}
+			},
+
+			changeStep: () => {
+				setStore({
+					userSingUp: {
+						is_first_step: true
+					}
+				});
 			},
 
 			getUserbyEmail: user_email => {

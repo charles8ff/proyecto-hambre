@@ -5,7 +5,7 @@ import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./pages/home";
 
 import injectContext from "./store/appContext";
-import { Register } from "./pages/register/register.jsx";
+import { Registro } from "./pages/register/registro.jsx";
 
 import { Header } from "./component/partials/header.jsx";
 import { Footer } from "./component/footer";
@@ -27,7 +27,7 @@ const Layout = () => {
 						<Profile />
 					</Route>
 					<Route exact path="/register">
-						<Register />
+						<Login />
 					</Route>
 					<Route exact path="/login">
 						<Login />

@@ -1,159 +1,93 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { AccountCircle as AccountCircleIcon, HistoryRounded } from "@material-ui/icons";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import {
-	Avatar,
-	Grid,
-	Container,
-	CssBaseline,
-	FormControlLabel,
-	Button,
-	Link,
-	Checkbox,
-	Typography
-} from "@material-ui/core";
-import { CssTextField, useStyles } from "./styles.js";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, useFieldArray, useWatch } from "react-hook-form";
 import { Context } from "../../store/appContext";
+import PropTypes from "prop-types";
 
-export const AddPlace = () => {
+import "../login/login.scss";
+import { propTypes } from "react-bootstrap/esm/Image";
+
+export const AddPlace = props => {
+	const { register, handleSubmit, watch, errors } = useForm();
 	const { store, actions } = useContext(Context);
-	const classes = useStyles();
-	const history = useHistory();
-	const { register, handleSubmit, control, errors } = useForm({
-		mode: "onChange",
-		reValidateMode: "onChange",
-		defaultValues: {
-			place_name: "",
-			address: "",
-			phone_number: "",
-			open_hour: "",
-			close_hour: "",
-			description: ""
-		}
-	});
-
-	const onSubmit = data => {
-		actions.registerPlace(data);
-	};
-
-	useEffect(
-		() => {
-			if (store.loginToken != false) {
-				history.push(`/place/${actions.decodeToken(store.loginToken).sub.id}`);
-			}
-		},
-		[store.loginToken]
-	);
 
 	return (
-		<Container component="main" maxWidth="xs">
-			<CssBaseline />
-			<div className={classes.paper}>
-				<div className={classes.paper}>
-					<Typography component="h1" variant="h4">
-						Añade tu restaurante
-					</Typography>
-				</div>
-				<form className={classes.form} noValidate onSubmit={handleSubmit(onSubmit)}>
-					<CssTextField
-						name="place_name"
-						label="Nombre del Restaurante"
-						type="text"
-						variant="outlined"
-						margin="normal"
-						inputRef={register({
-							required: "Añade el nombre de tu restaurante"
-						})}
-						error={!!errors.place_name}
-						className={classes.margin}
-						fullWidth
-					/>
-					{errors.place_name && <span className={classes.error}>{errors.place_name.message}</span>}
-					<CssTextField
-						name="address"
-						label="Dirección del restaurante"
-						type="text"
-						variant="outlined"
-						margin="normal"
-						inputRef={register({
-							required: "Añade la dirección de tu restaurante"
-						})}
-						error={!!errors.address}
-						className={classes.margin}
-						fullWidth
-					/>
-					<CssTextField
-						name="description"
-						label="Descripción del restaurante"
-						type="text"
-						variant="outlined"
-						margin="normal"
-						inputRef={register({
-							required: "Añade la descripción de tu restaurante"
-						})}
-						error={!!errors.description}
-						className={classes.margin}
-						fullWidth
-					/>
-					{errors.description && <span className={classes.error}>{errors.description.message}</span>}
-					<CssTextField
-						name="phone_number"
-						label="Telefono"
-						type="tel"
-						variant="outlined"
-						margin="normal"
-						inputRef={register({
-							required: "Añade el numero de telefono de tu restaurante"
-						})}
-						error={!!errors.phone_number}
-						className={classes.margin}
-						fullWidth
-					/>
-					{errors.phone_number && <span className={classes.error}>{errors.phone_number.message}</span>}
-					<Grid container spacing={3}>
-						<Grid item xs={12} sm={6}>
-							<CssTextField
+		<>
+			<div className="UserAcess__CardAddPlace">
+				<div className="UserAcess__Card--content text-center">
+					<h4 className="pb-3 mt-4">Añadir Restaurante</h4>
+					<form className="UserAcess__CardForm" onSubmit={handleSubmit(props.submit)}>
+						<input
+							name="place_name"
+							type="text"
+							placeholder="Nombre del Restaurante"
+							className="UserAcess__CardForm--Style mt-2"
+							ref={register}
+							autoComplete="off"
+						/>
+						<i className="UserAcess__CardForm--inputIcon fas fa-utensils mt-2" />
+						<div className="UserAcess__CardForm">
+							<input
+								name="address"
+								type="text"
+								placeholder="Dirección del restaurante"
+								className="UserAcess__CardForm--Style mt-2"
+								ref={register}
+								autoComplete="off"
+							/>
+							<i className="UserAcess__CardForm--inputIcon fas fa-map-marked-alt mt-2" />
+						</div>
+						<div className="UserAcess__CardForm">
+							<input
+								name="phone_number"
+								type="text"
+								placeholder="Número del restaurante"
+								className="UserAcess__CardForm--Style mt-2"
+								ref={register}
+								autoComplete="off"
+							/>
+							<i className="UserAcess__CardForm--inputIcon fas fa-phone mt-2" />
+						</div>
+						<div className="UserAcess__CardForm">
+							<input
 								name="open_hour"
 								type="time"
-								variant="outlined"
-								margin="normal"
-								inputRef={register({
-									required: "Añade el horario de apertura de tu restaurante"
-								})}
-								error={!!errors.open_hour}
-								className={classes.margin}
-								fullWidth
+								placeholder=""
+								className="UserAcess__CardForm--Style mt-2"
+								ref={register}
+								autoComplete="off"
 							/>
-							{errors.open_hour && <span className={classes.error}>{errors.open_hour.message}</span>}
-						</Grid>
-						<Grid item xs={12} sm={6}>
-							<CssTextField
+							<i className="UserAcess__CardForm--inputIcon fas fa-clock mt-2" />
+						</div>
+						<div className="UserAcess__CardForm">
+							<input
 								name="close_hour"
 								type="time"
-								variant="outlined"
-								margin="normal"
-								inputRef={register({
-									required: "Añade el horario de cierre de tu restaurante"
-								})}
-								error={!!errors.close_hour}
-								className={classes.margin}
-								fullWidth
+								placeholder=""
+								className="UserAcess__CardForm--Style mt-2"
+								ref={register}
+								autoComplete="off"
 							/>
-							{errors.close_hour && <span className={classes.error}>{errors.close_hour.message}</span>}
-						</Grid>
-					</Grid>
-					<Button
-						type="submit"
-						fullWidth
-						variant="contained"
-						disabled={!!errors.email || !!errors.password}
-						className={classes.submit}>
-						Sign up
-					</Button>
-				</form>
+							<i className="UserAcess__CardForm--inputIcon fas fa-clock mt-2" />
+						</div>
+						<div className="UserAcess__CardForm">
+							<input
+								name="description"
+								type="text"
+								placeholder="Descripción del restaurante"
+								className="UserAcess__CardForm--Style mt-2"
+								ref={register}
+								autoComplete="off"
+							/>
+							<i className="UserAcess__CardForm--inputIcon fas fa-file-alt mt-2" />
+						</div>
+						<input type="submit" value="Completar Registro" className="btn mt-4" />
+					</form>
+				</div>
 			</div>
-		</Container>
+		</>
 	);
+};
+
+AddPlace.propTypes = {
+	submit: PropTypes.func
 };

@@ -1,39 +1,29 @@
 import React, { useState, useContext, useEffect } from "react";
+import { useForm, useFieldArray, useWatch } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-
-import { AccountCircle as AccountCircleIcon, SettingsOverscanRounded, DonutLargeOutlined } from "@material-ui/icons";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Context } from "../../store/appContext";
-import {
-	Avatar,
-	Grid,
-	Container,
-	CssBaseline,
-	FormControlLabel,
-	Button,
-	Link,
-	Checkbox,
-	Typography
-} from "@material-ui/core";
-import { CssTextField, useStyles } from "../../pages/styles.js";
-import { useForm, Controller } from "react-hook-form";
+import { Registro } from "../register/registro.jsx";
+import { AddPlace } from "../register/add-place.jsx";
+
+import "./login.scss";
 
 export const Login = () => {
+	const { register, handleSubmit, watch, errors } = useForm();
 	const { store, actions } = useContext(Context);
-	const classes = useStyles();
 	const history = useHistory();
-	const { register, handleSubmit, errors } = useForm({
-		mode: "onChange",
-		reValidateMode: "onChange",
-		defaultValues: {
-			email: "",
-			password: ""
-		}
-	});
 
-	const onSubmit = data => {
+	const onLogin = data => {
 		store.userSingUp.material_ui_is_correct_password = false;
 		actions.login(data.email, data.password);
+	};
+
+	const userCheck = data => {
+		actions.registerProfile(data);
+		actions.getUserbyEmail(data.email);
+	};
+
+	const registerUser = data => {
+		actions.registerPlace(data);
 	};
 
 	useEffect(
@@ -44,72 +34,92 @@ export const Login = () => {
 		},
 		[store.loginToken]
 	);
+
+	useEffect(
+		() => {
+			if (history.location.pathname == "/register") {
+				actions.userWantToSingUp(true);
+				actions.changeStep();
+			} else if (history.location.pathname == "/login") {
+				actions.userWantToSingUp(false);
+				actions.changeStep();
+			}
+			return history.listen(location => {
+				if (location.pathname == "/register") {
+					actions.userWantToSingUp(true);
+					actions.changeStep();
+				} else if (history.location.pathname == "/login") {
+					actions.userWantToSingUp(false);
+					actions.changeStep();
+				}
+			});
+		},
+		[history]
+	);
+
 	return (
-		<Container component="main" maxWidth="xs">
-			<CssBaseline />
-			<div className={classes.paper}>
-				<div className={classes.paper}>
-					<Avatar className={classes.avatar}>
-						<LockOutlinedIcon />
-					</Avatar>
-					<Typography component="h1" variant="h4">
-						Log in
-					</Typography>
+		<>
+			<div className="UserAcess">
+				<div className="container">
+					<div className="row UserAcess__FullHeight justify-content-center">
+						<div className="col-12 py-5">
+							<input
+								className="checkbox d-none"
+								checked={store.singUp_User ? true : false}
+								type="checkbox"
+							/>
+							<div className="UserAcess__Card mx-auto">
+								<div className="UserAcess__CardWrapper">
+									<div className="UserAcess__CardLogin">
+										<div className="UserAcess__Card--content text-center">
+											<h4 className="mb-4 pb-3">Logueate</h4>
+											<form className="UserAcess__CardForm" onSubmit={handleSubmit(onLogin)}>
+												<input
+													name="email"
+													type="email"
+													placeholder="micorreo@gmail.com"
+													className="UserAcess__CardForm--Style"
+													ref={register({ required: true })}
+													autoComplete="off"
+												/>
+												<i className="UserAcess__CardForm--inputIcon fas fa-envelope" />
+												{store.userSingUp.material_ui_is_user_active ? (
+													<p>Email no valido</p>
+												) : null}
+												{errors.email && <p>Este campo es requerido</p>}
+												<div className="UserAcess__CardForm mt-3">
+													<input
+														name="password"
+														type="password"
+														className="UserAcess__CardForm--Style"
+														placeholder="*****"
+														autoComplete="off"
+														ref={register({ required: true, minLength: 6 })}
+													/>
+													<i className="UserAcess__CardForm--inputIcon fas fa-key" />
+													{store.userSingUp.material_ui_is_correct_password ? (
+														<p>{"Invalid password \n"}</p>
+													) : null}
+													{errors.password && <p>Este campo es requerido</p>}
+												</div>
+												<input type="submit" value="Entrar" className="btn mt-4" />
+											</form>
+											<span onClick={() => actions.userWantToSingUp(true)}>
+												¿No tienes cuenta? Registrate 😊
+											</span>
+										</div>
+									</div>
+									{store.userSingUp.is_first_step ? (
+										<Registro submit={userCheck} />
+									) : (
+										<AddPlace submit={registerUser} />
+									)}
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<form className={classes.form} noValidate onSubmit={handleSubmit(onSubmit)}>
-					<CssTextField
-						name="email"
-						label="Email Address"
-						variant="outlined"
-						margin="normal"
-						inputRef={register({
-							required: "You must provide the email address!",
-							pattern: {
-								value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-								message: "You must provide a valid email address!"
-							}
-						})}
-						autoComplete="email"
-						error={!!errors.email}
-						className={classes.margin}
-						fullWidth
-						autoFocus
-					/>
-					{store.userSingUp.material_ui_is_user_active ? (
-						<span className={classes.error}>{"Invalid email"}</span>
-					) : null}
-					{errors.email && <span className={classes.error}>{errors.email.message}</span>}
-					<CssTextField
-						name="password"
-						label="Password"
-						type="password"
-						variant="outlined"
-						margin="normal"
-						inputRef={register({
-							required: "You must provide a password.",
-							minLength: {
-								value: 6,
-								message: "Your password must be longer than 6 characters"
-							}
-						})}
-						error={!!errors.password}
-						fullWidth
-						autoComplete="current-password"
-					/>
-					{store.userSingUp.material_ui_is_correct_password ? (
-						<span className={classes.error}>{"Invalid password \n"}</span>
-					) : null}
-					{errors.password && <span className={classes.error}>{errors.password.message}</span>}
-					<Button
-						type="submit"
-						fullWidth
-						variant="contained"
-						disabled={!!errors.email || !!errors.password}
-						className={classes.submit}>
-						Log in
-					</Button>
-				</form>
 			</div>
-		</Container>
+		</>
 	);
 };
