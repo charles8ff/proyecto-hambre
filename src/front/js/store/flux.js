@@ -1,5 +1,5 @@
 import jwt_decode from "jwt-decode";
-const URLBACKEND = "https://3001-silver-narwhal-dcgq8rgc.ws-eu03.gitpod.io"; //no slash at end
+const URLBACKEND = "https://3001-coral-cattle-ipgf4dmx.ws-eu03.gitpod.io"; //no slash at end
 //no slash at end//no slash at end//no slash at end//no slash at end//no slash at end//no slash at end
 
 const getState = ({ getStore, getActions, setStore }) => {
@@ -85,9 +85,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch(URLBACKEND + `/api/${template_id}/section`)
 					.then(async res => {
 						const response = await res.json();
+
 						for (let section of response) {
 							setStore({
-								sections: [...getStore().sections, section.title]
+								sections: [...getStore().sections, section.name]
 							});
 						}
 					})

@@ -147,7 +147,7 @@ def new_section():
     ), request.json.get(
         "template_id", None
     )
-    section = Section.add(name, meal_id, template_id )
+    section = Section.add_new(name, meal_id, template_id )
 
     return {}, 201
 

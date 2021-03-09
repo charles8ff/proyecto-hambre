@@ -24,12 +24,13 @@ export const AddMeal = props => {
 		control,
 		name: "meal"
 	});
+
 	const getDataAllFields = watch();
 	let allMeals = {};
 
 	useEffect(() => {
 		for (let name of store.sections) {
-			localStorage.removeItem(name.toString());
+			localStorage.removeItem(name);
 		}
 	}, []);
 
@@ -38,6 +39,7 @@ export const AddMeal = props => {
 			let obj = JSON.parse(localStorage.getItem(name));
 			allMeals = { ...allMeals, ...obj };
 		}
+		console.log(allMeals);
 	};
 
 	const addMeal = (data, section) => {

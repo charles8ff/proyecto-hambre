@@ -158,7 +158,7 @@ class Section(db.Model):
     __table_args__ = ( db.UniqueConstraint('name', 'meal_id', 'template_id'), )
     id = db.Column(db.Integer, primary_key=True) 
     name = db.Column(db.VARCHAR, nullable=False)
-    meal_id = db.Column(db.Integer, db.ForeignKey("meal.id"))
+    meal_id = db.Column(db.Integer, db.ForeignKey("meal.id"), nullable=True)
     template_id = db.Column(db.Integer, db.ForeignKey("template.id"), nullable=False)
 
     def __repr__(self):
@@ -172,7 +172,17 @@ class Section(db.Model):
             "template_id": self.template_id
         }
 
-    
+    @classmethod
+    def add_new(cls, name, meal_id, template_id):
+        section = cls(
+            name=name,
+            meal_id=meal_id,
+            template_id=template_id
+            )
+        db.session.add(section)
+        db.session.commit()
+        return section
+
     def add(self):
         db.session.add(self)
         db.session.commit()
