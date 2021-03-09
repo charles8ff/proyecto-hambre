@@ -1,5 +1,5 @@
 import jwt_decode from "jwt-decode";
-const URLBACKEND = "https://3001-peach-hamster-hxks95vb.ws-eu03.gitpod.io"; //no slash at end
+const URLBACKEND = "https://3001-silver-narwhal-dcgq8rgc.ws-eu03.gitpod.io"; //no slash at end
 //no slash at end//no slash at end//no slash at end//no slash at end//no slash at end//no slash at end
 
 const getState = ({ getStore, getActions, setStore }) => {
@@ -11,13 +11,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				material_ui_is_user_active: false,
 				material_ui_is_correct_password: false
 			},
+			menus_type: [],
+			templates: [],
+			sections: [],
+			showNavigation: true,
 			singUp_profile: [],
 			loggedBusiness: {},
-			loginToken: localStorage.getItem("loginToken") ? localStorage.getItem("loginToken") : false,
-			titleSections: [],
-			allSections: []
+			loginToken: localStorage.getItem("loginToken") ? localStorage.getItem("loginToken") : false
 		},
 		actions: {
+			renameKey: (object, key, newKey) => {
+				const clonedObj = Object.assign({}, object);
+				const targetKey = clonedObj[key];
+				delete clonedObj[key];
+				clonedObj[newKey] = targetKey;
+				return clonedObj;
+			},
 			getProfile: place_id => {
 				fetch(URLBACKEND + `/api${place_id}`)
 					.then(async res => {
@@ -29,6 +38,68 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(err => {
 						throw err;
 					});
+			},
+			getMenuType: () => {
+				setStore({
+					menus_type: []
+				});
+				fetch(URLBACKEND + `/api/menutype`)
+					.then(async res => {
+						const response = await res.json();
+						for (let menu_type of response) {
+							menu_type = getActions().renameKey(menu_type, "id", "value");
+							menu_type = getActions().renameKey(menu_type, "menu_type", "label");
+							setStore({
+								menus_type: [...getStore().menus_type, menu_type]
+							});
+						}
+					})
+					.catch(err => {
+						throw err;
+					});
+			},
+			getTemplates: menu_type => {
+				setStore({
+					templates: []
+				});
+				fetch(URLBACKEND + `/api/${menu_type}/templates`)
+					.then(async res => {
+						const response = await res.json();
+						for (let template of response) {
+							template = getActions().renameKey(template, "id", "value");
+							template = getActions().renameKey(template, "title", "label");
+							setStore({
+								templates: [...getStore().templates, template]
+							});
+						}
+					})
+					.catch(err => {
+						throw err;
+					});
+			},
+
+			getSections: template_id => {
+				setStore({
+					sections: []
+				});
+				fetch(URLBACKEND + `/api/${template_id}/section`)
+					.then(async res => {
+						const response = await res.json();
+						for (let section of response) {
+							setStore({
+								sections: [...getStore().sections, section.title]
+							});
+						}
+					})
+					.catch(err => {
+						throw err;
+					});
+			},
+
+			hideNavigation: () => {
+				setStore({
+					showNavigation: false
+				});
 			},
 
 			getUserbyEmail: user_email => {
@@ -141,21 +212,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({
 					loginToken: false
 				});
-			},
-			loadMenu: async (place_id, template_id) => {
-				let res = await fetch(URLBACKEND + `/api/place/${place_id}/template/${template_id}`);
-				let responseAsJson = await res.json();
-				setStore({ allSections: responseAsJson });
-				return responseAsJson;
-			},
-			loadSections: async template_id => {
-				let res = await fetch(URLBACKEND + `/api/template/${template_id}`);
-				let responseAsJson = await res.json();
-				let sections = responseAsJson.map(elem => {
-					return elem.name;
-				});
-				setStore({ titleSections: sections });
-				return sections;
 			}
 		}
 	};

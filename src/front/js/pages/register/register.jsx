@@ -29,7 +29,7 @@ export const Register = () => {
 	useEffect(
 		() => {
 			if (store.loginToken != false) {
-				history.push(`/${actions.decodeToken(store.loginToken).sub.id}`);
+				history.push(`/place/${actions.decodeToken(store.loginToken).sub.id}`);
 			}
 		},
 		[store.loginToken]

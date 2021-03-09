@@ -1,4 +1,4 @@
-import enum
+import enum 
 from flask_sqlalchemy import SQLAlchemy
 import json  
 from dataclasses import asdict, dataclass
@@ -34,7 +34,6 @@ class Business(db.Model):
             "email": self.email,
             "place_name": self.place_name,
             "address": self.address,
-            "description": self.description,
             "phone_number": self.phone_number,
             "open_hour": self.open_hour.isoformat(),
             "close_hour": self.close_hour.isoformat(),
@@ -115,9 +114,9 @@ class Template(db.Model):
     title = db.Column(db.VARCHAR, nullable=False)
     description = db.Column(db.Text) # add nullable=False
     price = db.Column(db.Float) # add nullable=False
-    menu_type_id = db.Column(db.Integer, db.ForeignKey("menu_type.id"), nullable=False) # add nullable=False
     menu = db.relationship('Menu', backref='template',lazy=True)
     section = db.relationship('Section', backref='template',lazy=True)
+    menu_type_id = db.Column(db.Integer, db.ForeignKey("menu_type.id"), nullable=False) # add nullable=False
 
     def __repr__(self):
         return f'The template is: {self.title}'
@@ -125,11 +124,13 @@ class Template(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "title": self.title,
-            "description": self.description,
-            "price": self.price,
-            "menu_type_id": self.menu_type_id
+            "title": self.title
         }
+    
+    @classmethod
+    def get_by_id(cls, menu_type_id):
+        templates = cls.query.filter_by(menu_type_id = menu_type_id).all()
+        return [template.to_dict() for template in templates]
 
     @classmethod
     def add(cls, title, description, price, menu_type_id):
@@ -142,80 +143,54 @@ class Template(db.Model):
         db.session.add(template)
         db.session.commit()
         return template
-    
-    @classmethod
-    def get_by_menu_type(cls, menu_type):
-        template_list = cls.query.filter_by(menu_type = menu_type).all()
-        return template_list
 
 class Section(db.Model):
     __tablename__ = 'section'
     __table_args__ = ( db.UniqueConstraint('name', 'meal_id', 'template_id'), )
     id = db.Column(db.Integer, primary_key=True) 
     name = db.Column(db.VARCHAR, nullable=False)
-    meal_id = db.Column(db.Integer, db.ForeignKey("meal.id"))
+    meal_id = db.Column(db.Integer, db.ForeignKey("meal.id"), nullable=False)
     template_id = db.Column(db.Integer, db.ForeignKey("template.id"), nullable=False)
 
     def __repr__(self):
         return f'The Menu Type is: {self.name}'
 
     def to_dict(self):
-        meal= Meal.get_by_id(self.meal_id)
         return {
-            "id": self.id,
-            "name": self.name,
-            "meal_id": self.meal_id,
-            "template_id": self.template_id,
-            "meal_name": meal.name,
-            "meal_price": meal.price,
-            # "meal_info": meal.meal_info,
-            "meal_description": meal.description,
+            "title": self.name
         }
 
-    
-    def add(self):
-        db.session.add(self)
+    @classmethod
+    def add(cls, name, meal_id, template_id):
+        section = cls(
+            name=name,
+            meal_id=meal_id,
+            template_id=template_id
+            )
+        db.session.add(section)
         db.session.commit()
-    
-    @classmethod
-    def get_by_meal(cls, meal_id):
-        meal_in_section = cls.query.filter_by(meal_id = meal_id).first_or_404(description=None)
-        return meal_in_section
+        return section
 
     @classmethod
-    def get_by_name(cls, name):
-        sections = cls.query.filter_by(name = name).all()
-        return sections
+    def get_by_id(cls, template_id):
+        sections = cls.query.filter_by(template_id = template_id).all()
+        return [section.to_dict() for section in sections]
+        #return [template.to_dict() for template in templates]
 
-    @classmethod
-    def get_by_template_ONLY_NAMES(cls, template_id):
-        sections_in_template = cls.query.filter_by(template_id = template_id).distinct(Section.name)
-        return [section.to_dict() for section in sections_in_template]
-    
+# class Enum_Category(enum.Enum):
+#     daily_menu = "daily_menu"
+#     cart_menu = "cart_menu"
+#     drinks_menu = "drinks_menu"
+#     dessert_menu = "dessert_menu"
+#     cocktail_menu = "cocktail_menu"
 
-    @classmethod
-    def get_by_template(cls, template_id):
-        sections_in_template = cls.query.filter_by(template_id = template_id).all()
-        return [section.to_dict() for section in sections_in_template]
+class Enum_Category(str, enum.Enum):
+    daily_menu = "Menu del día"
+    cart_menu = "Carta"
+    drinks_menu = "Carta de bebidas"
+    dessert_menu = "Carta de postres"
+    cocktail_menu = "Carta de cocteles"
 
-    @classmethod
-    def get_by_template_and_business(cls, place_id, template_id):
-        sections_in_template = cls.query.filter_by(template_id = template_id).join(Meal, Section.meal_id==Meal.id).all()
-        return [section.to_dict() for section in sections_in_template]
-    
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
-        return self
-
-
-
-class Enum_Category(enum.Enum):
-    daily_menu = "daily_menu"
-    cart_menu = "cart_menu"
-    drinks_menu = "drinks_menu"
-    dessert_menu = "dessert_menu"
-    cocktail_menu = "cocktail_menu"
 
 class Menu_Type(db.Model):
     __tablename__ = 'menu_type'
@@ -224,7 +199,7 @@ class Menu_Type(db.Model):
     template = db.relationship('Template', backref='menu_type',lazy=True)
     
     def __repr__(self):
-        return f'The meal is: {self.meal_name}'
+        return f'The menu types are: {self.menu_type}'
 
     def to_dict(self):
         return {
@@ -240,14 +215,16 @@ class Menu_Type(db.Model):
         db.session.add(menu_type)
         db.session.commit()
         return menu_type
-
+    
+    @classmethod
+    def get_all_menu_type(cls):
+        menu_type = cls.query.all()
+        return [menu_types.to_dict() for menu_types in menu_type]
 
 association_table = db.Table('meal_contains_meal_info', db.Model.metadata,
     db.Column('meal', db.Integer, db.ForeignKey('meal.id')),
     db.Column('meal_info', db.Integer, db.ForeignKey('meal_info.id'))
 )
-
-
 class Meal(db.Model):
     __tablename__ = 'meal'
     id = db.Column(db.Integer, primary_key=True) 
@@ -259,8 +236,7 @@ class Meal(db.Model):
     meal_info = db.relationship(
         "Meal_Info",
         secondary=association_table,
-        back_populates="meal",
-        )
+        back_populates="meal")
 
     def __repr__(self):
         return f'The meal is: {self.meal_name}'
@@ -268,28 +244,21 @@ class Meal(db.Model):
     def to_dict(self):
         return{
             "id": self.id,
-            "name": self.name,
-            "description": self.description,
-            "price": self.price,
-            "business_id": self.business_id
-        }
-
-    def add(self , meal_info):
-        if meal_info is not None:
-            for info in meal_info:
-                self.meal_info.append(Meal_Info.get_by_id(info))
-        db.session.add(self)
-        db.session.commit()
+            "meal_name": self.meal_name,
+            "price": self.price
+            }
 
     @classmethod
-    def get_by_id(cls, id):
-        meal = cls.query.filter_by(id = id).first_or_404(description=None)
+    def add(cls, name, description, price, business_id):
+        meal = cls(
+            name=name,
+            description=description,
+            price=price,
+            business_id=business_id
+            )
+        db.session.add(meal)
+        db.session.commit()
         return meal
-
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit() 
-        return self
 
 class Enum_Info(enum.Enum):
     gluten = "gluten"
@@ -325,19 +294,5 @@ class Meal_Info(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "info": self.info
+            # do not to_dict the password, its a security breach
         }
-    @classmethod
-    def get_by_id(cls, id):
-        info = cls.query.filter_by(id = id).first()
-        return info
-
-    
-    @classmethod
-    def add(cls, meal_info):
-        meal_info = cls(
-            info=meal_info
-            )
-        db.session.add(meal_info)
-        db.session.commit()
-        return meal_info

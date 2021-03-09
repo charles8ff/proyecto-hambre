@@ -23,6 +23,7 @@ def profile_id(place_id):
         return jsonify(business_info)
     else:
         return 'User does not exist', 400
+        
 
 @api.route('/place/<place_id>', methods=['DELETE'])
 def delete_profile(place_id):
@@ -113,6 +114,11 @@ def new_menu_type():
 
     return {}, 201
 
+@api.route('/menutype', methods=['GET'])
+def get_menu_type():
+    get_menu_type = Menu_Type.get_all_menu_type()
+    return jsonify(get_menu_type), 200
+
 
 @api.route('/menutype/<menu_type_id>/template', methods=['POST'])
 def new_template(menu_type_id):
@@ -127,6 +133,11 @@ def new_template(menu_type_id):
 
     return {}, 201
 
+@api.route('/<menu_type_id>/templates', methods=['GET'])
+def get_templates(menu_type_id):
+    templates = Template.get_by_id(menu_type_id)
+    return jsonify(templates), 200
+
 @api.route('/section', methods=['POST'])
 def new_section():
     name, meal_id, template_id = request.json.get(
@@ -140,72 +151,7 @@ def new_section():
 
     return {}, 201
 
-@api.route('/meal_info', methods=['POST'])
-def new_meal_info():
-    info= request.json.get(
-        "info", None
-    )
-    meal_info = Meal_Info.add(info)
-
-    return {}, 201
-
-@api.route('/place/<int:place_id>/template/<int:template_id>', methods=['POST'])
-def new_meals_in_template(place_id, template_id):
-    body = request.get_json()
-    for section, meals in body.items():
-        for meal in meals:
-            new_meal= Meal(
-                name = meal.get("name"), 
-                description = meal.get("description"),
-                price = meal.get("price"),
-                business_id = place_id,
-            )
-            
-            new_meal.add(meal.get("meal_info"))
-            
-            new_section = Section(
-                name = section, 
-                meal_id = new_meal.id,
-                template_id = template_id
-            )
-            new_section.add()
-    return {}, 201
-
-@api.route('/place/<int:place_id>/template/<int:template_id>', methods=['DELETE'])
-def delete_meal(place_id, template_id):
-    meal_id= request.json.get(
-        "id", None
-    )
-    meal = Meal.get_by_id(meal_id)
-    section_row = Section.get_by_meal(meal.id)
-    section_row.delete()
-    meal.delete()
-    return meal.to_dict(), 200
-
-@api.route('/template/<template_id>', methods=['GET'])
-def getAllSectionNames(template_id):
-    sections = Section.get_by_template_ONLY_NAMES(template_id)
-    if sections is not None:
-        return jsonify(sections), 200
-    else:
-        return {}, 418
-
-@api.route('/place/<int:place_id>/template/<int:template_id>', methods=['GET'])
-def getAllMealsfromMenu(place_id, template_id):
-    place= Business.get_by_id(place_id)
-    sections =  Section.get_by_template_and_business(place_id, template_id)
-    # meals = []
-    # final_dict={}
-    # if sections is not None and place.get_is_active():
-    #     for section in sections:
-    #         meal = Meal.get_by_id(section.get("meal_id"))
-    #         mealdict = meal.to_dict()
-    #         meals.append(mealdict)
-    #     print(meals)
-    print(sections)
-    # for section in sectionNames:
-    #     final_dict={section.name: [for section in sections]}
-
-    return jsonify(sections), 200
-        
-
+@api.route('<template_id>/section', methods=['GET'])
+def get_section(template_id):
+    section = Section.get_by_id(template_id)
+    return jsonify(section), 200
