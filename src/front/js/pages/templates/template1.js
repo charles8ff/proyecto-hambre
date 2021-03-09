@@ -19,29 +19,24 @@ export const Template1 = () => {
 
 	let meals = [];
 
-	const loadSectionNames = async () => {
-		const response = await fetch(URLBACKEND + `/api/template/1`);
-		const data = await response.json();
-		let sections = data.map(elem => {
-			return elem.name;
-		});
-		setTemplateSections(sections);
-	};
+	// const loadSectionNames = async () => {
+	// 	const response = await fetch(URLBACKEND + `/api/template/1`);
+	// 	const data = await response.json();
+	// 	let sections = data.map(elem => {
+	// 		return elem.name;
+	// 	});
+	// 	setTemplateSections(sections);
+	// };
 
-	const loadMeals = async () => {
-		const response = await fetch(URLBACKEND + `/api/place/1/template/1`);
-		const data = await response.json();
-		setWholeMeals(data);
-	};
-
-	const mealsInHTML = mealArray => {
-		for (let i = 0; i < mealArray.length; i++) {
-			meals = mealArray.map((elem, index) => {
+	const mealsInHTML = (mealArray, section_name) => {
+		let filteredMeals = mealArray.filter(elem => elem.name == section_name);
+		for (let i = 0; i < filteredMeals.length; i++) {
+			meals = filteredMeals.map((elem, index) => {
 				return (
 					<ul key={index}>
-						{elem.name}
+						{elem.meal_name}
 						<span className="ml-2 mr-1">.....</span>
-						{elem.price}
+						{elem.meal_price}
 						{"€"}
 					</ul>
 				);
@@ -50,12 +45,18 @@ export const Template1 = () => {
 		}
 	};
 	useEffect(() => {
-		loadSectionNames();
-		loadMeals();
-		// var xd = actions.loadMenu(1, 1);
-		// console.log(xd);
-		// setWholeMeals(xd);
+		// loadSectionNames();
+		actions.loadSections(1);
+		actions.loadMenu(1, 1);
 	}, []);
+
+	useEffect(
+		() => {
+			setTemplateSections(store.titleSections);
+			setWholeMeals(store.allSections);
+		},
+		[store.allSections]
+	);
 
 	return (
 		<>
@@ -71,7 +72,7 @@ export const Template1 = () => {
 								</h3>
 							</div>
 							<div className="row justify-content-center align-content-center">
-								<ul>{mealsInHTML(wholeMeals)}</ul>
+								<ul>{mealsInHTML(wholeMeals, elem)}</ul>
 							</div>
 						</div>
 					);

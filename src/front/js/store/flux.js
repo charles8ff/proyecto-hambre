@@ -14,7 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			singUp_profile: [],
 			loggedBusiness: {},
 			loginToken: localStorage.getItem("loginToken") ? localStorage.getItem("loginToken") : false,
-			templateSections: []
+			titleSections: [],
+			allSections: []
 		},
 		actions: {
 			getProfile: place_id => {
@@ -141,17 +142,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 					loginToken: false
 				});
 			},
-
-			loadMenu: (place_id, template_id) => {
-				fetch(URLBACKEND + `/api/place/${place_id}/template/${template_id}`)
-					.then(async res => {
-						const response = await res.json();
-						console.log(response);
-						return response;
-					})
-					.catch(err => {
-						throw err;
-					});
+			loadMenu: async (place_id, template_id) => {
+				let res = await fetch(URLBACKEND + `/api/place/${place_id}/template/${template_id}`);
+				let responseAsJson = await res.json();
+				setStore({ allSections: responseAsJson });
+				return responseAsJson;
+			},
+			loadSections: async template_id => {
+				let res = await fetch(URLBACKEND + `/api/template/${template_id}`);
+				let responseAsJson = await res.json();
+				let sections = responseAsJson.map(elem => {
+					return elem.name;
+				});
+				setStore({ titleSections: sections });
+				return sections;
 			}
 		}
 	};

@@ -160,11 +160,16 @@ class Section(db.Model):
         return f'The Menu Type is: {self.name}'
 
     def to_dict(self):
+        meal= Meal.get_by_id(self.meal_id)
         return {
             "id": self.id,
             "name": self.name,
             "meal_id": self.meal_id,
-            "template_id": self.template_id
+            "template_id": self.template_id,
+            "meal_name": meal.name,
+            "meal_price": meal.price,
+            # "meal_info": meal.meal_info,
+            "meal_description": meal.description,
         }
 
     
@@ -195,7 +200,7 @@ class Section(db.Model):
 
     @classmethod
     def get_by_template_and_business(cls, place_id, template_id):
-        sections_in_template = cls.query.filter_by(template_id = template_id).join(Meal, Section.meal_id==Meal.id)
+        sections_in_template = cls.query.filter_by(template_id = template_id).join(Meal, Section.meal_id==Meal.id).all()
         return [section.to_dict() for section in sections_in_template]
     
     def delete(self):
