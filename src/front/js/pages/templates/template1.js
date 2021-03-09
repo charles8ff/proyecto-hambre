@@ -11,7 +11,13 @@ export const Template1 = () => {
 	const { store, actions } = useContext(Context);
 	// const history = useHistory();
 
-    
+    const renderFood = () => {
+		var indents = [];
+		for (var i = 0; i < 3; i++) {
+			indents.push(<li key={i}>Es un ejemplo.......5 €</li>);
+		}
+		return indents;
+	}; //relleno
 
 	return (
 		<>
