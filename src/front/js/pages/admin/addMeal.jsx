@@ -12,9 +12,9 @@ export const AddMeal = props => {
 		defaultValues: {
 			meal: [
 				{
-					name: "Ensalada César",
-					description: "Es una ensalada de pollo tomate y salsa césar",
-					price: "5",
+					name: "Nombre del plato",
+					description: "Añade una descripción",
+					price: "€",
 					meal_info: [1]
 				}
 			]
