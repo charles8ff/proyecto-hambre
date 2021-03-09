@@ -31,7 +31,7 @@ export const Profile = () => {
 								</div>
 								<Card.Body>
 									<Card.Title>
-										<h2 className="details">{store.loggedBusiness.email}</h2>
+										<h2 className="details">{store.loggedBusiness.place_name}</h2>
 									</Card.Title>
 								</Card.Body>
 							</Card>

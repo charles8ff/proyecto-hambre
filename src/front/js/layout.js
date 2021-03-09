@@ -12,7 +12,8 @@ import { Header } from "./component/partials/header.jsx";
 import { Footer } from "./component/footer";
 import { Login } from "./pages/login/login.jsx";
 import { Profile } from "./component/profile.jsx";
-
+import { TemplateTwo } from "./pages/templates/template-two.jsx";
+import { AddMenu } from "./pages/admin/addMenu.jsx";
 const Layout = () => {
 	const basename = process.env.BASENAME || "";
 	const { store, actions } = useContext(Context);
@@ -32,6 +33,12 @@ const Layout = () => {
 					</Route>
 					<Route exact path="/login">
 						<Login />
+					</Route>
+					<Route exact path="/template-two">
+						<TemplateTwo />
+					</Route>
+					<Route exact path="/addmenu">
+						<AddMenu />
 					</Route>
 					<Route>
 						<h1>Not found!</h1>
