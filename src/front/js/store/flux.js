@@ -5,13 +5,12 @@ const URLBACKEND = "https://3001-copper-mite-z2nrl6y2.ws-eu03.gitpod.io"; //no s
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			userSingUp: {
-				material_ui_is_user_exist: false,
-				is_first_step: true,
-				material_ui_is_user_active: false,
-				material_ui_is_correct_password: false
-			},
+			material_ui_is_user_exist: false,
+			is_first_step: true,
+			material_ui_is_user_active: false,
+			material_ui_is_correct_password: false,
 			singUp_User: false,
+			showNavigation: true,
 			singUp_profile: [],
 			loggedBusiness: {},
 			loginToken: localStorage.getItem("loginToken") ? localStorage.getItem("loginToken") : false
@@ -31,7 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			userWantToSingUp: data => {
-				if (data == true) {
+				if (data) {
 					setStore({
 						singUp_User: true
 					});
@@ -42,11 +41,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			hideNavigation: data => {
+				if (data) {
+					setStore({
+						showNavigation: false
+					});
+				} else {
+					setStore({
+						showNavigation: true
+					});
+				}
+			},
+
 			changeStep: () => {
 				setStore({
-					userSingUp: {
-						is_first_step: true
-					}
+					is_first_step: true
 				});
 			},
 
@@ -55,17 +64,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(async res => {
 						if (res.status == 409) {
 							setStore({
-								userSingUp: {
-									material_ui_is_user_exist: true,
-									is_first_step: true
-								}
+								material_ui_is_user_exist: true,
+								is_first_step: true
 							});
 						} else {
 							setStore({
-								userSingUp: {
-									material_ui_is_user_exist: false,
-									is_first_step: false
-								}
+								material_ui_is_user_exist: false,
+								is_first_step: false
 							});
 						}
 						const response = await res.json();
@@ -129,15 +134,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				if (response.status == 404) {
 					setStore({
-						userSingUp: {
-							material_ui_is_user_active: true
-						}
+						material_ui_is_user_active: true
 					});
 				} else if (response.status == 409) {
 					setStore({
-						userSingUp: {
-							material_ui_is_correct_password: true
-						}
+						material_ui_is_correct_password: true
 					});
 				} else {
 					if (response.ok) {

@@ -1,29 +1,38 @@
-import React, { useState, useContext, useEffect } from "react";
-import { useForm, useFieldArray, useWatch } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import React, { useContext } from "react";
+import { useForm } from "react-hook-form";
 import { Context } from "../../store/appContext";
 import PropTypes from "prop-types";
 
-import "../login/login.scss";
-import { propTypes } from "react-bootstrap/esm/Image";
+import "../../../styles/login.scss";
 
 export const Registro = props => {
-	const { register, handleSubmit, watch, errors } = useForm();
+	const { register: register2, errors: errors2, handleSubmit: handleSubmit2 } = useForm();
 	const { store, actions } = useContext(Context);
-	const history = useHistory();
+
+	const userCheck = data => {
+		console.log(data);
+		actions.registerProfile(data);
+		actions.getUserbyEmail(data.email);
+	};
 
 	return (
 		<>
 			<div className="UserAcess__CardRegister">
 				<div className="UserAcess__Card--content text-center">
 					<h4 className="mb-4 pb-3">Registrate</h4>
-					<form className="UserAcess__CardForm" onSubmit={handleSubmit(props.submit)}>
+					<form className="UserAcess__CardForm" onSubmit={handleSubmit2(userCheck)}>
 						<input
 							name="email"
 							type="email"
 							placeholder="micorreo@gmail.com"
 							className="UserAcess__CardForm--Style"
-							ref={register}
+							ref={register2({
+								required: true,
+								pattern: {
+									value: /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+									message: "invalid email address"
+								}
+							})}
 							autoComplete="off"
 						/>
 						<i className="UserAcess__CardForm--inputIcon fas fa-envelope" />
@@ -34,10 +43,10 @@ export const Registro = props => {
 								className="UserAcess__CardForm--Style"
 								placeholder="*****"
 								autoComplete="off"
-								ref={register({ required: false, minLength: 6 })}
+								ref={register2({ required: false, minLength: 6 })}
 							/>
 							<i className="UserAcess__CardForm--inputIcon fas fa-key" />
-							{errors.password && <p>This field is required</p>}
+							{errors2.password && <p>This field is required</p>}
 						</div>
 						<input type="submit" className="btn mt-4" />
 					</form>

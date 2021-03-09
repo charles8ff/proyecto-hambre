@@ -1,5 +1,5 @@
-/*Desktop View*/
-.header {
+/*Desktop Version*/
+.Header {
   display: flex;
   background: #171a22;
   justify-content: space-between;
@@ -9,79 +9,79 @@
   padding-bottom: 0.5rem;
   height: 80px;
 
-  a{
-      color: #cacaca;
-  }
-  a:link {
-            text-decoration: none;
-         }
-         a:hover {
-            text-decoration: none;
-         }
-}
-.logo-nav {
+  .Header__Logo{
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+    }
+
+    .Header__Logo--Container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+    .Header__Logo--Image {
+        width: 135px;
+        height: 50px;
+    }
+
 }
-.logo-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.logo {
-    width: 135px;
-    height: 50px;
-}
-.nav-options {
+
+
+    .Header__Nav {
   padding-left: 25px;
   display: grid;
   grid-template-columns: repeat(3, auto);
   grid-gap: 50px;
   list-style-type: none;
 }
-.mobile-option {
+
+.Header__Nav--Links :hover {
+  color: white;
+}
+
+
+.Header__Nav--MobileView {
   display: none;
 }
 
-.option :hover {
-  color: white;
-}
-.signin-up {
+.Header__Nav--SigninUp {
   display: flex;
   padding: 0px 5px;
   list-style-type: none;
 }
-.sign-in {
+.Header__Nav--SigninIn {
   padding-right: 50px;
   align-self: center;
 }
-.sign-in :hover {
-  color: white;
-}
-.signup-btn {
-  padding: 10px 10px;
-  height: 2.4rem;
-  border-radius: 3px;
-  background: rgb(222, 9, 241);
-  color: white;
-  cursor: pointer;
-  align-items: center;
-}
-.mobile-menu {
+
+.Header__MobileMenu {
   display: none;
 }
-@media (max-width: 648px) {
-  /*Mobile View */
-  .header {
+
+  a{
+      color: #cacaca;
+  }
+
+  a:link {
+            text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+
+/*Mobile Version*/
+@media (max-width: 950px) {
+  .Header {
     padding: 0px 10px;
   }
-  .logo {
+  .Header__Logo {
     width: 135px;
     height: 50px;
   }
-  .nav-options {
-      color: red;
+  .Header__Nav {
+    color: red;
     display: flex;
     width: 100%;
     height: 350px;
@@ -94,7 +94,7 @@
     list-style-type: none;
     grid-gap: 0px;
   }
-  .nav-options.active {
+  .Header__Nav.active {
     background: #171a22;
     left: 0;
     opacity: 1;
@@ -104,20 +104,20 @@
     padding-left: 0px;
   }
 
-  .menu-icon {
+  .Header__MobileMenu--Icon {
     stroke: #ff622d;
     fill: #fff;
     width: 45px;
     height: 45px;
   }
-  .option {
+  .Header__Nav--Links {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 10vw;
     padding: 30px 0px;
   }
-  .sign-up {
+  .Header__Nav--SigninUp {
     background: rgb(222, 9, 241);
     border-radius: 3px;
     color: white;
@@ -127,10 +127,10 @@
     border-radius: 3px;
   }
 
-  .signin-up {
+  .Header__Nav--SigninUp {
     display: none;
   }
 }
-.mobile-menu {
+.Header__MobileMenu {
   display: block;
 }

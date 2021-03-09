@@ -5,7 +5,7 @@ import { Context } from "../../store/appContext";
 import { Registro } from "../register/registro.jsx";
 import { AddPlace } from "../register/add-place.jsx";
 
-import "./login.scss";
+import "../../../styles/login.scss";
 
 export const Login = () => {
 	const { register, handleSubmit, watch, errors } = useForm();
@@ -13,17 +13,8 @@ export const Login = () => {
 	const history = useHistory();
 
 	const onLogin = data => {
-		store.userSingUp.material_ui_is_correct_password = false;
+		store.material_ui_is_correct_password = false;
 		actions.login(data.email, data.password);
-	};
-
-	const userCheck = data => {
-		actions.registerProfile(data);
-		actions.getUserbyEmail(data.email);
-	};
-
-	const registerUser = data => {
-		actions.registerPlace(data);
 	};
 
 	useEffect(
@@ -57,12 +48,16 @@ export const Login = () => {
 		[history]
 	);
 
+	useEffect(() => {
+		actions.hideNavigation(true);
+	}, []);
+
 	return (
 		<>
 			<div className="UserAcess">
 				<div className="container">
 					<div className="row UserAcess__FullHeight justify-content-center">
-						<div className="col-12 py-5">
+						<div className="col-12 pb-5">
 							<input
 								className="checkbox d-none"
 								checked={store.singUp_User ? true : false}
@@ -79,13 +74,17 @@ export const Login = () => {
 													type="email"
 													placeholder="micorreo@gmail.com"
 													className="UserAcess__CardForm--Style"
-													ref={register({ required: true })}
+													ref={register({
+														required: true,
+														pattern: {
+															value: /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+															message: "invalid email address"
+														}
+													})}
 													autoComplete="off"
 												/>
 												<i className="UserAcess__CardForm--inputIcon fas fa-envelope" />
-												{store.userSingUp.material_ui_is_user_active ? (
-													<p>Email no valido</p>
-												) : null}
+												{store.material_ui_is_user_active ? <p>Email no valido</p> : null}
 												{errors.email && <p>Este campo es requerido</p>}
 												<div className="UserAcess__CardForm mt-3">
 													<input
@@ -97,8 +96,8 @@ export const Login = () => {
 														ref={register({ required: true, minLength: 6 })}
 													/>
 													<i className="UserAcess__CardForm--inputIcon fas fa-key" />
-													{store.userSingUp.material_ui_is_correct_password ? (
-														<p>{"Invalid password \n"}</p>
+													{store.material_ui_is_correct_password ? (
+														<p>Invalid password</p>
 													) : null}
 													{errors.password && <p>Este campo es requerido</p>}
 												</div>
@@ -109,11 +108,7 @@ export const Login = () => {
 											</span>
 										</div>
 									</div>
-									{store.userSingUp.is_first_step ? (
-										<Registro submit={userCheck} />
-									) : (
-										<AddPlace submit={registerUser} />
-									)}
+									{store.is_first_step ? <Registro /> : <AddPlace />}
 								</div>
 							</div>
 						</div>

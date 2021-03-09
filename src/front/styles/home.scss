@@ -51,13 +51,36 @@ margin-top: 3rem;
 
 .parallax--two--home {
   background-image: url(https://images.unsplash.com/photo-1516749396351-ab12ad535d7c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);
-  min-height: 30rem; 
+  min-height: 44rem; 
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
+@media (max-width: 1200px) {
+    .parallax--two--home {
+  background-image: url(https://images.unsplash.com/photo-1516749396351-ab12ad535d7c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);
+  min-height: 66rem; 
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+}
+
+@media (max-width: 992px) {
+    .parallax--two--home {
+  background-image: url(https://images.unsplash.com/photo-1516749396351-ab12ad535d7c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);
+  min-height: 88.5rem; 
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+}
 
 // PARALLAX EFFECT FINISH
 .dmenu--about--what--doing{
@@ -85,8 +108,9 @@ margin-top: 3rem;
 }
 
 .dmenu--start--now{
-    background-color: #421983;
+    background-color: #421983d9;
     min-height: 15rem;
+    margin-top: 4rem;
     h2{
         color: $white;
         font-size: 3rem;
@@ -216,6 +240,17 @@ footer{
     transition: all 150ms linear;
 }
 
+@media (max-width: 992px) and (min-width: 750px) {
+   .card.user-card {
+    margin-top: 6rem;
+    margin-left: 10rem;
+    border-top: none;
+    -webkit-box-shadow: 0 0 1px 2px rgba(0,0,0,0.05), 0 -2px 1px -2px rgba(0,0,0,0.04), 0 0 0 -1px rgba(0,0,0,0.05);
+    box-shadow: 0 0 1px 2px rgba(0,0,0,0.05), 0 -2px 1px -2px rgba(0,0,0,0.04), 0 0 0 -1px rgba(0,0,0,0.05);
+    -webkit-transition: all 150ms linear;
+   } 
+}
+
 .card {
     border-radius: 5px;
     -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
@@ -342,15 +377,6 @@ footer{
     border-bottom-right-radius: 50px;
 }
 
-.user-card .card-block .user-image:after, .user-card .card-block .user-image:before {
-    content: "";
-    width: 100%;
-    height: 48%;
-    border: 2px solid #4099ff;
-    position: absolute;
-    left: 0;
-    z-index: 10;
-}
 
 .user-card .card-block .user-image:after {
     top: 0;
@@ -358,12 +384,84 @@ footer{
     border-top-right-radius: 50px;
 }
 
-.user-card .card-block .user-image:after, .user-card .card-block .user-image:before {
-    content: "";
-    width: 100%;
-    height: 48%;
-    border: 2px solid #4099ff;
-    position: absolute;
-    left: 0;
-    z-index: 10;
-}
+
+
+    .btn-button{  
+        border-radius: 4px;
+        height: 44px;
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+        -webkit-transition : all 200ms linear;
+        transition: all 200ms linear;
+        padding: 0 30px;
+        letter-spacing: 1px;
+        display: -webkit-inline-flex;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        -moz-justify-content: center;
+        -ms-justify-content: center;
+        justify-content: center;
+        -ms-flex-pack: center;
+        text-align: center;
+        border: none;
+        background-color: #ff622d;
+        color: white;
+        box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+    }
+    .btn-button:active,
+    .btn-button:focus{  
+        background-color: #102770;
+        color: white;
+        box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+    }
+    .btn-button:hover{  
+        background-color: #102770;
+        color: white;
+        box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+    }
+
+    .btn-home{  
+        border-radius: 4px;
+        height: 44px;
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+        -webkit-transition : all 200ms linear;
+        transition: all 200ms linear;
+        padding: 0 30px;
+        letter-spacing: 1px;
+        display: -webkit-inline-flex;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        -moz-justify-content: center;
+        -ms-justify-content: center;
+        justify-content: center;
+        -ms-flex-pack: center;
+        text-align: center;
+        border: none;
+        background-color: #102770;
+        color: white;
+        box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+    }
+    .btn-home:active,
+    .btn-home:focus{  
+        background-color: #10277082;
+        color: white;
+        box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+    }
+    .btn-home:hover{  
+        background-color: #10277082;
+        color: white;
+        box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+    }

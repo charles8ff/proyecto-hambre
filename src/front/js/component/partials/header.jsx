@@ -1,51 +1,91 @@
-import React, { useState } from "react";
+import React, { Fragment, useContext, useState, useEffect } from "react";
 import logoMenu from "./img/logo.png";
 import "../../../styles/header.scss";
+import { Link, useHistory } from "react-router-dom";
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container, Jumbotron, Row, Col } from "react-bootstrap";
+import { OurButton } from "../button.jsx";
+import { Context } from "../../store/appContext.js";
 
 export const Header = () => {
+	const { store, actions } = useContext(Context);
+	const history = useHistory();
 	const [click, setClick] = useState(false);
 	const handleClick = () => setClick(!click);
 	const closeMobileMenu = () => setClick(false);
 	return (
-		<div className="header">
-			<div className="logo-nav">
-				<div className="logo-container">{/* <a href="#">
-						<img src={logoMenu} className="logo" />
-					</a> */}</div>
-				<ul className={click ? "nav-options active" : "nav-options"}>
-					<li className="option" onClick={closeMobileMenu}>
-						<a href="#">ABOUT</a>
+		<div className="Header">
+			<div className="Header__Logo">
+				<div className="Header__Logo--Container">
+					{/* <Link to="/">
+						<img src={logoMenu} className="Header__Logo--Image" />
+					</Link> */}
+				</div>
+				<ul className={click ? "Header__Nav active" : "Header__Nav"}>
+					<li className="Header__Nav--Links" onClick={closeMobileMenu}>
+						<Link to="/">Inicio</Link>
+					</li>
+					{/* <li className="option" onClick={closeMobileMenu}>
+						<Link to="/">Inicio</Link>
 					</li>
 					<li className="option" onClick={closeMobileMenu}>
-						<a href="#">CONTACT</a>
-					</li>
-					<li className="option" onClick={closeMobileMenu}>
-						<a href="#">BLOG</a>
-					</li>
-					{/* <li className="option mobile-option" onClick={closeMobileMenu}>
-						<a href="#">SIGN-IN</a>
-					</li>
-					<li className="option mobile-option" onClick={closeMobileMenu}>
-						<a href="" className="sign-up">
-							SIGN-UP
-						</a>
+						<Link to="/">Inicio</Link>
 					</li> */}
+					<li className="Header__Nav--Links Header__Nav--MobileView" onClick={closeMobileMenu}>
+						<OurButton
+							title="Iniciar sesión"
+							click={() => history.push("/login")}
+							hide={store.loginToken != false ? "d-none" : ""}
+						/>
+					</li>
+					<li className="Header__Nav--Links Header__Nav--MobileView" onClick={closeMobileMenu}>
+						<OurButton
+							title="Regístrate"
+							click={() => history.push("/register")}
+							hide={store.loginToken != false ? "d-none" : ""}
+						/>
+					</li>
 				</ul>
 			</div>
-			<ul className="signin-up">
-				<li className="sign-in" onClick={closeMobileMenu}>
-					<a href="#">SIGN-IN</a>
+			<ul className="Header__Nav--SigninUp">
+				<li className="Header__Nav--SigninIn" onClick={closeMobileMenu}>
+					<OurButton
+						title="Iniciar sesión"
+						click={() => history.push("/login")}
+						hide={store.loginToken != false ? "d-none" : ""}
+					/>
 				</li>
-				{/* <li onClick={closeMobileMenu}>
-					<a href="" className="signup-btn">
-						SIGN-UP
-					</a>
-				</li> */}
+				<li className="Header__Nav--SigninIn" onClick={closeMobileMenu}>
+					<OurButton
+						title="Regístrate"
+						click={() => history.push("/register")}
+						hide={store.loginToken != false ? "d-none" : ""}
+					/>
+				</li>
+				<li className="Header__Nav--SigninIn" onClick={closeMobileMenu}>
+					<OurButton
+						title="Eliminar cuenta"
+						click={() => {
+							actions.deleteProfile(store.loggedBusiness.id);
+							history.push("/");
+						}}
+						hide={store.loginToken != false ? "" : "d-none"}
+					/>
+				</li>
+				<li className="Header__Nav--SigninIn" onClick={closeMobileMenu}>
+					<OurButton
+						title="Cerrar Sesión"
+						click={() => {
+							actions.doLogOut();
+							history.push("/");
+						}}
+						hide={store.loginToken != false ? "" : "d-none"}
+					/>
+				</li>
 			</ul>
-			<div className="mobile-menu" onClick={handleClick}>
+			<div className="Header__MobileMenu" onClick={handleClick}>
 				{click ? (
 					<svg
-						className="menu-icon"
+						className="Header__MobileMenu--Icon"
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 20 20"
 						fill="currentColor">
@@ -57,7 +97,7 @@ export const Header = () => {
 					</svg>
 				) : (
 					<svg
-						className="menu-icon"
+						className="Header__MobileMenu--Icon"
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
 						viewBox="0 0 24 24"

@@ -4,7 +4,7 @@ import "../../styles/home.scss";
 import PropTypes from "prop-types";
 
 export const OurButton = props => {
-	const className = "fill ml-auto " + props.hide;
+	const className = "btn-button " + props.hide;
 
 	return (
 		<>
