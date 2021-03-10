@@ -2,31 +2,17 @@ import React, { useState, useEffect, useContext, Fragment } from "react";
 import { useHistory } from "react-router-dom";
 import { Context } from "../../store/appContext";
 import "../../../styles/template1.scss";
-// import arrow from "../../../styles/img/yellowarrow.png";
 
 const URLBACKEND = "https://3001-peach-hamster-hxks95vb.ws-eu03.gitpod.io";
 const arrow = require("../../../styles/img/yellowarrow.png");
 
 export const Template1 = () => {
 	const { store, actions } = useContext(Context);
-	// const history = useHistory();
-
+	let place_id = actions.decodeToken(store.loginToken).sub.id;
 	const [templateSections, setTemplateSections] = useState([]);
-
 	const [wholeMeals, setWholeMeals] = useState([]);
-
 	const [wholeSections, setWholeSections] = useState([]);
-
 	let meals = [];
-
-	// const loadSectionNames = async () => {
-	// 	const response = await fetch(URLBACKEND + `/api/template/1`);
-	// 	const data = await response.json();
-	// 	let sections = data.map(elem => {
-	// 		return elem.name;
-	// 	});
-	// 	setTemplateSections(sections);
-	// };
 
 	const mealsInHTML = (mealArray, section_name) => {
 		let filteredMeals = mealArray.filter(elem => elem.name == section_name);
@@ -45,15 +31,15 @@ export const Template1 = () => {
 		}
 	};
 	useEffect(() => {
-		// loadSectionNames();
+		actions.hideNavigation(true);
 		actions.loadSections(1);
-		actions.loadMenu(1, 1);
+		actions.loadMenu(place_id, 1); // Place 1 y template 1 (place_id and template_id)
 	}, []);
 
 	useEffect(
 		() => {
-			setTemplateSections(store.titleSections);
-			setWholeMeals(store.allSections);
+			setTemplateSections(store.titleSections); //Info from sections
+			setWholeMeals(store.allSections); // getAllMeals
 		},
 		[store.allSections]
 	);

@@ -7,6 +7,7 @@ import { SelectFill } from "../../component/fill-select.jsx";
 import "../../../styles/login.scss";
 
 import { TemplateTwo } from "../templates/template-two.jsx";
+import { Template1 } from "../templates/template1.js";
 
 export const AddMenu = () => {
 	const { store, actions } = useContext(Context);
@@ -14,6 +15,7 @@ export const AddMenu = () => {
 	const [showSection, setShowSection] = useState(false);
 	const [previewTemplate, setPreviewTemplate] = useState(0);
 	let allMeals = {};
+	const history = useHistory();
 
 	useEffect(() => {
 		actions.hideNavigation(true);
@@ -26,6 +28,7 @@ export const AddMenu = () => {
 			allMeals = { ...allMeals, ...obj };
 		}
 		actions.postMeal(allMeals);
+		history.push("/menu/1");
 	};
 
 	const selectMenuType = e => {
@@ -43,8 +46,6 @@ export const AddMenu = () => {
 		actions.userSelectTemplate(e.value);
 		setPreviewTemplate(e.value);
 	};
-
-	console.log;
 
 	const selectTemplateView = () => {
 		return (

@@ -159,6 +159,7 @@ export const AddMeal = props => {
 													value={i + 1}
 													name={`${props.section}[${index}].meal_info`}
 													ref={register({ required: true })}
+													onBlur={() => addMeal(getDataAllFields, props.section)}
 												/>
 												{<img className="meal_img" src={c.url} />} {c.name}
 											</label>

@@ -41,8 +41,8 @@ const Layout = () => {
 					</Route>
 					<Route exact path="/place/:id/addmenu">
 						<AddMenu />
-                        </Route>
-					<Route exact path="/template1">
+					</Route>
+					<Route exact path="/place/:id/menu/1">
 						<Template1 />
 					</Route>
 					<Route>

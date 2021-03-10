@@ -176,6 +176,13 @@ class Section(db.Model):
             # "meal_info": meal.meal_info,
             "meal_description": meal.description,
         }
+    def to_dict_empty(self):
+        
+        return {
+            "id": self.id,
+            "name": self.name,
+            "template_id": self.template_id,
+        }
 
     def add(self):
         db.session.add(self)
@@ -193,8 +200,8 @@ class Section(db.Model):
 
     @classmethod
     def get_by_template_ONLY_NAMES(cls, template_id):
-        sections_in_template = cls.query.filter_by(template_id = template_id).distinct(Section.name)
-        return [section.to_dict() for section in sections_in_template]
+        sections_in_template = cls.query.filter_by(template_id = template_id, meal_id = None,).order_by(Section.id)
+        return [section.to_dict_empty() for section in sections_in_template]
     
 
     @classmethod
@@ -232,7 +239,8 @@ class Section(db.Model):
     @classmethod
     def get_by_id_without_meal(cls, template_id):
         sections = cls.query.filter_by( meal_id = None, template_id = template_id).order_by(Section.id).all()
-        return [section.to_dict() for section in sections]
+        print(sections)
+        return [section.to_dict_empty() for section in sections]
 
 
 class Enum_Category(str, enum.Enum):

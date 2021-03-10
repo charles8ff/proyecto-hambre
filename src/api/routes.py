@@ -151,9 +151,11 @@ def new_section():
 
     return {}, 201
 
-@api.route('<template_id>/section', methods=['GET'])
+@api.route('/templates/<int:template_id>/section', methods=['GET'])
 def get_section(template_id):
+    #print('hi')
     section = Section.get_by_id_without_meal(template_id)
+    print(section)
     return jsonify(section), 200
 
 @api.route('/meal_info', methods=['POST'])
