@@ -1,19 +1,16 @@
 import React, { useState, useEffect, useContext, Fragment } from "react";
 import { useHistory } from "react-router-dom";
 import { Context } from "../../store/appContext";
-import "../../../styles/template1.scss";
-// import arrow from "../../../styles/img/yellowarrow.png";
+import { Container, Card, ListGroup, ListGroupItem, Col, Row } from "react-bootstrap";
 
+import "../../../styles/template3.scss";
 const URLBACKEND = "https://3001-peach-hamster-hxks95vb.ws-eu03.gitpod.io";
-const arrow = require("../../../styles/img/yellowarrow.png");
 
-export const Template1 = () => {
+export const Template3 = () => {
 	const { store, actions } = useContext(Context);
 
 	const [templateSections, setTemplateSections] = useState([]);
-
 	const [wholeMeals, setWholeMeals] = useState([]);
-
 	const [wholeSections, setWholeSections] = useState([]);
 
 	let meals = [];
@@ -34,6 +31,7 @@ export const Template1 = () => {
 			return meals;
 		}
 	};
+
 	useEffect(() => {
 		actions.loadSections(1);
 		actions.loadMenu(1, 1);
@@ -55,10 +53,9 @@ export const Template1 = () => {
 
 		return indents;
 	};
-
 	return (
 		<>
-			{/* <div className="container-fluid template1--container justify-content-center">
+			{/* <div className="container-fluid template3--container justify-content-center">
 				<h2>MENÚ</h2>
 				<span className="place_name">{store.loggedBusiness.place_name}</span>
 				{templateSections.map((elem, index) => {
@@ -76,7 +73,7 @@ export const Template1 = () => {
 					);
 				})}
 			</div> */}
-			<div className="container-fluid template1--container justify-content-center">
+			<div className="container-fluid template3--container justify-content-center">
 				<h2>MENU</h2>
 				<span className="place_name">BAR MANOLO</span>
 				<div className="row  justify-content-center align-content-center">

@@ -156,6 +156,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				setStore({ titleSections: sections });
 				return sections;
+			},
+			postMeal: async data => {
+				let response = await fetch(URLBACKEND + `/api/place/${place_id}/template/${template_id}`, {
+					method: "POST",
+					headers: new Headers({
+						"Content-Type": "application/json"
+					}),
+					body: JSON.stringify({
+						data
+					})
+				});
+				if (response.status == 404) {
+				} else if (response.status == 409) {
+				} else {
+					if (response.ok) {
+						response = await response.json();
+						console.log(response);
+					}
+				}
 			}
 		}
 	};

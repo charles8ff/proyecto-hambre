@@ -5,10 +5,11 @@ $error-color:#ea1814;
 $white: #FFFFFF;
 $black:  #191919;
 $grey: #CDCDCD;
-$text-font-1: 'Akaya Kanadaka', cursive;
+$text-font-3: 'Abril Fatface', cursive;
+$text-font-3-2: 'Satisfy', cursive;
 
-.template1--container{
-    font-family: $text-font-1;
+.template3--container{
+    font-family: $text-font-3;
     
     margin:0;
     display:flex; 
@@ -34,16 +35,11 @@ $text-font-1: 'Akaya Kanadaka', cursive;
         text-align: center;
         color: $error-color
     }
-    // span{
-    //     text-align: center;
-    //     font-size: 1.4rem;
-    //     margin-bottom: 0.8rem;
-    //     color: $error-color
-    // }
     h3{
         align-items: center;
         font-size: 2rem;
-        color: $error-color
+        color: $error-color;
+        font-family: $text-font-3-2;
     }
     ul{
         list-style-type: none;
