@@ -199,4 +199,30 @@ def delete_meal(place_id, template_id):
     meal.delete()
     return meal.to_dict(), 200
 
+@api.route('/template/<template_id>', methods=['GET'])
+def getAllSectionNames(template_id):
+    sections = Section.get_by_template_ONLY_NAMES(template_id)
+    if sections is not None:
+        return jsonify(sections), 200
+    else:
+        return {}, 418
+
+@api.route('/place/<int:place_id>/template/<int:template_id>', methods=['GET'])
+def getAllMealsfromMenu(place_id, template_id):
+    place= Business.get_by_id(place_id)
+    sections =  Section.get_by_template_and_business(place_id, template_id)
+    # meals = []
+    # final_dict={}
+    # if sections is not None and place.get_is_active():
+    #     for section in sections:
+    #         meal = Meal.get_by_id(section.get("meal_id"))
+    #         mealdict = meal.to_dict()
+    #         meals.append(mealdict)
+    #     print(meals)
+    print(sections)
+    # for section in sectionNames:
+    #     final_dict={section.name: [for section in sections]}
+
+    return jsonify(sections), 200
+        
 

@@ -13,11 +13,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 			showNavigation: true,
 			singUp_profile: [],
 			loggedBusiness: {},
+<<<<<<< HEAD
 			menus_type: [],
 			templates: [],
 			sections: [],
 			selectedTemplate: 0,
 			loginToken: localStorage.getItem("loginToken") ? localStorage.getItem("loginToken") : false
+=======
+			loginToken: localStorage.getItem("loginToken") ? localStorage.getItem("loginToken") : false,
+			titleSections: [],
+			allSections: []
+>>>>>>> feature/carlos/templates-with-data
 		},
 		actions: {
 			renameKey: (object, key, newKey) => {
@@ -265,6 +271,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({
 					loginToken: false
 				});
+			},
+			loadMenu: async (place_id, template_id) => {
+				let res = await fetch(URLBACKEND + `/api/place/${place_id}/template/${template_id}`);
+				let responseAsJson = await res.json();
+				setStore({ allSections: responseAsJson });
+				return responseAsJson;
+			},
+			loadSections: async template_id => {
+				let res = await fetch(URLBACKEND + `/api/template/${template_id}`);
+				let responseAsJson = await res.json();
+				let sections = responseAsJson.map(elem => {
+					return elem.name;
+				});
+				setStore({ titleSections: sections });
+				return sections;
 			}
 		}
 	};
