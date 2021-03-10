@@ -14,30 +14,28 @@ export const TemplateTwo = () => {
 	};
 
 	useEffect(() => {
-		actions.hideNavigation();
+		actions.hideNavigation(true);
 	}, []);
 
 	return (
 		<>
-			<Container>
-				<Row>
-					<Col md={{ span: 6, offset: 4 }}>
-						<Card className="templete--two">
-							<Card.Body>
-								<Card.Title>
-									<h2>MENU</h2>
-								</Card.Title>
-								<h3>PRIMEROS</h3>
-								<ul>{renderFood()}</ul>
-								<h3>SEGUNDOS</h3>
-								<ul>{renderFood()}</ul>
-								<h3>POSTRES</h3>
-								<ul>{renderFood()}</ul>
-							</Card.Body>
-						</Card>
-					</Col>
-				</Row>
-			</Container>
+			<div className="container">
+				<div className="row justify-content-center align-items-center">
+					<Card className="templete--two card--templateTwo">
+						<Card.Body>
+							<Card.Title>
+								<h2>MENU</h2>
+							</Card.Title>
+							<h3>PRIMEROS</h3>
+							<ul>{renderFood()}</ul>
+							<h3>SEGUNDOS</h3>
+							<ul>{renderFood()}</ul>
+							<h3>POSTRES</h3>
+							<ul>{renderFood()}</ul>
+						</Card.Body>
+					</Card>
+				</div>
+			</div>
 		</>
 	);
 };

@@ -469,7 +469,7 @@ footer{
 
 
 .templete--two{
-  max-width: 28.125rem;
+  max-width: 50.125rem;
   padding: 1.875rem;
   margin: 1rem 0;
   background-color: $white;
@@ -530,3 +530,14 @@ li + li {
     border-top-color: #c28512;
 }
 
+
+
+.card--templateTwo {
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+    box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+    border: none;
+    width: 30rem;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}

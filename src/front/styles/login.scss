@@ -1,9 +1,9 @@
 .UserAcess{ 
  background: linear-gradient(to right, #ff622d 20%, #fa9352) #ff622d;
 
-    .UserAcess__FullHeight{
-        min-height: 100vh;
-    }
+  
+}
+
     .UserAcess__Card {
     position: relative;
     width: 440px;
@@ -14,6 +14,9 @@
     perspective: 800px;
     margin-top: 60px;
 
+
+}
+
     .UserAcess__CardForm{ 
     position: relative;
     display: block;
@@ -21,7 +24,14 @@
     padding: 0;
     margin-bottom: 1rem;
     
-    .UserAcess__CardForm--Style {
+    
+    }
+
+.UserAcess__FullHeight{
+        min-height: 100vh;
+    }
+
+.UserAcess__CardForm--Style {
         padding: 13px 20px;
         padding-left: 55px;
         height: 48px;
@@ -59,8 +69,7 @@
         -webkit-transition: all 200ms linear;
         transition: all 200ms linear;
         }
-    }
-}
+
 
     .UserAcess__Card--content{
         position: absolute;
@@ -189,4 +198,167 @@
         color: white;
         box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
     }
+
+
+    //CHANGES FOR CREATE TEMPLATE
+
+    .AddMenu{ 
+ background: linear-gradient(to right, #ff622d 20%, #fa9352) #ff622d;
+height:auto; overflow:auto
 }
+
+        .AddMenu__Card {
+        width: 45rem;
+        height:auto; overflow:auto;
+        background-color: white;
+        background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
+        background-position: bottom center;
+        background-repeat: no-repeat;
+        background-size: 300%;
+        position: absolute;
+        border-radius: 6px;
+        left: -8rem;
+        top: 0;
+        padding: 2rem;
+        margin-top: 2rem;
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        -o-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+
+    .AddMenu__Input--Style {
+        padding: 13px 20px;
+        padding-left: 55px;
+        margin-left: 0.6rem;
+        height: 2.5rem;
+        width: 100%;
+        font-weight: 500;
+        border-radius: 4px;
+        font-size: 14px;
+        line-height: 22px;
+        letter-spacing: 0.5px;
+        outline: none;
+        color: #c4c3ca;
+        background-color: white;
+        border: none;
+        -webkit-transition: all 200ms linear;
+        transition: all 200ms linear;
+        box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
+    }
+
+    .AddMenu__Input--Style--TextArea{
+        height: 4rem;
+    }
+
+.AddMenu__InputPrice--Style {
+        padding: 13px 20px;
+        padding-left: 55px;
+        height: 2.5rem;
+        width: 8rem;
+        margin-left: 1rem;
+        font-weight: 500;
+        border-radius: 4px;
+        font-size: 14px;
+        line-height: 22px;
+        letter-spacing: 0.5px;
+        outline: none;
+        color: #c4c3ca;
+        background-color: white;
+        border: none;
+        -webkit-transition: all 200ms linear;
+        transition: all 200ms linear;
+        box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
+    }
+
+    .AddMenu__Input--Style:focus,
+    .AddMenu__Input--Style:active {
+        border: none;
+        outline: none;
+        box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
+    }
+
+    .AddMenu__Input--Style--inputIcon {
+        position: absolute;
+        top: 0;
+        left: 18px;
+        height: 48px;
+        font-size: 24px;
+        line-height: 48px;
+        text-align: left;
+        color: #00bc98;
+        -webkit-transition: all 200ms linear;
+        transition: all 200ms linear;
+        }
+
+
+.inputContainer i {
+   position: absolute;
+}
+.inputContainer {
+   width: 100%;
+   margin-bottom: 10px;
+}
+.icon {
+    padding: 13px;
+    margin-left: 0.7rem;
+
+        color: #00bc98;
+    width: 70px;
+    text-align: left;
+}
+
+
+.icon--textarea {
+    padding: 17px;
+    margin-left: 0.4rem;
+    margin-top: 0.6rem;
+        color: #00bc98;
+    width: 70px;
+    text-align: left;
+}
+
+.icon--price {
+padding: 12px;
+    margin-left: 1rem;
+        color: #00bc98;
+    width: 70px;
+    text-align: left;
+}
+
+//Select template
+
+
+    .SelectTemplate__CardForm{ 
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 1rem;
+     height: 8rem;
+    
+    }
+
+    .meal_img{
+        width: 1.2rem;
+        height: 1.2rem;
+        
+    margin-bottom: 0.3rem;
+    margin-left: 0.3rem;
+
+
+    }
+
+    .meal_info_check{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .meal_info_label{
+            margin-left: 1.5rem;
+    width: 10rem;
+    }

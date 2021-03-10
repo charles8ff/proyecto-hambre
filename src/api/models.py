@@ -172,17 +172,6 @@ class Section(db.Model):
             "template_id": self.template_id
         }
 
-    @classmethod
-    def add_new(cls, name, meal_id, template_id):
-        section = cls(
-            name=name,
-            meal_id=meal_id,
-            template_id=template_id
-            )
-        db.session.add(section)
-        db.session.commit()
-        return section
-
     def add(self):
         db.session.add(self)
         db.session.commit()
@@ -207,20 +196,28 @@ class Section(db.Model):
         db.session.commit()
         return self
 
+    @classmethod
+    def add_new(cls, name, meal_id, template_id):
+        section = cls(
+            name=name,
+            meal_id=meal_id,
+            template_id=template_id
+            )
+        db.session.add(section)
+        db.session.commit()
+        return section
 
 
     @classmethod
     def get_by_id(cls, template_id):
         sections = cls.query.filter_by(template_id = template_id).all()
         return [section.to_dict() for section in sections]
-        #return [template.to_dict() for template in templates]
 
-# class Enum_Category(enum.Enum):
-#     daily_menu = "daily_menu"
-#     cart_menu = "cart_menu"
-#     drinks_menu = "drinks_menu"
-#     dessert_menu = "dessert_menu"
-#     cocktail_menu = "cocktail_menu"
+    @classmethod
+    def get_by_id_without_meal(cls, template_id):
+        sections = cls.query.filter_by( meal_id = None, template_id = template_id).order_by(Section.id).all()
+        return [section.to_dict() for section in sections]
+
 
 class Enum_Category(str, enum.Enum):
     daily_menu = "Menu del día"

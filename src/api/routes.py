@@ -99,7 +99,7 @@ def new_meal(place_id):
     ), request.json.get(
         "price", None
     )
-    print(place_id)
+    #print(place_id)
     meal = Meal.add(name, description, price, place_id)
 
     return {}, 201
@@ -153,7 +153,7 @@ def new_section():
 
 @api.route('<template_id>/section', methods=['GET'])
 def get_section(template_id):
-    section = Section.get_by_id(template_id)
+    section = Section.get_by_id_without_meal(template_id)
     return jsonify(section), 200
 
 @api.route('/meal_info', methods=['POST'])
@@ -168,6 +168,7 @@ def new_meal_info():
 @api.route('/place/<int:place_id>/template/<int:template_id>', methods=['POST'])
 def new_meals_in_template(place_id, template_id):
     body = request.get_json()
+    print(body)
     for section, meals in body.items():
         for meal in meals:
             new_meal= Meal(
@@ -179,7 +180,7 @@ def new_meals_in_template(place_id, template_id):
             
             new_meal.add(meal.get("meal_info"))
             
-            section = Section(
+            new_section = Section(
                 name = section, 
                 meal_id = new_meal.id,
                 template_id = template_id

@@ -37,7 +37,7 @@ const Layout = () => {
 					<Route exact path="/template-two">
 						<TemplateTwo />
 					</Route>
-					<Route exact path="/addmenu">
+					<Route exact path="/place/:id/addmenu">
 						<AddMenu />
 					</Route>
 					<Route>
