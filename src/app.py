@@ -23,27 +23,11 @@ app.url_map.strict_slashes = False
 jwt = JWTManager(app)
 
 # database condiguration
-if os.getenv("DATABASE_URL") is not None:
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
-else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////tmp/test.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 MIGRATE = Migrate(app, db)
 db.init_app(app)
-
-# MENU_TYPES = ["Menú del día","Carta", "Carta de bebidas", "Carta de postres", "Carta de cócteles"]
-
-# for menu_type in MENU_TYPES:
-#     menu = Menu_Type(menu_type)
-#     menu.add()
-
-# MEAL_INFO = ["gluten", "peanuts", "tree_nuts", "celery", "mustard", "eggs", "milk", "sesame", "fish", "crustaceans", "molluscs", "soya", "sulphites", "lupin", "vegetarian_friendly", "vegan_friendly"]
-
-# for info in MEAL_INFO:
-#     meal_info = Meal_Info(info)
-#     meal_info.add()
-
 # Allow CORS requests to this API
 CORS(app)
 
