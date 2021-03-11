@@ -16,6 +16,10 @@ export const Profile = () => {
 		},
 		[history.location.pathname]
 	);
+
+	useEffect(() => {
+		actions.hideNavigation(false);
+	}, []);
 	return (
 		<>
 			<Jumbotron className="jumbotron">

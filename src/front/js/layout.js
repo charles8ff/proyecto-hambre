@@ -1,25 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
+import { Context } from "./store/appContext.js";
 
 import { Home } from "./pages/home";
 
 import injectContext from "./store/appContext";
-import { Register } from "./pages/register/register.jsx";
+import { Registro } from "./pages/registro.jsx";
 
-import { Header } from "./component/navbar";
+import { Header } from "./component/partials/header.jsx";
 import { Footer } from "./component/footer";
-import { Login } from "./pages/login/login.jsx";
+import { Login } from "./pages/login.jsx";
 import { Profile } from "./component/profile.jsx";
-import { EditProfile } from "./component/editprofile.jsx";
+import { TemplateTwo } from "./pages/templates/template-two.jsx";
+import { AddMenu } from "./pages/admin/addMenu.jsx";
 
 const Layout = () => {
 	const basename = process.env.BASENAME || "";
-
+	const { store, actions } = useContext(Context);
 	return (
 		<BrowserRouter basename={basename}>
 			<ScrollToTop>
-				<Header />
+				{store.showNavigation ? <Header /> : null}
 				<Switch>
 					<Route exact path="/">
 						<Home />
@@ -28,19 +30,27 @@ const Layout = () => {
 						<Profile />
 					</Route>
 					<Route exact path="/register">
-						<Register />
+						<Login />
 					</Route>
 					<Route exact path="/login">
 						<Login />
+					</Route>
+					<Route exact path="/template-two">
+						<TemplateTwo />
+					</Route>
+					<Route exact path="/place/:id/addmenu">
+						<AddMenu />
 					</Route>
 					<Route>
 						<h1>Not found!</h1>
 					</Route>
 				</Switch>
-				<Footer
-					footer_text="¿Tienes Hambre?"
-					footer_url="https://coolors.co/191919-cdcdcd-ffffff-f44708-ed750b-f6b983-58c7e0"
-				/>
+				{store.showNavigation ? (
+					<Footer
+						footer_text="¿Tienes Hambre?"
+						footer_url="https://coolors.co/191919-cdcdcd-ffffff-f44708-ed750b-f6b983-58c7e0"
+					/>
+				) : null}
 			</ScrollToTop>
 		</BrowserRouter>
 	);

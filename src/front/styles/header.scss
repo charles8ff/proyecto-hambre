@@ -1,0 +1,136 @@
+/*Desktop Version*/
+.Header {
+  display: flex;
+  background: #171a22;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20rem;
+  padding-top: 1.5rem;
+  padding-bottom: 0.5rem;
+  height: 80px;
+
+  .Header__Logo{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+    }
+
+    .Header__Logo--Container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+    .Header__Logo--Image {
+        width: 135px;
+        height: 50px;
+    }
+
+}
+
+
+    .Header__Nav {
+  padding-left: 25px;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-gap: 50px;
+  list-style-type: none;
+}
+
+.Header__Nav--Links :hover {
+  color: white;
+}
+
+
+.Header__Nav--MobileView {
+  display: none;
+}
+
+.Header__Nav--SigninUp {
+  display: flex;
+  padding: 0px 5px;
+  list-style-type: none;
+}
+.Header__Nav--SigninIn {
+  padding-right: 50px;
+  align-self: center;
+}
+
+.Header__MobileMenu {
+  display: none;
+}
+
+  a{
+      color: #cacaca;
+  }
+
+  a:link {
+            text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+
+/*Mobile Version*/
+@media (max-width: 950px) {
+  .Header {
+    padding: 0px 10px;
+  }
+  .Header__Logo {
+    width: 135px;
+    height: 50px;
+  }
+  .Header__Nav {
+    color: red;
+    display: flex;
+    width: 100%;
+    height: 350px;
+    position: absolute;
+    top: 80px;
+    left: -100%;
+    opacity: 0;
+    transition: all 0.5s ease;
+    flex-direction: column;
+    list-style-type: none;
+    grid-gap: 0px;
+  }
+  .Header__Nav.active {
+    background: #171a22;
+    left: 0;
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: 1;
+    align-content: center;
+    padding-left: 0px;
+  }
+
+  .Header__MobileMenu--Icon {
+    stroke: #ff622d;
+    fill: #fff;
+    width: 45px;
+    height: 45px;
+  }
+  .Header__Nav--Links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10vw;
+    padding: 30px 0px;
+  }
+  .Header__Nav--SigninUp {
+    background: rgb(222, 9, 241);
+    border-radius: 3px;
+    color: white;
+    padding: 20px 0px;
+    width: 80%;
+    align-self: center;
+    border-radius: 3px;
+  }
+
+  .Header__Nav--SigninUp {
+    display: none;
+  }
+}
+.Header__MobileMenu {
+  display: block;
+}
