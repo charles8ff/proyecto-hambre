@@ -176,54 +176,14 @@ def new_meals_in_template(place_id, template_id):
                 template_id = template_id
             )
             new_section.add()
-<<<<<<< HEAD
     new_menu= Menu(business_id = place_id, template_id = template_id)
     new_menu.add()
-    return {}, 201
-=======
     return jsonify('Menu created successfully'), 201
->>>>>>> main
 
 @api.route('/meal_info', methods=['POST'])
 def new_meal_info():
     info= request.json.get(
         "info", None
     )
-<<<<<<< HEAD
-    meal = Meal.get_by_id(meal_id)
-    section_row = Section.get_by_meal(meal.id)
-    section_row.delete()
-    meal.delete()
-    return meal.to_dict(), 200
-
-@api.route('/template/<template_id>', methods=['GET'])
-def getAllSectionNames(template_id):
-    sections = Section.get_by_template_ONLY_NAMES(template_id)
-    if sections is not None:
-        return jsonify(sections), 200
-    else:
-        return {}, 418
-
-@api.route('/place/<int:place_id>/template/<int:template_id>', methods=['GET'])
-def getAllMealsfromMenu(place_id, template_id):
-    place= Business.get_by_id(place_id)
-    sections =  Section.get_by_template_and_business(place_id, template_id)
-    # meals = []
-    # final_dict={}
-    # if sections is not None and place.get_is_active():
-    #     for section in sections:
-    #         meal = Meal.get_by_id(section.get("meal_id"))
-    #         mealdict = meal.to_dict()
-    #         meals.append(mealdict)
-    #     print(meals)
-    print(sections)
-    # for section in sectionNames:
-    #     final_dict={section.name: [for section in sections]}
-
-    return jsonify(sections), 200
-        
-=======
     meal_info = Meal_Info.add(info)
->>>>>>> main
-
     return {}, 201

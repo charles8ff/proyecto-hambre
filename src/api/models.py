@@ -101,14 +101,11 @@ class Menu(db.Model):
             "business_id": self.business_id,
             "template_id": self.template_id
         }
-<<<<<<< HEAD
+        
     def add(self):
         db.session.add(self)
         db.session.commit()
 
-=======
-    
->>>>>>> main
     @classmethod
     def get_by_business_id(cls, place_id):
         menus = cls.query.filter_by(business_id = place_id).all()

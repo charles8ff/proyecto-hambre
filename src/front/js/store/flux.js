@@ -290,7 +290,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					loginToken: false
 				});
 			},
-<<<<<<< HEAD
 			loadMenu: async (place_id, template_id) => {
 				let res = await fetch(URLBACKEND + `/api/place/${place_id}/template/${template_id}`);
 				let responseAsJson = await res.json();
@@ -306,7 +305,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(sections);
 				setStore({ titleSections: sections });
 				return sections;
-=======
+			},
 			changeProfile: async (place_id, data) => {
 				let response = await fetch(URLBACKEND + `/api/place/${place_id}`, {
 					method: "PATCH",
@@ -317,7 +316,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(data)
 				});
 				response = await response.json();
->>>>>>> main
 			}
 		}
 	};

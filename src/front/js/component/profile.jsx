@@ -105,7 +105,7 @@ export const Profile = () => {
 															: "d-none"
 													}
 													click={() => {
-														history.push(history.location.pathname.concat("addmenu"));
+														history.push(history.location.pathname.concat("/addmenu"));
 													}}
 													// hide={store.loginToken != false ? "" : "d-none"}
 												/>
@@ -113,7 +113,7 @@ export const Profile = () => {
 										)}
 
 										{/* es la vista de los menus que tiene que ir en menu views */}
-										<p className="p-3">{store.loggedBusiness.description}</p>
+										{/* <p className="p-3">{store.loggedBusiness.description}</p>
 										<OurButton
 											title="Editar"
 											click={() => history.push(`${store.loggedBusiness.id}/edit`)}
@@ -123,7 +123,7 @@ export const Profile = () => {
 													? ""
 													: "d-none"
 											}
-										/>
+										/> */}
 									</div>
 								</div>
 							</div>

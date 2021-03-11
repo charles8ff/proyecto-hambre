@@ -192,7 +192,7 @@
     }
 
     .aside{
-      width: 170px;
+      width: 250px;
       height: 700px;
       background: #cacaca61;
       float: left;
@@ -203,15 +203,15 @@
         }
 
       .avatar{
-        width: 55px;
-        height: 55px;
-        border-radius: 50%;
-        background-color: rgb(255, 255, 255);
-        margin: auto;
-        margin-top: 20px;
-        overflow: hidden;
-        margin-left: 3rem;
-        transition: all 0.3s cubic-bezier(0.38,-0.9, 0.5, 2.5);
+width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    background-color: white;
+    margin: auto;
+    margin-top: 20px;
+    overflow: hidden;
+    margin-left: 4rem;
+    transition: all 0.3s cubic-bezier(0.38, -0.9, 0.5, 2.5);
       }
 
 
@@ -237,7 +237,7 @@
 
     .log-out{
         position: relative;
-        margin-top: 28rem;
+margin-top: 24rem;
         font-size: 11px;
         color: #e53935;
         font-weight: bold;
