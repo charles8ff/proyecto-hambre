@@ -4,6 +4,7 @@ import { Context } from "../store/appContext";
 import { Container, Jumbotron, Row, Col, Card, Button } from "react-bootstrap";
 import { MenusView } from "./menusview.jsx";
 import { useHistory } from "react-router-dom";
+import { OurButton } from "./button.jsx";
 
 export const Profile = () => {
 	const { store, actions } = useContext(Context);
@@ -57,7 +58,17 @@ export const Profile = () => {
 												{store.loggedBusiness.close_hour}
 											</h3>
 										</div>
-										<p className="p-5">{store.loggedBusiness.description}</p>
+										<p className="p-3">{store.loggedBusiness.description}</p>
+										<OurButton
+											title="Editar"
+											click={() => history.push(`${store.loggedBusiness.id}/edit`)}
+											hide={
+												store.loginToken != false &&
+												actions.decodeToken(store.loginToken).sub.id == store.loggedBusiness.id
+													? ""
+													: "d-none"
+											}
+										/>
 									</div>
 								</Card.Body>
 							</Card>

@@ -263,6 +263,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({
 					loginToken: false
 				});
+			},
+			changeProfile: async (place_id, data) => {
+				let response = await fetch(URLBACKEND + `/api/place/${place_id}`, {
+					method: "PATCH",
+					headers: new Headers({
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${loginToken}`
+					}),
+					body: JSON.stringify(data)
+				});
+				response = await response.json();
 			}
 		}
 	};
