@@ -24,12 +24,6 @@ export const Header = () => {
 					<li className="Header__Nav--Links" onClick={closeMobileMenu}>
 						<Link to="/">Inicio</Link>
 					</li>
-					{/* <li className="option" onClick={closeMobileMenu}>
-						<Link to="/">Inicio</Link>
-					</li>
-					<li className="option" onClick={closeMobileMenu}>
-						<Link to="/">Inicio</Link>
-					</li> */}
 					<li className="Header__Nav--Links Header__Nav--MobileView" onClick={closeMobileMenu}>
 						<OurButton
 							title="Iniciar sesión"

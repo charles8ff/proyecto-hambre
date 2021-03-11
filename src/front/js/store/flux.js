@@ -101,7 +101,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ userSelectTemplate: data });
 			},
 			postMeal: async data => {
-				console.log(data);
 				let place_id = getActions().decodeToken(getStore().loginToken).sub.id;
 				let template_id = getStore().userSelectTemplate;
 				let response = await fetch(URLBACKEND + `/api/place/${place_id}/template/${template_id}`, {
@@ -116,7 +115,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} else {
 					if (response.ok) {
 						response = await response.json();
-						console.log(response);
 					}
 				}
 			},

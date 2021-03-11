@@ -44,8 +44,6 @@ export const AddMenu = () => {
 		setPreviewTemplate(e.value);
 	};
 
-	console.log;
-
 	const selectTemplateView = () => {
 		return (
 			<>
