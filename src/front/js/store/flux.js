@@ -17,7 +17,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			singUp_User: false,
 			showNavigation: true,
 			singUp_profile: [],
-			loggedBusiness: {},
+			loggedBusiness: localStorage.getItem("place") ? JSON.parse(localStorage.getItem("place")) : false,
 			menus_type: [],
 			templates: [],
 			sections: [],
@@ -34,18 +34,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				delete clonedObj[key];
 				clonedObj[newKey] = targetKey;
 				return clonedObj;
-			},
-			getProfile: place_id => {
-				fetch(URLBACKEND + `/api${place_id}`)
-					.then(async res => {
-						const response = await res.json();
-						setStore({
-							loggedBusiness: response
-						});
-					})
-					.catch(err => {
-						throw err;
-					});
 			},
 			getLatitudeLongitude: address => {
 				Geocode.fromAddress(address).then(
@@ -149,6 +137,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch(URLBACKEND + `/api${place_id}`)
 					.then(async res => {
 						const response = await res.json();
+						localStorage.setItem("place", JSON.stringify(response));
 						setStore({
 							loggedBusiness: response
 						});

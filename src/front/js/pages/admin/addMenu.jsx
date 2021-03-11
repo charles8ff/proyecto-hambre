@@ -8,6 +8,7 @@ import "../../../styles/login.scss";
 
 import { TemplateTwo } from "../templates/template-two.jsx";
 import { Template1 } from "../templates/template1.js";
+import { Error404 } from "../404.jsx";
 
 export const AddMenu = () => {
 	const { store, actions } = useContext(Context);
@@ -16,6 +17,8 @@ export const AddMenu = () => {
 	const [previewTemplate, setPreviewTemplate] = useState(0);
 	let allMeals = {};
 	const history = useHistory();
+
+	const getPlaceID = history.location.pathname.replace(/\D/g, "");
 
 	useEffect(() => {
 		actions.hideNavigation(true);
@@ -56,7 +59,7 @@ export const AddMenu = () => {
 						<SelectFill options_value={store.templates} handleSelectType={selectTemplate} />
 					) : null}
 				</div>
-				{previewTemplate == 1 ? (
+				{previewTemplate == 2 ? (
 					<>
 						<button onClick={() => setShowSection(true)} className="btn mt-5 mb-5">
 							Seleccionar esta plantilla
@@ -91,8 +94,8 @@ export const AddMenu = () => {
 		);
 	};
 
-	return (
-		<>
+	const toRenderMenuAdd = () => {
+		return (
 			<div className="AddMenu">
 				<div className="container">
 					<div className="row UserAcess__FullHeight justify-content-center">
@@ -109,6 +112,8 @@ export const AddMenu = () => {
 					</div>
 				</div>
 			</div>
-		</>
-	);
+		);
+	};
+
+	return <>{getPlaceID == store.loggedBusiness.id ? toRenderMenuAdd() : <Error404 />}</>;
 };

@@ -1,65 +1,30 @@
 import React, { Component, useContext } from "react";
 import { Context } from "../store/appContext";
-import Card from "react-bootstrap/Card";
-import CardDeck from "react-bootstrap/CardDeck";
-import PropTypes from "prop-types";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { OurButton } from "./button.jsx";
 
 export const MenusView = props => {
-	const { store, actions } = useContext(Context);
-
-	// templatesInHTML = store.business.menus o algo del palo
-
 	return (
-		<Container>
-			<CardDeck className="justify-content-center pb-5">
-				<Row xs={1} md={1} lg={3} className="justify-content-center">
-					<Col>
-						<Card className="text-center">
-							<Card.Img
-								variant="top"
-								src="https://dkstudio.mx/wp-content/plugins/tutor/assets/images/placeholder.jpg"
-							/>
-							<Card.Body>
-								<Card.Title>Menú del día</Card.Title>
-							</Card.Body>
-							<Card.Footer>
-								<small className="text-muted">Ver toda la carta</small>
-							</Card.Footer>
-						</Card>
-					</Col>
-					<Col>
-						<Card className="text-center">
-							<Card.Img
-								variant="top"
-								src="https://dkstudio.mx/wp-content/plugins/tutor/assets/images/placeholder.jpg"
-							/>
-							<Card.Body>
-								<Card.Title>Carta</Card.Title>
-							</Card.Body>
-							<Card.Footer>
-								<small className="text-muted">Ver toda la carta</small>
-							</Card.Footer>
-						</Card>
-					</Col>
-					<Col>
-						<Card className="text-center">
-							<Card.Img
-								variant="top"
-								src="https://dkstudio.mx/wp-content/plugins/tutor/assets/images/placeholder.jpg"
-							/>
-							<Card.Body>
-								<Card.Title>Carta de vinos</Card.Title>
-							</Card.Body>
-							<Card.Footer>
-								<small className="text-muted">Ver toda la carta</small>
-							</Card.Footer>
-						</Card>
-					</Col>
-				</Row>
-			</CardDeck>
-		</Container>
+		<div className="d-flex flex-row pt-5 pl-1">
+			<div className="col-12 col-lg-6 col-xl-4">
+				<div className="menu__card user-card">
+					<div className="card-block">
+						{/* <div className="user-image"> */}
+						<img
+							className="menu__image"
+							src="https://ak.picdn.net/shutterstock/videos/12756518/thumb/9.jpg"
+							alt="Conoce nuestros beneficios"
+						/>
+						<i className="menu__delete fas fa-trash-alt" />
+						{/* </div> */}
+						<h5>Menu del día</h5>
+						<hr />
+						<div className="d-flex flex-row">
+							<OurButton title="Ver menu" />
+							<OurButton title="QR" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	);
 };

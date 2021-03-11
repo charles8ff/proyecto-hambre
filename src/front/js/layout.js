@@ -16,6 +16,8 @@ import { TemplateTwo } from "./pages/templates/template-two.jsx";
 import { AddMenu } from "./pages/admin/addMenu.jsx";
 import { Template1 } from "./pages/templates/template1.js";
 
+import { Error404 } from "./pages/404.jsx";
+
 const Layout = () => {
 	const basename = process.env.BASENAME || "";
 	const { store, actions } = useContext(Context);
@@ -39,9 +41,14 @@ const Layout = () => {
 					<Route exact path="/template-two">
 						<TemplateTwo />
 					</Route>
-					<Route exact path="/place/:id/addmenu">
-						<AddMenu />
-					</Route>
+					{store.loginToken != false &&
+					actions.decodeToken(store.loginToken).sub.id == store.loggedBusiness.id ? (
+						<Route exact path="/place/:id/addmenu">
+							<AddMenu />
+						</Route>
+					) : (
+						<Error404 />
+					)}
 					<Route exact path="/place/:id/menu/1">
 						<Template1 />
 					</Route>

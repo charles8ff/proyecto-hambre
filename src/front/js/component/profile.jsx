@@ -9,8 +9,10 @@ import { OurButton } from "./button.jsx";
 import { Maps } from "./maps.jsx";
 
 import "../../styles/profile.scss";
+import { useState } from "react";
 export const Profile = () => {
 	const { store, actions } = useContext(Context);
+	const [businessMenus, setBusinessMenus] = useState(false);
 	const history = useHistory();
 	useEffect(
 		() => {
@@ -20,28 +22,27 @@ export const Profile = () => {
 	);
 
 	useEffect(() => {
-		console.log(store.loggedBusiness);
-
 		actions.hideNavigation(true);
 	}, []);
 
 	useEffect(
 		() => {
-			if (store.loggedBusiness == false) {
-				console.log("es caca");
-			} else {
-				console.log(store.loggedBusiness);
-				actions.getLatitudeLongitude(store.loggedBusiness.address);
-			}
-
-			// actions.getLatitudeLongitude(store.loggedBusiness);
-			// actions.hideNavigation(true);
+			store.loggedBusiness == false ? null : actions.getLatitudeLongitude(store.loggedBusiness.address);
 		},
 		[store.loggedBusiness]
 	);
 
-	//console.log(store.map);
-	//console.log(process.env.REACT_GOOGLE_MAPS_API_KEY);
+	useEffect(
+		() => {
+			store.loggedBusiness.menus && !store.loggedBusiness.menus.length
+				? setBusinessMenus(false)
+				: setBusinessMenus(true);
+		},
+		[store.loggedBusiness.menus]
+	);
+
+	//console.log(history.location.pathname.replace(/\D/g, ""));
+
 	return (
 		<>
 			<div className="UserAcess">
@@ -64,15 +65,6 @@ export const Profile = () => {
 												<i className="Profile__Icon fas fa-color fa-lg fa-phone" />
 												<h4 className="Profile__H4">{store.loggedBusiness.phone_number}</h4>
 											</div>
-											{/* <div className="d-flex flex-row">
-												<i className="far fa-color fa-clock" />
-												<h4 className="Profile__H4">
-													{"Horario"}
-													{store.loggedBusiness.open_hour}
-													{" - "}
-													{store.loggedBusiness.close_hour}
-												</h4>
-											</div> */}
 											<div className="log-out">
 												<OurButton
 													title="Cerrar Sesión"
@@ -99,29 +91,28 @@ export const Profile = () => {
 										<div className="d-flex flex-row pt-2 justify-content-center">
 											<Maps />
 										</div>
-										{/* es la vista de los menus que tiene que ir en menu views */}
-										<div className="d-flex flex-row pt-5 pl-1">
-											<div className="col-12 col-lg-6 col-xl-4">
-												<div className="menu__card user-card">
-													<div className="card-block">
-														{/* <div className="user-image"> */}
-														<img
-															className="menu__image"
-															src="https://ak.picdn.net/shutterstock/videos/12756518/thumb/9.jpg"
-															alt="Conoce nuestros beneficios"
-														/>
-														<i className="menu__delete fas fa-trash-alt" />
-														{/* </div> */}
-														<h5>Menu del día</h5>
-														<hr />
-														<div className="d-flex flex-row">
-															<OurButton title="Ver menu" />
-															<OurButton title="QR" />
-														</div>
-													</div>
-												</div>
+										{businessMenus ? (
+											<MenusView />
+										) : (
+											<div className="d-flex flex-row pt-2 justify-content-center">
+												<OurButton
+													title="Añadir Menú"
+													hide={
+														store.loginToken != false &&
+														actions.decodeToken(store.loginToken).sub.id ==
+															store.loggedBusiness.id
+															? ""
+															: "d-none"
+													}
+													click={() => {
+														history.push(history.location.pathname.concat("addmenu"));
+													}}
+													// hide={store.loginToken != false ? "" : "d-none"}
+												/>
 											</div>
-										</div>
+										)}
+
+										{/* es la vista de los menus que tiene que ir en menu views */}
 									</div>
 								</div>
 							</div>
