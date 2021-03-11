@@ -29,6 +29,7 @@ class Business(db.Model):
         return self._password
     
     def to_dict(self):
+        menus = Menu.query.filter_by(business_id = self.id).all()
         return {
             "id": self.id,
             "email": self.email,
@@ -36,6 +37,7 @@ class Business(db.Model):
             "address": self.address,
             "description": self.description,
             "phone_number": self.phone_number,
+            "menus": menus,
             "open_hour": self.open_hour.isoformat(),
             "close_hour": self.close_hour.isoformat(),
             "description": self.description,
@@ -104,6 +106,10 @@ class Menu(db.Model):
             "business_id": self.business_id,
             "template_id": self.template_id
         }
+    def add(self):
+        db.session.add(self)
+        db.session.commit()
+
     @classmethod
     def get_by_business_id(cls, place_id):
         menus = cls.query.filter_by(business_id = place_id).all()

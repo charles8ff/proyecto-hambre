@@ -188,6 +188,8 @@ def new_meals_in_template(place_id, template_id):
                 template_id = template_id
             )
             new_section.add()
+    new_menu= Menu(business_id = place_id, template_id = template_id)
+    new_menu.add()
     return {}, 201
 
 @api.route('/place/<int:place_id>/template/<int:template_id>', methods=['DELETE'])
