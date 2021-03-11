@@ -11,6 +11,7 @@ import { Header } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Login } from "./pages/login/login.jsx";
 import { Profile } from "./component/profile.jsx";
+import { EditProfile } from "./component/editprofile.jsx";
 
 const Layout = () => {
 	const basename = process.env.BASENAME || "";

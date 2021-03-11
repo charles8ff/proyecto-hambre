@@ -11,6 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				material_ui_is_user_active: false,
 				material_ui_is_correct_password: false
 			},
+			showEdit: false,
 			singUp_profile: [],
 			loggedBusiness: {},
 			loginToken: localStorage.getItem("loginToken") ? localStorage.getItem("loginToken") : false
@@ -139,6 +140,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({
 					loginToken: false
 				});
+			},
+			changeProfile: async (place_id, data) => {
+				let response = await fetch(URLBACKEND + `/api/place/${place_id}`, {
+					method: "PATCH",
+					headers: new Headers({
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${loginToken}`
+					}),
+					body: JSON.stringify(data)
+				});
+				response = await response.json();
 			}
 		}
 	};
