@@ -1,7 +1,8 @@
 import React, { useContext, Fragment, useEffect } from "react";
 import { Row, Container, Col } from "react-bootstrap";
 import { Context } from "../store/appContext";
-import "../../styles/home.scss";
+// import "../../styles/home.scss";
+import "../../styles/dmenu_home.scss";
 import { Profile } from "../component/profile.jsx";
 import MenuIcon from "../component/partials/img/menu-icon.png";
 import { Benefits } from "../component/benefits.jsx";
@@ -11,8 +12,8 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 	return (
 		<>
-			<div className="homepage-hero-module">
-				<div className="bg-overlay" />
+			<div className="landing__hero">
+				<div className="landing__headbg" />
 				<div className="container d-flex flex-md-row flex-column">
 					<div className="col-12 col-md-6">
 						<h1 className="mb-4 text-white font-weight-bold ">HAZ TU MENU DIGITAL</h1>
@@ -26,15 +27,15 @@ export const Home = () => {
 							</Link>
 						</p>
 					</div>
-					<div className="col-12 col-md-6 shadow-lg phone--image" />
+					<div className="col-12 col-md-6 shadow-lg phone-image" />
 				</div>
 			</div>
-			<div className="dmenu--about--what--doing">
+			<div className="what-we-doing">
 				<div className="container">
 					<div className="row p-5">
 						<div className="col-12 col-md-7 pr-md-5 text-left align-self-center ">
 							<h2 className="mb-4 font-weight-bold ">¿Qué hacemos?</h2>
-							<img src={"https://i.imgur.com/dbSuYw0.png"} className="menu--icon" />
+							<img src={"https://i.imgur.com/dbSuYw0.png"} className="menu-icon" />
 						</div>
 						<div className="col-12 col-md-5 ">
 							<p>
@@ -45,7 +46,7 @@ export const Home = () => {
 					</div>
 				</div>
 			</div>
-			<div className="parallax--two--home">
+			<div className="parallax__home--two">
 				<div className="container">
 					<div className="d-flex flex-wrap">
 						<Benefits
@@ -62,7 +63,7 @@ export const Home = () => {
 						/>
 					</div>
 				</div>
-				<div className="dmenu--start--now">
+				<div className="start-now">
 					<div className="container p-5">
 						<div className="d-flex justify-content-center">
 							<h2 className="mb-4 font-weight-bold ">Empieza ahora</h2>
@@ -77,8 +78,7 @@ export const Home = () => {
 					</div>
 				</div>
 			</div>
-
-			<div className="dmenu--about--what--doing">
+			<div className="about-us">
 				<div className="container">
 					<div className="row p-5">
 						<div className="col-12 col-md-7 pr-md-5 text-left align-self-center ">
@@ -86,7 +86,7 @@ export const Home = () => {
 								src={
 									"https://previews.123rf.com/images/imtmphoto/imtmphoto1604/imtmphoto160400013/54478445-dos-empresarios-un-asi%C3%A1tico-y-un-cauc%C3%A1sico-d%C3%A1ndose-la-mano-mirando-a-la-c%C3%A1mara-en-el-aeropuerto-moderno-.jpg"
 								}
-								className="about--us--image"
+								className="about-us-pic"
 							/>
 						</div>
 						<div className="col-12 col-md-5 ">
