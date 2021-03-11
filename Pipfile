@@ -21,6 +21,7 @@ flask-login = "*"
 flask-wtf = "*"
 flask-jwt-extended = "*"
 werkzeug = "*"
+sqlalchemy-enum-tables = "*"
 
 [requires]
 python_version = "3.8"

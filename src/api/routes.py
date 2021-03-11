@@ -61,8 +61,8 @@ def handle_new_user():
     if not email or not password:
         return "Missing info", 400
     password_hash = generate_password_hash(password, method='pbkdf2:sha256')
-    user = Business.add(email, password_hash, place_name, address, description, phone_number, open_hour, close_hour)
-   
+    user = Business(email=email, _password=password_hash, place_name=place_name, address=address, description=description, phone_number=phone_number, open_hour=open_hour, close_hour=close_hour)
+    user.add()
     access_token = create_access_token(
         identity=user.to_dict(), 
         expires_delta=timedelta(minutes=90)
@@ -105,6 +105,17 @@ def get_menu_type():
     return jsonify(get_menu_type), 200
 
 
+@api.route('/menutype', methods=['POST'])
+def new_menu_type():
+    menu_type= request.json.get(
+        "menu_type", None
+    )
+    menu_type = Menu_Type(menu_type=menu_type)
+    menu_type.add()
+
+    return {}, 201
+
+
 @api.route('/menutype/<menu_type_id>/template', methods=['POST'])
 def new_template(menu_type_id):
     title, description, price = request.json.get(
@@ -114,8 +125,8 @@ def new_template(menu_type_id):
     ), request.json.get(
         "price", None
     )
-    template = Template.add(title, description, price, menu_type_id)
-
+    template = Template(title=title, description=description, price=price, menu_type_id=menu_type_id)
+    template.add()
     return {}, 201
 
 @api.route('/<menu_type_id>/templates', methods=['GET'])
@@ -164,3 +175,12 @@ def new_meals_in_template(place_id, template_id):
             )
             new_section.add()
     return jsonify('Menu created successfully'), 201
+
+@api.route('/meal_info', methods=['POST'])
+def new_meal_info():
+    info= request.json.get(
+        "info", None
+    )
+    meal_info = Meal_Info.add(info)
+
+    return {}, 201

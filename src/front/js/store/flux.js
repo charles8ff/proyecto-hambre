@@ -268,8 +268,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let response = await fetch(URLBACKEND + `/api/place/${place_id}`, {
 					method: "PATCH",
 					headers: new Headers({
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${loginToken}`
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${loginToken}`
 					}),
 					body: JSON.stringify(data)
 				});

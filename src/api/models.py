@@ -38,7 +38,6 @@ class Business(db.Model):
             "phone_number": self.phone_number,
             "open_hour": self.open_hour.isoformat(),
             "close_hour": self.close_hour.isoformat(),
-            "description": self.description,
         }
 
     @classmethod
@@ -73,20 +72,10 @@ class Business(db.Model):
         user = cls.query.filter_by(email = email).first_or_404(description=None)
         return user
 
-    @classmethod
-    def add(cls, email, password, place_name, address, description, phone_number, open_hour, close_hour):
-        user = cls(
-            email=email,
-            _password=password,
-            place_name=place_name,
-            address=address,
-            description=description,
-            phone_number=phone_number,
-            open_hour=open_hour,
-            close_hour=close_hour
-            )
-        db.session.add(user)
+    def add(self):
+        db.session.add(self)
         db.session.commit()
+        return self
     
 
     def get_password(self):
@@ -242,7 +231,6 @@ class Menu_Type(db.Model):
     def add(self):
         db.session.add(self)
         db.session.commit()
-        return menu_type
     
     @classmethod
     def get_all_menu_type(cls):
@@ -306,7 +294,7 @@ class Enum_Info(enum.Enum):
     milk = "milk"
     sesame = "sesame"
     fish = "fish"
-    crustaceans = "crustaceans"
+    custaceans = "crustaceans"
     molluscs = "molluscs"
     soya = "soya"
     sulphites = "sulphites"
@@ -337,6 +325,11 @@ class Meal_Info(db.Model):
         info = cls.query.filter_by(id = id).first()
         return info
 
-    def add(self):
-        db.session.add(self)
+    @classmethod
+    def add(cls, meal_info):
+        meal_info = cls(
+            info=meal_info
+            )
+        db.session.add(meal_info)
         db.session.commit()
+        return meal_info
