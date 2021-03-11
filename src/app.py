@@ -7,7 +7,7 @@ from flask_migrate import Migrate
 from flask_swagger import swagger
 from flask_cors import CORS
 from api.utils import APIException, generate_sitemap
-from api.models import db
+from api.models import db, Menu_Type, Meal_Info
 from api.routes import api
 from api.admin import setup_admin
 
@@ -31,6 +31,18 @@ else:
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 MIGRATE = Migrate(app, db)
 db.init_app(app)
+
+MENU_TYPES = ["daily_menu","cart_menu", "drinks_menu", "dessert_menu", "cocktail_menu"]
+
+for menu_type in MENU_TYPES:
+    menu = Menu_Type(menu_type)
+    menu.add()
+
+MEAL_INFO = ["gluten", "peanuts", "tree_nuts", "celery", "mustard", "eggs", "milk", "sesame", "fish", "crustaceans", "molluscs", "soya", "sulphites", "lupin", "vegetarian_friendly", "vegan_friendly"]
+
+for info in MEAL_INFO:
+    meal_info = Meal_Info(info)
+    meal_info.add()
 
 # Allow CORS requests to this API
 CORS(app)

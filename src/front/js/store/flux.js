@@ -142,10 +142,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 			},
 			changeProfile: async (place_id, data) => {
-				let response = await fetch(URLBACKEND + `/api/place/${place_id}/edit`, {
+				let response = await fetch(URLBACKEND + `/api/place/${place_id}`, {
 					method: "PATCH",
 					headers: new Headers({
-						"Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${loginToken}`
 					}),
 					body: JSON.stringify(data)
 				});
