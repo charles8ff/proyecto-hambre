@@ -86,6 +86,7 @@
 		"@material-ui/icons": "^4.11.2",
 		"@material-ui/lab": "^4.0.0-alpha.57",
 		"bootstrap": "^4.6.0",
+		"es-abstract": "^1.18.0",
 		"jwt-decode": "^3.1.2",
 		"password-hash": "^1.2.2",
 		"prop-types": "^15.6.1",
