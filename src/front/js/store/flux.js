@@ -1,7 +1,7 @@
 import jwt_decode from "jwt-decode";
 import Geocode from "react-geocode";
-const URLBACKEND = "https://3001-copper-mite-z2nrl6y2.ws-eu03.gitpod.io"; //no slash at end
-//no slash at end//no slash at end//no slash at end//no slash at end//no slash at end//no slash at end
+const URLBACKEND = "https://project-hunger.herokuapp.com/";
+
 Geocode.setApiKey(process.env.REACT_GOOGLE_MAPS_API_KEY);
 Geocode.setLanguage("es");
 Geocode.setRegion("es");
@@ -114,7 +114,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ userSelectTemplate: data });
 			},
 			postMeal: async data => {
-				console.log(data);
 				let place_id = getActions().decodeToken(getStore().loginToken).sub.id;
 				let template_id = getStore().userSelectTemplate;
 				let response = await fetch(URLBACKEND + `/api/place/${place_id}/template/${template_id}`, {
@@ -129,7 +128,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} else {
 					if (response.ok) {
 						response = await response.json();
-						console.log(response);
 					}
 				}
 			},
@@ -292,6 +290,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					loginToken: false
 				});
 			},
+<<<<<<< HEAD
 			loadMenu: async (place_id, template_id) => {
 				let res = await fetch(URLBACKEND + `/api/place/${place_id}/template/${template_id}`);
 				let responseAsJson = await res.json();
@@ -307,6 +306,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(sections);
 				setStore({ titleSections: sections });
 				return sections;
+=======
+			changeProfile: async (place_id, data) => {
+				let response = await fetch(URLBACKEND + `/api/place/${place_id}`, {
+					method: "PATCH",
+					headers: new Headers({
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${loginToken}`
+					}),
+					body: JSON.stringify(data)
+				});
+				response = await response.json();
+>>>>>>> main
 			}
 		}
 	};

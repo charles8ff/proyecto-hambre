@@ -6,13 +6,13 @@ import { Context } from "./store/appContext.js";
 import { Home } from "./pages/home";
 
 import injectContext from "./store/appContext";
-import { Registro } from "./pages/register/registro.jsx";
+import { Registro } from "./pages/registro.jsx";
 
 import { Header } from "./component/partials/header.jsx";
 import { Footer } from "./component/footer";
-import { Login } from "./pages/login/login.jsx";
+import { Login } from "./pages/login.jsx";
 import { Profile } from "./component/profile.jsx";
-import { TemplateTwo } from "./pages/templates/template-two.jsx";
+import { TemplateTwo } from "./pages/templates/template-two.jsx";//
 import { AddMenu } from "./pages/admin/addMenu.jsx";
 import { Template1 } from "./pages/templates/template1.js";
 

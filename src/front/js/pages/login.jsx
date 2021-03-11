@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useForm, useFieldArray, useWatch } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { Context } from "../../store/appContext";
-import { Registro } from "../register/registro.jsx";
-import { AddPlace } from "../register/add-place.jsx";
+import { Context } from "../store/appContext";
+import { Registro } from "./registro.jsx";
+import { AddPlace } from "./add-place.jsx";
 
-import "../../../styles/login.scss";
+import "../../styles/login.scss";
 
 export const Login = () => {
 	const { register, handleSubmit, watch, errors } = useForm();

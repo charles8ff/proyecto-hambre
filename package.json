@@ -87,6 +87,7 @@
 		"@material-ui/lab": "^4.0.0-alpha.57",
 		"@react-google-maps/api": "^2.1.1",
 		"bootstrap": "^4.6.0",
+		"es-abstract": "^1.18.0",
 		"jwt-decode": "^3.1.2",
 		"password-hash": "^1.2.2",
 		"prop-types": "^15.6.1",
@@ -104,6 +105,7 @@
 		"react-router-dom": "^5.2.0",
 		"react-select": "^4.2.1",
 		"semantic-ui-css": "^2.4.1",
-		"semantic-ui-react": "^2.0.3"
+		"semantic-ui-react": "^2.0.3",
+		"string.prototype.trimend": "^1.0.4"
 	}
 }

@@ -113,6 +113,17 @@ export const Profile = () => {
 										)}
 
 										{/* es la vista de los menus que tiene que ir en menu views */}
+										<p className="p-3">{store.loggedBusiness.description}</p>
+										<OurButton
+											title="Editar"
+											click={() => history.push(`${store.loggedBusiness.id}/edit`)}
+											hide={
+												store.loginToken != false &&
+												actions.decodeToken(store.loginToken).sub.id == store.loggedBusiness.id
+													? ""
+													: "d-none"
+											}
+										/>
 									</div>
 								</div>
 							</div>
