@@ -1,6 +1,11 @@
 import jwt_decode from "jwt-decode";
+import Geocode from "react-geocode";
 const URLBACKEND = "https://3001-copper-mite-z2nrl6y2.ws-eu03.gitpod.io"; //no slash at end
 //no slash at end//no slash at end//no slash at end//no slash at end//no slash at end//no slash at end
+Geocode.setApiKey(process.env.REACT_GOOGLE_MAPS_API_KEY);
+Geocode.setLanguage("es");
+Geocode.setRegion("es");
+Geocode.setLocationType("ROOFTOP");
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -19,7 +24,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			selectedTemplate: 0,
 			loginToken: localStorage.getItem("loginToken") ? localStorage.getItem("loginToken") : false,
 			titleSections: [],
-			allSections: []
+			allSections: [],
+			map: undefined
 		},
 		actions: {
 			renameKey: (object, key, newKey) => {
@@ -40,6 +46,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(err => {
 						throw err;
 					});
+			},
+			getLatitudeLongitude: address => {
+				Geocode.fromAddress(address).then(
+					response => {
+						const { lat, lng } = response.results[0].geometry.location;
+						setStore({
+							map: {
+								lat: lat,
+								lng: lng
+							}
+						});
+						console.log(lat, lng);
+					},
+					error => {
+						console.error(error);
+					}
+				);
 			},
 			getMenuType: () => {
 				setStore({ userSelectTemplate: 0 });
@@ -129,6 +152,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({
 							loggedBusiness: response
 						});
+					})
+					.catch(err => {
+						throw err;
+					});
+			},
+
+			googleAPI: place_id => {
+				fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,
++Mountain+View,+CA&key=${process.env.REACT_GOOGLE_MAPS_API_KEY}`)
+					.then(async res => {
+						const response = await res.json();
+						console.log(response);
 					})
 					.catch(err => {
 						throw err;
