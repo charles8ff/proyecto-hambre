@@ -43,6 +43,19 @@ export const Profile = () => {
 	console.log(store.menus_type);
 	//console.log(history.location.pathname.replace(/\D/g, ""));
 
+	const MenusInHTML = () => {
+		if (store.loggedBusiness.menus && store.menus_type) {
+			let titles = store.menus_type.map(elem => {
+				return elem.label;
+			});
+			return store.loggedBusiness.menus.map((elem, index) => {
+				return <MenusView key={index} title={titles[elem.template_id - 1]} />;
+			});
+		} else {
+			return <></>;
+		}
+	};
+
 	return (
 		<>
 			<div className="UserAcess Profile__Card__over">
@@ -109,7 +122,6 @@ export const Profile = () => {
 														// hide={store.loginToken != false ? "" : "d-none"}
 													/>
 												</div>
-												<MenusView />
 											</>
 										) : (
 											<div className="d-flex flex-row pt-2 justify-content-center">
@@ -129,8 +141,7 @@ export const Profile = () => {
 												/>
 											</div>
 										)}
-
-										{/* es la vista de los menus que tiene que ir en menu views */}
+										<div className="d-flex flex-row pt-5 pl-1">{MenusInHTML()}</div>
 										{/* <p className="p-3">{store.loggedBusiness.description}</p>
 										<OurButton
 											title="Editar"
