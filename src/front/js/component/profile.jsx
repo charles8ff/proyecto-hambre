@@ -41,43 +41,17 @@ export const Profile = () => {
 		[store.loggedBusiness.menus]
 	);
 
-	const getQRView = () => {
-		return (
-			<>
-				<button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-					Launch demo modal
-				</button>
-				<div
-					className="modal fade"
-					id="exampleModal"
-					tabIndex="-1"
-					role="dialog"
-					aria-labelledby="exampleModalLabel"
-					aria-hidden="true">
-					<div className="modal-dialog" role="document">
-						<div className="modal-content">
-							<div className="modal-header">
-								<h5 className="modal-title" id="exampleModalLabel">
-									Modal title
-								</h5>
-								<button type="button" className="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div className="modal-body">...</div>
-							<div className="modal-footer">
-								<button type="button" className="btn btn-secondary" data-dismiss="modal">
-									Close
-								</button>
-								<button type="button" className="btn btn-primary">
-									Save changes
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</>
-		);
+	const MenusInHTML = () => {
+		if (store.loggedBusiness.menus && store.menus_type) {
+			let titles = store.menus_type.map(elem => {
+				return elem.label;
+			});
+			return store.loggedBusiness.menus.map((elem, index) => {
+				return <MenusView key={index} title={titles[elem.template_id - 1]} />;
+			});
+		} else {
+			return <></>;
+		}
 	};
 
 	return (
@@ -146,7 +120,6 @@ export const Profile = () => {
 														// hide={store.loginToken != false ? "" : "d-none"}
 													/>
 												</div>
-												<MenusView />
 											</>
 										) : (
 											<div className="d-flex flex-row pt-2 justify-content-center">
@@ -166,8 +139,7 @@ export const Profile = () => {
 												/>
 											</div>
 										)}
-
-										{/* es la vista de los menus que tiene que ir en menu views */}
+										<div className="d-flex flex-row pt-5 pl-1">{MenusInHTML()}</div>
 										{/* <p className="p-3">{store.loggedBusiness.description}</p>
 										<OurButton
 											title="Editar"

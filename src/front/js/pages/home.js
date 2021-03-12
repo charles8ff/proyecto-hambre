@@ -9,6 +9,10 @@ import { Link, useHistory } from "react-router-dom";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+	useEffect(() => {
+		actions.hideNavigation(false);
+	}, []);
+
 	return (
 		<>
 			<div className="homepage-hero-module">
