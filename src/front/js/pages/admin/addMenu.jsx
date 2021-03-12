@@ -22,9 +22,7 @@ export const AddMenu = () => {
 
 	useEffect(() => {
 		actions.hideNavigation(true);
-		//actions.getMenuType();
 		actions.isPreviewTemplate(true);
-		//actions.loadSections(1);
 	}, []);
 
 	useEffect(
@@ -41,9 +39,8 @@ export const AddMenu = () => {
 			let obj = JSON.parse(localStorage.getItem(name));
 			allMeals = { ...allMeals, ...obj };
 		}
-		console.log(allMeals);
 		actions.postMeal(allMeals);
-		history.push("/place/5");
+		//history.push("/place/5"); //AÑADIR HISTORY PUSH TO LOCALSTORAGE USER ID
 	};
 
 	const selectMenuType = e => {
@@ -57,7 +54,6 @@ export const AddMenu = () => {
 	};
 
 	const selectTemplate = e => {
-		//console.log(e.value);
 		actions.getSections(e.value);
 		actions.userSelectTemplate(e.value);
 		setPreviewTemplate(e.value);
