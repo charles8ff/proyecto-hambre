@@ -1,45 +1,49 @@
 /*Desktop Version*/
 .Header {
-  display: flex;
-  background: #171a22;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 20rem;
-  padding-top: 1.5rem;
-  padding-bottom: 0.5rem;
-  height: 80px;
+    display: flex;
+    background: #171a22;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 
-  .Header__Logo{
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+    .Header__Logo {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
     }
 
     .Header__Logo--Container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
+
     .Header__Logo--Image {
         width: 135px;
         height: 50px;
     }
-
 }
 
-
-    .Header__Nav {
-  padding-left: 25px;
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  grid-gap: 50px;
-  list-style-type: none;
+.Header__Nav {
+    padding-left: 25px;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-gap: 50px;
+    list-style-type: none;
 }
 
-.Header__Nav--Links :hover {
+  .Header__Nav--Links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10vw;
+    padding: 30px 0px;
+  }
+  
+.Header__Nav--Links:hover {
   color: white;
 }
-
 
 .Header__Nav--MobileView {
   display: none;
@@ -50,6 +54,7 @@
   padding: 0px 5px;
   list-style-type: none;
 }
+
 .Header__Nav--SigninIn {
   padding-right: 50px;
   align-self: center;
@@ -59,17 +64,17 @@
   display: none;
 }
 
-  a{
-      color: #cacaca;
-  }
+a {
+    color: #cacaca;
+}
 
-  a:link {
-            text-decoration: none;
-  }
-
-  a:hover {
+a:link {
     text-decoration: none;
-  }
+}
+
+a:hover {
+    text-decoration: none;
+}
 
 /*Mobile Version*/
 @media (max-width: 950px) {

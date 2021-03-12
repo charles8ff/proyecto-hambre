@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import ScrollToTop from "./component/scrollToTop";
 import { Context } from "./store/appContext.js";
 
 import { Home } from "./pages/home";
@@ -21,41 +20,39 @@ const Layout = () => {
 	const { store, actions } = useContext(Context);
 	return (
 		<BrowserRouter basename={basename}>
-			<ScrollToTop>
-				{store.showNavigation ? <Header /> : null}
-				<Switch>
-					<Route exact path="/">
-						<Home />
-					</Route>
-					<Route exact path="/place/:id">
-						<Profile />
-					</Route>
-					<Route exact path="/register">
-						<Login />
-					</Route>
-					<Route exact path="/login">
-						<Login />
-					</Route>
-					<Route exact path="/template-two">
-						<TemplateTwo />
-					</Route>
-					<Route exact path="/place/:id/addmenu">
-						<AddMenu />
-					</Route>
-					<Route exact path="/place/:id/menu/1">
-						<Template1 />
-					</Route>
-					<Route>
-						<h1>Not found!</h1>
-					</Route>
-				</Switch>
-				{store.showNavigation ? (
-					<Footer
-						footer_text="¿Tienes Hambre?"
-						footer_url="https://coolors.co/191919-cdcdcd-ffffff-f44708-ed750b-f6b983-58c7e0"
-					/>
-				) : null}
-			</ScrollToTop>
+			{store.showNavigation ? <Header /> : null}
+			<Switch>
+				<Route exact path="/">
+					<Home />
+				</Route>
+				<Route exact path="/place/:id">
+					<Profile />
+				</Route>
+				<Route exact path="/register">
+					<Login />
+				</Route>
+				<Route exact path="/login">
+					<Login />
+				</Route>
+				<Route exact path="/template-two">
+					<TemplateTwo />
+				</Route>
+				<Route exact path="/place/:id/addmenu">
+					<AddMenu />
+				</Route>
+				<Route exact path="/place/:id/menu/1">
+					<Template1 />
+				</Route>
+				<Route>
+					<h1>Not found!</h1>
+				</Route>
+			</Switch>
+			{store.showNavigation ? (
+				<Footer
+					footer_text="¿Tienes Hambre?"
+					footer_url="https://coolors.co/191919-cdcdcd-ffffff-f44708-ed750b-f6b983-58c7e0"
+				/>
+			) : null}
 		</BrowserRouter>
 	);
 };
