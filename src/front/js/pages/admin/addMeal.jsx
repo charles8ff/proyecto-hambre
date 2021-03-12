@@ -33,12 +33,6 @@ export const AddMeal = props => {
 	});
 	const getDataAllFields = watch();
 
-	useEffect(() => {
-		for (let name of store.sections) {
-			localStorage.removeItem(name);
-		}
-	}, []);
-
 	const addMeal = (data, section) => {
 		localStorage.setItem(section.toString(), JSON.stringify(data));
 	};

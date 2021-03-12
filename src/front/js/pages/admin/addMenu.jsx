@@ -22,10 +22,19 @@ export const AddMenu = () => {
 
 	useEffect(() => {
 		actions.hideNavigation(true);
-		actions.getMenuType();
+		//actions.getMenuType();
 		actions.isPreviewTemplate(true);
 		//actions.loadSections(1);
 	}, []);
+
+	useEffect(
+		() => {
+			for (let name of store.sections) {
+				localStorage.removeItem(name);
+			}
+		},
+		[store.sections]
+	);
 
 	const onSubmit = () => {
 		for (let name of store.sections) {

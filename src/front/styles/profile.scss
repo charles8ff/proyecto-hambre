@@ -5,11 +5,11 @@
     .Profile__Card {
     position: relative;
     max-width: 100%;
-    height: 700px;
+    height: 750px;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
     perspective: 800px;
-    margin-top: 20px;
+    margin-top: 20px;;
 }
 
     .UserAcess__CardForm{ 
@@ -193,7 +193,7 @@
 
     .aside{
       width: 250px;
-      height: 700px;
+      height: 750px;
       background: #cacaca61;
       float: left;
       margin-left: 0px;
@@ -279,4 +279,9 @@ margin-top: 24rem;
     left: 6.5rem;
     top: -5.5rem;
     color: red;
+}
+
+.Profile__Card__over{
+    overflow: auto;
+    height: auto;
 }

@@ -22,7 +22,7 @@ const injectContext = PassedComponent => {
 		);
 
 		useEffect(() => {
-			//state.actions.isPreviewTemplate(false);
+			state.actions.getMenuType();
 		}, []);
 
 		return (

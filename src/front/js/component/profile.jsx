@@ -40,18 +40,18 @@ export const Profile = () => {
 		},
 		[store.loggedBusiness.menus]
 	);
-
+	console.log(store.menus_type);
 	//console.log(history.location.pathname.replace(/\D/g, ""));
 
 	return (
 		<>
-			<div className="UserAcess">
+			<div className="UserAcess Profile__Card__over">
 				<div className="container">
 					<div className="row UserAcess__FullHeight justify-content-center">
 						<div className="col-12">
 							<div className="Profile__Card mx-auto">
 								<div className="UserAcess__CardWrapper">
-									<div className="UserAcess__CardLogin">
+									<div className="UserAcess__CardLogin ">
 										<div className="aside">
 											<img
 												className="avatar"
@@ -92,7 +92,25 @@ export const Profile = () => {
 											<Maps />
 										</div>
 										{businessMenus ? (
-											<MenusView />
+											<>
+												<div className="d-flex flex-row mt-1 justify-content-end">
+													<OurButton
+														title="Añadir Menú"
+														hide={
+															store.loginToken != false &&
+															actions.decodeToken(store.loginToken).sub.id ==
+																store.loggedBusiness.id
+																? ""
+																: "d-none"
+														}
+														click={() => {
+															history.push(history.location.pathname.concat("/addmenu"));
+														}}
+														// hide={store.loginToken != false ? "" : "d-none"}
+													/>
+												</div>
+												<MenusView />
+											</>
 										) : (
 											<div className="d-flex flex-row pt-2 justify-content-center">
 												<OurButton
