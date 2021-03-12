@@ -47,7 +47,15 @@ export const Profile = () => {
 				return elem.label;
 			});
 			return store.loggedBusiness.menus.map((elem, index) => {
-				return <MenusView key={index} title={titles[elem.template_id - 1]} />;
+				console.log(elem.template_id);
+				return (
+					<MenusView
+						key={index}
+						title={titles[elem.template_id - 1]}
+						urlTemplate={elem.template_id}
+						urlPlace={store.loggedBusiness.id}
+					/>
+				);
 			});
 		} else {
 			return <></>;

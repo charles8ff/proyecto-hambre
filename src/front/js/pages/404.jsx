@@ -5,5 +5,9 @@ import "../../styles/home.scss";
 export const Error404 = () => {
 	const { store, actions } = useContext(Context);
 
-	return <div>Esto es un fallo 404</div>;
+	return (
+		<div>
+			<h1>Esto es un fallo 404 bien bonito</h1>
+		</div>
+	);
 };

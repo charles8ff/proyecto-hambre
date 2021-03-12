@@ -37,6 +37,14 @@ export const AddMeal = props => {
 		localStorage.setItem(section.toString(), JSON.stringify(data));
 	};
 
+	const [inputList, setInputList] = useState(["Añade tu plato"]);
+	const handleInputChange = (e, index) => {
+		const { name, value } = e.target;
+		const list = [...inputList];
+		list[index] = value;
+		setInputList(list);
+	};
+
 	const getMealInfo = [
 		{
 			url: "https://i.imgur.com/dtpzG2k.png",
@@ -111,7 +119,7 @@ export const AddMeal = props => {
 					<Accordion key={item.id} allowZeroExpanded>
 						<AccordionItem>
 							<AccordionItemHeading>
-								<AccordionItemButton>Plato: {item.id}</AccordionItemButton>
+								<AccordionItemButton>{JSON.stringify(inputList[index])}</AccordionItemButton>
 							</AccordionItemHeading>
 							<AccordionItemPanel>
 								<div className="inputContainer">
@@ -123,6 +131,7 @@ export const AddMeal = props => {
 										placeholder="Ensalada cesar"
 										className="AddMenu__Input--Style mb-3"
 										ref={register({ required: true })}
+										onChange={e => handleInputChange(e, index)}
 									/>
 								</div>
 								<div className="inputContainer">

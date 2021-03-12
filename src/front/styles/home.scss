@@ -217,6 +217,18 @@ button {
     margin-top: 30px;
   }
 }
+.linkedins{
+    display: flex;
+    align-items: center;
+}
+.linkedins > a{
+    color: $black;
+    &:hover{
+        color: $primary-color-light;
+        text-decoration: none;
+    }
+    padding-left: 0.4rem;
+}
 
 footer{
     background-color: $black;

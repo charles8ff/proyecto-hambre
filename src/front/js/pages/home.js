@@ -22,11 +22,11 @@ export const Home = () => {
 						<h1 className="mb-4 text-white font-weight-bold ">HAZ TU MENU DIGITAL</h1>
 						<p className="lead text-white">
 							Es hora de modernizar su restaurante añadiendo un menú digital, adaptándote a esta nueva
-							situación para no quedarte atrás ¡Nosotros te lo hacemos fácil por ti!
+							situación para no quedarte atrás. ¡Nosotros te lo hacemos fácil!
 						</p>
 						<p className="text-h3 mt-4">
 							<Link to="/register" className="btn-home">
-								Pruébalo GRATIS!
+								¡Pruébalo GRATIS!
 							</Link>
 						</p>
 					</div>
@@ -42,8 +42,9 @@ export const Home = () => {
 						</div>
 						<div className="col-12 col-md-5 ">
 							<p>
-								En DMenu.com buscamos facilitar la digitalización de los negocios que no tienen una
-								actividad digital previa, o que no poseen de los recursos o conocimientos para ello.
+								En D-Menu.com buscamos facilitar la digitalización de los negocios que no tienen una
+								actividad digital previa, o que no poseen recursos o conocimientos para ello. Con
+								nuestro servicio podrás crear tu página en muy poco tiempo.
 							</p>
 						</div>
 					</div>
@@ -74,7 +75,7 @@ export const Home = () => {
 						<div className="d-flex text-center justify-content-center">
 							<p className="text-h3 mt-4">
 								<Link to="/register" className="btn-button">
-									Pruébalo GRATIS!
+									¡Pruébalo GRATIS!
 								</Link>
 							</p>
 						</div>
@@ -96,9 +97,19 @@ export const Home = () => {
 						<div className="col-12 col-md-5 ">
 							<h2 className="mb-4 font-weight-bold ">Sobre Nosotros</h2>
 							<p>
-								Somos 2 chalaos de puta madre socio que te voy a contar aquí con el pana y eso
-								controlando y mucho bien. Se vienen cositas pronto :fire::sunglasses: texto de ejemplo
-								texto de ejemplo
+								Somos Oscar Fernández y Carlos Fisac, dos desarrolladores web juniors concienciados con
+								la pequeña hostelería y los momentos que atraviesa. En los enlaces a continuación podrás
+								saber más sobre nuestros proyectos y nuestra trayectoria profesional.
+							</p>
+							<p className="linkedins">
+								<i className="fab fa-2x fa-linkedin" />
+								<a href="https://www.linkedin.com/in/carlos-fisac-ferrandez">
+									Oscar Fernández Apellido2
+								</a>
+							</p>
+							<p className="linkedins">
+								<i className="fab fa-2x fa-linkedin" />
+								<a href="https://www.linkedin.com/in/carlos-fisac-ferrandez">Carlos Fisac Ferrández</a>
 							</p>
 						</div>
 					</div>
