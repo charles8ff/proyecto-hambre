@@ -32,7 +32,6 @@ export const Template1 = () => {
 	};
 	useEffect(
 		() => {
-			console.log("hola");
 			actions.hideNavigation(true);
 			actions.getSections(1);
 			actions.loadMenu(place_id, 1); // Place 1 y template 1 (place_id and template_id)
@@ -40,10 +39,11 @@ export const Template1 = () => {
 		[!store.templatePreview]
 	);
 
-	console.log(templateSections);
+	console.log("HOAÑKSDJKLASDJ", templateSections);
 
 	useEffect(
 		() => {
+			console.log("ajlsdhkjasdh");
 			setTemplateSections(store.sections); //Info from sections
 			setWholeMeals(store.allSections); // getAllMeals
 		},
