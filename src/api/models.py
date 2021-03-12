@@ -37,7 +37,7 @@ class Business(db.Model):
             "address": self.address,
             "description": self.description,
             "phone_number": self.phone_number,
-            "menus": menus,
+            "menus": [menu.to_dict() for menu in menus],
             "open_hour": self.open_hour.isoformat(),
             "close_hour": self.close_hour.isoformat(),
         }
