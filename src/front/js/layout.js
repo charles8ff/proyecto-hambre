@@ -41,6 +41,9 @@ const Layout = () => {
 					<Route exact path="/place/:id/addmenu">
 						<AddMenu />
 					</Route>
+					<Route exact path="/place/:id/menu/1">
+						<Template1 />
+					</Route>
 					<Route>
 						<h1>Not found!</h1>
 					</Route>

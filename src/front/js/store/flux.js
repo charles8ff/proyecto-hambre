@@ -17,7 +17,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			templates: [],
 			sections: [],
 			selectedTemplate: 0,
-			loginToken: localStorage.getItem("loginToken") ? localStorage.getItem("loginToken") : false
+			loginToken: localStorage.getItem("loginToken") ? localStorage.getItem("loginToken") : false,
+			titleSections: [],
+			allSections: []
 		},
 		actions: {
 			renameKey: (object, key, newKey) => {
@@ -83,7 +85,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({
 					sections: []
 				});
-				fetch(URLBACKEND + `/api/${template_id}/section`)
+				fetch(URLBACKEND + `/api/templates/${template_id}/section`)
 					.then(async res => {
 						const response = await res.json();
 

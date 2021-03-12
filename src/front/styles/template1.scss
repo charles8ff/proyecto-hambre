@@ -1,0 +1,57 @@
+$primary-color: #ED750B;
+$primary-color-light: #eee7d5;
+$secondary-color: #58C7E0;
+$error-color:#ea1814;
+$white: #FFFFFF;
+$black:  #191919;
+$grey: #CDCDCD;
+$text-font: 'Akaya Kanadaka', cursive;
+
+.template1--container{
+    font-family: $text-font;
+    
+    margin:0;
+    display:flex; 
+    flex-direction:column;
+    background-color: $primary-color-light;//more light
+
+    .place_name{
+        text-align: center;
+        font-size: 1.4rem;
+        margin-bottom: 0.8rem;
+        color: $error-color
+    }
+    img {
+        max-height: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    .flip-horizontally {
+        transform: scaleX(-1);
+    }
+    h2{
+        margin-top: 4rem;
+        font-size: 3rem;
+        text-align: center;
+        color: $error-color
+    }
+    // span{
+    //     text-align: center;
+    //     font-size: 1.4rem;
+    //     margin-bottom: 0.8rem;
+    //     color: $error-color
+    // }
+    h3{
+        align-items: center;
+        font-size: 2rem;
+        color: $error-color
+    }
+    ul{
+        list-style-type: none;
+        padding: 0rem;
+        margin-bottom: 1.2rem;
+        text-align: end;
+    }
+    li{
+        text-align: end;
+    }
+}
