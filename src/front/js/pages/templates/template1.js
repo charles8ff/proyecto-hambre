@@ -32,16 +32,19 @@ export const Template1 = () => {
 	};
 	useEffect(
 		() => {
+			console.log("hola");
 			actions.hideNavigation(true);
-			actions.loadSections(1);
+			actions.getSections(1);
 			actions.loadMenu(place_id, 1); // Place 1 y template 1 (place_id and template_id)
 		},
 		[!store.templatePreview]
 	);
 
+	console.log(templateSections);
+
 	useEffect(
 		() => {
-			setTemplateSections(store.titleSections); //Info from sections
+			setTemplateSections(store.sections); //Info from sections
 			setWholeMeals(store.allSections); // getAllMeals
 		},
 		[store.allSections]

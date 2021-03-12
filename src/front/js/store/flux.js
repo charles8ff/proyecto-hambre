@@ -306,21 +306,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 			},
 			loadMenu: async (place_id, template_id) => {
+				console.log("holi");
 				let res = await fetch(URLBACKEND + `/api/place/${place_id}/template/${template_id}`);
 				let responseAsJson = await res.json();
+				console.log("PUTA PROMESA");
 				setStore({ allSections: responseAsJson });
 				return responseAsJson;
 			},
-			loadSections: async template_id => {
-				let res = await fetch(URLBACKEND + `/api/template/${template_id}`);
-				let responseAsJson = await res.json();
-				let sections = responseAsJson.map(elem => {
-					return elem.name;
-				});
-				console.log(sections);
-				setStore({ titleSections: sections });
-				return sections;
-			},
+			// loadSections: async template_id => {
+			// 	let res = await fetch(URLBACKEND + `/api/template/${template_id}`);
+			// 	let responseAsJson = await res.json();
+			// 	let sections = responseAsJson.map(elem => {
+			// 		return elem.name;
+			// 	});
+			// 	console.log(sections);
+			// 	setStore({ titleSections: sections });
+			// 	return sections;
+			// },
 			changeProfile: async (place_id, data) => {
 				let response = await fetch(URLBACKEND + `/api/place/${place_id}`, {
 					method: "PATCH",
