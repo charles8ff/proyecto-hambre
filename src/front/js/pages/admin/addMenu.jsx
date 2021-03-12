@@ -7,7 +7,7 @@ import { SelectFill } from "../../component/fill-select.jsx";
 import "../../../styles/login.scss";
 
 import { TemplateTwo } from "../templates/template-two.jsx";
-import { Template1 } from "../templates/template1.js";
+import { Template1 } from "../templates/template1";
 import { Error404 } from "../404.jsx";
 
 export const AddMenu = () => {
@@ -23,6 +23,8 @@ export const AddMenu = () => {
 	useEffect(() => {
 		actions.hideNavigation(true);
 		actions.getMenuType();
+		actions.isPreviewTemplate(true);
+		//actions.loadSections(1);
 	}, []);
 
 	const onSubmit = () => {
@@ -30,12 +32,13 @@ export const AddMenu = () => {
 			let obj = JSON.parse(localStorage.getItem(name));
 			allMeals = { ...allMeals, ...obj };
 		}
+		console.log(allMeals);
 		actions.postMeal(allMeals);
-		history.push("/menu/1");
+		history.push("/place/5");
 	};
 
 	const selectMenuType = e => {
-		if (e.label === "Menu del día") {
+		if (e.label === "Menú del día") {
 			actions.getTemplates(e.value);
 			setShowTemplates(true);
 		} else if (e.label === "Carta") {
@@ -45,6 +48,7 @@ export const AddMenu = () => {
 	};
 
 	const selectTemplate = e => {
+		//console.log(e.value);
 		actions.getSections(e.value);
 		actions.userSelectTemplate(e.value);
 		setPreviewTemplate(e.value);
@@ -59,6 +63,14 @@ export const AddMenu = () => {
 						<SelectFill options_value={store.templates} handleSelectType={selectTemplate} />
 					) : null}
 				</div>
+				{previewTemplate == 1 ? (
+					<>
+						<button onClick={() => setShowSection(true)} className="btn mt-5 mb-5">
+							Seleccionar esta plantilla
+						</button>
+						<Template1 />{" "}
+					</>
+				) : null}
 				{previewTemplate == 2 ? (
 					<>
 						<button onClick={() => setShowSection(true)} className="btn mt-5 mb-5">

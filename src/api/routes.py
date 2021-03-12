@@ -151,7 +151,7 @@ def new_section():
 def get_section(template_id):
     #print('hi')
     section = Section.get_by_id_without_meal(template_id)
-    print(section)
+    #print(section)
     return jsonify(section), 200
 
 

@@ -1,6 +1,6 @@
 import jwt_decode from "jwt-decode";
 import Geocode from "react-geocode";
-const URLBACKEND = "https://project-hunger.herokuapp.com/";
+const URLBACKEND = "https://project-hunger.herokuapp.com";
 
 Geocode.setApiKey(process.env.REACT_GOOGLE_MAPS_API_KEY);
 Geocode.setLanguage("es");
@@ -25,7 +25,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			loginToken: localStorage.getItem("loginToken") ? localStorage.getItem("loginToken") : false,
 			titleSections: [],
 			allSections: [],
-			map: undefined
+			map: undefined,
+			templatePreview: false
 		},
 		actions: {
 			renameKey: (object, key, newKey) => {
@@ -96,10 +97,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({
 					sections: []
 				});
-				fetch(URLBACKEND + `/api/templates/${template_id}/section`)
+				fetch(URLBACKEND + `/api/${template_id}/section`)
 					.then(async res => {
 						const response = await res.json();
-
+						console.log(response);
 						for (let section of response) {
 							setStore({
 								sections: [...getStore().sections, section.name]
@@ -132,9 +133,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			getProfile: place_id => {
+				setStore({
+					loggedBusiness: false
+				});
 				fetch(URLBACKEND + `/api${place_id}`)
 					.then(async res => {
 						const response = await res.json();
+						console.log(response);
 						localStorage.setItem("place", JSON.stringify(response));
 						setStore({
 							loggedBusiness: response
@@ -167,6 +172,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 						singUp_User: false
 					});
 				}
+			},
+			isPreviewTemplate: data => {
+				if (data) {
+					setStore({
+						templatePreview: true
+					});
+				} else {
+					setStore({
+						templatePreview: false
+					});
+				} //añadir en appcontext para que inicie en false
 			},
 
 			hideNavigation: data => {

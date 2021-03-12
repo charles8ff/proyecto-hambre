@@ -21,9 +21,9 @@ const injectContext = PassedComponent => {
 			})
 		);
 
-		// useEffect(() => {
-		// 	state.actions.getSections();
-		// }, []);
+		useEffect(() => {
+			//state.actions.isPreviewTemplate(false);
+		}, []);
 
 		return (
 			<Context.Provider value={state}>
