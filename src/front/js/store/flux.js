@@ -46,7 +46,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 								lng: lng
 							}
 						});
-						console.log(lat, lng);
 					},
 					error => {
 						console.error(error);
@@ -138,23 +137,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch(URLBACKEND + `/api${place_id}`)
 					.then(async res => {
 						const response = await res.json();
-						console.log(response);
 						localStorage.setItem("place", JSON.stringify(response));
 						setStore({
 							loggedBusiness: response
 						});
-					})
-					.catch(err => {
-						throw err;
-					});
-			},
-
-			googleAPI: place_id => {
-				fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,
-+Mountain+View,+CA&key=${process.env.REACT_GOOGLE_MAPS_API_KEY}`)
-					.then(async res => {
-						const response = await res.json();
-						console.log(response);
 					})
 					.catch(err => {
 						throw err;
@@ -306,23 +292,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 			},
 			loadMenu: async (place_id, template_id) => {
-				console.log("holi");
 				let res = await fetch(URLBACKEND + `/api/place/${place_id}/template/${template_id}`);
 				let responseAsJson = await res.json();
-				console.log("PUTA PROMESA");
 				setStore({ allSections: responseAsJson });
 				return responseAsJson;
 			},
-			// loadSections: async template_id => {
-			// 	let res = await fetch(URLBACKEND + `/api/template/${template_id}`);
-			// 	let responseAsJson = await res.json();
-			// 	let sections = responseAsJson.map(elem => {
-			// 		return elem.name;
-			// 	});
-			// 	console.log(sections);
-			// 	setStore({ titleSections: sections });
-			// 	return sections;
-			// },
 			changeProfile: async (place_id, data) => {
 				let response = await fetch(URLBACKEND + `/api/place/${place_id}`, {
 					method: "PATCH",

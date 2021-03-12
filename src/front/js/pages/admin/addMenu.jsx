@@ -7,7 +7,7 @@ import { SelectFill } from "../../component/fill-select.jsx";
 import "../../../styles/login.scss";
 
 import { TemplateTwo } from "../templates/template-two.jsx";
-import { Template1 } from "../templates/template1";
+import { Template1 } from "../templates/template1.jsx";
 import { Error404 } from "../404.jsx";
 
 export const AddMenu = () => {

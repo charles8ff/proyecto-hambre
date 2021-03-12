@@ -20,7 +20,6 @@ export const EditProfile = () => {
 	const { register, handleSubmit, watch, errors } = useForm();
 	const onSubmit = data => {
 		let place_id = actions.decodeToken(store.loginToken).sub.id;
-		console.log(data);
 		actions.changeProfile(place_id, data);
 		history.push(`/place/${place_id}`);
 	};

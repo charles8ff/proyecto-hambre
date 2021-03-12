@@ -2,17 +2,16 @@ import React, { useState, useEffect, useContext, Fragment } from "react";
 import { useHistory } from "react-router-dom";
 import { Context } from "../../store/appContext";
 import "../../../styles/template1.scss";
-
-const URLBACKEND = "https://3001-peach-hamster-hxks95vb.ws-eu03.gitpod.io";
 const arrow = require("../../../styles/img/yellowarrow.png");
 
 export const Template1 = () => {
 	const { store, actions } = useContext(Context);
-	let place_id = actions.decodeToken(store.loginToken).sub.id;
 	const [templateSections, setTemplateSections] = useState([]);
 	const [wholeMeals, setWholeMeals] = useState([]);
 	const [wholeSections, setWholeSections] = useState([]);
 	let meals = [];
+	const history = useHistory();
+	const getPlaceID = history.location.pathname.match(/\d/);
 
 	const mealsInHTML = (mealArray, section_name) => {
 		let filteredMeals = mealArray.filter(elem => elem.name == section_name);
@@ -30,20 +29,25 @@ export const Template1 = () => {
 			return meals;
 		}
 	};
+
+	useEffect(
+		() => {
+			actions.getProfile(getPlaceID[0]);
+			actions.hideNavigation(true);
+		},
+		[store.loggedBusiness]
+	);
+
 	useEffect(
 		() => {
 			actions.hideNavigation(true);
 			actions.getSections(1);
-			actions.loadMenu(place_id, 1); // Place 1 y template 1 (place_id and template_id)
+			actions.loadMenu(getPlaceID[0], 1); // Place 1 y template 1 (place_id and template_id)
 		},
 		[!store.templatePreview]
 	);
-
-	console.log("HOAÑKSDJKLASDJ", templateSections);
-
 	useEffect(
 		() => {
-			console.log("ajlsdhkjasdh");
 			setTemplateSections(store.sections); //Info from sections
 			setWholeMeals(store.allSections); // getAllMeals
 		},
@@ -52,7 +56,7 @@ export const Template1 = () => {
 
 	const finalTemplate1 = () => {
 		return (
-			<div className="container-fluid template1--container justify-content-center">
+			<div className="container-fluid template1--container justify-content-center h-100">
 				<h2>MENÚ</h2>
 				<span className="place_name">{store.loggedBusiness.place_name}</span>
 				{templateSections.map((elem, index) => {

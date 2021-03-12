@@ -1,6 +1,10 @@
 import React, { Component, useContext } from "react";
 import { Context } from "../store/appContext";
 import { OurButton } from "./button.jsx";
+import { ModalView } from "./modal.jsx";
+
+import { ModalProvider, Modal, useModal, ModalTransition } from "react-simple-hook-modal";
+import "react-simple-hook-modal/dist/styles.css";
 
 export const MenusView = props => {
 	return (
@@ -20,7 +24,9 @@ export const MenusView = props => {
 						<hr />
 						<div className="d-flex flex-row">
 							<OurButton title="Ver menu" />
-							<OurButton title="QR" />
+							<ModalProvider>
+								<ModalView />
+							</ModalProvider>
 						</div>
 					</div>
 				</div>
