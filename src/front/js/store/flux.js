@@ -97,10 +97,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({
 					sections: []
 				});
-				fetch(URLBACKEND + `/api/${template_id}/section`)
+				fetch(URLBACKEND + `/api/templates/${template_id}/section`)
 					.then(async res => {
 						const response = await res.json();
-						console.log(response);
 						for (let section of response) {
 							setStore({
 								sections: [...getStore().sections, section.name]
