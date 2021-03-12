@@ -1,13 +1,14 @@
 import React, { Component, useContext } from "react";
 import { Context } from "../store/appContext";
 import { OurButton } from "./button.jsx";
-import { ModalView } from "./modal.jsx";
+//import { ModalView } from "./modal.jsx";
 import PropTypes from "prop-types";
 
 import { ModalProvider, Modal, useModal, ModalTransition } from "react-simple-hook-modal";
 import "react-simple-hook-modal/dist/styles.css";
 
 export const MenusView = props => {
+	const { isModalOpen, openModal, closeModal } = useModal();
 	return (
 		<div className="d-flex flex-row pt-5 pl-1">
 			<div className="col-12 col-lg-6 col-xl-4">
@@ -22,9 +23,18 @@ export const MenusView = props => {
 						<h5>Menu del día</h5>
 						<hr />
 						<div className="d-flex flex-row">
-							<OurButton title="Ver menu" />
 							<ModalProvider>
-								<ModalView />
+								<OurButton title="Ver QR" click={openModal} />
+								<Modal
+									onBackdropClick={closeModal}
+									isOpen={isModalOpen}
+									transition={ModalTransition.BOTTOM_UP}>
+									{/* <canvas ref={inputRef} /> */}
+									{/* <QR url={"https://3000-copper-mite-z2nrl6y2.ws-eu03.gitpod.io/place/5/menu/1"} /> */}
+									<div className="d-flex flex-row justify-content-center pt-3">
+										<OurButton title="CERRAR" click={closeModal} />
+									</div>
+								</Modal>
 							</ModalProvider>
 						</div>
 					</div>
