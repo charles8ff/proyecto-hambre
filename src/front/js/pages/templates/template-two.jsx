@@ -32,7 +32,7 @@ export const Template2 = () => {
 
 	useEffect(
 		() => {
-			//actions.getProfile(getPlaceID[0]);
+			actions.getProfile(getPlaceID[0]);
 			actions.hideNavigation(true);
 		},
 		[store.placeData]
@@ -42,7 +42,7 @@ export const Template2 = () => {
 		() => {
 			if (store.templatePreview == false) {
 				actions.hideNavigation(true);
-				actions.loadSections(2);
+				actions.getSections(2);
 				actions.loadMenu(getPlaceID[0], 2); // Place 1 y template 1 (place_id and template_id)
 			}
 		},

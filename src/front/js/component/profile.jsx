@@ -65,38 +65,41 @@ export const Profile = () => {
 			<div className="UserAcess Profile__Card__over">
 				<div className="container">
 					<div className="row UserAcess__FullHeight justify-content-center">
-						<div className="col-12">
-							<div className="Profile__Card mx-auto">
-								<div className="UserAcess__CardWrapper">
-									<div className="UserAcess__CardLogin ">
-										<div className="aside">
-											<img
-												className="avatar"
-												src="https://66.media.tumblr.com/avatar_faa95867d2b3_128.png"
-											/>
-											<div className="d-flex flex-row">
-												<i className="Profile__Icon fas fa-color fa-lg fa-map-marker-alt" />
-												<h4 className="Profile__H4">{store.placeData.address}</h4>
-											</div>
-											<div className="d-flex flex-row">
-												<i className="Profile__Icon fas fa-color fa-lg fa-phone" />
-												<h4 className="Profile__H4">{store.placeData.phone_number}</h4>
-											</div>
-											<div className="log-out">
-												<OurButton
-													title="Cerrar Sesión"
-													click={() => {
-														actions.doLogOut();
-														history.push("/");
-													}}
-													hide={store.loginToken != false ? "" : "d-none"}
-												/>
-											</div>
+						{/* <div className="col-12"> */}
+						<div className="Profile__Card mx-auto  col-12">
+							<div className="UserAcess__CardWrapper">
+								<div className="UserAcess__CardLogin d-flex flex-row">
+									<div className="aside">
+										<img
+											className="avatar"
+											src="https://66.media.tumblr.com/avatar_faa95867d2b3_128.png"
+										/>
+										<div className="d-flex flex-row">
+											<i className="Profile__Icon fas fa-color fa-lg fa-map-marker-alt" />
+											<h4 className="Profile__H4">{store.placeData.address}</h4>
 										</div>
-										<div className="main-title d-flex flex-row justify-content-center">
+										<div className="d-flex flex-row">
+											<i className="Profile__Icon fas fa-color fa-lg fa-phone" />
+											<h4 className="Profile__H4">{store.placeData.phone_number}</h4>
+										</div>
+										<div className="log-out">
+											<OurButton
+												title="Cerrar Sesión"
+												click={() => {
+													actions.doLogOut();
+													history.push("/");
+												}}
+												hide={store.loginToken != false ? "" : "d-none"}
+											/>
+										</div>
+									</div>
+
+									{/* <Container> */}
+									<div className="d-flex flex-column justify-content-center">
+										<div className="d-flex flex-row pt-2 justify-content-center test">
 											<h2>{store.placeData.place_name}</h2>
 										</div>
-										<div className=" d-flex flex-row justify-content-center">
+										<div className=" d-flex flex-row justify-content-center test">
 											<i className="Profile__Icon--Hour far fa-color fa-clock" />
 											<h4 className="Profile__H4">
 												{"Horario: "}
@@ -105,12 +108,12 @@ export const Profile = () => {
 												{store.placeData.close_hour}
 											</h4>
 										</div>
-										<div className="d-flex flex-row pt-2 justify-content-center">
+										<div className="d-flex flex-row justify-content-center p-2 test__map">
 											<Maps />
 										</div>
 										{businessMenus ? (
 											<>
-												<div className="d-flex flex-row mt-1 justify-content-end">
+												<div className="d-flex flex-row mt-1 justify-content-center test">
 													<OurButton
 														title="Añadir Menú"
 														hide={
@@ -128,7 +131,7 @@ export const Profile = () => {
 												</div>
 											</>
 										) : (
-											<div className="d-flex flex-row justify-content-center">
+											<div className="d-flex flex-row justify-content-center test">
 												<OurButton
 													title="Añadir Menú"
 													hide={
@@ -145,7 +148,9 @@ export const Profile = () => {
 												/>
 											</div>
 										)}
-										<div className="d-flex flex-row card__profile pl-1">{MenusInHTML()}</div>
+										<div className="d-flex flex-row flex-wrap card__profile pl-1">
+											{MenusInHTML()}
+										</div>
 										{/* <p className="p-3">{store.placeData.description}</p>
 										<OurButton
 											title="Editar"
@@ -158,12 +163,14 @@ export const Profile = () => {
 											}
 										/> */}
 									</div>
+									{/* </Container> */}
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			{/* </div> */}
 		</>
 	);
 };
