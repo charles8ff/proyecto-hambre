@@ -131,9 +131,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			getProfile: place_id => {
-				setStore({
-					loggedBusiness: false
-				});
+				// setStore({
+				// 	loggedBusiness: false
+				// });
 				fetch(URLBACKEND + `/api${place_id}`)
 					.then(async res => {
 						const response = await res.json();
@@ -307,6 +307,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(data)
 				});
 				response = await response.json();
+			},
+			loadSections: async template_id => {
+				let res = await fetch(URLBACKEND + `/api/template/${template_id}`);
+				let responseAsJson = await res.json();
+				let sections = responseAsJson.map(elem => {
+					return elem.name;
+				});
+				console.log(sections);
+				setStore({ titleSections: sections });
+				return sections;
 			}
 		}
 	};

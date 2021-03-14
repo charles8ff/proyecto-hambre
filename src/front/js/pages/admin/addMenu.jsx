@@ -6,7 +6,7 @@ import { SelectFill } from "../../component/fill-select.jsx";
 
 import "../../../styles/login.scss";
 
-import { TemplateTwo } from "../templates/template-two.jsx";
+import { Template2 } from "../templates/template-two.jsx";
 import { Template1 } from "../templates/template1.jsx";
 import { Error404 } from "../404.jsx";
 
@@ -40,8 +40,10 @@ export const AddMenu = () => {
 			allMeals = { ...allMeals, ...obj };
 		}
 		actions.postMeal(allMeals);
-		//history.push("/place/5"); //AÑADIR HISTORY PUSH TO LOCALSTORAGE USER ID
+		history.push(`/place/${JSON.parse(localStorage.getItem("place")).id}`); //AÑADIR HISTORY PUSH TO LOCALSTORAGE USER ID
 	};
+
+	console.log(JSON.parse(localStorage.getItem("place")).id);
 
 	const selectMenuType = e => {
 		if (e.label === "Menú del día") {
@@ -81,7 +83,7 @@ export const AddMenu = () => {
 						<button onClick={() => setShowSection(true)} className="btn mt-5 mb-5">
 							Seleccionar esta plantilla
 						</button>
-						<TemplateTwo />{" "}
+						<Template2 />{" "}
 					</>
 				) : null}
 			</>
@@ -132,5 +134,5 @@ export const AddMenu = () => {
 		);
 	};
 
-	return <>{getPlaceID == store.loggedBusiness.id ? toRenderMenuAdd() : <Error404 />}</>;
+	return <>{toRenderMenuAdd()}</>;
 };

@@ -32,11 +32,13 @@ export const Template1 = () => {
 
 	useEffect(
 		() => {
-			actions.getProfile(getPlaceID[0]);
+			//	actions.getProfile(getPlaceID[0]);
 			actions.hideNavigation(true);
 		},
 		[store.loggedBusiness]
 	);
+
+	console.log(getPlaceID[0]);
 
 	useEffect(
 		() => {

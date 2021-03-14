@@ -12,7 +12,7 @@ import { Header } from "./component/partials/header.jsx";
 import { Footer } from "./component/footer";
 import { Login } from "./pages/login.jsx";
 import { Profile } from "./component/profile.jsx";
-import { TemplateTwo } from "./pages/templates/template-two.jsx"; //
+import { Template2 } from "./pages/templates/template-two.jsx"; //
 import { AddMenu } from "./pages/admin/addMenu.jsx";
 import { Template1 } from "./pages/templates/template1.jsx";
 
@@ -38,23 +38,18 @@ const Layout = () => {
 					<Route exact path="/login">
 						<Login />
 					</Route>
-					<Route exact path="/template-two">
-						<TemplateTwo />
+					<Route exact path="/place/:id/addmenu">
+						<AddMenu />
 					</Route>
 					<Route exact path="/place/:id/menu/1">
 						<Template1 />
 					</Route>
+					<Route exact path="/place/:id/menu/2">
+						<Template2 />
+					</Route>
 					<Route>
 						<h1>Not found!</h1>
 					</Route>
-					{/* {store.loginToken != false &&
-					actions.decodeToken(store.loginToken).sub.id == store.loggedBusiness.id ? (
-						<Route exact path="/place/:id/addmenu">
-							<AddMenu />
-						</Route>
-					) : (
-						<Error404 />
-					)} */}
 				</Switch>
 				{store.showNavigation ? (
 					<Footer

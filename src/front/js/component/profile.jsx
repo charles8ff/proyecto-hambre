@@ -130,7 +130,7 @@ export const Profile = () => {
 												</div>
 											</>
 										) : (
-											<div className="d-flex flex-row pt-2 justify-content-center">
+											<div className="d-flex flex-row justify-content-center">
 												<OurButton
 													title="Añadir Menú"
 													hide={
@@ -147,7 +147,7 @@ export const Profile = () => {
 												/>
 											</div>
 										)}
-										<div className="d-flex flex-row pt-5 pl-1">{MenusInHTML()}</div>
+										<div className="d-flex flex-row card__profile pl-1">{MenusInHTML()}</div>
 										{/* <p className="p-3">{store.loggedBusiness.description}</p>
 										<OurButton
 											title="Editar"

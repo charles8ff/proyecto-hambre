@@ -5,7 +5,7 @@
     .Profile__Card {
     position: relative;
     max-width: 100%;
-    height: 850px;
+    height: 650px;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
     perspective: 800px;
@@ -193,7 +193,7 @@
 
     .aside{
       width: 250px;
-      height: 850px;
+      height: 650px;
       background: #cacaca61;
       float: left;
       margin-left: 0px;
@@ -237,7 +237,7 @@ width: 6rem;
 
     .log-out{
         position: relative;
-margin-top: 24rem;
+margin-top: 22rem;
         font-size: 11px;
         color: #e53935;
         font-weight: bold;
@@ -259,12 +259,14 @@ margin-top: 24rem;
           }
 
         .menu__card {
+                position: relative;
     border-radius: 5px;
     -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
     box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
     border: none;
     margin-top: 1.2rem;
     width: 15rem;
+    top: -3.9rem;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
 }
@@ -285,3 +287,18 @@ margin-top: 24rem;
     overflow: auto;
     height: auto;
 }
+
+
+
+      .avatar__home{
+width: 26rem;
+    height: 26rem;
+    border-radius: 50%;
+    background-color: white;
+    margin: auto;
+    margin-top: 20px;
+    overflow: hidden;
+    margin-left: 4rem;
+    transition: all 0.3s cubic-bezier(0.38, -0.9, 0.5, 2.5);
+      }
+

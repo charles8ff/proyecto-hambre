@@ -9,6 +9,7 @@ import { Link, useHistory } from "react-router-dom";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+
 	useEffect(() => {
 		actions.hideNavigation(false);
 	}, []);
@@ -87,12 +88,7 @@ export const Home = () => {
 				<div className="container">
 					<div className="row p-5">
 						<div className="col-12 col-md-7 pr-md-5 text-left align-self-center ">
-							<img
-								src={
-									"https://previews.123rf.com/images/imtmphoto/imtmphoto1604/imtmphoto160400013/54478445-dos-empresarios-un-asi%C3%A1tico-y-un-cauc%C3%A1sico-d%C3%A1ndose-la-mano-mirando-a-la-c%C3%A1mara-en-el-aeropuerto-moderno-.jpg"
-								}
-								className="about--us--image"
-							/>
+							<img src={"https://i.imgur.com/5BkbIdm.jpg"} className="about--us--image avatar__home" />
 						</div>
 						<div className="col-12 col-md-5 ">
 							<h2 className="mb-4 font-weight-bold ">Sobre Nosotros</h2>
@@ -103,9 +99,7 @@ export const Home = () => {
 							</p>
 							<p className="linkedins">
 								<i className="fab fa-2x fa-linkedin" />
-								<a href="https://www.linkedin.com/in/carlos-fisac-ferrandez">
-									Oscar Fernández Apellido2
-								</a>
+								<a href="https://www.linkedin.com/in/oscarfzz/">Oscar Fernández Morel</a>
 							</p>
 							<p className="linkedins">
 								<i className="fab fa-2x fa-linkedin" />
