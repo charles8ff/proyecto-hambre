@@ -278,7 +278,7 @@ width: 6rem;
 
     .log-out{
         position: relative;
-margin-top: 22rem;
+margin-top: 30rem;
         font-size: 11px;
         color: #e53935;
         font-weight: bold;
@@ -308,7 +308,6 @@ margin-top: 22rem;
     margin-top: 1.2rem;
     width: 15rem;
     top: -3.9rem;
-    padding-top: 2rem;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
 }
@@ -330,6 +329,9 @@ margin-top: 22rem;
     height: auto;
 }
 
+.Profile__MenuView{
+padding-top: 2rem;
+}
 
 
       .avatar__home{

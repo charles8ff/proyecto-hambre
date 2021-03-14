@@ -82,7 +82,7 @@ export const Profile = () => {
 											<i className="Profile__Icon fas fa-color fa-lg fa-phone" />
 											<h4 className="Profile__H4">{store.placeData.phone_number}</h4>
 										</div>
-										<div className="log-out">
+										<div className="mt-auto offset-1">
 											<OurButton
 												title="Cerrar Sesión"
 												click={() => {

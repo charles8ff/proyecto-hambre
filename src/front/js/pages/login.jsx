@@ -60,7 +60,7 @@ export const Login = () => {
 						<div className="col-12 pb-5">
 							<input
 								className="checkbox d-none"
-								checked={store.singUp_User ? true : false}
+								checked={store.userWantToSingUp ? true : false}
 								type="checkbox"
 							/>
 							<div className="UserAcess__Card mx-auto">
@@ -103,7 +103,11 @@ export const Login = () => {
 												</div>
 												<input type="submit" value="Entrar" className="btn mt-4" />
 											</form>
-											<span onClick={() => actions.userWantToSingUp(true)}>
+											<span
+												onClick={() => {
+													console.log("holi");
+													actions.userWantToSingUp(true);
+												}}>
 												¿No tienes cuenta? Registrate 😊
 											</span>
 										</div>

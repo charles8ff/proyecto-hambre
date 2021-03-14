@@ -15,7 +15,7 @@ export const MenusView = props => {
 	const history = useHistory();
 	return (
 		<div className="d-flex flex-row pt-5 pl-1">
-			<div className="col-12 col-lg-6 col-xl-4">
+			<div className="col-12 col-lg-6 Profile__MenuView col-xl-4">
 				<div className="menu__card user-card">
 					<div className="card-block">
 						<img
