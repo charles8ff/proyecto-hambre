@@ -64,11 +64,11 @@ export const Profile = () => {
 		<>
 			<div className="UserAcess Profile__Card__over">
 				<div className="container">
-					<div className="row UserAcess__FullHeight justify-content-center">
+					<div className="row Profile__Card_FullHeight justify-content-center">
 						{/* <div className="col-12"> */}
 						<div className="Profile__Card mx-auto  col-12">
-							<div className="UserAcess__CardWrapper">
-								<div className="UserAcess__CardLogin d-flex flex-row">
+							<div className="Profile__CardWrapper">
+								<div className="Profile__CardPlace d-flex flex-row">
 									<div className="aside">
 										<img
 											className="avatar"
@@ -96,10 +96,10 @@ export const Profile = () => {
 
 									{/* <Container> */}
 									<div className="d-flex flex-column justify-content-center">
-										<div className="d-flex flex-row pt-2 justify-content-center test">
+										<div className="d-flex flex-row pt-2 justify-content-center Profile__Card--Content">
 											<h2>{store.placeData.place_name}</h2>
 										</div>
-										<div className=" d-flex flex-row justify-content-center test">
+										<div className=" d-flex flex-row justify-content-center Profile__Card--Content">
 											<i className="Profile__Icon--Hour far fa-color fa-clock" />
 											<h4 className="Profile__H4">
 												{"Horario: "}
@@ -108,12 +108,12 @@ export const Profile = () => {
 												{store.placeData.close_hour}
 											</h4>
 										</div>
-										<div className="d-flex flex-row justify-content-center p-2 test__map">
+										<div className="d-flex flex-row justify-content-center p-2 Profile__Card--ContentMap">
 											<Maps />
 										</div>
 										{businessMenus ? (
 											<>
-												<div className="d-flex flex-row mt-1 justify-content-center test">
+												<div className="d-flex flex-row mt-1 justify-content-center Profile__Card--Content">
 													<OurButton
 														title="Añadir Menú"
 														hide={
@@ -131,7 +131,7 @@ export const Profile = () => {
 												</div>
 											</>
 										) : (
-											<div className="d-flex flex-row justify-content-center test">
+											<div className="d-flex flex-row justify-content-center Profile__Card--Content">
 												<OurButton
 													title="Añadir Menú"
 													hide={

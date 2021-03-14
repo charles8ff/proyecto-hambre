@@ -1,96 +1,188 @@
-.UserAcess{ 
- background: linear-gradient(to right, #ff622d 20%, #fa9352) #ff622d;
-}
+// .UserAcess{ 
+//  background: linear-gradient(to right, #ff622d 20%, #fa9352) #ff622d;
+// }
 
-    .Profile__Card {
-    position: relative;
-    max-width: 100%;
-    height: 650px;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    perspective: 800px;
-    margin-top: 20px;;
-}
-
-    .UserAcess__CardForm{ 
-    position: relative;
-    display: block;
-    margin: 0;
-    padding: 0;
-    margin-bottom: 1rem;
+//     .UserAcess__CardForm{ 
+//     position: relative;
+//     display: block;
+//     margin: 0;
+//     padding: 0;
+//     margin-bottom: 1rem;
     
     
-    }
+//     }
 
-.UserAcess__FullHeight{
-        min-height: 100vh;
-    }
+// .UserAcess__FullHeight{
+//         min-height: 100vh;
+//     }
 
-.UserAcess__CardForm--Style {
-        padding: 13px 20px;
-        padding-left: 55px;
-        height: 48px;
-        width: 100%;
-        font-weight: 500;
-        border-radius: 4px;
-        font-size: 14px;
-        line-height: 22px;
-        letter-spacing: 0.5px;
-        outline: none;
-        color: #c4c3ca;
-        background-color: white;
-        border: none;
-        -webkit-transition: all 200ms linear;
-        transition: all 200ms linear;
-        box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
-    }
+// .UserAcess__CardForm--Style {
+//         padding: 13px 20px;
+//         padding-left: 55px;
+//         height: 48px;
+//         width: 100%;
+//         font-weight: 500;
+//         border-radius: 4px;
+//         font-size: 14px;
+//         line-height: 22px;
+//         letter-spacing: 0.5px;
+//         outline: none;
+//         color: #c4c3ca;
+//         background-color: white;
+//         border: none;
+//         -webkit-transition: all 200ms linear;
+//         transition: all 200ms linear;
+//         box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
+//     }
 
-    .UserAcess__CardForm--Style:focus,
-    .UserAcess__CardForm--Style:active {
-        border: none;
-        outline: none;
-        box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
-    }
+//     .UserAcess__CardForm--Style:focus,
+//     .UserAcess__CardForm--Style:active {
+//         border: none;
+//         outline: none;
+//         box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
+//     }
 
-    .UserAcess__CardForm--inputIcon {
-        position: absolute;
-        top: 0;
-        left: 18px;
-        height: 48px;
-        font-size: 24px;
-        line-height: 48px;
-        text-align: left;
-        color: #00bc98;
-        -webkit-transition: all 200ms linear;
-        transition: all 200ms linear;
-        }
+//     .UserAcess__CardForm--inputIcon {
+//         position: absolute;
+//         top: 0;
+//         left: 18px;
+//         height: 48px;
+//         font-size: 24px;
+//         line-height: 48px;
+//         text-align: left;
+//         color: #00bc98;
+//         -webkit-transition: all 200ms linear;
+//         transition: all 200ms linear;
+//         }
 
 
-    .UserAcess__Card--content{
-        position: absolute;
-        width: 100%;
-        padding: 0 35px;
-        top: 50%;
-        left: 0;
-        transform: translate3d(0, -50%, 35px) perspective(100px);
-        z-index: 20;
-        display: block;
-    }
+//     .UserAcess__Card--content{
+//         position: absolute;
+//         width: 100%;
+//         padding: 0 35px;
+//         top: 50%;
+//         left: 0;
+//         transform: translate3d(0, -50%, 35px) perspective(100px);
+//         z-index: 20;
+//         display: block;
+//     }
 
-    .UserAcess__CardWrapper {
-        width: 100%;
-        height: 100%;
-        position:absolute;    
-        top: 0;
-        left: 0;  
-        -webkit-transform-style: preserve-3d;
-        transform-style: preserve-3d;
-        transition: all 600ms ease-out; 
-    }
+//     .UserAcess__CardWrapper {
+        // width: 100%;
+        // height: 100%;
+        // position:absolute;    
+        // top: 0;
+        // left: 0;  
+        // -webkit-transform-style: preserve-3d;
+        // transform-style: preserve-3d;
+        // transition: all 600ms ease-out; 
+//     }
 
-    .UserAcess__CardLogin, 
-    .UserAcess__CardRegister {
-             width: 100%; 
+//     .UserAcess__CardLogin, 
+//     .UserAcess__CardRegister {
+        //      width: 100%; 
+        // height: auto;
+        // background-color: white;
+        // background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
+        // background-position: bottom center;
+        // background-repeat: no-repeat;
+        // background-size: 300%;
+        // //position: absolute;
+        // border-radius: 6px;
+        // left: 0;
+        // top: 0;
+        // -webkit-transform-style: preserve-3d;
+        // transform-style: preserve-3d;
+        // -webkit-backface-visibility: hidden;
+        // -moz-backface-visibility: hidden;
+        // -o-backface-visibility: hidden;
+        // backface-visibility: hidden;
+//     }
+
+//     .UserAcess__CardAddPlace {
+//         width: 100%;
+//         height: 38rem;
+//         background-color: white;
+//         background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
+//         background-position: bottom center;
+//         background-repeat: no-repeat;
+//         background-size: 300%;
+//         position: absolute;
+//         border-radius: 6px;
+//         left: 0;
+//         top: 0;
+//         -webkit-transform-style: preserve-3d;
+//         transform-style: preserve-3d;
+//         -webkit-backface-visibility: hidden;
+//         -moz-backface-visibility: hidden;
+//         -o-backface-visibility: hidden;
+//         backface-visibility: hidden;
+//     }
+
+
+//     .UserAcess__CardRegister,
+//     .UserAcess__CardAddPlace {
+//         transform: rotateY(180deg);
+//     }
+
+//     .checkbox:checked ~ .UserAcess__Card .UserAcess__CardWrapper {
+//         transform: rotateY(180deg);
+//     }
+
+
+//     h6{
+//         padding: 0 20px;
+//         text-transform: uppercase;
+//         font-weight: 700;
+//     }
+
+//     span{
+//         cursor: pointer;
+//         font-size: 1.05rem;
+//     }
+
+//     .btn{  
+//         border-radius: 4px;
+//         height: 44px;
+//         font-size: 13px;
+//         font-weight: 600;
+//         text-transform: uppercase;
+//         -webkit-transition : all 200ms linear;
+//         transition: all 200ms linear;
+//         padding: 0 30px;
+//         letter-spacing: 1px;
+//         display: -webkit-inline-flex;
+//         display: -ms-inline-flexbox;
+//         display: inline-flex;
+//         -webkit-align-items: center;
+//         -moz-align-items: center;
+//         -ms-align-items: center;
+//         align-items: center;
+//         -webkit-justify-content: center;
+//         -moz-justify-content: center;
+//         -ms-justify-content: center;
+//         justify-content: center;
+//         -ms-flex-pack: center;
+//         text-align: center;
+//         border: none;
+//         background-color: #ff622d;
+//         color: white;
+//         box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+//     }
+//     .btn:active,
+//     .btn:focus{  
+//         background-color: #102770;
+//         color: white;
+//         box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+//     }
+//     .btn:hover{  
+//         background-color: #102770;
+//         color: white;
+//         box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+//     }
+
+.Profile__CardPlace{
+                 width: 100%; 
         height: auto;
         background-color: white;
         background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
@@ -107,93 +199,37 @@
         -moz-backface-visibility: hidden;
         -o-backface-visibility: hidden;
         backface-visibility: hidden;
+}
+
+.Profile__Card_FullHeight{
+        margin-bottom: 5rem;
+    height: 100vh;
     }
 
-    .UserAcess__CardAddPlace {
-        width: 100%;
-        height: 38rem;
-        background-color: white;
-        background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
-        background-position: bottom center;
-        background-repeat: no-repeat;
-        background-size: 300%;
-        position: absolute;
-        border-radius: 6px;
-        left: 0;
+    .Profile__Card {
+    position: relative;
+    max-width: 100%;
+    height: 550px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    perspective: 800px;
+    margin-top: 20px;;
+}
+
+.Profile__CardWrapper{
+            width: 100%;
+        height: 100%;
+        position:absolute;    
         top: 0;
+        left: 0;  
         -webkit-transform-style: preserve-3d;
         transform-style: preserve-3d;
-        -webkit-backface-visibility: hidden;
-        -moz-backface-visibility: hidden;
-        -o-backface-visibility: hidden;
-        backface-visibility: hidden;
-    }
-
-
-    .UserAcess__CardRegister,
-    .UserAcess__CardAddPlace {
-        transform: rotateY(180deg);
-    }
-
-    .checkbox:checked ~ .UserAcess__Card .UserAcess__CardWrapper {
-        transform: rotateY(180deg);
-    }
-
-
-    h6{
-        padding: 0 20px;
-        text-transform: uppercase;
-        font-weight: 700;
-    }
-
-    span{
-        cursor: pointer;
-        font-size: 1.05rem;
-    }
-
-    .btn{  
-        border-radius: 4px;
-        height: 44px;
-        font-size: 13px;
-        font-weight: 600;
-        text-transform: uppercase;
-        -webkit-transition : all 200ms linear;
-        transition: all 200ms linear;
-        padding: 0 30px;
-        letter-spacing: 1px;
-        display: -webkit-inline-flex;
-        display: -ms-inline-flexbox;
-        display: inline-flex;
-        -webkit-align-items: center;
-        -moz-align-items: center;
-        -ms-align-items: center;
-        align-items: center;
-        -webkit-justify-content: center;
-        -moz-justify-content: center;
-        -ms-justify-content: center;
-        justify-content: center;
-        -ms-flex-pack: center;
-        text-align: center;
-        border: none;
-        background-color: #ff622d;
-        color: white;
-        box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
-    }
-    .btn:active,
-    .btn:focus{  
-        background-color: #102770;
-        color: white;
-        box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
-    }
-    .btn:hover{  
-        background-color: #102770;
-        color: white;
-        box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
-    }
+        transition: all 600ms ease-out;
+}
 
     .aside{
       width: 250px;
-      height: 650px;
+      height: inherit;
       background: #cacaca61;
       margin-left: 0px;
       position: relative;
@@ -201,11 +237,11 @@
       box-sizing: border-box;
         }
 
-// @media (max-width: 998px) {
-//     .aside {
-//   display: none;
-//     }
-// }
+// // @media (max-width: 998px) {
+// //     .aside {
+// //   display: none;
+// //     }
+// // }
 
       .avatar{
 width: 6rem;
@@ -255,13 +291,13 @@ margin-top: 22rem;
     }
 
 
-          .main-title{
-                      font-weight: 600;
-                      margin-top: 2.5rem;
-        font-size: 32px;
-        color: #191919;
-        font-weight: light;
-          }
+//           .main-title{
+//                       font-weight: 600;
+//                       margin-top: 2.5rem;
+//         font-size: 32px;
+//         color: #191919;
+//         font-weight: light;
+//           }
 
         .menu__card {
                 position: relative;
@@ -272,6 +308,7 @@ margin-top: 22rem;
     margin-top: 1.2rem;
     width: 15rem;
     top: -3.9rem;
+    padding-top: 2rem;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
 }
@@ -307,12 +344,30 @@ width: 100%;
 
 
 
-.test{
-    width: max-content;
-    margin-left: 0.5rem;
+.Profile__Card--Content{
+    width: 100%;
+    margin-left: 4rem;
 }
 
-.test__map{
+.Profile__Card--ContentMap{
+    width: 100%;
+    margin-left: 4rem;
+}
+
+@media (max-width: 991px) {
+   .Profile__Card--Content{
+width: max-content;
+    margin-left: 2rem;
+}
+.Profile__Card--ContentMap{
     width: 22rem;
     margin-left: 0.5rem;
+}
+}
+
+
+@media (min-width: 1200px){
+    .container{
+        max-width: 960px;
+    }
 }
