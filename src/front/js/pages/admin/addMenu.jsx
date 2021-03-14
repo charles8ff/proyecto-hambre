@@ -40,10 +40,8 @@ export const AddMenu = () => {
 			allMeals = { ...allMeals, ...obj };
 		}
 		actions.postMeal(allMeals);
-		history.push(`/place/${JSON.parse(localStorage.getItem("place")).id}`); //AÑADIR HISTORY PUSH TO LOCALSTORAGE USER ID
+		history.push(`/place/${JSON.parse(localStorage.getItem("`Place`")).id}`); //AÑADIR HISTORY PUSH TO LOCALSTORAGE USER ID
 	};
-
-	console.log(JSON.parse(localStorage.getItem("place")).id);
 
 	const selectMenuType = e => {
 		if (e.label === "Menú del día") {

@@ -38,15 +38,17 @@ export const Template1 = () => {
 		[store.placeData]
 	);
 
-	console.log(getPlaceID[0]);
+	//console.log(getPlaceID[0]);
 
 	useEffect(
 		() => {
-			actions.hideNavigation(true);
-			actions.getSections(1);
-			actions.loadMenu(getPlaceID[0], 1); // Place 1 y template 1 (place_id and template_id)
+			if (store.templatePreview == false) {
+				actions.hideNavigation(true);
+				actions.getSections(1);
+				actions.loadMenu(getPlaceID[0], 1); // Place 1 y template 1 (place_id and template_id)
+			}
 		},
-		[!store.templatePreview]
+		[store.templatePreview]
 	);
 	useEffect(
 		() => {
@@ -55,6 +57,8 @@ export const Template1 = () => {
 		},
 		[store.allSections]
 	);
+
+	console.log(store.templatePreview);
 
 	const finalTemplate1 = () => {
 		return (
