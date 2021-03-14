@@ -2,13 +2,12 @@ import React, { useContext, Fragment, useEffect } from "react";
 import { Row, Container, Col } from "react-bootstrap";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
-import { Profile } from "../component/profile.jsx";
-import MenuIcon from "../component/partials/img/menu-icon.png";
 import { Benefits } from "../component/benefits.jsx";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+
 	useEffect(() => {
 		actions.hideNavigation(false);
 	}, []);

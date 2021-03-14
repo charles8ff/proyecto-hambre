@@ -1,4 +1,4 @@
-import React, { useContext, Fragment, useEffect } from "react";
+import React from "react";
 import { Row, Container, Col } from "react-bootstrap";
 import "../../styles/home.scss";
 import PropTypes from "prop-types";

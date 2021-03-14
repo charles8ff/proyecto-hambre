@@ -22,41 +22,39 @@ const Layout = () => {
 	const { store, actions } = useContext(Context);
 	return (
 		<BrowserRouter basename={basename}>
-			<ScrollToTop>
-				{store.showNavigation ? <Header /> : null}
-				<Switch>
-					<Route exact path="/">
-						<Home />
-					</Route>
-					<Route exact path="/place/:id">
-						<Profile />
-					</Route>
-					<Route exact path="/register">
-						<Login />
-					</Route>
-					<Route exact path="/login">
-						<Login />
-					</Route>
-					<Route exact path="/place/:id/addmenu">
-						<AddMenu />
-					</Route>
-					<Route exact path="/place/:id/menu/1">
-						<Template1 />
-					</Route>
-					<Route exact path="/place/:id/menu/2">
-						<Template2 />
-					</Route>
-					<Route>
-						<h1>Not found!</h1>
-					</Route>
-				</Switch>
-				{store.showNavigation ? (
-					<Footer
-						footer_text="¿Tienes Hambre?"
-						footer_url="https://coolors.co/191919-cdcdcd-ffffff-f44708-ed750b-f6b983-58c7e0"
-					/>
-				) : null}
-			</ScrollToTop>
+			{store.showNavigation ? <Header /> : null}
+			<Switch>
+				<Route exact path="/">
+					<Home />
+				</Route>
+				<Route exact path="/place/:id">
+					<Profile />
+				</Route>
+				<Route exact path="/register">
+					<Login />
+				</Route>
+				<Route exact path="/login">
+					<Login />
+				</Route>
+				<Route exact path="/place/:id/addmenu">
+					<AddMenu />
+				</Route>
+				<Route exact path="/place/:id/menu/1">
+					<Template1 />
+				</Route>
+				<Route exact path="/place/:id/menu/2">
+					<Template2 />
+				</Route>
+				<Route>
+					<h1>Not found!</h1>
+				</Route>
+			</Switch>
+			{store.showNavigation ? (
+				<Footer
+					footer_text="¿Tienes Hambre?"
+					footer_url="https://coolors.co/191919-cdcdcd-ffffff-f44708-ed750b-f6b983-58c7e0"
+				/>
+			) : null}
 		</BrowserRouter>
 	);
 };

@@ -10,25 +10,109 @@ Geocode.setLocationType("ROOFTOP");
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			material_ui_is_user_exist: false,
+			//material_ui_is_user_exist: false,
 			is_first_step: true,
 			material_ui_is_user_active: false,
-			material_ui_is_correct_password: false,
-			singUp_User: false,
+			material_ui_is_incorrect_password: false,
+			userWantToSingUp: false,
 			showNavigation: true,
-			singUp_profile: [],
-			loggedBusiness: localStorage.getItem("place") ? JSON.parse(localStorage.getItem("place")) : false,
+			singUp_profile: [], //save firts step of register
+			placeData: localStorage.getItem("Place") ? JSON.parse(localStorage.getItem("Place")) : false,
+			loginToken: localStorage.getItem("loginToken") ? localStorage.getItem("loginToken") : false,
 			menus_type: [],
 			templates: [],
 			sections: [],
 			selectedTemplate: 0,
-			loginToken: localStorage.getItem("loginToken") ? localStorage.getItem("loginToken") : false,
 			titleSections: [],
 			allSections: [],
 			map: undefined,
 			templatePreview: false
 		},
 		actions: {
+			login: async (emailgiven, passwordgiven) => {
+				let response = await fetch(URLBACKEND + "/api/login", {
+					method: "POST",
+					headers: new Headers({
+						"Content-Type": "application/json"
+					}),
+					body: JSON.stringify({
+						email: emailgiven,
+						password: passwordgiven
+					})
+				});
+				if (response.status == 404) {
+					setStore({
+						material_ui_is_user_active: true //email already exists or is inactive but exists
+					});
+				} else if (response.status == 409) {
+					setStore({
+						material_ui_is_incorrect_password: true //to set message with incorrect password
+					});
+				} else {
+					if (response.ok) {
+						response = await response.json();
+						localStorage.setItem("loginToken", response.access_token);
+						setStore({
+							loginToken: response.access_token
+						});
+						let data = getActions().decodeToken(response.access_token);
+						const dataURL = "/place/" + data.sub.id;
+						getActions().getProfile(dataURL);
+					}
+				}
+			},
+			decodeToken: token => {
+				return (token = jwt_decode(token));
+			},
+			userWantToSingUp: data => {
+				if (data) {
+					setStore({
+						userWantToSingUp: true
+					});
+				} else {
+					setStore({
+						userWantToSingUp: false
+					});
+				}
+			},
+			doLogOut: () => {
+				localStorage.removeItem("loginToken");
+				setStore({
+					loginToken: false
+				});
+			},
+
+			getUserbyEmail: user_email => {
+				fetch(URLBACKEND + `/api/user/${user_email}`)
+					.then(async res => {
+						if (res.status == 409) {
+							setStore({
+								material_ui_is_user_active: true, //check user is exists
+								is_first_step: true
+							});
+						} else {
+							setStore({
+								material_ui_is_user_active: false, //check user is exists
+								is_first_step: false
+							});
+						}
+						const response = await res.json();
+					})
+					.catch(err => {
+						throw err;
+					});
+			},
+
+			registerProfile: data => {
+				setStore({ singUp_profile: data });
+			},
+
+			registerPlace: data => {
+				const the_profile = { ...getStore().singUp_profile, ...data };
+				setStore({ singUp_profile: the_profile });
+				getActions().addNewProfile(getStore().singUp_profile);
+			},
+
 			renameKey: (object, key, newKey) => {
 				const clonedObj = Object.assign({}, object);
 				const targetKey = clonedObj[key];
@@ -131,32 +215,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			getProfile: place_id => {
-				// setStore({
-				// 	loggedBusiness: false
-				// });
+				setStore({
+					placeData: false
+				});
 				fetch(URLBACKEND + `/api${place_id}`)
 					.then(async res => {
 						const response = await res.json();
-						localStorage.setItem("place", JSON.stringify(response));
+						localStorage.setItem("Place", JSON.stringify(response));
 						setStore({
-							loggedBusiness: response
+							placeData: response
 						});
 					})
 					.catch(err => {
 						throw err;
 					});
-			},
-
-			userWantToSingUp: data => {
-				if (data) {
-					setStore({
-						singUp_User: true
-					});
-				} else {
-					setStore({
-						singUp_User: false
-					});
-				}
 			},
 			isPreviewTemplate: data => {
 				if (data) {
@@ -188,37 +260,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 			},
 
-			getUserbyEmail: user_email => {
-				fetch(URLBACKEND + `/api/user/${user_email}`)
-					.then(async res => {
-						if (res.status == 409) {
-							setStore({
-								material_ui_is_user_exist: true,
-								is_first_step: true
-							});
-						} else {
-							setStore({
-								material_ui_is_user_exist: false,
-								is_first_step: false
-							});
-						}
-						const response = await res.json();
-					})
-					.catch(err => {
-						throw err;
-					});
-			},
-
-			registerProfile: data => {
-				setStore({ singUp_profile: data });
-			},
-
-			registerPlace: data => {
-				const the_profile = { ...getStore().singUp_profile, ...data };
-				setStore({ singUp_profile: the_profile });
-				getActions().addNewProfile(getStore().singUp_profile);
-			},
-
 			addNewProfile: async user_profile => {
 				let response = await fetch(URLBACKEND + "/api/user", {
 					method: "POST",
@@ -248,48 +289,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				response = await response.json();
 				getActions().doLogOut();
-			},
-
-			login: async (emailgiven, passwordgiven) => {
-				let response = await fetch(URLBACKEND + "/api/login", {
-					method: "POST",
-					headers: new Headers({
-						"Content-Type": "application/json"
-					}),
-					body: JSON.stringify({
-						email: emailgiven,
-						password: passwordgiven
-					})
-				});
-				if (response.status == 404) {
-					setStore({
-						material_ui_is_user_active: true
-					});
-				} else if (response.status == 409) {
-					setStore({
-						material_ui_is_correct_password: true
-					});
-				} else {
-					if (response.ok) {
-						response = await response.json();
-						localStorage.setItem("loginToken", response.access_token);
-						setStore({
-							loginToken: response.access_token
-						});
-						let data = getActions().decodeToken(response.access_token);
-						const dataURL = "/place/" + data.sub.id;
-						getActions().getProfile(dataURL);
-					}
-				}
-			},
-			decodeToken: token => {
-				return (token = jwt_decode(token));
-			},
-			doLogOut: () => {
-				localStorage.removeItem("loginToken");
-				setStore({
-					loginToken: false
-				});
 			},
 			loadMenu: async (place_id, template_id) => {
 				let res = await fetch(URLBACKEND + `/api/place/${place_id}/template/${template_id}`);

@@ -2,7 +2,6 @@ import React, { Fragment, useContext, useState, useEffect } from "react";
 import logoMenu from "./img/logo.png";
 import "../../../styles/header.scss";
 import { Link, useHistory } from "react-router-dom";
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container, Jumbotron, Row, Col } from "react-bootstrap";
 import { OurButton } from "../button.jsx";
 import { Context } from "../../store/appContext.js";
 
@@ -12,6 +11,7 @@ export const Header = () => {
 	const [click, setClick] = useState(false);
 	const handleClick = () => setClick(!click);
 	const closeMobileMenu = () => setClick(false);
+
 	return (
 		<div className="Header">
 			<div className="Header__Logo">
@@ -25,55 +25,48 @@ export const Header = () => {
 						<Link to="/">Inicio</Link>
 					</li>
 					<li className="Header__Nav--Links Header__Nav--MobileView" onClick={closeMobileMenu}>
-						<OurButton
-							title="Iniciar sesión"
-							click={() => history.push("/login")}
-							hide={store.loginToken != false ? "d-none" : ""}
-						/>
+						<Link to="/login">
+							<OurButton title="Iniciar sesión" hide={store.loginToken != false ? "d-none" : ""} />
+						</Link>
 					</li>
 					<li className="Header__Nav--Links Header__Nav--MobileView" onClick={closeMobileMenu}>
-						<OurButton
-							title="Regístrate"
-							click={() => history.push("/register")}
-							hide={store.loginToken != false ? "d-none" : ""}
-						/>
+						<Link to="/register">
+							<OurButton title="Regístrate" hide={store.loginToken != false ? "d-none" : ""} />
+						</Link>
 					</li>
 				</ul>
 			</div>
 			<ul className="Header__Nav--SigninUp">
 				<li className="Header__Nav--SigninIn" onClick={closeMobileMenu}>
-					<OurButton
-						title="Iniciar sesión"
-						click={() => history.push("/login")}
-						hide={store.loginToken != false ? "d-none" : ""}
-					/>
+					<Link to="/login">
+						<OurButton title="Iniciar sesión" hide={store.loginToken != false ? "d-none" : ""} />
+					</Link>
 				</li>
 				<li className="Header__Nav--SigninIn" onClick={closeMobileMenu}>
-					<OurButton
-						title="Regístrate"
-						click={() => history.push("/register")}
-						hide={store.loginToken != false ? "d-none" : ""}
-					/>
+					<Link to="/register">
+						<OurButton title="Regístrate" hide={store.loginToken != false ? "d-none" : ""} />
+					</Link>
 				</li>
 				<li className="Header__Nav--SigninIn" onClick={closeMobileMenu}>
 					<OurButton
 						title="Eliminar cuenta"
 						click={() => {
-							actions.deleteProfile(store.loggedBusiness.id);
+							actions.deleteProfile(store.placeData.id);
 							history.push("/");
 						}}
 						hide={store.loginToken != false ? "" : "d-none"}
 					/>
 				</li>
 				<li className="Header__Nav--SigninIn" onClick={closeMobileMenu}>
-					<OurButton
-						title="Cerrar Sesión"
-						click={() => {
-							actions.doLogOut();
-							history.push("/");
-						}}
-						hide={store.loginToken != false ? "" : "d-none"}
-					/>
+					<Link to="/">
+						<OurButton
+							title="Cerrar Sesión"
+							click={() => {
+								actions.doLogOut();
+							}}
+							hide={store.loginToken != false ? "" : "d-none"}
+						/>
+					</Link>
 				</li>
 			</ul>
 			<div className="Header__MobileMenu" onClick={handleClick}>

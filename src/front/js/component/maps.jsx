@@ -1,14 +1,11 @@
 import React, { useState, useCallback, useContext } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
-import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 
 const containerStyle = {
 	width: "35rem",
 	height: "15rem"
 };
-
-const options = { closeBoxURL: "", enableEventPropagation: true };
 
 export const Maps = props => {
 	const { store, actions } = useContext(Context);

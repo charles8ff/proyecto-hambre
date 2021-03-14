@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import { OurButton } from "./button.jsx";
 import { useForm } from "react-hook-form";
 
-export const EditProfile = () => {
+export const EditProfile = () => { //to review
 	const { store, actions } = useContext(Context);
 	const history = useHistory();
 
@@ -35,7 +35,7 @@ export const EditProfile = () => {
 								</div>
 								<Card.Body>
 									<Card.Title>
-										<h2 className="details">{store.loggedBusiness.email}</h2>
+										<h2 className="details">{store.placeData.email}</h2>
 									</Card.Title>
 								</Card.Body>
 							</Card>

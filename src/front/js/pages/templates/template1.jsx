@@ -35,7 +35,7 @@ export const Template1 = () => {
 			//	actions.getProfile(getPlaceID[0]);
 			actions.hideNavigation(true);
 		},
-		[store.loggedBusiness]
+		[store.placeData]
 	);
 
 	console.log(getPlaceID[0]);
@@ -60,7 +60,7 @@ export const Template1 = () => {
 		return (
 			<div className="container-fluid template1--container justify-content-center h-100">
 				<h2>MENÚ</h2>
-				<span className="place_name">{store.loggedBusiness.place_name}</span>
+				<span className="place_name">{store.placeData.place_name}</span>
 				{templateSections.map((elem, index) => {
 					return (
 						<div key={index}>

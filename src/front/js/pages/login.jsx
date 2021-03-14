@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useForm, useFieldArray, useWatch } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Registro } from "./registro.jsx";
@@ -8,12 +8,12 @@ import { AddPlace } from "./add-place.jsx";
 import "../../styles/login.scss";
 
 export const Login = () => {
-	const { register, handleSubmit, watch, errors } = useForm();
+	const { register, handleSubmit, errors } = useForm();
 	const { store, actions } = useContext(Context);
 	const history = useHistory();
 
 	const onLogin = data => {
-		store.material_ui_is_correct_password = false;
+		store.material_ui_is_incorrect_password = false;
 		actions.login(data.email, data.password);
 	};
 
@@ -96,8 +96,8 @@ export const Login = () => {
 														ref={register({ required: true, minLength: 6 })}
 													/>
 													<i className="UserAcess__CardForm--inputIcon fas fa-key" />
-													{store.material_ui_is_correct_password ? (
-														<p>Invalid password</p>
+													{store.material_ui_is_incorrect_password ? (
+														<p>Contraseña invalida</p>
 													) : null}
 													{errors.password && <p>Este campo es requerido</p>}
 												</div>

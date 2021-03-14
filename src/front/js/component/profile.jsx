@@ -27,33 +27,31 @@ export const Profile = () => {
 
 	useEffect(
 		() => {
-			store.loggedBusiness == false ? null : actions.getLatitudeLongitude(store.loggedBusiness.address);
+			store.placeData == false ? null : actions.getLatitudeLongitude(store.placeData.address);
 		},
-		[store.loggedBusiness]
+		[store.placeData]
 	);
 
 	useEffect(
 		() => {
-			store.loggedBusiness.menus && !store.loggedBusiness.menus.length
-				? setBusinessMenus(false)
-				: setBusinessMenus(true);
+			store.placeData.menus && !store.placeData.menus.length ? setBusinessMenus(false) : setBusinessMenus(true);
 		},
-		[store.loggedBusiness.menus]
+		[store.placeData.menus]
 	);
 
 	const MenusInHTML = () => {
-		if (store.loggedBusiness.menus && store.menus_type) {
+		if (store.placeData.menus && store.menus_type) {
 			let titles = store.menus_type.map(elem => {
 				return elem.label;
 			});
-			return store.loggedBusiness.menus.map((elem, index) => {
+			return store.placeData.menus.map((elem, index) => {
 				console.log(elem.template_id);
 				return (
 					<MenusView
 						key={index}
 						title={titles[elem.template_id - 1]}
 						urlTemplate={elem.template_id}
-						urlPlace={store.loggedBusiness.id}
+						urlPlace={store.placeData.id}
 					/>
 				);
 			});
@@ -78,11 +76,11 @@ export const Profile = () => {
 											/>
 											<div className="d-flex flex-row">
 												<i className="Profile__Icon fas fa-color fa-lg fa-map-marker-alt" />
-												<h4 className="Profile__H4">{store.loggedBusiness.address}</h4>
+												<h4 className="Profile__H4">{store.placeData.address}</h4>
 											</div>
 											<div className="d-flex flex-row">
 												<i className="Profile__Icon fas fa-color fa-lg fa-phone" />
-												<h4 className="Profile__H4">{store.loggedBusiness.phone_number}</h4>
+												<h4 className="Profile__H4">{store.placeData.phone_number}</h4>
 											</div>
 											<div className="log-out">
 												<OurButton
@@ -96,15 +94,15 @@ export const Profile = () => {
 											</div>
 										</div>
 										<div className="main-title d-flex flex-row justify-content-center">
-											<h2>{store.loggedBusiness.place_name}</h2>
+											<h2>{store.placeData.place_name}</h2>
 										</div>
 										<div className=" d-flex flex-row justify-content-center">
 											<i className="Profile__Icon--Hour far fa-color fa-clock" />
 											<h4 className="Profile__H4">
 												{"Horario: "}
-												{store.loggedBusiness.open_hour}
+												{store.placeData.open_hour}
 												{" - "}
-												{store.loggedBusiness.close_hour}
+												{store.placeData.close_hour}
 											</h4>
 										</div>
 										<div className="d-flex flex-row pt-2 justify-content-center">
@@ -118,7 +116,7 @@ export const Profile = () => {
 														hide={
 															store.loginToken != false &&
 															actions.decodeToken(store.loginToken).sub.id ==
-																store.loggedBusiness.id
+																store.placeData.id
 																? ""
 																: "d-none"
 														}
@@ -136,7 +134,7 @@ export const Profile = () => {
 													hide={
 														store.loginToken != false &&
 														actions.decodeToken(store.loginToken).sub.id ==
-															store.loggedBusiness.id
+															store.placeData.id
 															? ""
 															: "d-none"
 													}
@@ -148,13 +146,13 @@ export const Profile = () => {
 											</div>
 										)}
 										<div className="d-flex flex-row card__profile pl-1">{MenusInHTML()}</div>
-										{/* <p className="p-3">{store.loggedBusiness.description}</p>
+										{/* <p className="p-3">{store.placeData.description}</p>
 										<OurButton
 											title="Editar"
-											click={() => history.push(`${store.loggedBusiness.id}/edit`)}
+											click={() => history.push(`${store.placeData.id}/edit`)}
 											hide={
 												store.loginToken != false &&
-												actions.decodeToken(store.loginToken).sub.id == store.loggedBusiness.id
+												actions.decodeToken(store.loginToken).sub.id == store.placeData.id
 													? ""
 													: "d-none"
 											}

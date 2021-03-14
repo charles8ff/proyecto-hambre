@@ -1,4 +1,4 @@
-import React, { Component, useContext, Fragment } from "react";
+import React, { useContext, Fragment } from "react";
 import Select from "react-select";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";

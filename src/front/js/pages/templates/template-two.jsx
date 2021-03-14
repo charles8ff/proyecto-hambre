@@ -35,7 +35,7 @@ export const Template2 = () => {
 			actions.getProfile(getPlaceID[0]);
 			actions.hideNavigation(true);
 		},
-		[store.loggedBusiness]
+		[store.placeData]
 	);
 
 	useEffect(
