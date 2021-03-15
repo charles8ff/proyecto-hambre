@@ -29,6 +29,8 @@ export const Template1 = () => {
 		}
 	};
 
+	console.log(getPlaceID);
+
 	useEffect(
 		() => {
 			if (store.placeData == false) {

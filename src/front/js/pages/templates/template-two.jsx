@@ -30,10 +30,12 @@ export const Template2 = () => {
 		}
 	};
 
+	console.log(actions.loadMenu(getPlaceID[0], 2));
+
 	useEffect(
 		() => {
 			if (store.placeData == false) {
-				actions.getProfile(getPlaceID);
+				actions.getProfile(getPlaceID[0]);
 				actions.hideNavigation(true);
 			}
 		},
@@ -45,7 +47,7 @@ export const Template2 = () => {
 			if (store.templatePreview == false) {
 				actions.hideNavigation(true);
 				actions.getSections(2);
-				actions.loadMenu(getPlaceID, 2); // Place 1 y template 1 (place_id and template_id)
+				actions.loadMenu(getPlaceID[0], 2); // Place 1 y template 1 (place_id and template_id)
 			}
 		},
 		[store.templatePreview]

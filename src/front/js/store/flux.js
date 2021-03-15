@@ -1,6 +1,6 @@
 import jwt_decode from "jwt-decode";
 import Geocode from "react-geocode";
-const URLBACKEND = "https://3001-tomato-ox-1i5lci6z.ws-eu03.gitpod.io";
+const URLBACKEND = "https://3001-copper-mite-z2nrl6y2.ws-eu03.gitpod.io";
 
 Geocode.setApiKey(process.env.REACT_GOOGLE_MAPS_API_KEY);
 Geocode.setLanguage("es");
