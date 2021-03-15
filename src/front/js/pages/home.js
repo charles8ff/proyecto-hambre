@@ -1,8 +1,6 @@
 import React, { useContext, Fragment, useEffect } from "react";
-import { Row, Container, Col } from "react-bootstrap";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
-import { Benefits } from "../component/benefits.jsx";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
