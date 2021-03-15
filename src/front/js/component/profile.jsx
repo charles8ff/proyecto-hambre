@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import { OurButton } from "./button.jsx";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { useForm, useWatch } from "react-hook-form";
 
 import { Maps } from "./maps.jsx";
 
@@ -18,6 +19,9 @@ export const Profile = () => {
 	const [businessMenus, setBusinessMenus] = useState(false);
 	const [editing, setEditing] = useState(false);
 	const history = useHistory();
+	const { register, errors, handleSubmit, watch } = useForm();
+
+	const getDataAllFields = watch();
 
 	useEffect(
 		() => {
@@ -65,9 +69,100 @@ export const Profile = () => {
 		}
 	};
 
+	const submitEditedProfile = data => {
+		console.log(data);
+	};
+
+	const displayEditProfile = () => {
+		return (
+			<div className="container">
+				<div className="inputContainer">
+					<i className="fas fa-utensils icon" />
+					<input
+						name={"place_name"}
+						type="text"
+						placeholder={`${store.placeData.place_name}`}
+						className="AddMenu__Input--Style mb-3"
+						ref={register({ required: true })}
+					/>
+				</div>
+				<div className="inputContainer d-flex flex-row flex-wrap">
+					<div>
+						<i className="fas fa-clock icon" />
+						<input
+							name={"open_hour"}
+							type="time"
+							placeholder={`${store.placeData.open_hour}`}
+							className="AddMenu__Input--Style mb-3"
+							ref={register({ required: true })}
+						/>
+					</div>
+					<div>
+						<i className="fas fa-clock icon" />
+						<input
+							name={"close_hour"}
+							type="time"
+							placeholder={`${store.placeData.close_hour}`}
+							className="AddMenu__Input--Style mb-3"
+							ref={register({ required: true })}
+						/>
+					</div>
+				</div>
+				<div className="inputContainer">
+					<i className="fas fa-phone icon" />
+					<input
+						name={"phone_number"}
+						type="tel"
+						placeholder={`${store.placeData.phone_number}`}
+						className="AddMenu__Input--Style mb-3"
+						ref={register({ required: true })}
+					/>
+				</div>
+				<div className="inputContainer">
+					<i className="fas fa-phone icon" />
+					<input
+						name={"address"}
+						type="text"
+						placeholder={`${store.placeData.address}`}
+						className="AddMenu__Input--Style mb-3"
+						ref={register({ required: true })}
+					/>
+				</div>
+				<div className="inputContainer">
+					<i className="fas fa-envelope icon" />
+					<input
+						name={"email"}
+						type="tel"
+						placeholder={`${store.placeData.email}`}
+						className="AddMenu__Input--Style mb-3"
+						ref={register({ required: true })}
+					/>
+				</div>
+				<div className="d-flex flex-row flex-wrap mt-1 justify-content-center Profile__Card--Content">
+					<div>
+						<OurButton
+							title="Guardar Cambios"
+							click={() => {
+								submitEditedProfile(getDataAllFields);
+							}}
+						/>
+					</div>
+					<div>
+						<OurButton
+							title="Cancelar"
+							click={() => {
+								setEditing(false);
+							}}
+						/>
+					</div>
+				</div>
+			</div>
+		);
+	};
+
 	return (
 		<>
-			<div className="wrapper">
+			<div className={editing ? "Editing__Wrapper" : "wrapper"}>
 				<div className="profile-card js-profile-card">
 					<div className="d-flex flex-row justify-content-center">
 						<div className="profile-card__img d-flex flex-row">
@@ -85,50 +180,75 @@ export const Profile = () => {
 							/>
 						</div>
 					</div>
-
-					<div className="profile-card__cnt js-profile-cnt">
-						<div className="profile-card__name">
-							<h2>{store.placeData.place_name}</h2>
-							<div className="d-flex flex-row justify-content-center pb-1">
-								<OurButton
-									title="Cerrar Sesión"
-									click={() => {
-										actions.doLogOut();
-										history.push("/");
-									}}
-									hide={store.loginToken != false ? "" : "d-none"}
-								/>
-							</div>
-						</div>
-						<div className="profile-card__txt d-flex flex-row justify-content-center">
-							<i className="Profile__Icon--Hour far fa-color fa-clock" />
-							<h4 className="Profile__H4">
-								{"Horario: "}
-								{store.placeData.open_hour}
-								{" - "}
-								{store.placeData.close_hour}
-							</h4>
-						</div>
-						<div className="profile-card-loc">
-							<span className="profile-card-loc__icon" />
-							<span className="profile-card-loc__txt">
-								{" "}
-								<div className="d-flex flex-row">
-									<i className="Profile__Icon--Hour fas fa-color fa-lg fa-phone" />
-									<h4 className="Profile__H4">{store.placeData.phone_number}</h4>
+					{editing ? (
+						displayEditProfile()
+					) : (
+						<div className="profile-card__cnt js-profile-cnt">
+							<div className="profile-card__name">
+								<h2>{store.placeData.place_name}</h2>
+								<div className="d-flex flex-row justify-content-center pb-1">
+									<OurButton
+										title="Cerrar Sesión"
+										click={() => {
+											actions.doLogOut();
+											history.push("/");
+										}}
+										hide={store.loginToken != false ? "" : "d-none"}
+									/>
 								</div>
-							</span>
-						</div>
-						<div className="d-flex flex-row justify-content-center">
-							<i className="Profile__Icon fas fa-color fa-lg fa-map-marker-alt" />
-							<h4 className="Profile__H4">{store.placeData.address}</h4>
-						</div>
-						<div className="d-flex flex-row justify-content-center p-2 Profile__Card--ContentMap">
-							<Maps />
-						</div>
-						{businessMenus ? (
-							<>
-								<div className="d-flex flex-row mt-1 justify-content-center Profile__Card--Content">
+							</div>
+							<div className="profile-card__txt d-flex flex-row justify-content-center">
+								<i className="Profile__Icon--Hour far fa-color fa-clock" />
+								<h4 className="Profile__H4">
+									{"Horario: "}
+									{store.placeData.open_hour}
+									{" - "}
+									{store.placeData.close_hour}
+								</h4>
+							</div>
+							<div className="profile-card-loc">
+								<span className="profile-card-loc__icon" />
+								<span className="profile-card-loc__txt">
+									{" "}
+									<div className="d-flex flex-row">
+										<i className="Profile__Icon--Hour fas fa-color fa-lg fa-phone" />
+										<h4 className="Profile__H4">{store.placeData.phone_number}</h4>
+									</div>
+								</span>
+							</div>
+							<div className="d-flex flex-row justify-content-center">
+								<i className="Profile__Icon fas fa-color fa-lg fa-map-marker-alt" />
+								<h4 className="Profile__H4">{store.placeData.address}</h4>
+							</div>
+							<div className="d-flex flex-row justify-content-center p-2 Profile__Card--ContentMap">
+								<Maps />
+							</div>
+							{businessMenus ? (
+								<>
+									<div className="d-flex flex-row mt-1 justify-content-center Profile__Card--Content">
+										<OurButton
+											title="Añadir Menú"
+											hide={
+												store.loginToken != false &&
+												actions.decodeToken(store.loginToken).sub.id == store.placeData.id
+													? ""
+													: "d-none"
+											}
+											click={() => {
+												history.push(history.location.pathname.concat("/addmenu"));
+											}}
+										/>
+									</div>
+									<div className="Profile__CardContainer">
+										<div className="Parallax__TwoCards">
+											<div className="Profile__Menus d-flex flex-row flex-wrap">
+												{MenusInHTML()}
+											</div>
+										</div>
+									</div>
+								</>
+							) : (
+								<div className="d-flex flex-row justify-content-center Profile__Card--Content">
 									<OurButton
 										title="Añadir Menú"
 										hide={
@@ -142,29 +262,9 @@ export const Profile = () => {
 										}}
 									/>
 								</div>
-								<div className="Profile__CardContainer">
-									<div className="Parallax__TwoCards">
-										<div className="Profile__Menus d-flex flex-row flex-wrap">{MenusInHTML()}</div>
-									</div>
-								</div>
-							</>
-						) : (
-							<div className="d-flex flex-row justify-content-center Profile__Card--Content">
-								<OurButton
-									title="Añadir Menú"
-									hide={
-										store.loginToken != false &&
-										actions.decodeToken(store.loginToken).sub.id == store.placeData.id
-											? ""
-											: "d-none"
-									}
-									click={() => {
-										history.push(history.location.pathname.concat("/addmenu"));
-									}}
-								/>
-							</div>
-						)}
-					</div>
+							)}
+						</div>
+					)}
 				</div>
 			</div>
 		</>
