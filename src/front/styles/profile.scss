@@ -235,7 +235,11 @@
       position: relative;
       border-right: 1px solid rgba(0, 0, 0, 0.1);
       box-sizing: border-box;
-        }
+      .editIcon:active{
+        color: #ff622d;
+      }
+      
+    }
 
 // // @media (max-width: 998px) {
 // //     .aside {
@@ -248,10 +252,10 @@ width: 6rem;
     height: 6rem;
     border-radius: 50%;
     background-color: white;
-    margin: auto;
-    margin-top: 20px;
+    // margin: auto;
+    margin-top: 2rem;
     overflow: hidden;
-    margin-left: 4rem;
+    margin-left: 15%;
     transition: all 0.3s cubic-bezier(0.38, -0.9, 0.5, 2.5);
       }
 
