@@ -26,7 +26,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			titleSections: [],
 			allSections: [],
 			map: undefined,
-			templatePreview: false
+			templatePreview: false,
+			showModal: false
 		},
 		actions: {
 			login: async (emailgiven, passwordgiven) => {
@@ -80,6 +81,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({
 					loginToken: false
 				});
+			},
+
+			userWantToOpenModal: data => {
+				if (data) {
+					setStore({
+						showModal: true
+					});
+				} else {
+					setStore({
+						showModal: false
+					});
+				}
 			},
 
 			getUserbyEmail: user_email => {
