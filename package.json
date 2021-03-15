@@ -101,6 +101,7 @@
 		"react-geocode": "^0.2.3",
 		"react-hook-form": "^6.15.4",
 		"react-inlinesvg": "^2.2.2",
+		"react-multi-carousel": "^2.6.2",
 		"react-polyfills": "0.0.1",
 		"react-qrcodes": "^1.0.7",
 		"react-router-dom": "^5.2.0",
