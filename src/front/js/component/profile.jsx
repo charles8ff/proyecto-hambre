@@ -48,7 +48,6 @@ export const Profile = () => {
 		[store.placeData.menus]
 	);
 
-	console.log(editing);
 	const MenusInHTML = () => {
 		if (store.placeData.menus && store.menus_type) {
 			let titles = store.menus_type.map(elem => {
@@ -70,7 +69,8 @@ export const Profile = () => {
 	};
 
 	const submitEditedProfile = data => {
-		console.log(data);
+		actions.editProfile(store.placeData.id, data);
+		setEditing(false);
 	};
 
 	const displayEditProfile = () => {
@@ -119,7 +119,7 @@ export const Profile = () => {
 					/>
 				</div>
 				<div className="inputContainer">
-					<i className="fas fa-phone icon" />
+					<i className="fas fa-map-marker-alt icon" />
 					<input
 						name={"address"}
 						type="text"

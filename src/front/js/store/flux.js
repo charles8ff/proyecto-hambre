@@ -1,6 +1,6 @@
 import jwt_decode from "jwt-decode";
 import Geocode from "react-geocode";
-const URLBACKEND = "https://project-hunger.herokuapp.com";
+const URLBACKEND = "https://3001-ivory-bedbug-iyltk5kg.ws-eu03.gitpod.io";
 
 Geocode.setApiKey(process.env.REACT_GOOGLE_MAPS_API_KEY);
 Geocode.setLanguage("es");
@@ -309,16 +309,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ allSections: responseAsJson });
 				return responseAsJson;
 			},
-			changeProfile: async (place_id, data) => {
+
+			editProfile: async (place_id, data) => {
 				let response = await fetch(URLBACKEND + `/api/place/${place_id}`, {
 					method: "PATCH",
 					headers: new Headers({
 						"Content-Type": "application/json",
-						Authorization: `Bearer ${loginToken}`
+						Authorization: `Bearer ${getStore().loginToken}`
 					}),
 					body: JSON.stringify(data)
 				});
 				response = await response.json();
+				console.log(response);
+				getActions().getProfile(`/place/${response.id}`);
 			},
 			loadSections: async template_id => {
 				let res = await fetch(URLBACKEND + `/api/template/${template_id}`);
