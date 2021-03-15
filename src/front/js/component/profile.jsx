@@ -22,10 +22,11 @@ export const Profile = () => {
 	const { register, errors, handleSubmit, watch } = useForm();
 
 	const getDataAllFields = watch();
+	const getPlaceID = history.location.pathname.replace(/\D/g, "");
 
 	useEffect(
 		() => {
-			actions.getProfile(history.location.pathname);
+			actions.getProfile(getPlaceID[0]);
 		},
 		[history.location.pathname]
 	);
@@ -173,7 +174,12 @@ export const Profile = () => {
 						</div>
 						<div>
 							<i
-								className="fas fa-2x fa-edit editIcon"
+								className={
+									store.loginToken != false &&
+									actions.decodeToken(store.loginToken).sub.id == store.placeData.id
+										? "fas fa-2x fa-edit editIcon"
+										: "d-none"
+								}
 								onClick={() => {
 									setEditing(true);
 								}}

@@ -1,6 +1,6 @@
 import jwt_decode from "jwt-decode";
 import Geocode from "react-geocode";
-const URLBACKEND = "https://3001-ivory-bedbug-iyltk5kg.ws-eu03.gitpod.io";
+const URLBACKEND = "https://3001-tomato-ox-1i5lci6z.ws-eu03.gitpod.io";
 
 Geocode.setApiKey(process.env.REACT_GOOGLE_MAPS_API_KEY);
 Geocode.setLanguage("es");
@@ -210,6 +210,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ userSelectTemplate: data });
 			},
 			postMeal: async data => {
+				console.log(data);
 				let place_id = getActions().decodeToken(getStore().loginToken).sub.id;
 				let template_id = getStore().userSelectTemplate;
 				let response = await fetch(URLBACKEND + `/api/place/${place_id}/template/${template_id}`, {
@@ -231,7 +232,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({
 					placeData: false
 				});
-				fetch(URLBACKEND + `/api${place_id}`)
+				fetch(URLBACKEND + `/api/place/${place_id}`)
 					.then(async res => {
 						const response = await res.json();
 						localStorage.setItem("Place", JSON.stringify(response));
@@ -320,7 +321,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(data)
 				});
 				response = await response.json();
-				console.log(response);
 				getActions().getProfile(`/place/${response.id}`);
 			},
 			loadSections: async template_id => {

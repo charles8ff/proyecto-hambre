@@ -17,7 +17,6 @@ padding-right: 0.3rem;
   padding-top: 100px;
   display: flex;
   background-image: linear-gradient(to right, #ff622d 20%, #fa9352);
-    min-height: 100vh;
   @media screen and (max-width: 768px) {
     height: auto;
     padding-top: 100px;
@@ -27,7 +26,6 @@ padding-right: 0.3rem;
 
 .Editing__Wrapper {
   width: 100%;
-  min-height: 100vh;
   height: auto;
   padding: 50px 20px;
   padding-top: 100px;
