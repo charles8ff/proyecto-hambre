@@ -70,17 +70,22 @@ export const AddMenu = () => {
 				</div>
 				{previewTemplate == 1 ? (
 					<>
-						<button onClick={() => setShowSection(true)} className="btn mt-5 mb-5">
-							Seleccionar esta plantilla
-						</button>
+						{" "}
+						<div className="d-flex flex-row justify-content-center">
+							<button onClick={() => setShowSection(true)} className="btn mt-3 mb-5">
+								Seleccionar esta plantilla
+							</button>
+						</div>
 						<Template1 />{" "}
 					</>
 				) : null}
 				{previewTemplate == 2 ? (
 					<>
-						<button onClick={() => setShowSection(true)} className="btn mt-5 mb-5">
-							Seleccionar esta plantilla
-						</button>
+						<div className="d-flex flex-row justify-content-center">
+							<button onClick={() => setShowSection(true)} className="btn mt-3 mb-5">
+								Seleccionar esta plantilla
+							</button>
+						</div>
 						<Template2 />{" "}
 					</>
 				) : null}
@@ -117,13 +122,9 @@ export const AddMenu = () => {
 				<div className="container">
 					<div className="row UserAcess__FullHeight justify-content-center">
 						<div className="col-12 pb-5">
-							<div className="UserAcess__Card mx-auto">
-								<div className="UserAcess__CardWrapper">
-									<div className="AddMenu__Card">
-										<div className="UserAcess__Card--content text-center" />
-										{!showSection ? selectTemplateView() : toCreateMenuView()}
-									</div>
-								</div>
+							<div className="AddMenu__Card justify-content-center">
+								<div className="UserAcess__Card--content text-center" />
+								{!showSection ? selectTemplateView() : toCreateMenuView()}
 							</div>
 						</div>
 					</div>
