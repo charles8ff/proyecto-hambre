@@ -151,7 +151,7 @@ def new_section():
 def get_section(template_id):
     #print('hi')
     section = Section.get_by_id_without_meal(template_id)
-    print(section)
+    #print(section)
     return jsonify(section), 200
 
 
@@ -191,7 +191,7 @@ def new_meal_info():
 
 @api.route('/place/<int:place_id>/template/<int:template_id>', methods=['GET'])
 def getAllMealsfromMenu(place_id, template_id):
-    place= Business.get_by_id(place_id)
-    sections =  Section.get_by_template_and_business(place_id, template_id)
-
+    #place= Business.get_by_id(place_id)
+    sections = Section.get_by_template_and_business(place_id, template_id)
+    print(sections)
     return jsonify(sections), 200

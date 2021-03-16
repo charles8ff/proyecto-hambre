@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import PropTypes from "prop-types";
 import { Context } from "../../store/appContext";
@@ -33,14 +33,16 @@ export const AddMeal = props => {
 	});
 	const getDataAllFields = watch();
 
-	useEffect(() => {
-		for (let name of store.sections) {
-			localStorage.removeItem(name);
-		}
-	}, []);
-
 	const addMeal = (data, section) => {
 		localStorage.setItem(section.toString(), JSON.stringify(data));
+	};
+
+	const [inputList, setInputList] = useState(["Añade tu plato"]);
+	const handleInputChange = (e, index) => {
+		const { name, value } = e.target;
+		const list = [...inputList];
+		list[index] = value;
+		setInputList(list);
 	};
 
 	const getMealInfo = [
@@ -117,7 +119,7 @@ export const AddMeal = props => {
 					<Accordion key={item.id} allowZeroExpanded>
 						<AccordionItem>
 							<AccordionItemHeading>
-								<AccordionItemButton>Plato: {item.id}</AccordionItemButton>
+								<AccordionItemButton>{JSON.stringify(inputList[index])}</AccordionItemButton>
 							</AccordionItemHeading>
 							<AccordionItemPanel>
 								<div className="inputContainer">
@@ -129,6 +131,7 @@ export const AddMeal = props => {
 										placeholder="Ensalada cesar"
 										className="AddMenu__Input--Style mb-3"
 										ref={register({ required: true })}
+										onChange={e => handleInputChange(e, index)}
 									/>
 								</div>
 								<div className="inputContainer">

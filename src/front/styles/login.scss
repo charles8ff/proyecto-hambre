@@ -208,7 +208,7 @@ height:auto; overflow:auto
 }
 
         .AddMenu__Card {
-        width: 45rem;
+        width: 100%;
         height:auto; overflow:auto;
         background-color: white;
         background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
@@ -217,7 +217,6 @@ height:auto; overflow:auto
         background-size: 300%;
         position: absolute;
         border-radius: 6px;
-        left: -8rem;
         top: 0;
         padding: 2rem;
         margin-top: 2rem;

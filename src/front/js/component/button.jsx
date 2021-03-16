@@ -1,5 +1,4 @@
-import React, { useContext, Fragment } from "react";
-import { Context } from "../store/appContext";
+import React, { Fragment } from "react";
 import "../../styles/home.scss";
 import PropTypes from "prop-types";
 

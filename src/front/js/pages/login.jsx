@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useForm, useFieldArray, useWatch } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Registro } from "./registro.jsx";
@@ -8,12 +8,12 @@ import { AddPlace } from "./add-place.jsx";
 import "../../styles/login.scss";
 
 export const Login = () => {
-	const { register, handleSubmit, watch, errors } = useForm();
+	const { register, handleSubmit, errors } = useForm();
 	const { store, actions } = useContext(Context);
 	const history = useHistory();
 
 	const onLogin = data => {
-		store.material_ui_is_correct_password = false;
+		store.material_ui_is_incorrect_password = false;
 		actions.login(data.email, data.password);
 	};
 
@@ -60,7 +60,7 @@ export const Login = () => {
 						<div className="col-12 pb-5">
 							<input
 								className="checkbox d-none"
-								checked={store.singUp_User ? true : false}
+								checked={store.userWantToSingUp ? true : false}
 								type="checkbox"
 							/>
 							<div className="UserAcess__Card mx-auto">
@@ -96,14 +96,17 @@ export const Login = () => {
 														ref={register({ required: true, minLength: 6 })}
 													/>
 													<i className="UserAcess__CardForm--inputIcon fas fa-key" />
-													{store.material_ui_is_correct_password ? (
-														<p>Invalid password</p>
+													{store.material_ui_is_incorrect_password ? (
+														<p>Contraseña invalida</p>
 													) : null}
 													{errors.password && <p>Este campo es requerido</p>}
 												</div>
 												<input type="submit" value="Entrar" className="btn mt-4" />
 											</form>
-											<span onClick={() => actions.userWantToSingUp(true)}>
+											<span
+												onClick={() => {
+													actions.userWantToSingUp(true);
+												}}>
 												¿No tienes cuenta? Registrate 😊
 											</span>
 										</div>

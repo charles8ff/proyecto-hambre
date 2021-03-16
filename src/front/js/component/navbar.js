@@ -20,7 +20,7 @@ export const Header = () => {
 					<OurButton
 						title="Eliminar cuenta"
 						click={() => {
-							actions.deleteProfile(store.loggedBusiness.id);
+							actions.deleteProfile(store.placeData.id);
 							history.push("/");
 						}}
 						hide={store.loginToken != false ? "" : "d-none"}

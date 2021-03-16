@@ -1,19 +1,22 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 
-export const Footer = props => (
-	<footer className="footer mt-auto py-3 container-fluid">
-		<div className="row d-flex justify-content-center">
-			<div className="col-2">Project Hunger</div>
-			<div className="offset-7 col-2">
-				{props.footer_text}
-				{"  "}
-				<a href={props.footer_url}>Click aquí</a>
+//import PropTypes from "prop-types";
+
+export const Footer = () => {
+	return (
+		<footer className="text-center text-white">
+			<div className="container p-4 pb-0">
+				<section className="mb-4">
+					<a className="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+						<i className="fab fa-facebook-f" />
+					</a>
+
+					<a className="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+						<i className="fab fa-twitter" />
+					</a>
+				</section>
 			</div>
-		</div>
-	</footer>
-);
-Footer.propTypes = {
-	footer_text: PropTypes.string,
-	footer_url: PropTypes.string
+			<div className="text-center p-3">© 2021 Copyright: DMenu.com</div>
+		</footer>
+	);
 };
