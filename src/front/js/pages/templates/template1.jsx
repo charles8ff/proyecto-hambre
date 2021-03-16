@@ -61,7 +61,7 @@ export const Template1 = () => {
 
 	const finalTemplate1 = () => {
 		return (
-			<div className="container-fluid template1--container justify-content-center h-100">
+			<div className="container-fluid template1--container justify-content-center">
 				<h2>MENÚ</h2>
 				<span className="place_name">{store.placeData.place_name}</span>
 				{templateSections.map((elem, index) => {
