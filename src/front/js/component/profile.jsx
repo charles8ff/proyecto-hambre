@@ -5,15 +5,15 @@ import { Container, Dropdown, Row, Col, DropdownButton, Button } from "react-boo
 import { MenusView } from "./menusview.jsx";
 import { useHistory } from "react-router-dom";
 import { OurButton } from "./button.jsx";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import { useForm, useWatch } from "react-hook-form";
 
 import { Maps } from "./maps.jsx";
 
 import "../../styles/profile.scss";
 import { useState } from "react";
-import { DropdownMenu, MenuItem } from "react-bootstrap-dropdown-menu";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export const Profile = () => {
 	const { store, actions } = useContext(Context);
@@ -24,6 +24,14 @@ export const Profile = () => {
 
 	const getDataAllFields = watch();
 	const getPlaceID = history.location.pathname.replace(/\D/g, "");
+
+	var settings = {
+		dots: true,
+		infinite: true,
+		speed: 500,
+		slidesToShow: 1,
+		slidesToScroll: 1
+	};
 
 	useEffect(
 		() => {
@@ -175,7 +183,7 @@ export const Profile = () => {
 	return (
 		<>
 			<div className="wrapper h-100 container-fluid">
-				<div className="task-manager">
+				<div className={editing ? "task-manager" : "task-manager h-100"}>
 					<div className={editing ? "left-bar d-none" : "left-bar"}>
 						<div className="left-content">
 							<div className="profile-card__img d-flex flex-row justify-content-center">

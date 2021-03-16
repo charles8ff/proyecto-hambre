@@ -42,7 +42,6 @@
         line-height: 22px;
         letter-spacing: 0.5px;
         outline: none;
-        color: #c4c3ca;
         background-color: white;
         border: none;
         -webkit-transition: all 200ms linear;
@@ -241,13 +240,18 @@ height:auto; overflow:auto
         line-height: 22px;
         letter-spacing: 0.5px;
         outline: none;
-        color: #c4c3ca;
         background-color: white;
         border: none;
         -webkit-transition: all 200ms linear;
         transition: all 200ms linear;
         box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
-    }
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #c4c3cad4;
+}
+
 
     .AddMenu__Input--Style--TextArea{
         height: 4rem;
@@ -265,7 +269,6 @@ height:auto; overflow:auto
         line-height: 22px;
         letter-spacing: 0.5px;
         outline: none;
-        color: #c4c3ca;
         background-color: white;
         border: none;
         -webkit-transition: all 200ms linear;

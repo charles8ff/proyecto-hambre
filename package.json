@@ -79,6 +79,7 @@
 		]
 	},
 	"dependencies": {
+		"@brainhubeu/react-carousel": "^1.19.26",
 		"@emotion/core": "^10.1.1",
 		"@emotion/styled": "^10.0.27",
 		"@kunukn/react-collapse": "^1.2.7",
@@ -89,6 +90,7 @@
 		"bootstrap": "^4.6.0",
 		"es-abstract": "^1.18.0",
 		"jwt-decode": "^3.1.2",
+		"mdb-ui-kit": "^3.3.0",
 		"password-hash": "^1.2.2",
 		"prop-types": "^15.6.1",
 		"react": "^16.14.0",
@@ -97,6 +99,7 @@
 		"react-bootstrap-dropdown-menu": "^1.1.23",
 		"react-collapsible": "^2.8.3",
 		"react-dom": "^16.14.0",
+		"react-elastic-carousel": "^0.11.2",
 		"react-encrypt": "^1.0.1",
 		"react-form-input-validation": "^2.0.5",
 		"react-geocode": "^0.2.3",
@@ -108,8 +111,10 @@
 		"react-router-dom": "^5.2.0",
 		"react-select": "^4.2.1",
 		"react-simple-hook-modal": "^1.1.0",
+		"react-slick": "^0.28.1",
 		"semantic-ui-css": "^2.4.1",
 		"semantic-ui-react": "^2.0.3",
+		"slick-carousel": "^1.8.1",
 		"string.prototype.trimend": "^1.0.4"
 	}
 }

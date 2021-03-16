@@ -96,7 +96,6 @@ margin: 1rem;
   width: 100%;
   max-width: 62.188rem;
   height: auto;
-  background: #fff;
   border-radius: 4px;
   box-shadow:
   0 0.3px 2.2px rgba(0, 0, 0, 0.011),
@@ -106,6 +105,11 @@ margin: 1rem;
   0 4.2px 33.4px rgba(0, 0, 0, 0.029),
   0 10px 80px rgba(0, 0, 0, 0.04);
   overflow: hidden;
+      background-color: white;
+    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg);
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-size: 300%;
 }
 
 .left-bar {
