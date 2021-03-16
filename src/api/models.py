@@ -169,6 +169,7 @@ class Section(db.Model):
             "template_id": self.template_id,
             "meal_name": meal.name,
             "meal_price": meal.price,
+            "business_id": meal.business_id,
             # "meal_info": meal.meal_info,
             "meal_description": meal.description,
         }
@@ -203,7 +204,8 @@ class Section(db.Model):
 
     @classmethod
     def get_by_template_and_business(cls, place_id, template_id):
-        sections_in_template = cls.query.filter_by(template_id = template_id).join(Meal, Section.meal_id==Meal.id).all()
+        sections_in_template = cls.query.filter_by(template_id = template_id).join(Meal, Section.meal_id==Meal.id).filter_by(business_id = place_id).all()
+        print(sections_in_template)
         return [section.to_dict() for section in sections_in_template]
     
     def delete(self):
@@ -231,7 +233,6 @@ class Section(db.Model):
     @classmethod
     def get_by_id_without_meal(cls, template_id):
         sections = cls.query.filter_by( meal_id = None, template_id = template_id).order_by(Section.id).all()
-        print(sections)
         return [section.to_dict_empty() for section in sections]
 
 

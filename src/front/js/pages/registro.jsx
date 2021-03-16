@@ -35,6 +35,8 @@ export const Registro = props => {
 							autoComplete="off"
 						/>
 						<i className="UserAcess__CardForm--inputIcon fas fa-envelope" />
+						{store.material_ui_is_user_active ? <p>Email no valido</p> : null}
+						{errors.email && <p>Este campo es requerido</p>}
 						<div className="UserAcess__CardForm mt-2">
 							<input
 								name="password"
@@ -45,7 +47,7 @@ export const Registro = props => {
 								ref={register({ required: false, minLength: 6 })}
 							/>
 							<i className="UserAcess__CardForm--inputIcon fas fa-key" />
-							{errors.password && <p>This field is required</p>}
+							{errors.password && <p>Este campo es requerido</p>}
 						</div>
 						<input type="submit" className="btn mt-4" />
 					</form>

@@ -21,9 +21,10 @@ const injectContext = PassedComponent => {
 			})
 		);
 
-		// useEffect(() => {
-		// 	state.actions.getSections();
-		// }, []);
+		useEffect(() => {
+			state.actions.getMenuType();
+			//state.actions.isPreviewTemplate(false);
+		}, []);
 
 		return (
 			<Context.Provider value={state}>

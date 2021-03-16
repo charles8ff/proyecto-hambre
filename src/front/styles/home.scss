@@ -9,6 +9,15 @@ $black:  #191919;
 $grey: #c4c3ca;
 $text-font: 'Roboto', sans-serif;
 
+
+/* Design */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
 .homepage-hero-module{
     padding-top: 1rem;
     position: relative;
@@ -73,7 +82,7 @@ margin-top: 3rem;
 @media (max-width: 992px) {
     .parallax--two--home {
   background-image: url(https://images.unsplash.com/photo-1516749396351-ab12ad535d7c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);
-  min-height: 88.5rem; 
+  min-height: 81rem; 
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -216,6 +225,18 @@ button {
   .details {
     margin-top: 30px;
   }
+}
+.linkedins{
+    display: flex;
+    align-items: center;
+}
+.linkedins > a{
+    color: $black;
+    &:hover{
+        color: $primary-color-light;
+        text-decoration: none;
+    }
+    padding-left: 0.4rem;
 }
 
 footer{
@@ -540,4 +561,73 @@ li + li {
     width: 30rem;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
+}
+
+
+.Parallax_Two--CardContainer{
+  padding-top: 4.7rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  img {
+    height: 7rem;
+    width: 7rem;
+    margin-top: 1.5rem;
+}
+
+}
+
+.Parallax__TwoCards {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.Parallax__TwoCards--Item {
+  display: flex;
+  padding: 1rem;
+}
+
+@media (min-width: 40rem) {
+  .Parallax__TwoCards--Item {
+    width: 50%;
+  }
+}
+
+@media (min-width: 56rem) {
+  .Parallax__TwoCards--Item {
+    width: 33.3333%;
+  }
+}
+
+.Parallax__TwoCard {
+  background-color: white;
+  border-radius: 0.25rem;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.Parallax__TwoCard--Content {
+  padding: 1rem;
+}
+
+.Parallax__TwoCard--Title {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  margin: 0px;
+}
+
+.Parallax__TwoCard--Text {
+  color: #ffffff;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;    
+  font-weight: 400;
 }

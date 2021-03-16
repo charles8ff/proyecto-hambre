@@ -6,8 +6,9 @@ import { SelectFill } from "../../component/fill-select.jsx";
 
 import "../../../styles/login.scss";
 
-import { TemplateTwo } from "../templates/template-two.jsx";
-import { Template1 } from "../templates/template1.js";
+import { Template2 } from "../templates/template-two.jsx";
+import { Template1 } from "../templates/template1.jsx";
+import { Error404 } from "../404.jsx";
 
 export const AddMenu = () => {
 	const { store, actions } = useContext(Context);
@@ -17,10 +18,21 @@ export const AddMenu = () => {
 	let allMeals = {};
 	const history = useHistory();
 
+	const getPlaceID = history.location.pathname.replace(/\D/g, "");
+
 	useEffect(() => {
 		actions.hideNavigation(true);
-		actions.getMenuType();
+		actions.isPreviewTemplate(true);
 	}, []);
+
+	useEffect(
+		() => {
+			for (let name of store.sections) {
+				localStorage.removeItem(name);
+			}
+		},
+		[store.sections]
+	);
 
 	const onSubmit = () => {
 		for (let name of store.sections) {
@@ -28,11 +40,11 @@ export const AddMenu = () => {
 			allMeals = { ...allMeals, ...obj };
 		}
 		actions.postMeal(allMeals);
-		history.push("/menu/1");
+		history.replace("/place/".concat(actions.decodeToken(store.loginToken).sub.id.toString()));
 	};
 
 	const selectMenuType = e => {
-		if (e.label === "Menu del día") {
+		if (e.label === "Menú del día") {
 			actions.getTemplates(e.value);
 			setShowTemplates(true);
 		} else if (e.label === "Carta") {
@@ -58,10 +70,23 @@ export const AddMenu = () => {
 				</div>
 				{previewTemplate == 1 ? (
 					<>
-						<button onClick={() => setShowSection(true)} className="btn mt-5 mb-5">
-							Seleccionar esta plantilla
-						</button>
-						<TemplateTwo />{" "}
+						{" "}
+						<div className="d-flex flex-row justify-content-center">
+							<button onClick={() => setShowSection(true)} className="btn mt-3 mb-5">
+								Seleccionar esta plantilla
+							</button>
+						</div>
+						<Template1 />{" "}
+					</>
+				) : null}
+				{previewTemplate == 2 ? (
+					<>
+						<div className="d-flex flex-row justify-content-center">
+							<button onClick={() => setShowSection(true)} className="btn mt-3 mb-5">
+								Seleccionar esta plantilla
+							</button>
+						</div>
+						<Template2 />{" "}
 					</>
 				) : null}
 			</>
@@ -91,24 +116,22 @@ export const AddMenu = () => {
 		);
 	};
 
-	return (
-		<>
+	const toRenderMenuAdd = () => {
+		return (
 			<div className="AddMenu">
 				<div className="container">
-					<div className="row UserAcess__FullHeight justify-content-center">
+					<div className="UserAcess__FullHeight justify-content-center">
 						<div className="col-12 pb-5">
-							<div className="UserAcess__Card mx-auto">
-								<div className="UserAcess__CardWrapper">
-									<div className="AddMenu__Card">
-										<div className="UserAcess__Card--content text-center" />
-										{!showSection ? selectTemplateView() : toCreateMenuView()}
-									</div>
-								</div>
+							<div className="AddMenu__Card justify-content-center">
+								<div className="UserAcess__Card--content text-center" />
+								{!showSection ? selectTemplateView() : toCreateMenuView()}
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</>
-	);
+		);
+	};
+
+	return <>{toRenderMenuAdd()}</>;
 };

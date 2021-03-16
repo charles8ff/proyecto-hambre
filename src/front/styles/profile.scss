@@ -1,0 +1,165 @@
+
+.Profile__Icon--Hour{
+        font-size: 1.3rem;
+padding-right: 0.3rem;
+        margin-top: 0.2rem;
+}
+
+    .Profile__H4 {
+        font-weight: 600;
+        font-size: 1.3rem;
+        margin-left: 0.5rem;
+    }
+
+.profile-card__img {
+    margin-bottom: 3rem;
+    position: relative;
+    background: center;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    box-shadow: 0px 5px 50px 0px #ff622d, 0px 0px 0px 7px #ff622d;
+    left: 7rem;
+    top: 1rem;
+
+    img {
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+  }
+.Profile__Menus {
+  display: flex;
+  padding: 1rem;
+margin: 1rem;
+
+}
+
+@media (min-width: 40rem) {
+  .Profile__Menus{
+    width: 100%;
+  }
+}
+
+@media (min-width: 56rem) {
+  .Profile__Menus {
+    width: 100%;
+  }
+}
+
+.Profile__CardContainer{
+  max-width: 1200px;
+  margin: 0 auto;
+
+  img {
+    height: 7rem;
+    width: 7rem;
+    margin-top: 1.5rem;
+}
+
+}
+
+.Profile__Card {
+  background-color: white;
+  border-radius: 0.25rem;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+    margin: 1rem;
+}
+
+
+%flex {
+  display: flex;
+  align-items: center;
+}
+
+.wrapper {
+   margin: 0;
+  @extend %flex;
+  justify-content: center;
+ background: linear-gradient(to right, #ff622d 20%, #fa9352) #ff622d;
+   height: auto;
+  min-height: -webkit-fill-available;
+}
+
+.task-manager {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 980px;
+  height: auto;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow:
+  0 0.3px 2.2px rgba(0, 0, 0, 0.011),
+  0 0.7px 5.3px rgba(0, 0, 0, 0.016),
+  0 1.3px 10px rgba(0, 0, 0, 0.02),
+  0 2.2px 17.9px rgba(0, 0, 0, 0.024),
+  0 4.2px 33.4px rgba(0, 0, 0, 0.029),
+  0 10px 80px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.left-bar {
+  background-color: #cacaca61;
+  width: 330px;
+  border-right: 1px solid #e3e7f7;
+  position: relative;
+}
+
+.left-content { padding: 0; }
+
+.page-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  
+}
+
+@media screen and (max-width: 900px) {
+  .left-bar {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .task-manager {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  
+  .right-bar, .page-content {
+    width: 100%;
+    display: block;
+  }
+  
+}
+
+.dropleft{
+        position: relative;
+    top: 1rem;
+    left: -1rem;
+    font-size: 2rem;
+
+    .show{
+    position: absolute;
+    transform: translate3d(0px, 48px, 0px);
+    top: -0.5rem;
+    left: -7.8rem;
+    will-change: transform;
+    }
+}
+
+.dropdown-menu{
+    position: absolute !important;
+    transform: translate3d(0px, 48px, 0px) !important;
+    top: -0.5rem !important;
+    left: -7.8rem !important;
+    will-change: transform !important;
+}
+
+.editing{
+    padding: 5rem;
+}
