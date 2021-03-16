@@ -67,7 +67,7 @@ export const Login = () => {
 								<div className="UserAcess__CardWrapper">
 									<div className="UserAcess__CardLogin">
 										<div className="UserAcess__Card--content text-center">
-											<h4 className="mb-4 pb-3">Logueate</h4>
+											<h4 className="mb-4 pb-3">Loguéate</h4>
 											<form className="UserAcess__CardForm" onSubmit={handleSubmit(onLogin)}>
 												<input
 													name="email"
@@ -84,7 +84,7 @@ export const Login = () => {
 													autoComplete="off"
 												/>
 												<i className="UserAcess__CardForm--inputIcon fas fa-envelope" />
-												{store.material_ui_is_user_active ? <p>Email no valido</p> : null}
+												{store.material_ui_is_user_active ? <p>Email no válido</p> : null}
 												{errors.email && <p>Este campo es requerido</p>}
 												<div className="UserAcess__CardForm mt-3">
 													<input
@@ -97,7 +97,7 @@ export const Login = () => {
 													/>
 													<i className="UserAcess__CardForm--inputIcon fas fa-key" />
 													{store.material_ui_is_incorrect_password ? (
-														<p>Contraseña invalida</p>
+														<p>Contraseña inválida</p>
 													) : null}
 													{errors.password && <p>Este campo es requerido</p>}
 												</div>
@@ -107,7 +107,7 @@ export const Login = () => {
 												onClick={() => {
 													actions.userWantToSingUp(true);
 												}}>
-												¿No tienes cuenta? Registrate 😊
+												¿No tienes cuenta? Regístrate 😊
 											</span>
 										</div>
 									</div>

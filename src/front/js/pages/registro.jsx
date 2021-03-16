@@ -18,7 +18,7 @@ export const Registro = props => {
 		<>
 			<div className="UserAcess__CardRegister">
 				<div className="UserAcess__Card--content text-center">
-					<h4 className="mb-4 pb-3">Registrate</h4>
+					<h4 className="mb-4 pb-3">Regístrate</h4>
 					<form className="UserAcess__CardForm" onSubmit={handleSubmit(userCheck)}>
 						<input
 							name="email"
@@ -35,7 +35,7 @@ export const Registro = props => {
 							autoComplete="off"
 						/>
 						<i className="UserAcess__CardForm--inputIcon fas fa-envelope" />
-						{store.material_ui_is_user_active ? <p>Email no valido</p> : null}
+						{store.material_ui_is_user_active ? <p>Email no válido</p> : null}
 						{errors.email && <p>Este campo es requerido</p>}
 						<div className="UserAcess__CardForm mt-2">
 							<input
@@ -51,7 +51,7 @@ export const Registro = props => {
 						</div>
 						<input type="submit" className="btn mt-4" />
 					</form>
-					<span onClick={() => actions.userWantToSingUp(false)}>¿Ya tienes cuenta? Logueate 😊</span>
+					<span onClick={() => actions.userWantToSingUp(false)}>¿Ya tienes cuenta? Loguéate 😊</span>
 				</div>
 			</div>
 		</>

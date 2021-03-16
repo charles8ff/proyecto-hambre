@@ -51,27 +51,37 @@ export const AddPlace = props => {
 							/>
 							<i className="UserAcess__CardForm--inputIcon fas fa-phone mt-2" />
 						</div>
-						<div className="UserAcess__CardForm">
-							<input
-								name="open_hour"
-								type="time"
-								placeholder=""
-								className="UserAcess__CardForm--Style mt-2"
-								ref={register}
-								autoComplete="off"
-							/>
-							<i className="UserAcess__CardForm--inputIcon fas fa-clock mt-2" />
+						<div className="d-flex flex-row justify-content-space-between">
+							<label className="col-6 p-0" htmlFor="open_hour">
+								Hora de apertura
+							</label>
+							<label className="col-6 p-0" htmlFor="close_hour">
+								Hora de cierre
+							</label>
 						</div>
-						<div className="UserAcess__CardForm">
-							<input
-								name="close_hour"
-								type="time"
-								placeholder=""
-								className="UserAcess__CardForm--Style mt-2"
-								ref={register}
-								autoComplete="off"
-							/>
-							<i className="UserAcess__CardForm--inputIcon fas fa-clock mt-2" />
+						<div className="d-flex flex-row">
+							<div className="UserAcess__CardForm col-6">
+								<input
+									name="open_hour"
+									type="time"
+									placeholder="Hora de Apertura"
+									className="UserAcess__CardForm--Style mt-2"
+									ref={register}
+									autoComplete="off"
+								/>
+								<i className="UserAcess__CardForm--inputIcon fas fa-clock mt-2" />
+							</div>
+							<div className="UserAcess__CardForm col-6">
+								<input
+									name="close_hour"
+									type="time"
+									placeholder="Hora de cierre"
+									className="UserAcess__CardForm--Style mt-2"
+									ref={register}
+									autoComplete="off"
+								/>
+								<i className="UserAcess__CardForm--inputIcon fas fa-clock mt-2" />
+							</div>
 						</div>
 						<div className="UserAcess__CardForm">
 							<input
