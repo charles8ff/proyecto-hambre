@@ -13,6 +13,7 @@ import { Maps } from "./maps.jsx";
 
 import "../../styles/profile.scss";
 import { useState } from "react";
+import { DropdownMenu, MenuItem } from "react-bootstrap-dropdown-menu";
 
 export const Profile = () => {
 	const { store, actions } = useContext(Context);
@@ -76,7 +77,7 @@ export const Profile = () => {
 
 	const displayEditProfile = () => {
 		return (
-			<div className="container">
+			<div className="container editing">
 				<div className="inputContainer">
 					<i className="fas fa-utensils icon" />
 					<input
@@ -163,15 +164,9 @@ export const Profile = () => {
 
 	return (
 		<>
-			<div className="wrapper">
+			<div className="wrapper container-fluid">
 				<div className="task-manager">
-					<div className="left-bar">
-						<div className="upper-part">
-							<div className="actions">
-								<div className="circle" />
-								<div className="circle-2" />
-							</div>
-						</div>
+					<div className={editing ? "left-bar d-none" : "left-bar"}>
 						<div className="left-content">
 							<div className="profile-card__img d-flex flex-row justify-content-center">
 								<img
@@ -195,51 +190,86 @@ export const Profile = () => {
 						</div>
 					</div>
 					<div className="page-content">
-						<div className="d-flex flex-row justify-content-end">
-							<div className="profile__drop">
-								<ul>
-									<li>
-										<a href="#">
+						{editing ? (
+							<>
+								<div className="d-flex flex-row justify-content-center pt-4">
+									<h4 className="Profile__H4">Edita tu cuenta</h4>
+								</div>{" "}
+								{displayEditProfile()}
+							</>
+						) : (
+							<>
+								<div className="d-flex flex-row justify-content-end">
+									<div
+										className={
+											store.loginToken != false &&
+											actions.decodeToken(store.loginToken).sub.id == store.placeData.id
+												? "dropleft"
+												: "d-none"
+										}>
+										<div data-toggle="dropdown">
 											<i className="fas fa-users-cog" />
-											Tutorial
-										</a>
-										<ul>
-											<li>
-												<a href="#">
-													<i className="fa fa-desktop fa-1x" />
-													Design
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<i className="fa fa-cog fa-1x" />
-													Development
-												</a>
-											</li>
-										</ul>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div className="profile-card__name d-flex flex-row justify-content-center pt-2">
-							<h2>{store.placeData.place_name}</h2>
-						</div>
-						<div className="d-flex flex-row justify-content-center pt-2">
-							<i className="Profile__Icon--Hour fas fa-color fa-lg fa-phone" />
-							<h4 className="Profile__H4">{store.placeData.phone_number}</h4>
-						</div>
-						<div className="d-flex flex-row justify-content-center">
-							<i className="Profile__Icon fas fa-color fa-lg fa-map-marker-alt" />
-							<h4 className="Profile__H4">{store.placeData.address}</h4>
-						</div>
-						<div className="d-flex flex-row justify-content-center p-2 Profile__Card--ContentMap">
-							<Maps />
-						</div>
-						<div className="Profile__CardContainer">
-							<div className="Parallax__TwoCards">
-								<div className="Profile__Menus d-flex flex-row flex-wrap">{MenusInHTML()}</div>
-							</div>
-						</div>
+										</div>
+										<div className="dropdown-menu">
+											<div className="dropdown-item" onClick={() => history.replace("/")}>
+												<i className="fas fa-home" /> Inicio
+											</div>
+											<div className="dropdown-item" onClick={() => setEditing(true)}>
+												<i className="fas fa-edit" /> Editar cuenta
+											</div>
+											<div
+												className="dropdown-item"
+												onClick={() => {
+													history.replace("/");
+													actions.doLogOut();
+												}}>
+												<i className="fas fa-sign-out-alt" /> Cerrar sesión
+											</div>
+										</div>
+									</div>
+								</div>
+								<div className="profile-card__name d-flex flex-row justify-content-center pt-2">
+									<h2>{store.placeData.place_name}</h2>
+								</div>
+								<div className="d-flex flex-row justify-content-center pt-2">
+									<i className="Profile__Icon--Hour fas fa-color fa-lg fa-phone" />
+									<h4 className="Profile__H4">{store.placeData.phone_number}</h4>
+								</div>
+								<div className="d-flex flex-row justify-content-center">
+									<i className="Profile__Icon fas fa-color fa-lg fa-map-marker-alt" />
+									<h4 className="Profile__H4">{store.placeData.address}</h4>
+								</div>
+								<div className="d-flex flex-row justify-content-center p-2 Profile__Card--ContentMap">
+									<Maps />
+								</div>
+								<div className="d-flex flex-row mt-1 justify-content-center Profile__Card--Content">
+									<OurButton
+										title="Añadir Menú"
+										hide={
+											store.loginToken != false &&
+											actions.decodeToken(store.loginToken).sub.id == store.placeData.id
+												? ""
+												: "d-none"
+										}
+										click={() => {
+											history.replace(
+												"/place/".concat(
+													actions
+														.decodeToken(store.loginToken)
+														.sub.id.toString()
+														.concat("/addmenu")
+												)
+											);
+										}}
+									/>
+								</div>
+								<div className="Profile__CardContainer">
+									<div className="Parallax__TwoCards">
+										<div className="Profile__Menus d-flex flex-row flex-wrap">{MenusInHTML()}</div>
+									</div>
+								</div>
+							</>
+						)}
 					</div>
 				</div>
 			</div>

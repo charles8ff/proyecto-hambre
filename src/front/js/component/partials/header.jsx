@@ -52,10 +52,11 @@ export const Header = () => {
 					</li>
 					<li className="Header__Nav--SigninIn" onClick={closeMobileMenu}>
 						<OurButton
-							title="Eliminar cuenta"
+							title="Ir al panel"
 							click={() => {
-								actions.deleteProfile(store.loggedBusiness.id);
-								history.push("/");
+								history.replace(
+									"/place/".concat(actions.decodeToken(store.loginToken).sub.id.toString())
+								);
 							}}
 							hide={store.loginToken != false ? "" : "d-none"}
 						/>
