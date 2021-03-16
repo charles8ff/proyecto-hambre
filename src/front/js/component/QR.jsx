@@ -19,7 +19,7 @@ export const QR = props => {
 		}
 	});
 
-	return <img ref={inputRef} />;
+	return <img className="QR" ref={inputRef} />;
 };
 
 QR.propTypes = {

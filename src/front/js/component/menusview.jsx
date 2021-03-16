@@ -10,6 +10,7 @@ import { useHistory } from "react-router-dom";
 import "../../styles/profile.scss";
 import { ModalProvider, Modal, useModal, ModalTransition } from "react-simple-hook-modal";
 import "react-simple-hook-modal/dist/styles.css";
+const URLBACKEND = "https://project-hunger.herokuapp.com";
 
 export const MenusView = props => {
 	const { isModalOpen, openModal, closeModal } = useModal();
@@ -32,15 +33,13 @@ export const MenusView = props => {
 					<ModalProvider backdropClassName="d-none">
 						<OurButton
 							title="Ver Menu"
-							click={() => history.push(`${props.urlPlace}/menu/${props.urlTemplate}`)}
+							click={() => history.replace(`${props.urlPlace}/menu/${props.urlTemplate}`)}
 						/>
 						<OurButton title="Ver QR" click={openModal} />
 						<Modal isOpen={isModalOpen} transition={ModalTransition.BOTTOM_UP}>
-							<QR
-								url={`https://3000-copper-mite-z2nrl6y2.ws-eu03.gitpod.io/place/${
-									props.urlPlace
-								}/menu/${props.urlTemplate}`}
-							/>
+							<div className="d-flex flex-row justify-content-center">
+								<QR url={`${URLBACKEND}/place/${props.urlPlace}/menu/${props.urlTemplate}`} />
+							</div>
 							<div className="d-flex flex-row justify-content-center pt-3">
 								<OurButton title="CERRAR" click={closeModal} />
 							</div>
