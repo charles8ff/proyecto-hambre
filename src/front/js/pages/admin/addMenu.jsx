@@ -63,9 +63,13 @@ export const AddMenu = () => {
 		return (
 			<>
 				<div className="SelectTemplate__CardForm">
+					<label className="col-12 p-0 pl-3">Elige un tipo de carta</label>
 					<SelectFill options_value={store.menus_type} handleSelectType={selectMenuType} />
 					{showTemplates ? (
-						<SelectFill options_value={store.templates} handleSelectType={selectTemplate} />
+						<>
+							<label className="col-12 p-0 pt-2 pl-3">Elige una plantilla</label>
+							<SelectFill options_value={store.templates} handleSelectType={selectTemplate} />
+						</>
 					) : null}
 				</div>
 				{previewTemplate == 1 ? (
@@ -121,10 +125,17 @@ export const AddMenu = () => {
 			<div className="AddMenu">
 				<div className="container">
 					<div className="UserAcess__FullHeight justify-content-center">
-						<div className="col-12 pb-5">
+						<div className="row pb-5">
 							<div className="AddMenu__Card justify-content-center">
 								<div className="UserAcess__Card--content text-center" />
 								{!showSection ? selectTemplateView() : toCreateMenuView()}
+								<div className="d-flex justify-content-center pt-3">
+									<button
+										className="btn-home"
+										onClick={() => history.replace(`/place/${getPlaceID}`)}>
+										Volver al Panel
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>

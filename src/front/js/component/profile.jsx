@@ -97,58 +97,94 @@ export const Profile = () => {
 		return (
 			<div className="container editing">
 				<div className="inputContainer">
-					<i className="fas fa-utensils icon" />
-					<input
-						name={"place_name"}
-						type="text"
-						placeholder={`${store.placeData.place_name}`}
-						className="AddMenu__Input--Style mb-3"
-						ref={register({ required: true })}
-					/>
-				</div>
-				<div className="inputContainer d-flex flex-row flex-wrap">
-					<div>
-						<i className="fas fa-clock icon" />
-						<input
-							name={"open_hour"}
-							type="time"
-							placeholder={`${store.placeData.open_hour}`}
-							className="AddMenu__Input--Style mb-3"
-							ref={register({ required: true })}
-						/>
+					<div className="d-flex flex-row">
+						<label className="col-12 p-0 pl-3" htmlFor="place_name">
+							Nombre del Establecimiento
+						</label>
 					</div>
-					<div>
-						<i className="fas fa-clock icon" />
+					<div className="d-flex flex-row">
+						<i className="fas fa-utensils icon" />
 						<input
-							name={"close_hour"}
-							type="time"
-							placeholder={`${store.placeData.close_hour}`}
+							name={"place_name"}
+							type="text"
+							placeholder={`${store.placeData.place_name}`}
 							className="AddMenu__Input--Style mb-3"
 							ref={register({ required: true })}
 						/>
 					</div>
 				</div>
 				<div className="inputContainer">
-					<i className="fas fa-phone icon" />
-					<input
-						name={"phone_number"}
-						type="tel"
-						placeholder={`${store.placeData.phone_number}`}
-						className="AddMenu__Input--Style mb-3"
-						ref={register({ required: true })}
-					/>
+					<div className="d-flex flex-row">
+						<label className="col-6 p-0 pl-3" htmlFor="open_hour">
+							Hora de apertura
+						</label>
+						<label className="col-6 p-0 pl-3" htmlFor="close_hour">
+							Hora de cierre
+						</label>
+					</div>
+					<div className="d-flex flex-row">
+						<div className="col-6 p-0">
+							<i className="fas fa-clock icon" />
+							<input
+								name={"open_hour"}
+								type="time"
+								placeholder={`${store.placeData.open_hour}`}
+								className="AddMenu__Input--Style mb-3"
+								ref={register({ required: true })}
+							/>
+						</div>
+						<div className="col-6 p-0">
+							<i className="fas fa-clock icon" />
+							<input
+								name={"close_hour"}
+								type="time"
+								placeholder={`${store.placeData.close_hour}`}
+								className="AddMenu__Input--Style mb-3"
+								ref={register({ required: true })}
+							/>
+						</div>
+					</div>
 				</div>
 				<div className="inputContainer">
-					<i className="fas fa-map-marker-alt icon" />
-					<input
-						name={"address"}
-						type="text"
-						placeholder={`${store.placeData.address}`}
-						className="AddMenu__Input--Style mb-3"
-						ref={register({ required: true })}
-					/>
+					<div className="d-flex flex-row">
+						<label className="col-12 p-0 pl-3" htmlFor="phone_number">
+							Teléfono
+						</label>
+					</div>
+					<div className="d-flex flex-row">
+						<i className="fas fa-phone icon" />
+						<input
+							name={"phone_number"}
+							type="tel"
+							placeholder={`${store.placeData.phone_number}`}
+							className="AddMenu__Input--Style mb-3"
+							ref={register({ required: true })}
+						/>
+					</div>
 				</div>
 				<div className="inputContainer">
+					<div className="d-flex flex-row">
+						<label className="col-12 p-0 pl-3" htmlFor="address">
+							Ubicación
+						</label>
+					</div>
+					<div className="d-flex flex-row">
+						<i className="fas fa-map-marker-alt icon" />
+						<input
+							name={"address"}
+							type="text"
+							placeholder={`${store.placeData.address}`}
+							className="AddMenu__Input--Style mb-3"
+							ref={register({ required: true })}
+						/>
+					</div>
+				</div>
+				<div className="inputContainer">
+					<div className="d-flex flex-row">
+						<label className="col-12 p-0 pl-3" htmlFor="email">
+							Correo Electrónico
+						</label>
+					</div>
 					<i className="fas fa-envelope icon" />
 					<input
 						name={"email"}

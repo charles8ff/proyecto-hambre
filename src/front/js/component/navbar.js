@@ -14,7 +14,7 @@ export const Header = () => {
 				<Container>
 					<Navbar expand="lg">
 						<Link to="/">
-							<Navbar.Brand>Proyecto Hambre</Navbar.Brand>
+							<Navbar.Brand>Proyecto Hambr</Navbar.Brand>
 						</Link>
 					</Navbar>
 					<OurButton
