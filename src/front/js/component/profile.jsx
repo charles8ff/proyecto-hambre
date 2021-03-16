@@ -23,7 +23,7 @@ export const Profile = () => {
 	const { register, errors, handleSubmit, watch } = useForm();
 
 	const getDataAllFields = watch();
-	const getPlaceID = history.location.pathname.replace(/\D/g, "");
+	const getPlaceID = history.location.pathname.split("/");
 
 	var settings = {
 		dots: true,
@@ -35,7 +35,7 @@ export const Profile = () => {
 
 	useEffect(
 		() => {
-			actions.getProfile(getPlaceID);
+			actions.getProfile(getPlaceID[2]);
 		},
 		[history.location.pathname]
 	);
@@ -47,7 +47,7 @@ export const Profile = () => {
 	useEffect(
 		() => {
 			if (store.userEditAccount) {
-				actions.getProfile(getPlaceID);
+				actions.getProfile(getPlaceID[2]);
 				actions.userWantToEditAccount(false);
 			}
 		},

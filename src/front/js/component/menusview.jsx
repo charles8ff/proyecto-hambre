@@ -26,8 +26,7 @@ export const MenusView = props => {
 									<img src="https://i.imgur.com/EoBQLsD.png" />
 								</div>
 							</div>
-							<hr />
-							<div className="d-flex flex-row justify-content-center">
+							<div className="d-flex flex-row justify-content-center w-100">
 								{" "}
 								<h5>{props.title}</h5>
 							</div>

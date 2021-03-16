@@ -18,7 +18,7 @@ export const AddMenu = () => {
 	let allMeals = {};
 	const history = useHistory();
 
-	const getPlaceID = history.location.pathname.replace(/\D/g, "");
+	const getPlaceID = history.location.pathname.split("/");
 
 	useEffect(() => {
 		actions.hideNavigation(true);
@@ -132,7 +132,7 @@ export const AddMenu = () => {
 								<div className="d-flex justify-content-center pt-3">
 									<button
 										className="btn-home"
-										onClick={() => history.replace(`/place/${getPlaceID}`)}>
+										onClick={() => history.replace(`/place/${getPlaceID[2]}`)}>
 										Volver al Panel
 									</button>
 								</div>

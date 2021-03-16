@@ -11,7 +11,7 @@ export const Template2 = () => {
 	const [wholeSections, setWholeSections] = useState([]);
 	let meals = [];
 	const history = useHistory();
-	const getPlaceID = history.location.pathname.replace(/\D/g, "");
+	const getPlaceID = history.location.pathname.split("/");
 
 	const mealsInHTML = (mealArray, section_name) => {
 		let filteredMeals = mealArray.filter(elem => elem.name == section_name);
@@ -33,7 +33,7 @@ export const Template2 = () => {
 	useEffect(
 		() => {
 			if (store.placeData == false) {
-				actions.getProfile(getPlaceID[0]);
+				actions.getProfile(getPlaceID[2]);
 				actions.hideNavigation(true);
 			}
 		},
@@ -45,7 +45,7 @@ export const Template2 = () => {
 			if (store.templatePreview == false) {
 				actions.hideNavigation(true);
 				actions.getSections(2);
-				actions.loadMenu(getPlaceID[0], 2); // Place 1 y template 1 (place_id and template_id)
+				actions.loadMenu(getPlaceID[2], 2); // Place 1 y template 1 (place_id and template_id)
 			}
 		},
 		[store.templatePreview]
