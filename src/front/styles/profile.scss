@@ -57,6 +57,11 @@ margin: 1rem;
     margin-top: 1.5rem;
 }
 
+.QR{
+    width: 17rem;
+    height: 17rem;
+}
+
 }
 
 .Profile__Card {
@@ -77,18 +82,19 @@ margin: 1rem;
 
 .wrapper {
    margin: 0;
+   padding: 3rem;
   @extend %flex;
   justify-content: center;
  background: linear-gradient(to right, #ff622d 20%, #fa9352) #ff622d;
    height: auto;
-  min-height: -webkit-fill-available;
+  //min-height: -webkit-fill-available;
 }
 
 .task-manager {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 980px;
+  max-width: 62.188rem;
   height: auto;
   background: #fff;
   border-radius: 4px;
@@ -163,3 +169,4 @@ margin: 1rem;
 .editing{
     padding: 5rem;
 }
+

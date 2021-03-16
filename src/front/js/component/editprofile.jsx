@@ -21,7 +21,7 @@ export const EditProfile = () => { //to review
 	const onSubmit = data => {
 		let place_id = actions.decodeToken(store.loginToken).sub.id;
 		actions.changeProfile(place_id, data);
-		history.push(`/place/${place_id}`);
+		history.replace(`/place/${place_id}`);
 	};
 	return (
 		<>
