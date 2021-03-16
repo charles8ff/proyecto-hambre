@@ -13,8 +13,6 @@ export const Template2 = () => {
 	const history = useHistory();
 	const getPlaceID = history.location.pathname.replace(/\D/g, "");
 
-	console.log(getPlaceID);
-
 	const mealsInHTML = (mealArray, section_name) => {
 		let filteredMeals = mealArray.filter(elem => elem.name == section_name);
 		for (let i = 0; i < filteredMeals.length; i++) {
