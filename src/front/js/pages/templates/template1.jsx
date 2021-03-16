@@ -11,7 +11,8 @@ export const Template1 = () => {
 	const [wholeSections, setWholeSections] = useState([]);
 	let meals = [];
 	const history = useHistory();
-	const getPlaceID = history.location.pathname.match(/\d/);
+	const getPlaceID = history.location.pathname.split("/");
+
 	const mealsInHTML = (mealArray, section_name) => {
 		let filteredMeals = mealArray.filter(elem => elem.name == section_name);
 		for (let i = 0; i < filteredMeals.length; i++) {
@@ -29,12 +30,10 @@ export const Template1 = () => {
 		}
 	};
 
-	console.log(getPlaceID);
-
 	useEffect(
 		() => {
 			if (store.placeData == false) {
-				actions.getProfile(getPlaceID);
+				actions.getProfile(getPlaceID[2]);
 				actions.hideNavigation(true);
 			}
 		},
@@ -46,7 +45,7 @@ export const Template1 = () => {
 			if (store.templatePreview == false) {
 				actions.hideNavigation(true);
 				actions.getSections(1);
-				actions.loadMenu(getPlaceID, 1); // Place 1 y template 1 (place_id and template_id)
+				actions.loadMenu(getPlaceID[2], 1); // Place 1 y template 1 (place_id and template_id)
 			}
 		},
 		[store.templatePreview]

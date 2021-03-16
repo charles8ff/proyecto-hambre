@@ -40,7 +40,7 @@ export const AddMenu = () => {
 			allMeals = { ...allMeals, ...obj };
 		}
 		actions.postMeal(allMeals);
-		//history.push(`/place/${JSON.parse(localStorage.getItem("Place")).id}`); //AÑADIR HISTORY PUSH TO LOCALSTORAGE USER ID
+		history.replace("/place/".concat(actions.decodeToken(store.loginToken).sub.id.toString()));
 	};
 
 	const selectMenuType = e => {
@@ -120,7 +120,7 @@ export const AddMenu = () => {
 		return (
 			<div className="AddMenu">
 				<div className="container">
-					<div className="row UserAcess__FullHeight justify-content-center">
+					<div className="UserAcess__FullHeight justify-content-center">
 						<div className="col-12 pb-5">
 							<div className="AddMenu__Card justify-content-center">
 								<div className="UserAcess__Card--content text-center" />

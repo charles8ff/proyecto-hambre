@@ -27,7 +27,7 @@ export const Profile = () => {
 
 	useEffect(
 		() => {
-			actions.getProfile(getPlaceID[0]);
+			actions.getProfile(getPlaceID);
 		},
 		[history.location.pathname]
 	);

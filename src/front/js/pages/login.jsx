@@ -105,7 +105,6 @@ export const Login = () => {
 											</form>
 											<span
 												onClick={() => {
-													console.log("holi");
 													actions.userWantToSingUp(true);
 												}}>
 												¿No tienes cuenta? Registrate 😊

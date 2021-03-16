@@ -11,7 +11,9 @@ export const Template2 = () => {
 	const [wholeSections, setWholeSections] = useState([]);
 	let meals = [];
 	const history = useHistory();
-	const getPlaceID = history.location.pathname.match(/\d/);
+	const getPlaceID = history.location.pathname.replace(/\D/g, "");
+
+	console.log(getPlaceID);
 
 	const mealsInHTML = (mealArray, section_name) => {
 		let filteredMeals = mealArray.filter(elem => elem.name == section_name);
@@ -29,8 +31,6 @@ export const Template2 = () => {
 			return meals;
 		}
 	};
-
-	console.log(actions.loadMenu(getPlaceID[0], 2));
 
 	useEffect(
 		() => {
