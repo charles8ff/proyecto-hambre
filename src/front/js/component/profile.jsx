@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { Container, Jumbotron, Row, Col, Card, Button } from "react-bootstrap";
+import { Container, Dropdown, Row, Col, DropdownButton, Button } from "react-bootstrap";
 import { MenusView } from "./menusview.jsx";
 import { useHistory } from "react-router-dom";
 import { OurButton } from "./button.jsx";
@@ -163,8 +163,88 @@ export const Profile = () => {
 
 	return (
 		<>
-			<div className={editing ? "Editing__Wrapper" : "wrapper"}>
-				<div className="profile-card js-profile-card">
+			<div className="wrapper">
+				<div className="task-manager">
+					<div className="left-bar">
+						<div className="upper-part">
+							<div className="actions">
+								<div className="circle" />
+								<div className="circle-2" />
+							</div>
+						</div>
+						<div className="left-content">
+							<div className="profile-card__img d-flex flex-row justify-content-center">
+								<img
+									src="https://img2.freepng.es/20180413/oyq/kisspng-restaurant-logo-lunch-5ad1606381cc10.5146934915236711395317.jpg"
+									alt="profile card"
+								/>
+							</div>
+							<div className="profile-card__txt d-flex flex-row justify-content-center pt-2">
+								<i className="Profile__Icon--Hour far fa-color fa-clock" />
+								<h4 className="Profile__H4">
+									{"Horario: "}
+									{store.placeData.open_hour}
+									{" - "}
+									{store.placeData.close_hour}
+								</h4>
+							</div>
+							<div className="profile-card__txt d-flex flex-row justify-content-center pt-2">
+								<i className="Profile__Icon--Hour far fa-color fa-file-alt pt-1" />
+								<p className="Profile__H4">{store.placeData.description}</p>
+							</div>
+						</div>
+					</div>
+					<div className="page-content">
+						<div className="d-flex flex-row justify-content-end">
+							<div className="profile__drop">
+								<ul>
+									<li>
+										<a href="#">
+											<i className="fas fa-users-cog" />
+											Tutorial
+										</a>
+										<ul>
+											<li>
+												<a href="#">
+													<i className="fa fa-desktop fa-1x" />
+													Design
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<i className="fa fa-cog fa-1x" />
+													Development
+												</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div className="profile-card__name d-flex flex-row justify-content-center pt-2">
+							<h2>{store.placeData.place_name}</h2>
+						</div>
+						<div className="d-flex flex-row justify-content-center pt-2">
+							<i className="Profile__Icon--Hour fas fa-color fa-lg fa-phone" />
+							<h4 className="Profile__H4">{store.placeData.phone_number}</h4>
+						</div>
+						<div className="d-flex flex-row justify-content-center">
+							<i className="Profile__Icon fas fa-color fa-lg fa-map-marker-alt" />
+							<h4 className="Profile__H4">{store.placeData.address}</h4>
+						</div>
+						<div className="d-flex flex-row justify-content-center p-2 Profile__Card--ContentMap">
+							<Maps />
+						</div>
+						<div className="Profile__CardContainer">
+							<div className="Parallax__TwoCards">
+								<div className="Profile__Menus d-flex flex-row flex-wrap">{MenusInHTML()}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{/* <div className={editing ? "Editing__Wrapper" : "wrapper"}>
+				<div className="profile-card js-profile-card d-flex flex-row">
 					<div className="d-flex flex-row justify-content-center">
 						<div className="profile-card__img d-flex flex-row">
 							<img
@@ -272,7 +352,7 @@ export const Profile = () => {
 						</div>
 					)}
 				</div>
-			</div>
+			</div> */}
 		</>
 	);
 };

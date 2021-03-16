@@ -23,7 +23,11 @@ export const MenusView = props => {
 					</div>
 				</div>
 				<hr />
-				<h5>{props.title}</h5>
+				<div className="d-flex flex-row justify-content-center">
+					{" "}
+					<h5>{props.title}</h5>
+				</div>
+
 				<div className="d-flex flex-row">
 					<ModalProvider backdropClassName="d-none">
 						<OurButton
