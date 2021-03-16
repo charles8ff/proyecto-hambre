@@ -60,7 +60,7 @@ export const Template2 = () => {
 
 	const finalTemplate2 = () => {
 		return (
-			<div className="container">
+			<div className="container h-100">
 				<div className="row justify-content-center align-items-center">
 					<Card className="templete--two card--templateTwo">
 						<Card.Body>

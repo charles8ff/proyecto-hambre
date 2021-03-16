@@ -27,7 +27,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			allSections: [],
 			map: undefined,
 			templatePreview: false,
-			showModal: false
+			showModal: false,
+			userEditAccount: false
 		},
 		actions: {
 			login: async (emailgiven, passwordgiven) => {
@@ -73,6 +74,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} else {
 					setStore({
 						userWantToSingUp: false
+					});
+				}
+			},
+			userWantToEditAccount: data => {
+				if (data) {
+					setStore({
+						userEditAccount: true
+					});
+				} else {
+					setStore({
+						userEditAccount: false
 					});
 				}
 			},
@@ -320,6 +332,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(data)
 				});
 				response = await response.json();
+				getActions().userWantToEditAccount(true);
 				getActions().getProfile(`/place/${response.id}`);
 			},
 			loadSections: async template_id => {

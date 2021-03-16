@@ -38,6 +38,16 @@ export const Profile = () => {
 
 	useEffect(
 		() => {
+			if (store.userEditAccount) {
+				actions.getProfile(getPlaceID);
+				actions.userWantToEditAccount(false);
+			}
+		},
+		[store.userEditAccount]
+	);
+
+	useEffect(
+		() => {
 			store.placeData == false ? null : actions.getLatitudeLongitude(store.placeData.address);
 		},
 		[store.placeData]
@@ -164,7 +174,7 @@ export const Profile = () => {
 
 	return (
 		<>
-			<div className="wrapper container-fluid">
+			<div className="wrapper h-100 container-fluid">
 				<div className="task-manager">
 					<div className={editing ? "left-bar d-none" : "left-bar"}>
 						<div className="left-content">
