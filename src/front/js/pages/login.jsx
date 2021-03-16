@@ -6,6 +6,7 @@ import { Registro } from "./registro.jsx";
 import { AddPlace } from "./add-place.jsx";
 
 import "../../styles/login.scss";
+import { OurButton } from "../component/button.jsx";
 
 export const Login = () => {
 	const { register, handleSubmit, errors } = useForm();
@@ -67,26 +68,38 @@ export const Login = () => {
 								<div className="UserAcess__CardWrapper">
 									<div className="UserAcess__CardLogin">
 										<div className="UserAcess__Card--content text-center">
-											<h4 className="mb-4 pb-3">Loguéate</h4>
+											<h4 className="mx-4 pb-3">Loguéate</h4>
 											<form className="UserAcess__CardForm" onSubmit={handleSubmit(onLogin)}>
-												<input
-													name="email"
-													type="email"
-													placeholder="micorreo@gmail.com"
-													className="UserAcess__CardForm--Style"
-													ref={register({
-														required: true,
-														pattern: {
-															value: /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
-															message: "invalid email address"
-														}
-													})}
-													autoComplete="off"
-												/>
-												<i className="UserAcess__CardForm--inputIcon fas fa-envelope" />
-												{store.material_ui_is_user_active ? <p>Email no válido</p> : null}
-												{errors.email && <p>Este campo es requerido</p>}
-												<div className="UserAcess__CardForm mt-3">
+												<div className="d-flex flex-row">
+													<label className=" p-0 pl-3" htmlFor="email">
+														Correo Electrónico
+													</label>
+												</div>
+												<div className="UserAcess__CardForm">
+													<input
+														name="email"
+														type="email"
+														placeholder="micorreo@gmail.com"
+														className="UserAcess__CardForm--Style"
+														ref={register({
+															required: true,
+															pattern: {
+																value: /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+																message: "invalid email address"
+															}
+														})}
+														autoComplete="off"
+													/>
+													<i className="UserAcess__CardForm--inputIcon fas fa-envelope" />
+													{store.material_ui_is_user_active ? <p>Email no válido</p> : null}
+													{errors.email && <p>Este campo es requerido</p>}
+												</div>
+												<div className="d-flex flex-row">
+													<label className=" p-0 pl-3" htmlFor="password">
+														Contraseña
+													</label>
+												</div>
+												<div className="UserAcess__CardForm">
 													<input
 														name="password"
 														type="password"
@@ -113,6 +126,11 @@ export const Login = () => {
 									</div>
 									{store.is_first_step ? <Registro /> : <AddPlace />}
 								</div>
+							</div>
+							<div className="d-flex justify-content-center pt-1">
+								<button className="btn-home" onClick={() => history.replace("/")}>
+									Volver a Inicio
+								</button>
 							</div>
 						</div>
 					</div>

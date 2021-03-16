@@ -18,44 +18,61 @@ export const AddPlace = props => {
 		<>
 			<div className="UserAcess__CardAddPlace">
 				<div className="UserAcess__Card--content text-center">
-					<h4 className="pb-3 mt-4">Añadir Restaurante</h4>
+					<h4 className="pb-3 mx-4">Añadir Restaurante</h4>
 					<form className="UserAcess__CardForm" onSubmit={handleSubmit(registerUser)}>
-						<input
-							name="place_name"
-							type="text"
-							placeholder="Nombre del Restaurante"
-							className="UserAcess__CardForm--Style mt-2"
-							ref={register}
-							autoComplete="off"
-						/>
-						<i className="UserAcess__CardForm--inputIcon fas fa-utensils mt-2" />
+						<div className="d-flex flex-row justify-content-start">
+							<label className="pl-3 m-0" htmlFor="place_name">
+								Nombre del Establecimiento
+							</label>
+						</div>
+						<div className="UserAcess__CardForm">
+							<input
+								name="place_name"
+								type="text"
+								placeholder="Nombre del Establecimiento"
+								className="UserAcess__CardForm--Style"
+								ref={register}
+								autoComplete="off"
+							/>
+							<i className="UserAcess__CardForm--inputIcon fas fa-utensils" />
+						</div>
+						<div className="d-flex flex-row justify-content-start">
+							<label className="pl-3 m-0" htmlFor="address">
+								Ubicación
+							</label>
+						</div>
 						<div className="UserAcess__CardForm">
 							<input
 								name="address"
 								type="text"
 								placeholder="Dirección del restaurante"
-								className="UserAcess__CardForm--Style mt-2"
+								className="UserAcess__CardForm--Style"
 								ref={register}
 								autoComplete="off"
 							/>
-							<i className="UserAcess__CardForm--inputIcon fas fa-map-marked-alt mt-2" />
+							<i className="UserAcess__CardForm--inputIcon fas fa-map-marked-alt" />
+						</div>
+						<div className="d-flex flex-row justify-content-start">
+							<label className="pl-3 m-0" htmlFor="phone_number">
+								Teléfono
+							</label>
 						</div>
 						<div className="UserAcess__CardForm">
 							<input
 								name="phone_number"
 								type="text"
 								placeholder="Número del restaurante"
-								className="UserAcess__CardForm--Style mt-2"
+								className="UserAcess__CardForm--Style"
 								ref={register}
 								autoComplete="off"
 							/>
-							<i className="UserAcess__CardForm--inputIcon fas fa-phone mt-2" />
+							<i className="UserAcess__CardForm--inputIcon fas fa-phone" />
 						</div>
 						<div className="d-flex flex-row justify-content-space-between">
-							<label className="col-6 p-0" htmlFor="open_hour">
+							<label className="col-6 p-0 pr-4" htmlFor="open_hour">
 								Hora de apertura
 							</label>
-							<label className="col-6 p-0" htmlFor="close_hour">
+							<label className="col-6 p-0 pr-4" htmlFor="close_hour">
 								Hora de cierre
 							</label>
 						</div>
@@ -65,34 +82,39 @@ export const AddPlace = props => {
 									name="open_hour"
 									type="time"
 									placeholder="Hora de Apertura"
-									className="UserAcess__CardForm--Style mt-2"
+									className="UserAcess__CardForm--Style"
 									ref={register}
 									autoComplete="off"
 								/>
-								<i className="UserAcess__CardForm--inputIcon fas fa-clock mt-2" />
+								<i className="UserAcess__CardForm--inputIcon fas fa-clock" />
 							</div>
 							<div className="UserAcess__CardForm col-6">
 								<input
 									name="close_hour"
 									type="time"
 									placeholder="Hora de cierre"
-									className="UserAcess__CardForm--Style mt-2"
+									className="UserAcess__CardForm--Style"
 									ref={register}
 									autoComplete="off"
 								/>
-								<i className="UserAcess__CardForm--inputIcon fas fa-clock mt-2" />
+								<i className="UserAcess__CardForm--inputIcon fas fa-clock" />
 							</div>
+						</div>
+						<div className="d-flex flex-row justify-content-start">
+							<label className="pl-3 m-0" htmlFor="description">
+								Descripción
+							</label>
 						</div>
 						<div className="UserAcess__CardForm">
 							<input
 								name="description"
 								type="text"
 								placeholder="Descripción del restaurante"
-								className="UserAcess__CardForm--Style mt-2"
+								className="UserAcess__CardForm--Style"
 								ref={register}
 								autoComplete="off"
 							/>
-							<i className="UserAcess__CardForm--inputIcon fas fa-file-alt mt-2" />
+							<i className="UserAcess__CardForm--inputIcon fas fa-file-alt" />
 						</div>
 						<input type="submit" value="Completar Registro" className="btn mt-4" />
 					</form>

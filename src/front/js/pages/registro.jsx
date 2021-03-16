@@ -18,26 +18,39 @@ export const Registro = props => {
 		<>
 			<div className="UserAcess__CardRegister">
 				<div className="UserAcess__Card--content text-center">
-					<h4 className="mb-4 pb-3">Regístrate</h4>
+					<h4 className="mx-4 pb-3">Regístrate</h4>
 					<form className="UserAcess__CardForm" onSubmit={handleSubmit(userCheck)}>
-						<input
-							name="email"
-							type="email"
-							placeholder="micorreo@gmail.com"
-							className="UserAcess__CardForm--Style"
-							ref={register({
-								required: true,
-								pattern: {
-									value: /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
-									message: "invalid email address"
-								}
-							})}
-							autoComplete="off"
-						/>
-						<i className="UserAcess__CardForm--inputIcon fas fa-envelope" />
-						{store.material_ui_is_user_active ? <p>Email no válido</p> : null}
-						{errors.email && <p>Este campo es requerido</p>}
-						<div className="UserAcess__CardForm mt-2">
+						<div className="d-flex flex-row">
+							<label className=" p-0 pl-3" htmlFor="email">
+								Correo Electrónico
+							</label>
+						</div>
+						<div className="UserAcess__CardForm">
+							<input
+								name="email"
+								type="email"
+								placeholder="micorreo@gmail.com"
+								className="UserAcess__CardForm--Style"
+								ref={register({
+									required: true,
+									pattern: {
+										value: /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+										message: "invalid email address"
+									}
+								})}
+								autoComplete="off"
+							/>
+							<i className="UserAcess__CardForm--inputIcon fas fa-envelope" />
+
+							{store.material_ui_is_user_active ? <p>Email no válido</p> : null}
+							{errors.email && <p>Este campo es requerido</p>}
+						</div>
+						<div className="d-flex flex-row">
+							<label className=" p-0 pl-3" htmlFor="password">
+								Contraseña
+							</label>
+						</div>
+						<div className="UserAcess__CardForm">
 							<input
 								name="password"
 								type="password"

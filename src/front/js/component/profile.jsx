@@ -210,7 +210,7 @@ export const Profile = () => {
 
 	return (
 		<>
-			<div className="wrapper h-100 container-fluid">
+			<div className="wrapper container-fluid">
 				<div className="task-manager">
 					<div className={editing ? "left-bar d-none" : "left-bar"}>
 						<div className="left-content">
