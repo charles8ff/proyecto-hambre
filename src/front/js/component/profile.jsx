@@ -20,7 +20,7 @@ export const Profile = () => {
 	const { register, errors, handleSubmit, watch } = useForm();
 
 	const getDataAllFields = watch();
-	const getPlaceID = history.location.pathname.split("/");
+	const getPlaceID = history.location.pathname.split("/");//
 
 	useEffect(
 		() => {
