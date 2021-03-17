@@ -5,15 +5,12 @@ import { Container, Dropdown, Row, Col, DropdownButton, Button } from "react-boo
 import { MenusView } from "./menusview.jsx";
 import { useHistory } from "react-router-dom";
 import { OurButton } from "./button.jsx";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import { useForm, useWatch } from "react-hook-form";
 
 import { Maps } from "./maps.jsx";
 
 import "../../styles/profile.scss";
 import { useState } from "react";
-import { DropdownMenu, MenuItem } from "react-bootstrap-dropdown-menu";
 
 export const Profile = () => {
 	const { store, actions } = useContext(Context);
@@ -23,11 +20,11 @@ export const Profile = () => {
 	const { register, errors, handleSubmit, watch } = useForm();
 
 	const getDataAllFields = watch();
-	const getPlaceID = history.location.pathname.replace(/\D/g, "");
+	const getPlaceID = history.location.pathname.split("/");
 
 	useEffect(
 		() => {
-			actions.getProfile(getPlaceID);
+			actions.getProfile(getPlaceID[2]);
 		},
 		[history.location.pathname]
 	);
@@ -39,7 +36,7 @@ export const Profile = () => {
 	useEffect(
 		() => {
 			if (store.userEditAccount) {
-				actions.getProfile(getPlaceID);
+				actions.getProfile(getPlaceID[2]);
 				actions.userWantToEditAccount(false);
 			}
 		},
@@ -89,58 +86,94 @@ export const Profile = () => {
 		return (
 			<div className="container editing">
 				<div className="inputContainer">
-					<i className="fas fa-utensils icon" />
-					<input
-						name={"place_name"}
-						type="text"
-						placeholder={`${store.placeData.place_name}`}
-						className="AddMenu__Input--Style mb-3"
-						ref={register({ required: true })}
-					/>
-				</div>
-				<div className="inputContainer d-flex flex-row flex-wrap">
-					<div>
-						<i className="fas fa-clock icon" />
-						<input
-							name={"open_hour"}
-							type="time"
-							placeholder={`${store.placeData.open_hour}`}
-							className="AddMenu__Input--Style mb-3"
-							ref={register({ required: true })}
-						/>
+					<div className="d-flex flex-row">
+						<label className="col-12 p-0 pl-3" htmlFor="place_name">
+							Nombre del Establecimiento
+						</label>
 					</div>
-					<div>
-						<i className="fas fa-clock icon" />
+					<div className="d-flex flex-row">
+						<i className="fas fa-utensils icon" />
 						<input
-							name={"close_hour"}
-							type="time"
-							placeholder={`${store.placeData.close_hour}`}
+							name={"place_name"}
+							type="text"
+							placeholder={`${store.placeData.place_name}`}
 							className="AddMenu__Input--Style mb-3"
 							ref={register({ required: true })}
 						/>
 					</div>
 				</div>
 				<div className="inputContainer">
-					<i className="fas fa-phone icon" />
-					<input
-						name={"phone_number"}
-						type="tel"
-						placeholder={`${store.placeData.phone_number}`}
-						className="AddMenu__Input--Style mb-3"
-						ref={register({ required: true })}
-					/>
+					<div className="d-flex flex-row">
+						<label className="col-6 p-0 pl-3" htmlFor="open_hour">
+							Hora de apertura
+						</label>
+						<label className="col-6 p-0 pl-3" htmlFor="close_hour">
+							Hora de cierre
+						</label>
+					</div>
+					<div className="d-flex flex-row">
+						<div className="col-6 p-0">
+							<i className="fas fa-clock icon" />
+							<input
+								name={"open_hour"}
+								type="time"
+								placeholder={`${store.placeData.open_hour}`}
+								className="AddMenu__Input--Style mb-3"
+								ref={register({ required: true })}
+							/>
+						</div>
+						<div className="col-6 p-0">
+							<i className="fas fa-clock icon" />
+							<input
+								name={"close_hour"}
+								type="time"
+								placeholder={`${store.placeData.close_hour}`}
+								className="AddMenu__Input--Style mb-3"
+								ref={register({ required: true })}
+							/>
+						</div>
+					</div>
 				</div>
 				<div className="inputContainer">
-					<i className="fas fa-map-marker-alt icon" />
-					<input
-						name={"address"}
-						type="text"
-						placeholder={`${store.placeData.address}`}
-						className="AddMenu__Input--Style mb-3"
-						ref={register({ required: true })}
-					/>
+					<div className="d-flex flex-row">
+						<label className="col-12 p-0 pl-3" htmlFor="phone_number">
+							Teléfono
+						</label>
+					</div>
+					<div className="d-flex flex-row">
+						<i className="fas fa-phone icon" />
+						<input
+							name={"phone_number"}
+							type="tel"
+							placeholder={`${store.placeData.phone_number}`}
+							className="AddMenu__Input--Style mb-3"
+							ref={register({ required: true })}
+						/>
+					</div>
 				</div>
 				<div className="inputContainer">
+					<div className="d-flex flex-row">
+						<label className="col-12 p-0 pl-3" htmlFor="address">
+							Ubicación
+						</label>
+					</div>
+					<div className="d-flex flex-row">
+						<i className="fas fa-map-marker-alt icon" />
+						<input
+							name={"address"}
+							type="text"
+							placeholder={`${store.placeData.address}`}
+							className="AddMenu__Input--Style mb-3"
+							ref={register({ required: true })}
+						/>
+					</div>
+				</div>
+				<div className="inputContainer">
+					<div className="d-flex flex-row">
+						<label className="col-12 p-0 pl-3" htmlFor="email">
+							Correo Electrónico
+						</label>
+					</div>
 					<i className="fas fa-envelope icon" />
 					<input
 						name={"email"}
@@ -174,8 +207,11 @@ export const Profile = () => {
 
 	return (
 		<>
-			<div className="wrapper h-100 container-fluid">
-				<div className="task-manager">
+			<div
+				className={
+					editing || businessMenus == false ? "wrapper h-100 container-fluid" : "wrapper container-fluid"
+				}>
+				<div className={editing ? "task-manager h-100" : "task-manager"}>
 					<div className={editing ? "left-bar d-none" : "left-bar"}>
 						<div className="left-content">
 							<div className="profile-card__img d-flex flex-row justify-content-center">

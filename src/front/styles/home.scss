@@ -518,12 +518,16 @@ li {
   counter-increment: index; 
   display: flex;
   align-items: center;
+  margin-top: 0.8rem;
   padding: 0.8rem;
   box-sizing: border-box;
 }
 /* Element separation */
 li + li {
   border-top: 1px solid $grey;
+}
+span{
+ margin-left: 1rem;
 }
 }
 
@@ -584,6 +588,7 @@ li + li {
   margin: 0;
   padding: 0;
 }
+
 
 .Parallax__TwoCards--Item {
   display: flex;

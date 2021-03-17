@@ -11,19 +11,95 @@ export const Template2 = () => {
 	const [wholeSections, setWholeSections] = useState([]);
 	let meals = [];
 	const history = useHistory();
-	const getPlaceID = history.location.pathname.replace(/\D/g, "");
+	const getPlaceID = history.location.pathname.split("/");
+	const getMealInfo = [
+		{
+			url: "https://i.imgur.com/dtpzG2k.png",
+			name: "Gluten"
+		},
+		{
+			url: "https://i.imgur.com/DgfrxUa.png",
+			name: "Cacahuetes"
+		},
+		{
+			url: "https://i.imgur.com/SEFHs4K.png",
+			name: "Frutos Secos"
+		},
+		{
+			url: "https://i.imgur.com/jjFoTc7.png",
+			name: "Apio"
+		},
+		{
+			url: "https://i.imgur.com/TePCu6L.png",
+			name: "Mostaza"
+		},
+		{
+			url: "https://i.imgur.com/8V96M0O.png",
+			name: "Huevos"
+		},
+		{
+			url: "https://i.imgur.com/vU8Xsfi.png",
+			name: "Leche"
+		},
+		{
+			url: "https://i.imgur.com/jgP7fiA.png",
+			name: "Sésamo"
+		},
+		{
+			url: "https://i.imgur.com/4CoWCkc.png",
+			name: "Pescado"
+		},
+		{
+			url: "https://i.imgur.com/oTOnO2r.png",
+			name: "Crustaceo"
+		},
+		{
+			url: "https://i.imgur.com/7sgZjjj.png",
+			name: "Moluscos"
+		},
+		{
+			url: "https://i.imgur.com/cg1uWnr.png",
+			name: "Soja"
+		},
+		{
+			url: "https://i.imgur.com/2LDlTSv.png",
+			name: "Sulfitos"
+		},
+		{
+			url: "https://i.imgur.com/aS8z8Q3.png",
+			name: "Altramuces"
+		},
+		{
+			url: "https://i.imgur.com/KZuBX9F.png",
+			name: "Vegatariano"
+		},
+		{
+			url: "https://i.imgur.com/uHEoATb.png",
+			name: "Vegano"
+		}
+	];
 
 	const mealsInHTML = (mealArray, section_name) => {
 		let filteredMeals = mealArray.filter(elem => elem.name == section_name);
 		for (let i = 0; i < filteredMeals.length; i++) {
 			meals = filteredMeals.map((elem, index) => {
 				return (
-					<ul key={index}>
-						{elem.meal_name}
-						<span className="ml-2 mr-1">.....</span>
-						{elem.meal_price}
-						{"€"}
-					</ul>
+					<>
+						<li key={index}>
+							{elem.meal_name}
+							<span className="ml-2 mr-1">.....</span>
+							{elem.meal_price}
+							{"€"}
+						</li>
+						{elem.meal_info.map((c, i) => {
+							return (
+								<span key={i}>
+									{<img className="meal_img" src={getMealInfo[c.id - 1].url} />}{" "}
+									{getMealInfo[c.id - 1].name}
+								</span>
+							);
+						})}
+					</>
 				);
 			});
 			return meals;
@@ -33,7 +109,7 @@ export const Template2 = () => {
 	useEffect(
 		() => {
 			if (store.placeData == false) {
-				actions.getProfile(getPlaceID[0]);
+				actions.getProfile(getPlaceID[2]);
 				actions.hideNavigation(true);
 			}
 		},
@@ -45,7 +121,7 @@ export const Template2 = () => {
 			if (store.templatePreview == false) {
 				actions.hideNavigation(true);
 				actions.getSections(2);
-				actions.loadMenu(getPlaceID[0], 2); // Place 1 y template 1 (place_id and template_id)
+				actions.loadMenu(getPlaceID[2], 2); // Place 1 y template 1 (place_id and template_id)
 			}
 		},
 		[store.templatePreview]

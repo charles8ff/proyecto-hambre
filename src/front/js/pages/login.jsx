@@ -6,6 +6,8 @@ import { Registro } from "./registro.jsx";
 import { AddPlace } from "./add-place.jsx";
 
 import "../../styles/login.scss";
+import { OurButton } from "../component/button.jsx";
+import { GoogleLogin } from "react-google-login";
 
 export const Login = () => {
 	const { register, handleSubmit, errors } = useForm();
@@ -29,19 +31,23 @@ export const Login = () => {
 	useEffect(
 		() => {
 			if (history.location.pathname == "/register") {
+				actions.userWantToUseGoogle(false);
 				actions.userWantToSingUp(true);
-				actions.changeStep();
+				actions.changeStep(true);
 			} else if (history.location.pathname == "/login") {
+				actions.userWantToUseGoogle(false);
 				actions.userWantToSingUp(false);
-				actions.changeStep();
+				actions.changeStep(true);
 			}
 			return history.listen(location => {
 				if (location.pathname == "/register") {
+					actions.userWantToUseGoogle(false);
 					actions.userWantToSingUp(true);
-					actions.changeStep();
+					actions.changeStep(true);
 				} else if (history.location.pathname == "/login") {
+					actions.userWantToUseGoogle(false);
 					actions.userWantToSingUp(false);
-					actions.changeStep();
+					actions.changeStep(true);
 				}
 			});
 		},
@@ -50,7 +56,13 @@ export const Login = () => {
 
 	useEffect(() => {
 		actions.hideNavigation(true);
+		actions.userWantToUseGoogle(false);
 	}, []);
+
+	const responseGoogle = response => {
+		actions.userWantToUseGoogle(true);
+		actions.login(response.profileObj.email, response.profileObj.googleId);
+	};
 
 	return (
 		<>
@@ -67,26 +79,38 @@ export const Login = () => {
 								<div className="UserAcess__CardWrapper">
 									<div className="UserAcess__CardLogin">
 										<div className="UserAcess__Card--content text-center">
-											<h4 className="mb-4 pb-3">Logueate</h4>
+											<h4 className="mx-4 pb-3">Loguéate</h4>
 											<form className="UserAcess__CardForm" onSubmit={handleSubmit(onLogin)}>
-												<input
-													name="email"
-													type="email"
-													placeholder="micorreo@gmail.com"
-													className="UserAcess__CardForm--Style"
-													ref={register({
-														required: true,
-														pattern: {
-															value: /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
-															message: "invalid email address"
-														}
-													})}
-													autoComplete="off"
-												/>
-												<i className="UserAcess__CardForm--inputIcon fas fa-envelope" />
-												{store.material_ui_is_user_active ? <p>Email no valido</p> : null}
-												{errors.email && <p>Este campo es requerido</p>}
-												<div className="UserAcess__CardForm mt-3">
+												<div className="d-flex flex-row">
+													<label className=" p-0 pl-3" htmlFor="email">
+														Correo Electrónico
+													</label>
+												</div>
+												<div className="UserAcess__CardForm">
+													<input
+														name="email"
+														type="email"
+														placeholder="micorreo@gmail.com"
+														className="UserAcess__CardForm--Style"
+														ref={register({
+															required: true,
+															pattern: {
+																value: /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+																message: "invalid email address"
+															}
+														})}
+														autoComplete="off"
+													/>
+													<i className="UserAcess__CardForm--inputIcon fas fa-envelope" />
+													{store.material_ui_is_user_active ? <p>Email no válido</p> : null}
+													{errors.email && <p>Este campo es requerido</p>}
+												</div>
+												<div className="d-flex flex-row">
+													<label className=" p-0 pl-3" htmlFor="password">
+														Contraseña
+													</label>
+												</div>
+												<div className="UserAcess__CardForm">
 													<input
 														name="password"
 														type="password"
@@ -97,22 +121,37 @@ export const Login = () => {
 													/>
 													<i className="UserAcess__CardForm--inputIcon fas fa-key" />
 													{store.material_ui_is_incorrect_password ? (
-														<p>Contraseña invalida</p>
+														<p>Contraseña inválida</p>
 													) : null}
 													{errors.password && <p>Este campo es requerido</p>}
 												</div>
-												<input type="submit" value="Entrar" className="btn mt-4" />
+												<div className="d-flex flex-row mt-4 justify-content-center">
+													<input type="submit" value="Entrar" className="btn mt-2" />
+													<GoogleLogin
+														className="btn"
+														clientId={process.env.REACT_GOOGLE_LOGIN_OAUTH}
+														buttonText="Entra con Google"
+														onSuccess={responseGoogle}
+														onFailure={responseGoogle}
+														cookiePolicy={"single_host_origin"}
+													/>
+												</div>
 											</form>
 											<span
 												onClick={() => {
 													actions.userWantToSingUp(true);
 												}}>
-												¿No tienes cuenta? Registrate 😊
+												¿No tienes cuenta? Regístrate 😊
 											</span>
 										</div>
 									</div>
 									{store.is_first_step ? <Registro /> : <AddPlace />}
 								</div>
+							</div>
+							<div className="d-flex justify-content-center pt-1">
+								<button className="btn-home" onClick={() => history.replace("/")}>
+									Volver a Inicio
+								</button>
 							</div>
 						</div>
 					</div>
