@@ -170,7 +170,7 @@ class Section(db.Model):
             "meal_name": meal.name,
             "meal_price": meal.price,
             "business_id": meal.business_id,
-            # "meal_info": meal.meal_info,
+            "meal_info": [meal_info.to_dict() for meal_info in meal.meal_info],
             "meal_description": meal.description,
         }
     def to_dict_empty(self):
@@ -352,7 +352,6 @@ class Meal_Info(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "info": self.info
         }
     @classmethod
     def get_by_id(cls, id):

@@ -34,12 +34,6 @@ $text-font: 'Akaya Kanadaka', cursive;
         text-align: center;
         color: $error-color
     }
-    // span{
-    //     text-align: center;
-    //     font-size: 1.4rem;
-    //     margin-bottom: 0.8rem;
-    //     color: $error-color
-    // }
     h3{
         align-items: center;
         font-size: 2rem;
@@ -49,9 +43,11 @@ $text-font: 'Akaya Kanadaka', cursive;
         list-style-type: none;
         padding: 0rem;
         margin-bottom: 1.2rem;
-        text-align: end;
+        text-align: center;
     }
     li{
-        text-align: end;
+        text-align: center;
+        margin-top: 1rem;
+    margin-bottom: 0.6rem;
     }
 }

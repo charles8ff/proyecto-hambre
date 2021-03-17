@@ -25,14 +25,6 @@ export const Profile = () => {
 	const getDataAllFields = watch();
 	const getPlaceID = history.location.pathname.split("/");
 
-	var settings = {
-		dots: true,
-		infinite: true,
-		speed: 500,
-		slidesToShow: 1,
-		slidesToScroll: 1
-	};
-
 	useEffect(
 		() => {
 			actions.getProfile(getPlaceID[2]);
@@ -218,7 +210,10 @@ export const Profile = () => {
 
 	return (
 		<>
-			<div className={editing ? "wrapper h-100 container-fluid" : "wrapper container-fluid"}>
+			<div
+				className={
+					editing || businessMenus == false ? "wrapper h-100 container-fluid" : "wrapper container-fluid"
+				}>
 				<div className={editing ? "task-manager h-100" : "task-manager"}>
 					<div className={editing ? "left-bar d-none" : "left-bar"}>
 						<div className="left-content">
