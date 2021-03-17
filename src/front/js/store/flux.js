@@ -28,7 +28,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			map: undefined,
 			templatePreview: false,
 			showModal: false,
-			userEditAccount: false
+			userEditAccount: false,
+			isGoogleAuth: false
 		},
 		actions: {
 			login: async (emailgiven, passwordgiven) => {
@@ -43,9 +44,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				});
 				if (response.status == 404) {
-					setStore({
-						material_ui_is_user_active: true //email already exists or is inactive but exists
-					});
+					if (getStore().isGoogleAuth) {
+						let userData = { emailgiven, passwordgiven };
+						userData = getActions().renameKey(userData, "emailgiven", "email");
+						userData = getActions().renameKey(userData, "passwordgiven", "password");
+						getActions().registerProfile(userData);
+						getActions().userWantToSingUp(true);
+						getActions().changeStep(false);
+					} else {
+						setStore({
+							material_ui_is_user_active: true //email already exists or is inactive but exists
+						});
+					}
 				} else if (response.status == 409) {
 					setStore({
 						material_ui_is_incorrect_password: true //to set message with incorrect password
@@ -61,6 +71,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 						const dataURL = "/place/" + data.sub.id;
 						getActions().getProfile(dataURL);
 					}
+				}
+			},
+			userWantToUseGoogle: data => {
+				if (data) {
+					setStore({
+						isGoogleAuth: true
+					});
+				} else {
+					setStore({
+						isGoogleAuth: false
+					});
 				}
 			},
 			decodeToken: token => {
@@ -107,17 +128,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			getUserbyEmail: user_email => {
-				fetch(URLBACKEND + `/api/user/${user_email}`)
+			getUserbyEmail: data => {
+				fetch(URLBACKEND + `/api/user/${data.email}`)
 					.then(async res => {
 						if (res.status == 409) {
-							setStore({
-								material_ui_is_user_active: true, //check user is exists
-								is_first_step: true
-							});
+							if (getStore().isGoogleAuth) {
+								getActions().login(data.email, data.password);
+							} else {
+								setStore({
+									material_ui_is_user_active: true, //check user is exists
+									is_first_step: true
+								});
+							}
 						} else {
+							getActions().registerProfile(data);
 							setStore({
-								material_ui_is_user_active: false, //check user is exists
+								material_ui_is_user_active: false,
 								is_first_step: false
 							});
 						}
@@ -279,10 +305,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			changeStep: () => {
-				setStore({
-					is_first_step: true
-				});
+			changeStep: data => {
+				// setStore({
+				// 	is_first_step: true
+				// });
+				if (data) {
+					setStore({
+						is_first_step: true
+					});
+				} else {
+					setStore({
+						is_first_step: false
+					});
+				}
 			},
 
 			addNewProfile: async user_profile => {

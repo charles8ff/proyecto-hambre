@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
+import { GoogleLogin } from "react-google-login";
 
 import "../../styles/login.scss";
 
@@ -11,7 +12,20 @@ export const Registro = props => {
 
 	const userCheck = data => {
 		actions.registerProfile(data);
-		actions.getUserbyEmail(data.email);
+		actions.getUserbyEmail(data);
+	};
+
+	useEffect(() => {
+		actions.hideNavigation(true);
+		actions.userWantToUseGoogle(false);
+	}, []);
+
+	const responseGoogle = response => {
+		actions.userWantToUseGoogle(true);
+		const email = response.profileObj.email;
+		const password = response.profileObj.googleId;
+		const googleData = { email, password };
+		actions.getUserbyEmail(googleData);
 	};
 
 	return (
@@ -62,7 +76,17 @@ export const Registro = props => {
 							<i className="UserAcess__CardForm--inputIcon fas fa-key" />
 							{errors.password && <p>Este campo es requerido</p>}
 						</div>
-						<input type="submit" className="btn mt-4" />
+						<div className="d-flex flex-row mt-4 justify-content-center">
+							<input type="submit" value="Registrarse" className="btn mt-2" />
+							<GoogleLogin
+								className="btn"
+								clientId={process.env.REACT_GOOGLE_LOGIN_OAUTH}
+								buttonText="Registrarse con Google"
+								onSuccess={responseGoogle}
+								onFailure={responseGoogle}
+								cookiePolicy={"single_host_origin"}
+							/>
+						</div>
 					</form>
 					<span onClick={() => actions.userWantToSingUp(false)}>¿Ya tienes cuenta? Loguéate 😊</span>
 				</div>

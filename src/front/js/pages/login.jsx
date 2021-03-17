@@ -7,6 +7,7 @@ import { AddPlace } from "./add-place.jsx";
 
 import "../../styles/login.scss";
 import { OurButton } from "../component/button.jsx";
+import { GoogleLogin } from "react-google-login";
 
 export const Login = () => {
 	const { register, handleSubmit, errors } = useForm();
@@ -30,19 +31,23 @@ export const Login = () => {
 	useEffect(
 		() => {
 			if (history.location.pathname == "/register") {
+				actions.userWantToUseGoogle(false);
 				actions.userWantToSingUp(true);
-				actions.changeStep();
+				actions.changeStep(true);
 			} else if (history.location.pathname == "/login") {
+				actions.userWantToUseGoogle(false);
 				actions.userWantToSingUp(false);
-				actions.changeStep();
+				actions.changeStep(true);
 			}
 			return history.listen(location => {
 				if (location.pathname == "/register") {
+					actions.userWantToUseGoogle(false);
 					actions.userWantToSingUp(true);
-					actions.changeStep();
+					actions.changeStep(true);
 				} else if (history.location.pathname == "/login") {
+					actions.userWantToUseGoogle(false);
 					actions.userWantToSingUp(false);
-					actions.changeStep();
+					actions.changeStep(true);
 				}
 			});
 		},
@@ -51,7 +56,13 @@ export const Login = () => {
 
 	useEffect(() => {
 		actions.hideNavigation(true);
+		actions.userWantToUseGoogle(false);
 	}, []);
+
+	const responseGoogle = response => {
+		actions.userWantToUseGoogle(true);
+		actions.login(response.profileObj.email, response.profileObj.googleId);
+	};
 
 	return (
 		<>
@@ -114,7 +125,17 @@ export const Login = () => {
 													) : null}
 													{errors.password && <p>Este campo es requerido</p>}
 												</div>
-												<input type="submit" value="Entrar" className="btn mt-4" />
+												<div className="d-flex flex-row mt-4 justify-content-center">
+													<input type="submit" value="Entrar" className="btn mt-2" />
+													<GoogleLogin
+														className="btn"
+														clientId={process.env.REACT_GOOGLE_LOGIN_OAUTH}
+														buttonText="Entra con Google"
+														onSuccess={responseGoogle}
+														onFailure={responseGoogle}
+														cookiePolicy={"single_host_origin"}
+													/>
+												</div>
 											</form>
 											<span
 												onClick={() => {
