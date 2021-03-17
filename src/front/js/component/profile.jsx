@@ -12,9 +12,6 @@ import { Maps } from "./maps.jsx";
 import "../../styles/profile.scss";
 import { useState } from "react";
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
 export const Profile = () => {
 	const { store, actions } = useContext(Context);
 	const [businessMenus, setBusinessMenus] = useState(false);

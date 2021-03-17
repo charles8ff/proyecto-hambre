@@ -290,7 +290,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({
 						templatePreview: false
 					});
-				} //añadir en appcontext para que inicie en false
+				}
 			},
 
 			hideNavigation: data => {
