@@ -52,7 +52,7 @@ export const Template1 = () => {
 		},
 		{
 			url: "https://i.imgur.com/oTOnO2r.png",
-			name: "Crustaceo"
+			name: "Crustáceo"
 		},
 		{
 			url: "https://i.imgur.com/7sgZjjj.png",
@@ -72,7 +72,7 @@ export const Template1 = () => {
 		},
 		{
 			url: "https://i.imgur.com/KZuBX9F.png",
-			name: "Vegatariano"
+			name: "Vegetariano"
 		},
 		{
 			url: "https://i.imgur.com/uHEoATb.png",
