@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 0601843d1377
+Revision ID: 19761dee3b6a
 Revises: 
-Create Date: 2021-03-17 18:25:45.469048
+Create Date: 2021-03-17 19:35:33.406170
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '0601843d1377'
+revision = '19761dee3b6a'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -34,7 +34,7 @@ def upgrade():
     )
     op.create_table('meal_info',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('info', sa.Enum('gluten', 'peanuts', 'tree_nuts', 'celery', 'mustard', 'eggs', 'milk', 'sesame', 'fish', 'custaceans', 'molluscs', 'soya', 'sulphites', 'lupin', 'vegetarian_friendly', 'vegan_friendly', name='enum_info'), nullable=False),
+    sa.Column('info', sa.Enum('gluten', 'peanuts', 'tree_nuts', 'celery', 'mustard', 'eggs', 'milk', 'sesame', 'fish', 'crustaceans', 'molluscs', 'soya', 'sulphites', 'lupin', 'vegetarian_friendly', 'vegan_friendly', name='enum_info'), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('menu_type',

@@ -328,7 +328,7 @@ class Enum_Info(enum.Enum):
     milk = "milk"
     sesame = "sesame"
     fish = "fish"
-    custaceans = "crustaceans"
+    crustaceans = "crustaceans"
     molluscs = "molluscs"
     soya = "soya"
     sulphites = "sulphites"
