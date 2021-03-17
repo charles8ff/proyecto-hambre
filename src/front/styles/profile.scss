@@ -71,7 +71,7 @@ margin: 1rem;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-    margin: 1rem;
+  margin: 0.3rem;
 }
 
 
@@ -80,21 +80,20 @@ margin: 1rem;
   align-items: center;
 }
 
-.wrapper {
+.wrapper { 
    margin: 0;
    padding: 3rem;
   @extend %flex;
   justify-content: center;
  background: linear-gradient(to right, #ff622d 20%, #fa9352) #ff622d;
    height: auto;
-  //min-height: -webkit-fill-available;
 }
 
 .task-manager {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 62.188rem;
+  max-width: 64.188rem;
   height: auto;
   border-radius: 4px;
   box-shadow:

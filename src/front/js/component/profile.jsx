@@ -218,8 +218,8 @@ export const Profile = () => {
 
 	return (
 		<>
-			<div className="wrapper h-100 container-fluid">
-				<div className={editing ? "task-manager" : "task-manager h-100"}>
+			<div className={editing ? "wrapper h-100 container-fluid" : "wrapper container-fluid"}>
+				<div className={editing ? "task-manager h-100" : "task-manager"}>
 					<div className={editing ? "left-bar d-none" : "left-bar"}>
 						<div className="left-content">
 							<div className="profile-card__img d-flex flex-row justify-content-center">

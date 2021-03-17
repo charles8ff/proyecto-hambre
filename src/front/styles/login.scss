@@ -206,8 +206,13 @@
     //CHANGES FOR CREATE TEMPLATE
 
     .AddMenu{ 
+          position: relative;
+  min-height: 100% !important;
  background: linear-gradient(to right, #ff622d 20%, #fa9352) #ff622d;
 height:auto; overflow:auto
+}
+.AddTemplateHeight{
+    min-height: 90rem;
 }
 
         .AddMenu__Card {

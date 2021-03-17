@@ -96,7 +96,6 @@ export const AddMenu = () => {
 			</>
 		);
 	};
-
 	const toCreateMenuView = () => {
 		return (
 			<>
@@ -122,20 +121,16 @@ export const AddMenu = () => {
 
 	const toRenderMenuAdd = () => {
 		return (
-			<div className="AddMenu">
+			<div className={previewTemplate != 0 ? "AddMenu AddTemplateHeight" : "AddMenu"}>
 				<div className="container">
 					<div className="UserAcess__FullHeight justify-content-center">
-						<div className="row pb-5">
-							<div className="AddMenu__Card justify-content-center">
-								<div className="UserAcess__Card--content text-center" />
-								{!showSection ? selectTemplateView() : toCreateMenuView()}
-								<div className="d-flex justify-content-center pt-3">
-									<button
-										className="btn-home"
-										onClick={() => history.replace(`/place/${getPlaceID[2]}`)}>
-										Volver al Panel
-									</button>
-								</div>
+						<div className="AddMenu__Card justify-content-center">
+							<div className="UserAcess__Card--content text-center" />
+							{!showSection ? selectTemplateView() : toCreateMenuView()}
+							<div className="d-flex justify-content-center pt-3">
+								<button className="btn-home" onClick={() => history.replace(`/place/${getPlaceID[2]}`)}>
+									Volver al Panel
+								</button>
 							</div>
 						</div>
 					</div>

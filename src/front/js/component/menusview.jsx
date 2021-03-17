@@ -41,9 +41,9 @@ export const MenusView = props => {
 						/>
 						<OurButton title="Ver QR" click={openModal} />
 						<Modal isOpen={isModalOpen} transition={ModalTransition.BOTTOM_UP}>
-							<div className="d-flex flex-row justify-content-center">
-								<QR url={`${URLBACKEND}/place/${props.urlPlace}/menu/${props.urlTemplate}`} />
-							</div>
+							{/* <div className="d-flex flex-row justify-content-center"> */}
+							<QR url={`${URLBACKEND}/place/${props.urlPlace}/menu/${props.urlTemplate}`} />
+							{/* </div> */}
 							<div className="d-flex flex-row justify-content-center pt-3">
 								<OurButton title="CERRAR" click={closeModal} />
 							</div>
