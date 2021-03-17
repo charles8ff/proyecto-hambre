@@ -23,7 +23,7 @@ export const MenusView = props => {
 						{/* <div className="Parallax__TwoCards"> */}
 						<div className="Profile__Menus d-flex flex-row flex-wrap">
 							<div className="card_image">
-								<img src="https://i.imgur.com/EoBQLsD.png" />
+								<img src="https://i.imgur.com/RBq8n0b.png" />
 							</div>
 						</div>
 						<div className="d-flex flex-row justify-content-center w-100">
