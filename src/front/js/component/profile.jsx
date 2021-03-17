@@ -20,7 +20,7 @@ export const Profile = () => {
 	const { register, errors, handleSubmit, watch } = useForm();
 
 	const getDataAllFields = watch();
-	const getPlaceID = history.location.pathname.split("/");//
+	const getPlaceID = history.location.pathname.split("/"); //
 
 	useEffect(
 		() => {
@@ -211,7 +211,7 @@ export const Profile = () => {
 				className={
 					editing || businessMenus == false ? "wrapper h-100 container-fluid" : "wrapper container-fluid"
 				}>
-				<div className={editing ? "task-manager h-100" : "task-manager"}>
+				<div className={editing ? "task-manager__edit h-100" : "task-manager"}>
 					<div className={editing ? "left-bar d-none" : "left-bar"}>
 						<div className="left-content">
 							<div className="profile-card__img d-flex flex-row justify-content-center">
@@ -220,8 +220,8 @@ export const Profile = () => {
 									alt="profile card"
 								/>
 							</div>
-							<div className="profile-card__txt d-flex flex-row justify-content-center pt-2">
-								<i className="Profile__Icon--Hour far fa-color fa-clock" />
+							<div className="profile-card__txt d-flex pt-2">
+								<i className="Profile__Icon--Hour far fa-color fa-clock pl-3" />
 								<h4 className="Profile__H4">
 									{"Horario: "}
 									{store.placeData.open_hour}
@@ -229,8 +229,12 @@ export const Profile = () => {
 									{store.placeData.close_hour}
 								</h4>
 							</div>
-							<div className="profile-card__txt d-flex flex-row justify-content-center pt-2">
-								<i className="Profile__Icon--Hour far fa-color fa-file-alt pt-1" />
+							<div className="d-flex flex-row pt-2">
+								<i className="Profile__Icon--Hour fas fa-color fa-lg fa-phone pl-3" />
+								<h4 className="Profile__H4">{store.placeData.phone_number}</h4>
+							</div>
+							<div className="profile-card__txt d-flex flex-row pt-2">
+								<i className="Profile__Icon--Hour far fa-color fa-file-alt pt-1 pl-3" />
 								<p className="Profile__H4">{store.placeData.description}</p>
 							</div>
 						</div>
@@ -274,12 +278,8 @@ export const Profile = () => {
 										</div>
 									</div>
 								</div>
-								<div className="profile-card__name d-flex flex-row justify-content-center pt-2">
+								<div className="profile-card__name d-flex flex-row justify-content-center pt-2 pb-3">
 									<h2>{store.placeData.place_name}</h2>
-								</div>
-								<div className="d-flex flex-row justify-content-center pt-2">
-									<i className="Profile__Icon--Hour fas fa-color fa-lg fa-phone" />
-									<h4 className="Profile__H4">{store.placeData.phone_number}</h4>
 								</div>
 								<div className="d-flex flex-row justify-content-center">
 									<i className="Profile__Icon fas fa-color fa-lg fa-map-marker-alt" />

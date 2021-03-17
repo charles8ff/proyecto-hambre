@@ -115,6 +115,29 @@ margin: 1rem;
     background-size: 300%;
 }
 
+.task-manager__edit {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 64.188rem;
+  height: auto;
+  min-height: 44rem;
+  border-radius: 4px;
+  box-shadow:
+  0 0.3px 2.2px rgba(0, 0, 0, 0.011),
+  0 0.7px 5.3px rgba(0, 0, 0, 0.016),
+  0 1.3px 10px rgba(0, 0, 0, 0.02),
+  0 2.2px 17.9px rgba(0, 0, 0, 0.024),
+  0 4.2px 33.4px rgba(0, 0, 0, 0.029),
+  0 10px 80px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+      background-color: white;
+    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg);
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-size: 300%;
+}
+
 .left-bar {
   background-color: #cacaca61;
   width: 330px;
