@@ -20,17 +20,17 @@ export const MenusView = props => {
 			<div className="Profile__Card">
 				<div className="d-flex flex-row pb-2 justify-content-center">
 					<div className="Profile__CardContainer">
-						<div className="Parallax__TwoCards">
-							<div className="Profile__Menus d-flex flex-row flex-wrap">
-								<div className="card_image">
-									<img src="https://i.imgur.com/EoBQLsD.png" />
-								</div>
-							</div>
-							<div className="d-flex flex-row justify-content-center w-100">
-								{" "}
-								<h5>{props.title}</h5>
+						{/* <div className="Parallax__TwoCards"> */}
+						<div className="Profile__Menus d-flex flex-row flex-wrap">
+							<div className="card_image">
+								<img src="https://i.imgur.com/EoBQLsD.png" />
 							</div>
 						</div>
+						<div className="d-flex flex-row justify-content-center w-100">
+							{" "}
+							<h4>{props.title}</h4>
+						</div>
+						{/* </div> */}
 					</div>
 				</div>
 				<div className="d-flex flex-row">

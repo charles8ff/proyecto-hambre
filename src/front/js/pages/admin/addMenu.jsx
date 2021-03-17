@@ -40,6 +40,7 @@ export const AddMenu = () => {
 			allMeals = { ...allMeals, ...obj };
 		}
 		actions.postMeal(allMeals);
+		actions.getProfile(getPlaceID[2]);
 		history.replace("/place/".concat(actions.decodeToken(store.loginToken).sub.id.toString()));
 	};
 
