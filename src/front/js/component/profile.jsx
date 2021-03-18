@@ -12,6 +12,23 @@ import { Maps } from "./maps.jsx";
 import "../../styles/profile.scss";
 import { useState } from "react";
 
+import {
+	FacebookShareButton,
+	FacebookMessengerShareButton,
+	FacebookMessengerIcon,
+	LinkedinShareButton,
+	TwitterShareButton,
+	TelegramShareButton,
+	WhatsappShareButton,
+	EmailShareButton,
+	EmailIcon,
+	FacebookIcon,
+	TwitterIcon,
+	LinkedinIcon,
+	TelegramIcon,
+	WhatsappIcon
+} from "react-share";
+
 export const Profile = () => {
 	const { store, actions } = useContext(Context);
 	const [businessMenus, setBusinessMenus] = useState(false);
@@ -31,6 +48,7 @@ export const Profile = () => {
 
 	useEffect(() => {
 		actions.hideNavigation(true);
+		actions.isPreviewTemplate(false);
 	}, []);
 
 	useEffect(
@@ -205,11 +223,16 @@ export const Profile = () => {
 		);
 	};
 
+	const shareUrl = `https://project-hunger.herokuapp.com/place/${store.placeData.id}`;
+	const title = `Conoce el restaurante ${store.placeData.place_name} y todos los menús que posee`;
+
 	return (
 		<>
 			<div
 				className={
-					editing || businessMenus == false ? "wrapper h-100 container-fluid" : "wrapper container-fluid"
+					editing || businessMenus == false
+						? "wrapper__editing h-100 container-fluid"
+						: "wrapper container-fluid"
 				}>
 				<div className={editing ? "task-manager__edit h-100" : "task-manager"}>
 					<div className={editing ? "left-bar d-none" : "left-bar"}>
@@ -236,6 +259,23 @@ export const Profile = () => {
 							<div className="profile-card__txt d-flex flex-row pt-2">
 								<i className="Profile__Icon--Hour far fa-color fa-file-alt pt-1 pl-3" />
 								<p className="Profile__H4">{store.placeData.description}</p>
+							</div>
+							<div className="d-flex flex-row justify-content-center">
+								<FacebookShareButton url={shareUrl} quote={title}>
+									<FacebookIcon size={32} round />
+								</FacebookShareButton>
+								<FacebookMessengerShareButton url={shareUrl} appId="705783116757812">
+									<FacebookMessengerIcon size={32} round />
+								</FacebookMessengerShareButton>
+								<WhatsappShareButton url={shareUrl} title={title} separator=":: ">
+									<WhatsappIcon size={32} round />
+								</WhatsappShareButton>
+								<LinkedinShareButton url={shareUrl}>
+									<LinkedinIcon size={32} round />
+								</LinkedinShareButton>
+								<EmailShareButton url={shareUrl} subject={title} body="body">
+									<EmailIcon size={32} round />
+								</EmailShareButton>
 							</div>
 						</div>
 					</div>
@@ -281,9 +321,30 @@ export const Profile = () => {
 								<div className="profile-card__name d-flex flex-row justify-content-center pt-2 pb-3">
 									<h2>{store.placeData.place_name}</h2>
 								</div>
-								<div className="d-flex flex-row justify-content-center">
+								<div className="d-flex flex-row justify-content-center Mobile__NoDisplay">
 									<i className="Profile__Icon fas fa-color fa-lg fa-map-marker-alt" />
 									<h4 className="Profile__H4">{store.placeData.address}</h4>
+								</div>
+								<div className="d-flex flex-row justify-content-center pt-1 Mobile__DisplayTel">
+									<i className="Profile__Icon--Hour fas fa-color fa-lg fa-phone pl-3" />
+									<h4 className="Profile__H4">{store.placeData.phone_number}</h4>
+								</div>
+								<div className="d-flex flex-row justify-content-center Mobile__Display">
+									<FacebookShareButton url={shareUrl} quote={title}>
+										<FacebookIcon size={32} round />
+									</FacebookShareButton>
+									<FacebookMessengerShareButton url={shareUrl} appId="705783116757812">
+										<FacebookMessengerIcon size={32} round />
+									</FacebookMessengerShareButton>
+									<WhatsappShareButton url={shareUrl} title={title} separator=":: ">
+										<WhatsappIcon size={32} round />
+									</WhatsappShareButton>
+									<LinkedinShareButton url={shareUrl}>
+										<LinkedinIcon size={32} round />
+									</LinkedinShareButton>
+									<EmailShareButton url={shareUrl} subject={title} body="body">
+										<EmailIcon size={32} round />
+									</EmailShareButton>
 								</div>
 								<div className="d-flex flex-row justify-content-center p-2 Profile__Card--ContentMap">
 									<Maps />

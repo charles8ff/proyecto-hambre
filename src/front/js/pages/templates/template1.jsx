@@ -6,9 +6,9 @@ const arrow = require("../../../styles/img/yellowarrow.png");
 
 export const Template1 = () => {
 	const { store, actions } = useContext(Context);
-	const [templateSections, setTemplateSections] = useState([]);
+	const [templateSections, setTemplateSections] = useState([]); // borrar esto en el resto
 	const [wholeMeals, setWholeMeals] = useState([]);
-	const [wholeSections, setWholeSections] = useState([]);
+	const [wholeSections, setWholeSections] = useState([]); // borrar esto en el resto
 	let meals = [];
 	const history = useHistory();
 	const getPlaceID = history.location.pathname.split("/");
@@ -129,7 +129,6 @@ export const Template1 = () => {
 	);
 	useEffect(
 		() => {
-			setTemplateSections(store.sections); //Info from sections
 			setWholeMeals(store.allSections); // getAllMeals
 		},
 		[store.allSections]
@@ -137,10 +136,10 @@ export const Template1 = () => {
 
 	const finalTemplate1 = () => {
 		return (
-			<div className="container-fluid template1--container justify-content-center">
+			<div className="container-fluid h-100 template1--container justify-content-center">
 				<h2>MENÚ</h2>
 				<span className="place_name">{store.placeData.place_name}</span>
-				{templateSections.map((elem, index) => {
+				{store.sections.map((elem, index) => {
 					return (
 						<div key={index}>
 							<div className="row  justify-content-center align-content-center">
@@ -150,17 +149,29 @@ export const Template1 = () => {
 							</div>
 							<div className="row justify-content-center align-content-center">
 								<ul>{mealsInHTML(wholeMeals, elem)}</ul>
+								<ul>{renderPreviewFood()}</ul>
 							</div>
 						</div>
 					);
 				})}
+
+				<div
+					className={
+						store.loginToken && actions.decodeToken(store.loginToken).sub.id == store.placeData.id
+							? "container d-flex flex-row justify-content-center"
+							: "d-none"
+					}>
+					<button className="btn-home p-3" onClick={() => history.replace(`/place/${getPlaceID[2]}`)}>
+						Volver al perfil
+					</button>
+				</div>
 			</div>
 		);
 	};
 
 	const renderPreviewFood = () => {
-		var indents = [];
-		for (var i = 0; i < 3; i++) {
+		let indents = [];
+		for (let i = 0; i < 3; i++) {
 			indents.push(<li key={i}>Es un ejemplo.......5 €</li>);
 		}
 		return indents;
