@@ -9,7 +9,7 @@ export const Template2 = () => {
 	const [wholeMeals, setWholeMeals] = useState([]);
 	let meals = [];
 	const history = useHistory();
-	const getPlaceID = history.location.pathname.split("/");
+	const getPlaceID = history.location.pathname.split("/");//
 	const getMealInfo = [
 		{
 			url: "https://i.imgur.com/dtpzG2k.png",
