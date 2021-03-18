@@ -161,7 +161,7 @@ export const Template1 = () => {
 							? "container d-flex flex-row justify-content-center"
 							: "d-none"
 					}>
-					<button className="btn-home p-3" onClick={() => console.log("errrre")}>
+					<button className="btn-home p-3" onClick={() => history.replace(`/place/${getPlaceID[2]}`)}>
 						Volver al perfil
 					</button>
 				</div>
