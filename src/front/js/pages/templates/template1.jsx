@@ -149,7 +149,6 @@ export const Template1 = () => {
 							</div>
 							<div className="row justify-content-center align-content-center">
 								<ul>{mealsInHTML(wholeMeals, elem)}</ul>
-								<ul>{renderPreviewFood()}</ul>
 							</div>
 						</div>
 					);
