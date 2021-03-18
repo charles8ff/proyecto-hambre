@@ -154,13 +154,24 @@ export const Template1 = () => {
 						</div>
 					);
 				})}
+
+				<div
+					className={
+						store.loginToken && actions.decodeToken(store.loginToken).sub.id == store.placeData.id
+							? "container d-flex flex-row justify-content-center"
+							: "d-none"
+					}>
+					<button className="btn-home p-3" onClick={() => console.log("errrre")}>
+						Volver al perfil
+					</button>
+				</div>
 			</div>
 		);
 	};
 
 	const renderPreviewFood = () => {
-		var indents = [];
-		for (var i = 0; i < 3; i++) {
+		let indents = [];
+		for (let i = 0; i < 3; i++) {
 			indents.push(<li key={i}>Es un ejemplo.......5 €</li>);
 		}
 		return indents;
