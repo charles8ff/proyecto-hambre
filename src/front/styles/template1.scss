@@ -9,7 +9,8 @@ $text-font: 'Akaya Kanadaka', cursive;
 
 .template1--container{
     font-family: $text-font;
-    
+    padding-bottom: calc(10% + 1px) !important;
+    height: auto !important;
     margin:0;
     display:flex; 
     flex-direction:column;
@@ -51,3 +52,51 @@ $text-font: 'Akaya Kanadaka', cursive;
     margin-bottom: 0.6rem;
     }
 }
+
+@media (max-width: 1400px) and (orientation: landscape) { 
+.template1--container{
+    font-family: $text-font;
+   // height: auto !important;
+    margin:0;
+    display:flex; 
+    flex-direction:column;
+    background-color: $primary-color-light;//more light
+
+    .place_name{
+        text-align: center;
+        font-size: 1.4rem;
+        margin-bottom: 0.8rem;
+        color: $error-color
+    }
+    img {
+        max-height: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    .flip-horizontally {
+        transform: scaleX(-1);
+    }
+    h2{
+        margin-top: 4rem;
+        font-size: 3rem;
+        text-align: center;
+        color: $error-color
+    }
+    h3{
+        align-items: center;
+        font-size: 2rem;
+        color: $error-color
+    }
+    ul{
+        list-style-type: none;
+        padding: 0rem;
+        margin-bottom: 1.2rem;
+        text-align: center;
+    }
+    li{
+        text-align: center;
+        margin-top: 1rem;
+    margin-bottom: 0.6rem;
+    }
+}
+
+ }

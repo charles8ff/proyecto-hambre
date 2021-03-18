@@ -47,6 +47,28 @@ margin: 1rem;
   }
 }
 
+@media screen and (max-width: 581px) {
+.Mobile__NoDisplay{
+    display: none !important;
+}
+}
+
+@media (max-width: 600px) {
+.Mobile__Display{
+    background-color: #cacaca61;
+}
+
+}
+
+@media (min-width: 650px) {
+.Mobile__Display{
+   display: none !important;
+}
+.Mobile__DisplayTel{
+   display: none !important;
+}
+}
+
 .Profile__CardContainer{
   max-width: 1200px;
   margin: 0 auto;
@@ -85,6 +107,7 @@ margin: 1rem;
 }
 
 .wrapper { 
+  padding-bottom: calc(20% + 1px) !important;
    margin: 0;
    padding: 3rem;
   @extend %flex;
@@ -199,4 +222,3 @@ margin: 1rem;
 .editing{
     padding: 5rem;
 }
-
