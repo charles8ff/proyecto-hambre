@@ -115,6 +115,14 @@ margin: 1rem;
  background: linear-gradient(to right, #ff622d 20%, #fa9352) #ff622d;
    height: auto;
 }
+.wrapper__editing { 
+   margin: 0;
+   padding: 3rem;
+  @extend %flex;
+  justify-content: center;
+ background: linear-gradient(to right, #ff622d 20%, #fa9352) #ff622d;
+   height: auto;
+}
 
 .task-manager {
   display: flex;

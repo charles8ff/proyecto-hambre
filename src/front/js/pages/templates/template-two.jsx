@@ -6,9 +6,7 @@ import { useHistory } from "react-router-dom";
 
 export const Template2 = () => {
 	const { store, actions } = useContext(Context);
-	const [templateSections, setTemplateSections] = useState([]);
 	const [wholeMeals, setWholeMeals] = useState([]);
-	const [wholeSections, setWholeSections] = useState([]);
 	let meals = [];
 	const history = useHistory();
 	const getPlaceID = history.location.pathname.split("/");
@@ -128,7 +126,6 @@ export const Template2 = () => {
 	);
 	useEffect(
 		() => {
-			setTemplateSections(store.sections); //Info from sections
 			setWholeMeals(store.allSections); // getAllMeals
 		},
 		[store.allSections]
@@ -143,7 +140,7 @@ export const Template2 = () => {
 							<Card.Title>
 								<h2>MENU</h2>
 							</Card.Title>
-							{templateSections.map((elem, index) => {
+							{store.sections.map((elem, index) => {
 								return (
 									<div key={index}>
 										<h3>{elem}</h3>

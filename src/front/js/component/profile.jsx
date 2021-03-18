@@ -48,6 +48,7 @@ export const Profile = () => {
 
 	useEffect(() => {
 		actions.hideNavigation(true);
+		actions.isPreviewTemplate(false);
 	}, []);
 
 	useEffect(
@@ -229,7 +230,9 @@ export const Profile = () => {
 		<>
 			<div
 				className={
-					editing || businessMenus == false ? "wrapper h-100 container-fluid" : "wrapper container-fluid"
+					editing || businessMenus == false
+						? "wrapper__editing h-100 container-fluid"
+						: "wrapper container-fluid"
 				}>
 				<div className={editing ? "task-manager__edit h-100" : "task-manager"}>
 					<div className={editing ? "left-bar d-none" : "left-bar"}>
