@@ -8,7 +8,7 @@ To achieve our goal, we reshape the traditional paper menus into a digital appro
 those businesses to new clients born into the digital world, by developing a search engine using our database that filters the different products
 these refreshed establishments.
 
-# Thinking about the UX
+# Thinking about the UX 
 <a href="https://docs.google.com/spreadsheets/d/1GkgkEOZP4fDDO_FT29dnPJT-r2ZatEt_L4DRrKOZQ4c/edit?usp=sharing" target="_blank"><img align="center" src="https://i.imgur.com/mWDYnF3.png" alt="UX" border="0" /></a>
 <a href="https://docs.google.com/spreadsheets/d/1GkgkEOZP4fDDO_FT29dnPJT-r2ZatEt_L4DRrKOZQ4c/edit?usp=sharing" target="_blank"><img align="center" src="https://i.imgur.com/bB88i7K.png" alt="UX" border="0" /></a>
 <a href="https://docs.google.com/spreadsheets/d/1GkgkEOZP4fDDO_FT29dnPJT-r2ZatEt_L4DRrKOZQ4c/edit?usp=sharing" target="_blank"><img align="center" src="https://i.imgur.com/HYECyUP.png" alt="UX" border="0" /></a>
